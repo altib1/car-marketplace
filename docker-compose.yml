@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # PHP-FPM service
+  php:
+    build:
+      context: ./docker/php
+    container_name: php-container
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+      - app-network
+
+  # Nginx service
+  nginx:
+    build:
+      context: ./docker/nginx
+    container_name: nginx-container
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
+    depends_on:
+      - php
+    networks:
+      - app-network
+
+  # MySQL database service
+  db:
+    image: mysql:8.0
+    container_name: db-container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: car_marketplace
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - app-network
+
+  # Elasticsearch service
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.0
+    container_name: elasticsearch-container
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - app-network
+
+  # Kibana service (optional, for viewing Elasticsearch data)
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.0
+    container_name: kibana-container
+    ports:
+      - 5601:5601
+    networks:
+      - app-network
+    depends_on:
+      - elasticsearch
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
