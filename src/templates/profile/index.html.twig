@@ -3,9 +3,61 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-    <h1>Profile</h1>
+<div class="container mx-auto py-8">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h1 class="text-3xl font-bold text-center mb-6">Profile</h1>
 
-{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <p>Email: {{ user.email }}</p>
-{% endif %}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="text-center mb-6">
+                <p class="text-lg text-gray-700">Email: <span class="font-semibold">{{ app.user.email }}</span></p>
+            </div>
+        {% endif %}
+
+        <!-- Create Publication Section -->
+        <div class="bg-gray-100 p-4 rounded-lg mb-6">
+            <h2 class="text-2xl font-semibold mb-4">Create a Publication</h2>
+            {{ form_start(publicationForm, {'attr': {'class': 'space-y-4'}}) }}
+                <div class="space-y-2">
+                    {{ form_label(publicationForm.title, 'Title') }}
+                    {{ form_widget(publicationForm.title, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div class="space-y-2">
+                    {{ form_label(publicationForm.description, 'Description') }}
+                    {{ form_widget(publicationForm.description, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div class="space-y-2">
+                    {{ form_label(publicationForm.price, 'Price') }}
+                    {{ form_widget(publicationForm.price, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div class="space-y-2">
+                    {{ form_label(publicationForm.year, 'Year') }}
+                    {{ form_widget(publicationForm.year, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                {{ form_widget(publicationForm.user) }} {# Hidden field for the user #}
+                {{ form_widget(publicationForm.brand, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Publish</button>
+            {{ form_end(publicationForm) }}
+        </div>
+
+        <!-- Publications List Section -->
+        <div>
+            <h2 class="text-2xl font-semibold mb-4">Your Publications</h2>
+            {% if publications|length > 0 %}
+                <div class="space-y-4">
+                    {% for publication in publications %}
+                        <div class="bg-white p-4 rounded-lg shadow-md">
+                            <h3 class="font-semibold">{{ publication.title }}</h3>
+                            <p class="text-gray-800 mb-2">{{ publication.description }}</p>
+                            <p class="text-gray-700 mb-2">Price: {{ publication.price }}</p>
+                            <p class="text-sm text-gray-500">Year: {{ publication.year }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-gray-600">You haven't made any publications yet.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
