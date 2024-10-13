@@ -59,12 +59,12 @@ final class PublicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('publication/edit.html.twig', [
             'publication' => $publication,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -76,6 +76,6 @@ final class PublicationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
     }
 }

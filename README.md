@@ -37,6 +37,8 @@ git clone https://github.com/altib1/car-marketplace.git
   php bin/console doctrine:schema:update --force
 
   php bin/console doctrine:fixtures:load
+
+  php bin/console tailwind:build --watch
 ```
     
 ## Access

@@ -1,41 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Publication index{% endblock %}
+{% block title %}Publication Index{% endblock %}
 
 {% block body %}
-    <h1>Publication index</h1>
+<div class="flex flex-col md:flex-row min-h-screen bg-gray-50">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Year</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for publication in publications %}
-            <tr>
-                <td>{{ publication.id }}</td>
-                <td>{{ publication.title }}</td>
-                <td>{{ publication.description }}</td>
-                <td>{{ publication.price }}</td>
-                <td>{{ publication.year }}</td>
-                <td>
-                    <a href="{{ path('app_publication_show', {'id': publication.id}) }}">show</a>
-                    <a href="{{ path('app_publication_edit', {'id': publication.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            <h1 class="text-3xl font-semibold text-gray-800 mb-6 p-6 border-b border-gray-200">Publication Index</h1>
 
-    <a href="{{ path('app_publication_new') }}">Create new</a>
+            <div class="p-6">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Id</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Year</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                    {% for publication in publications %}
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ publication.id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ publication.title }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ publication.description }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ publication.price }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ publication.year }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <a href="{{ path('app_publication_show', {'id': publication.id}) }}" class="text-blue-600 hover:text-blue-800">Show</a>
+                                <a href="{{ path('app_publication_edit', {'id': publication.id}) }}" class="text-blue-600 hover:text-blue-800 ml-2">Edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="flex justify-between items-center p-6 bg-gray-100 border-t border-gray-200">
+                <a href="{{ path('app_publication_new') }}" class="text-blue-600 hover:text-blue-800 transition-colors">Create New</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

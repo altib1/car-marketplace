@@ -3,61 +3,114 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-<div class="container mx-auto py-8">
-    <div class="bg-white shadow-md rounded-lg p-6">
-        <h1 class="text-3xl font-bold text-center mb-6">Profile</h1>
+<div class="flex min-h-screen bg-gray-100">
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <div class="text-center mb-6">
-                <p class="text-lg text-gray-700">Email: <span class="font-semibold">{{ app.user.email }}</span></p>
-            </div>
-        {% endif %}
-
-        <!-- Create Publication Section -->
-        <div class="bg-gray-100 p-4 rounded-lg mb-6">
-            <h2 class="text-2xl font-semibold mb-4">Create a Publication</h2>
-            {{ form_start(publicationForm, {'attr': {'class': 'space-y-4'}}) }}
-                <div class="space-y-2">
-                    {{ form_label(publicationForm.title, 'Title') }}
-                    {{ form_widget(publicationForm.title, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div class="space-y-2">
-                    {{ form_label(publicationForm.description, 'Description') }}
-                    {{ form_widget(publicationForm.description, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div class="space-y-2">
-                    {{ form_label(publicationForm.price, 'Price') }}
-                    {{ form_widget(publicationForm.price, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div class="space-y-2">
-                    {{ form_label(publicationForm.year, 'Year') }}
-                    {{ form_widget(publicationForm.year, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                {{ form_widget(publicationForm.user) }} {# Hidden field for the user #}
-                {{ form_widget(publicationForm.brand, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Publish</button>
-            {{ form_end(publicationForm) }}
+    <!-- Main Content -->
+    <div class="flex-1 p-6">
+        <!-- Profile Section -->
+        <div id="profile" class="section bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4">Profile Information</h2>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <p class="text-lg">Email: <span class="font-semibold">{{ app.user.email }}</span></p>
+            {% endif %}
         </div>
 
-        <!-- Publications List Section -->
-        <div>
-            <h2 class="text-2xl font-semibold mb-4">Your Publications</h2>
+        <!-- Publications Section -->
+        <div id="publications" class="section hidden bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4">Your Publications</h2>
             {% if publications|length > 0 %}
-                <div class="space-y-4">
+                <div class="space-y-4" id="publication-list">
                     {% for publication in publications %}
-                        <div class="bg-white p-4 rounded-lg shadow-md">
+                    <div id="publication-{{ publication.id }}" class="bg-gray-100 p-4 rounded-lg shadow flex justify-between items-center">
+                        <div>
                             <h3 class="font-semibold">{{ publication.title }}</h3>
-                            <p class="text-gray-800 mb-2">{{ publication.description }}</p>
+                            <p class="text-gray-700 mb-2">{{ publication.description }}</p>
                             <p class="text-gray-700 mb-2">Price: {{ publication.price }}</p>
                             <p class="text-sm text-gray-500">Year: {{ publication.year }}</p>
                         </div>
+                        <div class="flex space-x-2">
+                            <button onclick="openEditModal({{ publication.id }})" class="text-blue-500 hover:text-blue-600">Edit</button>
+                            
+                            <!-- Delete Button with Specific CSRF Token -->
+                            <form method="post" action="{{ path('app_publication_delete', {'id': publication.id}) }}" class="inline">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ publication.id) }}">
+                                <button type="submit" class="text-red-500 hover:text-red-600">Delete</button>
+                            </form>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             {% else %}
                 <p class="text-gray-600">You haven't made any publications yet.</p>
             {% endif %}
         </div>
+
+        <!-- Create Publication Section -->
+        <div id="create-publication" class="section hidden bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold mb-4">Create a Publication</h2>
+            {{ form_start(publicationForm, {'attr': {'class': 'space-y-4'}}) }}
+                <div>
+                    {{ form_label(publicationForm.title, 'Title') }}
+                    {{ form_widget(publicationForm.title, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div>
+                    {{ form_label(publicationForm.description, 'Description') }}
+                    {{ form_widget(publicationForm.description, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div>
+                    {{ form_label(publicationForm.price, 'Price') }}
+                    {{ form_widget(publicationForm.price, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                <div>
+                    {{ form_label(publicationForm.year, 'Year') }}
+                    {{ form_widget(publicationForm.year, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+                </div>
+                {{ form_widget(publicationForm.user) }} {# Hidden user field #}
+                {{ form_widget(publicationForm.brand, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
+
+                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Publish</button>
+            {{ form_end(publicationForm) }}
+        </div>
+
+        <!-- Edit Publication Modal -->
+        <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeEditModal()">
+            <div class="bg-white p-6 rounded-lg shadow-lg" onclick="event.stopPropagation()">
+                <h2 class="text-2xl font-bold mb-4">Edit Publication</h2>
+                <div id="edit-form-content">
+                    <!-- This will be dynamically filled -->
+                </div>
+                <button class="mt-4 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" onclick="closeEditModal()">Close</button>
+            </div>
+        </div>
     </div>
 </div>
+
+<script>
+    function showSection(sectionId) {
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(function (section) {
+            section.classList.add('hidden');
+        });
+        // Show the selected section
+        document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function openEditModal(publicationId) {
+        // Fetch the edit form for the publication
+        fetch(`/publication/${publicationId}/edit`)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('edit-form-content').innerHTML = data;
+                document.getElementById('edit-modal').classList.remove('hidden');
+            });
+    }
+
+    function closeEditModal() {
+        document.getElementById('edit-modal').classList.add('hidden');
+        document.getElementById('edit-form-content').innerHTML = ''; // Clear the content
+    }
+
+    // Show the profile section by default on page load
+    showSection('profile');
+</script>
 {% endblock %}

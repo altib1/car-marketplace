@@ -7,12 +7,31 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
+        <style>
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .scroll-hidden::-webkit-scrollbar {
+                display: none; /* Safari and Chrome */
+            }
+
+            /* Hide scrollbar for IE and Edge */
+            .scroll-hidden {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+        </style>
 
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="flex h-screen">
+            <!-- Sidebar Navigation -->
+            {% include 'profile-menu/index.html.twig' %}
+    
+            <div class="flex-1 p-4 overflow-y-auto scroll-hidden">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
     </body>
 </html>
