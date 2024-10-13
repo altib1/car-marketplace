@@ -3,21 +3,57 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+<div class="bg-gray-100 flex justify-center items-center h-screen">
+    <!-- Left: Image -->
+    <div class="w-1/2 h-screen hidden lg:block">
+        <img src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat" alt="Placeholder Image" class="object-cover w-full h-full">
+    </div>
+    <!-- Right: Register Form -->
+    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
+        <h1 class="text-2xl font-semibold mb-4">Register</h1>
 
-    <h1>Register</h1>
+        <!-- Display any error flash messages -->
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="mb-4 bg-red-100 text-red-700 px-4 py-2 rounded">
+                {{ flash_error }}
+            </div>
+        {% endfor %}
 
-    {{ form_errors(registrationForm) }}
+        <!-- Registration Form -->
+        {{ form_start(registrationForm, { attr: { class: 'space-y-4' } }) }}
+        
+        <!-- Email Input -->
+        <div>
+            {{ form_label(registrationForm.email, null, { label_attr: { class: 'block text-gray-600' } }) }}
+            {{ form_widget(registrationForm.email, { attr: { class: 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500' } }) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
+        
+        <!-- Password Input -->
+        <div>
+            {{ form_label(registrationForm.plainPassword, 'Password', { label_attr: { class: 'block text-gray-600' } }) }}
+            {{ form_widget(registrationForm.plainPassword, { attr: { class: 'w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500' } }) }}
+            {{ form_errors(registrationForm.plainPassword) }}
+        </div>
+        
+        <!-- Agree Terms Checkbox -->
+        <div class="flex items-center">
+            {{ form_widget(registrationForm.agreeTerms, { attr: { class: 'mr-2' } }) }}
+            {{ form_label(registrationForm.agreeTerms, null, { label_attr: { class: 'text-gray-600' } }) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">
+            Register
+        </button>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        {{ form_end(registrationForm) }}
+        
+        <!-- Login Link -->
+        <div class="mt-6 text-blue-500 text-center">
+            <a href="{{ path('app_login') }}" class="hover:underline">Already have an account? Login here</a>
+        </div>
+    </div>
+</div>
 {% endblock %}
