@@ -45,3 +45,12 @@ git clone https://github.com/altib1/car-marketplace.git
 
 to acces the website this is the link : 
 http://localhost:8080/
+
+## Tests
+
+to launch tests of phpunit : 
+
+```
+sudo docker exec php-container ./vendor/bin/phpunit
+
+```
