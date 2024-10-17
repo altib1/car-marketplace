@@ -1,0 +1,5 @@
+# behat.yaml.dist / behat.yaml
+
+default:
+    extensions:
+        FriendsOfBehat\SymfonyExtension: ~
