@@ -30,11 +30,6 @@ class PublicationType extends AbstractType
         ->add('year', NumberType::class, [
             'attr' => ['class' => 'w-full p-3 border rounded-lg'],
         ])
-        ->add('user', EntityType::class, [
-            'class' => User::class,
-            'choice_label' => 'id',
-            'attr' => ['class' => 'w-full p-3 border rounded-lg'],
-        ])
         ->add('brand', EntityType::class, [
             'class' => CarBrand::class,
             'choice_label' => 'id',
