@@ -1,0 +1,169 @@
+<body class="bg-gray-100">
+    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto flex items-center justify-between px-4 py-3">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold text-blue-600">
+                    La Centrale
+                </a>
+            </div>
+
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex space-x-6">
+                <div class="relative group">
+                    <a href="#" class="text-gray-800 hover:text-blue-600 flex items-center">
+                        Voitures
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 lucide lucide-chevron-down">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-64 z-50 border">
+                        <div class="p-4">
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Voitures neuves</a>
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Voitures d'occasion</a>
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Utilitaires</a>
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Voitures électriques</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <a href="#" class="text-gray-800 hover:text-blue-600 flex items-center">
+                        Annonces
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1 lucide lucide-chevron-down">
+                            <path d="m6 9 6 6 6-6"/>
+                        </svg>
+                    </a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 w-64 z-50 border">
+                        <div class="p-4">
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Déposer une annonce</a>
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Mes annonces</a>
+                            <a href="#" class="block py-2 hover:bg-gray-100 rounded">Recherche avancée</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="text-gray-800 hover:text-blue-600">Nos services</a>
+            </div>
+
+            <!-- Boutons d'action Desktop -->
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="#" class="text-blue-600 hover:underline">Connexion</a>
+                <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
+                    Déposer une annonce
+                </a>
+            </div>
+
+            <!-- Bouton Mobile Menu -->
+            <div class="md:hidden">
+                <button id="mobile-menu-toggle" class="text-gray-800 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+                        <line x1="4" x2="20" y1="12" y2="12"/>
+                        <line x1="4" x2="20" y1="6" y2="6"/>
+                        <line x1="4" x2="20" y1="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Slide-out -->
+        <div id="mobile-menu" class="fixed top-0 left-0 w-64 h-full bg-white shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out z-50 pt-16">
+            <div class="p-4">
+                <div class="space-y-4">
+                    <!-- Voitures Section -->
+                    <div>
+                        <div class="flex justify-between items-center" x-data="{ open: false }">
+                            <a href="#" class="block py-2 text-lg font-semibold">Voitures</a>
+                            <button @click="open = !open" class="text-gray-600">
+                                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down">
+                                    <path d="m6 9 6 6 6-6"/>
+                                </svg>
+                                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up">
+                                    <path d="m18 15-6-6-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div x-show="open" class="pl-4 space-y-2 mt-2">
+                            <a href="#" class="block">Voitures neuves</a>
+                            <a href="#" class="block">Voitures d'occasion</a>
+                            <a href="#" class="block">Utilitaires</a>
+                            <a href="#" class="block">Voitures électriques</a>
+                        </div>
+                    </div>
+
+                    <!-- Annonces Section -->
+                    <div>
+                        <div class="flex justify-between items-center" x-data="{ open: false }">
+                            <a href="#" class="block py-2 text-lg font-semibold">Annonces</a>
+                            <button @click="open = !open" class="text-gray-600">
+                                <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down">
+                                    <path d="m6 9 6 6 6-6"/>
+                                </svg>
+                                <svg x-show="open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-up">
+                                    <path d="m18 15-6-6-6 6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div x-show="open" class="pl-4 space-y-2 mt-2">
+                            <a href="#" class="block">Déposer une annonce</a>
+                            <a href="#" class="block">Mes annonces</a>
+                            <a href="#" class="block">Recherche avancée</a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="block py-2 text-lg font-semibold">Nos services</a>
+                </div>
+
+                <div class="mt-6 space-y-4">
+                    <a href="#" class="block text-center bg-blue-600 text-white px-4 py-2 rounded-full">
+                        Déposer une annonce
+                    </a>
+                    <a href="#" class="block text-center text-blue-600 border border-blue-600 px-4 py-2 rounded-full">
+                        Connexion
+                    </a>
+                </div>
+
+                <!-- Bouton de fermeture -->
+                <button id="mobile-menu-close" class="absolute top-4 right-4 text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Overlay semi-transparent -->
+        <div id="mobile-menu-overlay" class="fixed inset-0 bg-black opacity-0 invisible transition-all duration-300 z-40"></div>
+    </nav>
+
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            mobileMenu.classList.remove('-translate-x-full');
+            mobileMenuOverlay.classList.remove('invisible');
+            mobileMenuOverlay.classList.add('opacity-50');
+        });
+
+        document.getElementById('mobile-menu-close').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            mobileMenu.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('invisible');
+            mobileMenuOverlay.classList.remove('opacity-50');
+        });
+
+        document.getElementById('mobile-menu-overlay').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            
+            mobileMenu.classList.add('-translate-x-full');
+            mobileMenuOverlay.classList.add('invisible');
+            mobileMenuOverlay.classList.remove('opacity-50');
+        });
+    </script>
+</body>

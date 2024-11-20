@@ -48,28 +48,6 @@
         <!-- Create Publication Section -->
         <div id="create-publication" class="section hidden bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold mb-4">Create a Publication</h2>
-            {{ form_start(publicationForm, {'attr': {'class': 'space-y-4'}}) }}
-                <div>
-                    {{ form_label(publicationForm.title, 'Title') }}
-                    {{ form_widget(publicationForm.title, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div>
-                    {{ form_label(publicationForm.description, 'Description') }}
-                    {{ form_widget(publicationForm.description, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div>
-                    {{ form_label(publicationForm.price, 'Price') }}
-                    {{ form_widget(publicationForm.price, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                <div>
-                    {{ form_label(publicationForm.year, 'Year') }}
-                    {{ form_widget(publicationForm.year, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-                </div>
-                {{ form_widget(publicationForm.user) }} {# Hidden user field #}
-                {{ form_widget(publicationForm.brand, {'attr': {'class': 'w-full p-3 border rounded-lg'}}) }}
-
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">Publish</button>
-            {{ form_end(publicationForm) }}
         </div>
 
         <!-- Edit Publication Modal -->

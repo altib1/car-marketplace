@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+        {% endblock %}
+        <style>
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .scroll-hidden::-webkit-scrollbar {
+                display: none; /* Safari and Chrome */
+            }
+
+            /* Hide scrollbar for IE and Edge */
+            .scroll-hidden {
+                -ms-overflow-style: none; /* IE and Edge */
+                scrollbar-width: none; /* Firefox */
+            }
+        </style>
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+    </head>
+    <body>
+            <div class="w-full">
+                    <!-- menu -->
+                    {% include 'menu/index.html.twig' %}
+            </div>
+    
+            <div class="flex-1 p-4 mt-20 overflow-y-auto scroll-hidden">
+                {% block body %}
+                    <!-- Hero Section -->
+                    <section class="bg-gray-100 py-8">
+                        <div class="container mx-auto px-4">
+                            <div class="flex flex-col md:flex-row items-center justify-between">
+                                <!-- Search Form -->
+                                <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/2">
+                                    <h2 class="text-xl font-bold mb-4">Acheter ou Vendre</h2>
+                                    <form>
+                                        <div class="mb-4">
+                                            <label class="block text-sm font-medium text-gray-700">Marque</label>
+                                            <select class="w-full border-gray-300 rounded-md">
+                                                <option>Choisir une marque</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-sm font-medium text-gray-700">Modèle</label>
+                                            <select class="w-full border-gray-300 rounded-md">
+                                                <option>Choisir un modèle</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="block text-sm font-medium text-gray-700">Prix</label>
+                                            <input type="text" class="w-full border-gray-300 rounded-md">
+                                        </div>
+                                        <button type="submit" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md w-full">
+                                            Rechercher (324 190)
+                                        </button>
+                                    </form>
+                                </div>
+                                <!-- Car Image -->
+                                <div class="mt-8 md:mt-0 md:ml-6">
+                                    <img src="car-placeholder.jpg" alt="Car" class="w-full max-w-md mx-auto rounded-lg shadow-md">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Recent Searches -->
+                    <section class="bg-white py-8">
+                        <div class="container mx-auto px-4">
+                            <h2 class="text-2xl font-bold mb-4">Vos recherches récentes</h2>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-gray-200 px-4 py-2 rounded-full text-sm">AUDI A3</span>
+                                <span class="bg-gray-200 px-4 py-2 rounded-full text-sm">MERCEDES CLASSE C</span>
+                                <span class="bg-gray-200 px-4 py-2 rounded-full text-sm">VOLKSWAGEN GOLF</span>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Ideal Vehicles -->
+                    <section class="bg-gray-100 py-8">
+                        <div class="container mx-auto px-4">
+                            <h2 class="text-2xl font-bold mb-4">Trouvez votre occasion idéale</h2>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <img src="petit-prix.jpg" alt="Petit Prix" class="w-full rounded-md mb-4">
+                                    <h3 class="font-bold text-lg text-center">Petits prix</h3>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <img src="electrique.jpg" alt="Électriques" class="w-full rounded-md mb-4">
+                                    <h3 class="font-bold text-lg text-center">Électriques</h3>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <img src="hybride.jpg" alt="Hybrides" class="w-full rounded-md mb-4">
+                                    <h3 class="font-bold text-lg text-center">Hybrides</h3>
+                                </div>
+                                <div class="bg-white p-4 rounded-lg shadow-md">
+                                    <img src="familiale.jpg" alt="Familiales" class="w-full rounded-md mb-4">
+                                    <h3 class="font-bold text-lg text-center">Familiales</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Popular Brands -->
+                    <section class="bg-white py-8">
+                        <div class="container mx-auto px-4">
+                            <h2 class="text-2xl font-bold mb-4">Les marques les plus populaires</h2>
+                            <div class="flex gap-6">
+                                <img src="audi-logo.jpg" alt="Audi" class="w-12 h-12">
+                                <img src="bmw-logo.jpg" alt="BMW" class="w-12 h-12">
+                                <img src="mercedes-logo.jpg" alt="Mercedes" class="w-12 h-12">
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- Price Indicator -->
+                    <section class="bg-gray-100 py-8">
+                        <div class="container mx-auto px-4">
+                            <h2 class="text-2xl font-bold mb-4">Indicateur prix</h2>
+                            <div class="bg-white p-6 rounded-lg shadow-md">
+                                <p class="text-gray-600">Grâce à notre expertise, nous vous indiquons les meilleurs prix pour vos recherches.</p>
+                            </div>
+                        </div>
+                    </section>
+
+
+                
+                {% endblock %}
+            </div>
+    </body>
+</html>

@@ -26,8 +26,12 @@
     </head>
     <body>
         <div class="flex h-screen">
-            <!-- Sidebar Navigation -->
-            {% include 'profile-menu/index.html.twig' %}
+            <div class="flex h-screen">
+                {% if app.user %}
+                    <!-- Sidebar Navigation -->
+                    {% include 'profile-menu/index.html.twig' %}
+                {% endif %}
+            </div>
     
             <div class="flex-1 p-4 overflow-y-auto scroll-hidden">
                 {% block body %}{% endblock %}
