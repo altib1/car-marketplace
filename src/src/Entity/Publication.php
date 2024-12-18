@@ -37,8 +37,17 @@ class Publication
     #[ORM\ManyToOne(inversedBy: 'publications')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'publications')]
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
     private ?CarBrand $brand = null;
+    
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?CarModel $model = null;
+    
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?MotorizationType $motorizationType = null;
 
     public function __construct()
     {
@@ -144,11 +153,36 @@ class Publication
     {
         return $this->brand;
     }
-
+    
     public function setBrand(?CarBrand $brand): static
     {
         $this->brand = $brand;
-
+    
         return $this;
     }
+    
+    public function getModel(): ?CarModel
+    {
+        return $this->model;
+    }
+    
+    public function setModel(?CarModel $model): static
+    {
+        $this->model = $model;
+    
+        return $this;
+    }
+    
+    public function getMotorizationType(): ?MotorizationType
+    {
+        return $this->motorizationType;
+    }
+    
+    public function setMotorizationType(?MotorizationType $motorizationType): static
+    {
+        $this->motorizationType = $motorizationType;
+    
+        return $this;
+    }
+    
 }

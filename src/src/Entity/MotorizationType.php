@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\MotorizationTypeRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MotorizationTypeRepository::class)]
@@ -34,6 +35,24 @@ class MotorizationType
         $this->type = $type;
 
         return $this;
+    }
+
+    public function setName(string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->type;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->type;
     }
 
     public function getModel(): ?CarModel
