@@ -24,16 +24,9 @@ class CarBrand
     #[ORM\OneToMany(targetEntity: CarModel::class, mappedBy: 'brand')]
     private Collection $carModels;
 
-    /**
-     * @var Collection<int, Publication>
-     */
-    #[ORM\OneToMany(targetEntity: Publication::class, mappedBy: 'brand')]
-    private Collection $publications;
-
     public function __construct()
     {
         $this->carModels = new ArrayCollection();
-        $this->publications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,33 +76,8 @@ class CarBrand
         return $this;
     }
 
-    /**
-     * @return Collection<int, Publication>
-     */
-    public function getPublications(): Collection
+    public function __toString(): string
     {
-        return $this->publications;
-    }
-
-    public function addPublication(Publication $publication): static
-    {
-        if (!$this->publications->contains($publication)) {
-            $this->publications->add($publication);
-            $publication->setBrand($this);
-        }
-
-        return $this;
-    }
-
-    public function removePublication(Publication $publication): static
-    {
-        if ($this->publications->removeElement($publication)) {
-            // set the owning side to null (unless already changed)
-            if ($publication->getBrand() === $this) {
-                $publication->setBrand(null);
-            }
-        }
-
-        return $this;
+        return $this->name;
     }
 }
