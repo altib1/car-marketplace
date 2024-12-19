@@ -45,6 +45,12 @@
                             <th class="px-6 py-4 text-gray-700 font-medium">Motorisation</th>
                             <td class="px-6 py-4">{{ publication.motorizationType }}</td>
                         </tr>
+                        <tr class="border-b bg-gray-50">
+                            <th class="px-6 py-4 text-gray-700 font-medium">Image</th>
+                            <td class="px-6 py-4">
+                                <img src="{{ asset('uploads/brochures/' ~ publication.brochureFilename) }}" alt="Publication Image" class="w-32 h-32 object-cover">
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

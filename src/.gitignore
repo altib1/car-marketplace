@@ -19,6 +19,8 @@ yarn-error.log
 ###> symfony/asset-mapper ###
 /public/assets/
 /assets/vendor/
+/assets/node_modules/
+/public/uploads/
 ###< symfony/asset-mapper ###
 
 ###> phpunit/phpunit ###

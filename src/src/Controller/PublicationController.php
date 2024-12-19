@@ -1,5 +1,4 @@
 <?php
-// src/Controller/PublicationController.php
 
 namespace App\Controller;
 
@@ -17,6 +16,7 @@ use App\Repository\PublicationRepository;
 use App\Repository\CarModelRepository;
 use App\Repository\MotorizationTypeRepository;
 use App\Entity\CarBrand;
+use App\Service\FileUploader;
 
 #[Route('/publication')]
 final class PublicationController extends AbstractController
@@ -30,7 +30,11 @@ final class PublicationController extends AbstractController
     }
 
     #[Route('/new', name: 'app_publication_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(
+        Request $request, 
+        EntityManagerInterface $entityManager,  
+        FileUploader $fileUploader
+        ): Response
     {
         $publication = new Publication();
         $form = $this->createForm(PublicationType::class, $publication);
@@ -47,6 +51,13 @@ final class PublicationController extends AbstractController
             $publication->setModel($carModel);
             $publication->setMotorizationType($motorizationType);
             
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $brochureFile */
+            $brochureFile = $form->get('brochure')->getData();
+            if ($brochureFile) {
+                $newFilename = $fileUploader->upload($brochureFile);
+                $publication->setBrochureFilename($newFilename);
+            }
+
             $entityManager->persist($publication);
             $entityManager->flush();
             

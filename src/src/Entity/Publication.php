@@ -49,6 +49,9 @@ class Publication
     #[ORM\JoinColumn(nullable: false)]
     private ?MotorizationType $motorizationType = null;
 
+    #[ORM\Column(type: 'string')]
+    private string $brochureFilename;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -182,6 +185,18 @@ class Publication
     {
         $this->motorizationType = $motorizationType;
     
+        return $this;
+    }
+
+    public function getBrochureFilename(): string
+    {
+        return $this->brochureFilename;
+    }
+
+    public function setBrochureFilename(string $brochureFilename): self
+    {
+        $this->brochureFilename = $brochureFilename;
+
         return $this;
     }
     
