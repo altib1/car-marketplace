@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\All;
 
 class PublicationType extends AbstractType
 {
@@ -60,28 +61,39 @@ class PublicationType extends AbstractType
                 'placeholder' => 'Choose a motorisation type',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_motorizationType'],
             ])
-            ->add('brochure', FileType::class, [
-                'label' => 'Brochure (IMAGE file)',
-
-                // unmapped means that this field is not associated to any entity property
+            ->add('images', FileType::class, [
+                'label' => 'Images (PNG, JPG, JPEG, WEBP files)',
                 'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
                 'required' => false,
-
-                // unmapped fields can't define their validation using attributes
-                // in the associated entity, so you can use the PHP constraint classes
+                'multiple' => true,
+                'constraints' => [
+                    new All([
+                        'constraints' => [
+                            new File([
+                                'maxSize' => '10024k',
+                                'mimeTypes' => [
+                                    'image/png',
+                                    'image/jpg',
+                                    'image/jpeg',
+                                    'image/webp',
+                                ],
+                                'mimeTypesMessage' => 'Please upload a valid Image',
+                            ])
+                        ],
+                    ]),
+                ],
+            ])
+            ->add('video', FileType::class, [
+                'label' => 'Video (MP4 file)',
+                'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '10024k',
+                        'maxSize' => '50000k',
                         'mimeTypes' => [
-                            'image/png',
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/webp',
+                            'video/mp4',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid Image',
+                        'mimeTypesMessage' => 'Please upload a valid MP4 video',
                     ])
                 ],
             ]);

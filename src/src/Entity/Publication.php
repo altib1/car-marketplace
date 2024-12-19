@@ -49,8 +49,11 @@ class Publication
     #[ORM\JoinColumn(nullable: false)]
     private ?MotorizationType $motorizationType = null;
 
-    #[ORM\Column(type: 'string')]
-    private string $brochureFilename;
+    #[ORM\Column(type: Types::JSON, nullable: true)]
+    private $imageFilenames = [];
+
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private $videoFilename;
 
     public function __construct()
     {
@@ -188,14 +191,33 @@ class Publication
         return $this;
     }
 
-    public function getBrochureFilename(): string
+    public function getImageFilenames(): ?array
     {
-        return $this->brochureFilename;
+        return $this->imageFilenames;
     }
 
-    public function setBrochureFilename(string $brochureFilename): self
+    public function setImageFilenames(?array $imageFilenames): self
     {
-        $this->brochureFilename = $brochureFilename;
+        $this->imageFilenames = $imageFilenames;
+
+        return $this;
+    }
+
+    public function addImageFilename(string $imageFilename): self
+    {
+        $this->imageFilenames[] = $imageFilename;
+
+        return $this;
+    }
+
+    public function getVideoFilename(): ?string
+    {
+        return $this->videoFilename;
+    }
+
+    public function setVideoFilename(?string $videoFilename): self
+    {
+        $this->videoFilename = $videoFilename;
 
         return $this;
     }

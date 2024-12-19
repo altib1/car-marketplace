@@ -51,12 +51,24 @@ final class PublicationController extends AbstractController
             $publication->setModel($carModel);
             $publication->setMotorizationType($motorizationType);
             
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $brochureFile */
-            $brochureFile = $form->get('brochure')->getData();
-            if ($brochureFile) {
-                $newFilename = $fileUploader->upload($brochureFile);
-                $publication->setBrochureFilename($newFilename);
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile[] $imageFiles */
+        $imageFiles = $form->get('images')->getData();
+
+        foreach ($imageFiles as $imageFile) {
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                // Assuming you have a method to add image filenames to the publication
+                $publication->addImageFilename($imageFileName);
             }
+        }
+
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $videoFile */
+        $videoFile = $form->get('video')->getData();
+
+        if ($videoFile) {
+            $videoFileName = $fileUploader->upload($videoFile);
+            $publication->setVideoFilename($videoFileName);
+        }
 
             $entityManager->persist($publication);
             $entityManager->flush();
@@ -78,13 +90,50 @@ final class PublicationController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/remove-image/{image}', name: 'app_publication_remove_image', methods: ['GET'])]
+    public function removeImage(Publication $publication, string $image, EntityManagerInterface $entityManager): Response
+    {
+        $imageFilenames = $publication->getImageFilenames();
+        if (($key = array_search($image, $imageFilenames)) !== false) {
+            unset($imageFilenames[$key]);
+            $publication->setImageFilenames(array_values($imageFilenames));
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_publication_edit', ['id' => $publication->getId()]);
+    }
+
     #[Route('/{id}/edit', name: 'app_publication_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Publication $publication, EntityManagerInterface $entityManager): Response
+    public function edit(
+        Request $request, 
+        Publication $publication, 
+        EntityManagerInterface $entityManager,
+        FileUploader $fileUploader
+        ): Response
     {
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile[] $imageFiles */
+            $imageFiles = $form->get('images')->getData();
+
+            foreach ($imageFiles as $imageFile) {
+                if ($imageFile) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $publication->addImageFilename($imageFileName);
+                }
+            }
+        
+            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $videoFile */
+            $videoFile = $form->get('video')->getData();
+        
+            if ($videoFile) {
+                $videoFileName = $fileUploader->upload($videoFile);
+                $publication->setVideoFilename($videoFileName);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);

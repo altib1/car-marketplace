@@ -1,4 +1,61 @@
+<!-- templates/publication/_form.html.twig -->
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn mt-5 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow-md transition-all">{{ button_label|default('Save') }}</button>
+    <div class="mb-4">
+        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.title, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.title) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.description) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.price) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.year) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.brand) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.model) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.motorizationType) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.images, 'Images', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.images, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.images) }}
+    </div>
+
+    <div class="mb-4">
+        {{ form_label(form.video, 'Video', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_widget(form.video, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_errors(form.video) }}
+    </div>
+
+    <div class="flex justify-end">
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow-md transition-all">{{ button_label|default('Save') }}</button>
+    </div>
 {{ form_end(form) }}
