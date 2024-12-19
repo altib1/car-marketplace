@@ -7,48 +7,56 @@
 
     <!-- Main Content -->
     <div class="flex-1 p-8">
-        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <h1 class="text-3xl font-semibold text-gray-800 mb-6 p-6 border-b border-gray-200">Publication Details</h1>
+        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
+            <h1 class="text-4xl font-bold text-gray-900 mb-6 p-6 border-b border-gray-200">Publication Details</h1>
 
             <div class="p-6">
-                <table class="w-full text-sm text-left text-gray-500">
+                <table class="w-full text-sm text-left text-gray-700">
                     <tbody>
-                        <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Id</th>
-                            <td class="px-6 py-4">{{ publication.id }}</td>
-                        </tr>
                         <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Title</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Title</th>
                             <td class="px-6 py-4">{{ publication.title }}</td>
                         </tr>
                         <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Description</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Description</th>
                             <td class="px-6 py-4">{{ publication.description }}</td>
                         </tr>
                         <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Price</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Price</th>
                             <td class="px-6 py-4">{{ publication.price }}</td>
                         </tr>
                         <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Year</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Year</th>
                             <td class="px-6 py-4">{{ publication.year }}</td>
                         </tr>
                         <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">brand</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Brand</th>
                             <td class="px-6 py-4">{{ publication.brand }}</td>
                         </tr>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Model</th>
+                        <tr class="border-b">
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Model</th>
                             <td class="px-6 py-4">{{ publication.model }}</td>
                         </tr>
                         <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Motorisation</th>
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Motorisation</th>
                             <td class="px-6 py-4">{{ publication.motorizationType }}</td>
                         </tr>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-700 font-medium">Image</th>
+                        <tr class="border-b">
+                            <th class="px-6 py-4 text-gray-900 font-semibold">Images</th>
                             <td class="px-6 py-4">
-                                <img src="{{ asset('uploads/brochures/' ~ publication.brochureFilename) }}" alt="Publication Image" class="w-32 h-32 object-cover">
+                                <div class="flex flex-wrap gap-4">
+                                    {% for imageFilename in publication.imageFilenames %}
+                                        <img src="{{ asset('uploads/brochures/' ~ imageFilename) }}" alt="Publication Image" class="w-32 h-32 object-cover rounded-lg shadow-md">
+                                    {% endfor %}
+                                </div>
+                                {% if publication.videoFilename %}
+                                    <div class="mt-4">
+                                        <video controls class="w-full rounded-lg shadow-md">
+                                            <source src="{{ asset('uploads/brochures/' ~ publication.videoFilename) }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                {% endif %}
                             </td>
                         </tr>
                     </tbody>

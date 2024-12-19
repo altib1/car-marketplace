@@ -10,8 +10,104 @@
         <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
             <h1 class="text-3xl font-semibold text-gray-800 mb-6 p-6 border-b border-gray-200">Edit Publication</h1>
 
-            <div class="p-6 ">
-                {{ include('publication/_form.html.twig', {'button_label': 'Update'}) }}
+            <div class="p-6">
+                {{ form_start(form) }}
+
+                <!-- Form Fields -->
+                <div class="grid grid-cols-1 gap-6">
+                    <div>
+                        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.title, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.title) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.description) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.price) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.year) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.brand) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.model) }}
+                    </div>
+
+                    <div>
+                        {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                        {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                        {{ form_errors(form.motorizationType) }}
+                    </div>
+                </div>
+
+                <!-- Existing Images -->
+                <div class="mt-6">
+                    <label class="block text-sm font-medium text-gray-700">Existing Images</label>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        {% for imageFilename in publication.imageFilenames %}
+                            <div class="relative">
+                                <img src="{{ asset('uploads/brochures/' ~ imageFilename) }}" alt="Publication Image" class="w-32 h-32 object-cover rounded-lg shadow-md">
+                                <a href="{{ path('app_publication_remove_image', {'id': publication.id, 'image': imageFilename}) }}" class="absolute top-0 right-0 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Upload New Images -->
+                <div class="mt-6">
+                    {{ form_label(form.images, 'Upload New Images', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                        <div class="space-y-1 text-center">
+                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 8H20a2 2 0 00-2 2v4H8v28h32V14H30v-4a2 2 0 00-2-2zM20 4h8a4 4 0 014 4v4h8a4 4 0 014 4v28a4 4 0 01-4 4H8a4 4 0 01-4-4V14a4 4 0 014-4h8V8a4 4 0 014-4z" />
+                            </svg>
+                            <div class="flex text-sm text-gray-600">
+                                <label for="{{ form.images.vars.id }}" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                    <span>Upload a file</span>
+                                    {{ form_widget(form.images, {
+                                        'attr': {
+                                            'class': 'sr-only',
+                                            'multiple': 'multiple',
+                                            'id': form.images.vars.id
+                                        }
+                                    }) }}
+                                </label>
+                                <p class="pl-1">or drag and drop</p>
+                            </div>
+                            <p class="text-xs text-gray-500">
+                                PNG, JPG, JPEG, WEBP up to 10MB
+                            </p>
+                        </div>
+                    </div>
+                    {{ form_errors(form.images) }}
+                </div>
+
+                <div class="flex justify-end mt-6">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow-md transition-all">{{ button_label|default('Save') }}</button>
+                </div>
+                {{ form_end(form) }}
             </div>
 
             <div class="flex justify-between items-center p-6 bg-gray-100 border-t border-gray-200">
