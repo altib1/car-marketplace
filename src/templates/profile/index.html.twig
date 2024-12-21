@@ -3,61 +3,113 @@
 {% block title %}Profile{% endblock %}
 
 {% block body %}
-<div class="flex min-h-screen bg-gray-100">
-
+<div class="min-h-screen bg-gray-50">
     <!-- Main Content -->
-    <div class="flex-1 p-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <!-- Profile Section -->
-        <div id="profile" class="section bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Profile Information</h2>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <p class="text-lg">Email: <span class="font-semibold">{{ app.user.email }}</span></p>
-            {% endif %}
+        <div id="profile" class="section space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <div class="flex items-center space-x-4 mb-6">
+                    <div class="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                        <span class="text-2xl text-white font-bold">{{ app.user.email|first|upper }}</span>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Profile Information</h2>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <p class="text-gray-600">{{ app.user.email }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Publications Section -->
-        <div id="publications" class="section hidden bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Your Publications</h2>
-            {% if publications|length > 0 %}
-                <div class="space-y-4" id="publication-list">
-                    {% for publication in publications %}
-                    <div id="publication-{{ publication.id }}" class="bg-gray-100 p-4 rounded-lg shadow flex justify-between items-center">
-                        <div>
-                            <h3 class="font-semibold">{{ publication.title }}</h3>
-                            <p class="text-gray-700 mb-2">{{ publication.description }}</p>
-                            <p class="text-gray-700 mb-2">Price: {{ publication.price }}</p>
-                            <p class="text-sm text-gray-500">Year: {{ publication.year }}</p>
-                        </div>
-                        <div class="flex space-x-2">
-                            <button onclick="openEditModal({{ publication.id }})" class="text-blue-500 hover:text-blue-600">Edit</button>
-                            
-                            <!-- Delete Button with Specific CSRF Token -->
-                            <form method="post" action="{{ path('app_publication_delete', {'id': publication.id}) }}" class="inline">
-                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ publication.id) }}">
-                                <button type="submit" class="text-red-500 hover:text-red-600">Delete</button>
-                            </form>
-                        </div>
-                    </div>
-                    {% endfor %}
+        <div id="publications" class="section hidden space-y-6 mt-8">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Your Publications</h2>
+                    <button onclick="showSection('create-publication')" class="inline-flex items-center px-4 py-2 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Add New Publication
+                    </button>
                 </div>
-            {% else %}
-                <p class="text-gray-600">You haven't made any publications yet.</p>
-            {% endif %}
+
+                {% if publications|length > 0 %}
+                    <div class="space-y-4" id="publication-list">
+                        {% for publication in publications %}
+                        <div id="publication-{{ publication.id }}" class="group bg-gray-50 hover:bg-gray-100 p-6 rounded-xl border border-gray-200 transition-all duration-200">
+                            <div class="flex justify-between items-start">
+                                <div class="space-y-2">
+                                    <h3 class="text-lg font-semibold text-gray-900">{{ publication.title }}</h3>
+                                    <p class="text-gray-600">{{ publication.description }}</p>
+                                    <div class="flex items-center space-x-4">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                                            ${{ publication.price }}
+                                        </span>
+                                        <span class="text-sm text-gray-500">
+                                            Published in {{ publication.year }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                                    <button onclick="openEditModal({{ publication.id }})" class="text-sm px-3 py-1 rounded-md text-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
+                                        Edit
+                                    </button>
+                                    <form method="post" action="{{ path('app_publication_delete', {'id': publication.id}) }}" class="inline">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ publication.id) }}">
+                                        <button type="submit" class="text-sm px-3 py-1 rounded-md text-red-600 hover:bg-red-50 transition-colors duration-200">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center py-12">
+                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        <h3 class="mt-2 text-sm font-medium text-gray-900">No publications</h3>
+                        <p class="mt-1 text-sm text-gray-500">Get started by creating a new publication.</p>
+                    </div>
+                {% endif %}
+            </div>
         </div>
 
         <!-- Create Publication Section -->
-        <div id="create-publication" class="section hidden bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Create a Publication</h2>
+        <div id="create-publication" class="section hidden mt-8">
+            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Create a Publication</h2>
+                <!-- Form content will go here -->
+            </div>
         </div>
 
         <!-- Edit Publication Modal -->
-        <div id="edit-modal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden" onclick="closeEditModal()">
-            <div class="bg-white p-6 rounded-lg shadow-lg" onclick="event.stopPropagation()">
-                <h2 class="text-2xl font-bold mb-4">Edit Publication</h2>
-                <div id="edit-form-content">
-                    <!-- This will be dynamically filled -->
+        <div id="edit-modal" class="fixed inset-0 z-50 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+            <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeEditModal()"></div>
+                <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+                <div class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6" onclick="event.stopPropagation()">
+                    <div class="absolute top-0 right-0 pt-4 pr-4">
+                        <button type="button" onclick="closeEditModal()" class="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                Edit Publication
+                            </h3>
+                            <div class="mt-4" id="edit-form-content">
+                                <!-- Dynamic content will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="mt-4 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600" onclick="closeEditModal()">Close</button>
             </div>
         </div>
     </div>
@@ -65,30 +117,29 @@
 
 <script>
     function showSection(sectionId) {
-        // Hide all sections
-        document.querySelectorAll('.section').forEach(function (section) {
+        document.querySelectorAll('.section').forEach(section => {
             section.classList.add('hidden');
         });
-        // Show the selected section
         document.getElementById(sectionId).classList.remove('hidden');
     }
 
     function openEditModal(publicationId) {
-        // Fetch the edit form for the publication
         fetch(`/publication/${publicationId}/edit`)
             .then(response => response.text())
             .then(data => {
                 document.getElementById('edit-form-content').innerHTML = data;
                 document.getElementById('edit-modal').classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
             });
     }
 
     function closeEditModal() {
         document.getElementById('edit-modal').classList.add('hidden');
-        document.getElementById('edit-form-content').innerHTML = ''; // Clear the content
+        document.getElementById('edit-form-content').innerHTML = '';
+        document.body.style.overflow = 'auto';
     }
 
-    // Show the profile section by default on page load
+    // Show the profile section by default
     showSection('profile');
 </script>
 {% endblock %}
