@@ -3,75 +3,100 @@
 {% block title %}Publication{% endblock %}
 
 {% block body %}
-<div class="flex flex-col md:flex-row min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-12">
+    <!-- Main Content Container -->
+    <div class="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
+        <!-- Slider Section -->
+        <div class="relative">
+            {% if publication.imageFilenames is defined and publication.imageFilenames %}
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for imageFilename in publication.imageFilenames %}
+                            <div class="swiper-slide">
+                                <img 
+                                    src="{{ asset('uploads/brochures/' ~ imageFilename) }}" 
+                                    alt="{{ imageFilename }}" 
+                                    class="w-full h-64 object-cover"
+                                />
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <!-- Slider Navigation -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            {% else %}
+                <div class="w-full h-64 bg-gray-100 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                    <p class="text-gray-500 mt-2">No images available</p>
+                </div>
+            {% endif %}
+        </div>
 
-    <!-- Main Content -->
-    <div class="flex-1 p-8">
-        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg">
-            <h1 class="text-4xl font-bold text-gray-900 mb-6 p-6 border-b border-gray-200">Publication Details</h1>
+        <!-- Details Section -->
+        <div class="p-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-6">{{ publication.title }}</h1>
+            <table class="w-full text-sm text-left text-gray-700">
+                <tbody>
+                    <tr class="border-b bg-gray-50">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Title</th>
+                        <td class="px-6 py-4">{{ publication.title }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Description</th>
+                        <td class="px-6 py-4">{{ publication.description }}</td>
+                    </tr>
+                    <tr class="border-b bg-gray-50">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Price</th>
+                        <td class="px-6 py-4">{{ publication.price ? ('$' ~ publication.price) : 'Not available' }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Year</th>
+                        <td class="px-6 py-4">{{ publication.year }}</td>
+                    </tr>
+                    <tr class="border-b bg-gray-50">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Brand</th>
+                        <td class="px-6 py-4">{{ publication.brand }}</td>
+                    </tr>
+                    <tr class="border-b">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">Model</th>
+                        <td class="px-6 py-4">{{ publication.model }}</td>
+                    </tr>
+                    <tr class="border-b bg-gray-50">
+                        <th class="px-6 py-4 text-gray-900 font-semibold">ID</th>
+                        <td class="px-6 py-4">{{ publication.id }}</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            <div class="p-6">
-                <table class="w-full text-sm text-left text-gray-700">
-                    <tbody>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Title</th>
-                            <td class="px-6 py-4">{{ publication.title }}</td>
-                        </tr>
-                        <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Description</th>
-                            <td class="px-6 py-4">{{ publication.description }}</td>
-                        </tr>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Price</th>
-                            <td class="px-6 py-4">{{ publication.price }}</td>
-                        </tr>
-                        <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Year</th>
-                            <td class="px-6 py-4">{{ publication.year }}</td>
-                        </tr>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Brand</th>
-                            <td class="px-6 py-4">{{ publication.brand }}</td>
-                        </tr>
-                        <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Model</th>
-                            <td class="px-6 py-4">{{ publication.model }}</td>
-                        </tr>
-                        <tr class="border-b bg-gray-50">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Motorisation</th>
-                            <td class="px-6 py-4">{{ publication.motorizationType }}</td>
-                        </tr>
-                        <tr class="border-b">
-                            <th class="px-6 py-4 text-gray-900 font-semibold">Images</th>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-wrap gap-4">
-                                    {% for imageFilename in publication.imageFilenames %}
-                                        <img src="{{ asset('uploads/brochures/' ~ imageFilename) }}" alt="Publication Image" class="w-32 h-32 object-cover rounded-lg shadow-md">
-                                    {% endfor %}
-                                </div>
-                                {% if publication.videoFilename %}
-                                    <div class="mt-4">
-                                        <video controls class="w-full rounded-lg shadow-md">
-                                            <source src="{{ asset('uploads/brochures/' ~ publication.videoFilename) }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="flex justify-between items-center p-6 bg-gray-100 border-t border-gray-200">
-                <a href="{{ path('app_publication_index') }}" class="text-blue-600 hover:text-blue-800 transition-colors">Back to List</a>
-                <a href="{{ path('app_publication_edit', {'id': publication.id}) }}" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow-md transition-all">Edit</a>
-            </div>
-
-            <div class="p-6">
-                {{ include('publication/_delete_form.html.twig') }}
+            <!-- Action Buttons -->
+            <div class="mt-8 flex justify-end space-x-4">
+                <a href="{{ path('app_publication_edit', {'id': publication.id}) }}" 
+                   class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-200">
+                    Edit
+                </a>
+                <a href="{{ path('app_publication_index') }}" 
+                   class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    Back to List
+                </a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- SwiperJS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper('.swiper-container', {
+        loop: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+<link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet">
 {% endblock %}
