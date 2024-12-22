@@ -3,59 +3,55 @@
 {% block title %}Edit Publication{% endblock %}
 
 {% block body %}
-<div class="flex flex-col md:flex-row min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8">
+    <div class="container max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Edit Publication</h1>
+                    <p class="mt-2 text-gray-600">Update the details for your publication</p>
+                </div>
+                <a href="{{ path('app_publication_index') }}" 
+                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                    </svg>
+                    Back to List
+                </a>
+            </div>
+        </div>
 
-    <!-- Main Content -->
-    <div class="flex-1 p-8">
-        <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
-            <h1 class="text-3xl font-semibold text-gray-800 mb-6 p-6 border-b border-gray-200">Edit Publication</h1>
+        <!-- Form Card -->
+        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+            <!-- Form Header -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6">
+                <div class="flex items-center space-x-4">
+                    <div class="rounded-full bg-white/10 p-3">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold text-white">Publication Details</h2>
+                        <p class="text-blue-100 text-sm mt-1">Make sure all fields are correctly filled</p>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Form Content -->
             <div class="p-6">
                 {{ form_start(form) }}
 
-                <!-- Form Fields -->
                 <div class="grid grid-cols-1 gap-6">
-                    <div>
-                        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.title, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.title) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.description) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.price) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.year) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.brand) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.model) }}
-                    </div>
-
-                    <div>
-                        {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                        {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-                        {{ form_errors(form.motorizationType) }}
-                    </div>
+                    {% for field in [form.title, form.description, form.price, form.year, form.brand, form.model, form.motorizationType] %}
+                        <div>
+                            {{ form_label(field, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                            {{ form_widget(field, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                            {{ form_errors(field) }}
+                        </div>
+                    {% endfor %}
                 </div>
 
                 <!-- Existing Images -->
@@ -105,14 +101,9 @@
                 </div>
 
                 <div class="flex justify-end mt-6">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow-md transition-all">{{ button_label|default('Save') }}</button>
+                    <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">{{ button_label|default('Save') }}</button>
                 </div>
                 {{ form_end(form) }}
-            </div>
-
-            <div class="flex justify-between items-center p-6 bg-gray-100 border-t border-gray-200">
-                <a href="{{ path('app_publication_index') }}" class="text-blue-600 hover:text-blue-800 transition-colors">Back to List</a>
-                {{ include('publication/_delete_form.html.twig') }}
             </div>
         </div>
     </div>
