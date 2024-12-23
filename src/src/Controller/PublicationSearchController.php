@@ -7,12 +7,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CarBrandRepository;
+use App\Repository\CarModelRepository;
+use App\Repository\MotorizationTypeRepository;
 
 class PublicationSearchController extends AbstractController
 {
     #[Route('/publications/search', name: 'app_publications_search')]
-    public function search(Request $request, PublicationSearchService $searchService): Response
-    {
+    public function search(
+        Request $request, 
+        PublicationSearchService $searchService,
+        CarBrandRepository $carBrandRepository,
+        CarModelRepository $carModelRepository,
+        MotorizationTypeRepository $motorizationTypeRepository
+    ): Response {
         $criteria = [
             'q' => $request->query->get('q'),
             'price_min' => $request->query->get('price_min'),
@@ -26,12 +34,19 @@ class PublicationSearchController extends AbstractController
             'page' => $request->query->getInt('page', 1),
             'per_page' => 10
         ];
-
+    
         $results = $searchService->search($criteria);
 
+        $brands = $carBrandRepository->findAll();
+        $models = $carModelRepository->findAll();
+        $motorizationTypes = $motorizationTypeRepository->findAll();
+    
         return $this->render('publication/search.html.twig', [
-            'results' => $results,
-            'criteria' => $criteria
+            'results' => $results,  // results from search service
+            'criteria' => $criteria,
+            'brands' => $brands,
+            'models' => $models,
+            'motorizationTypes' => $motorizationTypes,
         ]);
     }
 }
