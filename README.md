@@ -40,7 +40,18 @@ git clone https://github.com/altib1/car-marketplace.git
 
   php bin/console tailwind:build --watch
 ```
-    
+## Elastic Search 
+
+```bash
+  docker-compose exec php bash
+
+  php bin/console fos:elastica:create
+
+  php bin/console fos:elastica:populate
+```
+notes:
+fos_elastica.yaml whould have the env not directly the url, but for some reason its not getting it -> FIXME
+
 ## Access
 
 to acces the website this is the link : 

@@ -1,0 +1,42 @@
+fos_elastica:
+    clients:
+        default:
+            url: 'http://elasticsearch:9200'
+    indexes:
+      publications:
+          persistence:
+              driver: orm
+              model: App\Entity\Publication
+              provider: ~
+              finder: ~
+          properties:
+              id: ~
+              title:
+                  type: text
+                  boost: 3.0
+              description:
+                  type: text
+              price:
+                  type: float
+              year:
+                  type: integer
+              brand:
+                  type: nested
+                  properties:
+                      id: ~
+                      name: { type: keyword }
+              model:
+                  type: nested
+                  properties:
+                      id: ~
+                      name: { type: keyword }
+              motorizationType:
+                  type: nested
+                  properties:
+                      id: ~
+                      name: { type: keyword }
+              user:
+                  type: nested
+                  properties:
+                      id: ~
+                      email: { type: keyword }
