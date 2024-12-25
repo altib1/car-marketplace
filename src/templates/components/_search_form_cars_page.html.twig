@@ -1,8 +1,3 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Search Results{% endblock %}
-
-{% block body %}
 <div class="container mx-auto py-8 flex flex-col lg:flex-row gap-8">
     <!-- Filter Section -->
     <div class="w-full lg:w-1/4 bg-white p-6 rounded-xl shadow-xl">
@@ -81,45 +76,82 @@
     {% if results.results|length > 0 %}
         <div class="grid grid-cols-1 gap-6">
             {% for publication in results.results %}
-                <div class="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all flex flex-col md:flex-row">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col md:flex-row overflow-hidden group">
                     <!-- Image Section -->
-                    <div class="relative w-full md:w-1/3 bg-cover bg-center h-full rounded-t-xl md:rounded-l-xl"
-                         style="background-image: url('{{ publication.imageFilenames|length > 0 ? asset('uploads/brochures/' ~ publication.imageFilenames[0]) : 'your-placeholder-image-url.jpg' }}');">
-                        {% if publication.imageFilenames|length == 0 %}
-                            <div class="absolute inset-0 flex items-center justify-center bg-gray-300 opacity-80 rounded-t-xl md:rounded-l-xl">
-                                <p class="text-white text-sm">No image available</p>
+                    <div class="relative w-full md:w-1/3 h-64 md:h-auto rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center h-full transform group-hover:scale-105 transition-transform duration-300"
+                             style="background-image: url('{{ publication.imageFilenames|length > 0 ? asset('uploads/brochures/' ~ publication.imageFilenames[0]) : 'your-placeholder-image-url.jpg' }}');">
+                            {% if publication.imageFilenames|length == 0 %}
+                                <div class="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80">
+                                    <p class="text-white text-sm font-medium">No image available</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <!-- Optional: Add a "Featured" or "New" badge -->
+                        {% if publication.featured|default(false) %}
+                            <div class="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-md text-sm font-medium">
+                                À ne pas manquer
                             </div>
                         {% endif %}
                     </div>
 
                     <!-- Car Info Section -->
-                    <div class="p-6 w-full md:w-2/3 flex flex-col justify-between">
-                        <h2 class="text-xl font-semibold text-gray-800">{{ publication.title }}</h2>
-                        <div class="mt-4 text-lg text-gray-600">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm text-gray-500">Price</span>
-                                <span class="font-semibold">{{ publication.price }} €</span>
+                    <div class="p-6 w-full md:w-2/3 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-900">{{ publication.title }}</h2>
+                                    <p class="text-sm text-gray-600 mt-1">{{ publication.brand }} {{ publication.model }}</p>
+                                </div>
+                                <!-- Optional: Add a favorite button -->
+                                <button class="text-gray-400 hover:text-gray-600 transition-colors">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
                             </div>
-                            <div class="flex items-center space-x-2 mt-2">
-                                <span class="text-sm text-gray-500">Year</span>
-                                <span class="font-semibold">{{ publication.year }}</span>
-                            </div>
-                            <div class="flex items-center space-x-2 mt-2">
-                                <span class="text-sm text-gray-500">Brand</span>
-                                <span class="font-semibold">{{ publication.brand }}</span>
-                            </div>
-                            <div class="flex items-center space-x-2 mt-2">
-                                <span class="text-sm text-gray-500">Model</span>
-                                <span class="font-semibold">{{ publication.model }}</span>
+
+                            <div class="mt-4 grid grid-cols-2 gap-4">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500">Price</span>
+                                    <span class="font-semibold text-lg text-gray-900">{{ publication.price }} €</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500">Year</span>
+                                    <span class="font-semibold">{{ publication.year }}</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500">Brand</span>
+                                    <span class="font-semibold">{{ publication.brand }}</span>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-sm text-gray-500">Model</span>
+                                    <span class="font-semibold">{{ publication.model }}</span>
+                                </div>
                             </div>
                         </div>
-                        <a href="{{ path('app_car_show', { id: publication.id }) }}" class="inline-block text-blue-600 hover:text-blue-800 mt-4 text-sm">View Details</a>
+
+                        <div class="flex items-center justify-between mt-6">
+                            <a href="{{ path('app_car_show', { id: publication.id }) }}" 
+                               class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
+                                View Details
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <!-- Optional: Add a price tag indicator -->
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-700">
+                                Offre équitable
+                            </span>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-gray-500 mt-6">No results found for your search criteria.</p>
+        <div class="flex items-center justify-center h-40 bg-gray-50 rounded-xl">
+            <p class="text-gray-500">No results found for your search criteria.</p>
+        </div>
     {% endif %}
 </div>
 
@@ -128,33 +160,29 @@
     <div class="mt-6 flex justify-center">
         <nav aria-label="Pagination" class="relative w-full max-w-4xl">
             <div class="flex items-center bg-white shadow-lg rounded-lg overflow-hidden">
-                <!-- Image on the left covering the full height -->
-                <div class="w-16 bg-cover bg-center h-full" style="background-image: url('your-image-url.jpg');"></div>
-                
-                <!-- Pagination controls on the right -->
-                <ul class="inline-flex space-x-4 py-2 px-6 w-full justify-between items-center">
+                <!-- Pagination controls -->
+                <ul class="inline-flex space-x-4 py-3 px-6 w-full justify-between items-center">
                     {% if results.pagination.previous_page %}
                         <li>
                             <a href="{{ path('app_publications_search', criteria|merge({ page: results.pagination.previous_page })) }}" 
-                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-l-xl flex items-center transition duration-300">
-                                <span class="sr-only">Previous</span>
+                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l4.293 4.293a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 0z" clip-rule="evenodd" />
                                 </svg>
+                                <span class="ml-2">Previous</span>
                             </a>
                         </li>
                     {% endif %}
 
-                    <!-- Current page info -->
-                    <li class="text-gray-500 text-sm">
+                    <li class="text-gray-500 text-sm font-medium">
                         Page {{ results.pagination.current_page }} of {{ results.pagination.total_pages }}
                     </li>
 
                     {% if results.pagination.next_page %}
                         <li>
                             <a href="{{ path('app_publications_search', criteria|merge({ page: results.pagination.next_page })) }}" 
-                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-200 px-4 py-2 rounded-r-xl flex items-center transition duration-300">
-                                <span class="sr-only">Next</span>
+                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
+                                <span class="mr-2">Next</span>
                                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-4.293-4.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                 </svg>
@@ -166,6 +194,3 @@
         </nav>
     </div>
 {% endif %}
-
-
-{% endblock %}

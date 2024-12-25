@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -8,37 +8,44 @@
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
         <style>
-            /* Hide scrollbar for Chrome, Safari and Opera */
             .scroll-hidden::-webkit-scrollbar {
-                display: none; /* Safari and Chrome */
+                display: none;
             }
 
-            /* Hide scrollbar for IE and Edge */
             .scroll-hidden {
-                -ms-overflow-style: none; /* IE and Edge */
-                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none;
+                scrollbar-width: none;
             }
         </style>
 
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </head>
-    <body>
-        <div class="w-full">
-            <!-- menu -->
+    <body class="flex flex-col min-h-screen bg-white-100">
+        <!-- Navbar -->
+        <nav class="w-full">
             {% include 'menu/index.html.twig' %}
-        </div>
-        <div class="flex h-screen px-20 pt-20">
-            <div class="flex">
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 px-20 pt-10">
+            <div class="flex h-full">
                 {% if app.user and (app.request.attributes.get('_route') in ['app_profile', 'app_publication', 'app_publication_index', 'app_publication_new', 'app_publication_delete', 'app_publication_show', 'app_publication_edit']) %}
-                    {% include 'profile-menu/index.html.twig' %}
+                    <aside class="flex-none">
+                        {% include 'profile-menu/index.html.twig' %}
+                    </aside>
                 {% endif %}
+        
+                <div class="flex-1 p-4 overflow-y-auto scroll-hidden">
+                    {% block body %}{% endblock %}
+                </div>
             </div>
-    
-            <div class="flex-1 p-4 overflow-y-auto scroll-hidden">
-                {% block body %}{% endblock %}
-            </div>
-        </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="w-full mt-auto">
+            {% include 'footer/index.html.twig' %}
+        </footer>
     </body>
 </html>
