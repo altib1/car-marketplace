@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cars{% endblock %}
+
+{% block body %}
+    <div class="container mx-auto py-2">
+        {% include 'components/_search_form_cars_page.html.twig' with {
+            'brands': brands,
+            'models': models,
+            'motorizationTypes': motorizationTypes,
+            'criteria': criteria
+        } %}
+    </div>
+{% endblock %}

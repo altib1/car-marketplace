@@ -2,25 +2,28 @@
 
 namespace App\Controller;
 
-use App\Service\PublicationSearchService;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CarBrandRepository;
 use App\Repository\CarModelRepository;
 use App\Repository\MotorizationTypeRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Service\PublicationSearchService;
+use App\Entity\Publication;
 
-class PublicationSearchController extends AbstractController
+
+class CarsController extends AbstractController
 {
-    #[Route('/publications/search', name: 'app_publications_search')]
-    public function search(
-        Request $request, 
-        PublicationSearchService $searchService,
+    #[Route('/cars', name: 'app_cars')]
+    public function index(
+        Request $request,
         CarBrandRepository $carBrandRepository,
         CarModelRepository $carModelRepository,
-        MotorizationTypeRepository $motorizationTypeRepository
+        MotorizationTypeRepository $motorizationTypeRepository,
+        PublicationSearchService $searchService,
     ): Response {
+
         $criteria = [
             'q' => $request->query->get('q'),
             'price_min' => $request->query->get('price_min'),
@@ -40,13 +43,21 @@ class PublicationSearchController extends AbstractController
         $brands = $carBrandRepository->findAll();
         $models = $carModelRepository->findAll();
         $motorizationTypes = $motorizationTypeRepository->findAll();
-    
-        return $this->render('components/_search_form.html.twig', [
-            'results' => $results,  // results from search service
-            'criteria' => $criteria,
+
+        return $this->render('cars/index.html.twig', [
             'brands' => $brands,
             'models' => $models,
             'motorizationTypes' => $motorizationTypes,
+            'results' => $results,  // results from search service
+            'criteria' => $criteria,
+        ]);
+    }
+
+    #[Route('cars/{id}', name: 'app_car_show', methods: ['GET'])]
+    public function show(Publication $publication): Response
+    {
+        return $this->render('cars/show.html.twig', [
+            'publication' => $publication,
         ]);
     }
 }

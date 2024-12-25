@@ -18,10 +18,10 @@ use App\Repository\MotorizationTypeRepository;
 use App\Entity\CarBrand;
 use App\Service\FileUploader;
 
-#[Route('/publication')]
+#[Route('/publication', name: 'app_publication')]
 final class PublicationController extends AbstractController
 {
-    #[Route(name: 'app_publication_index', methods: ['GET'])]
+    #[Route(name: '_index', methods: ['GET'])]
     public function index(PublicationRepository $publicationRepository): Response
     {
         return $this->render('publication/index.html.twig', [
@@ -29,7 +29,7 @@ final class PublicationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_publication_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: '_new', methods: ['GET', 'POST'])]
     public function new(
         Request $request, 
         EntityManagerInterface $entityManager,  
@@ -82,7 +82,7 @@ final class PublicationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_publication_show', methods: ['GET'])]
+    #[Route('/{id}', name: '_show', methods: ['GET'])]
     public function show(Publication $publication): Response
     {
         return $this->render('publication/show.html.twig', [
@@ -90,7 +90,7 @@ final class PublicationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/remove-image/{image}', name: 'app_publication_remove_image', methods: ['GET'])]
+    #[Route('/{id}/remove-image/{image}', name: '_remove_image', methods: ['GET'])]
     public function removeImage(Publication $publication, string $image, EntityManagerInterface $entityManager): Response
     {
         $imageFilenames = $publication->getImageFilenames();
@@ -103,7 +103,7 @@ final class PublicationController extends AbstractController
         return $this->redirectToRoute('app_publication_edit', ['id' => $publication->getId()]);
     }
 
-    #[Route('/{id}/edit', name: 'app_publication_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: '_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request, 
         Publication $publication, 
@@ -136,7 +136,7 @@ final class PublicationController extends AbstractController
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_publication_show', ['id' => $publication->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('publication/edit.html.twig', [
@@ -145,7 +145,7 @@ final class PublicationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_publication_delete', methods: ['POST'])]
+    #[Route('/{id}', name: '_delete', methods: ['POST'])]
     public function delete(Request $request, Publication $publication, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$publication->getId(), $request->getPayload()->getString('_token'))) {
@@ -153,7 +153,7 @@ final class PublicationController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_profile', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
     }
 
  #[Route('/models/{brandId}', name: 'get_models', methods: ['GET'])]

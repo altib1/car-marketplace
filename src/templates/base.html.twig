@@ -31,8 +31,7 @@
         </div>
         <div class="flex h-screen px-20 pt-20">
             <div class="flex">
-                {% if app.user %}
-                    <!-- Sidebar Navigation -->
+                {% if app.user and (app.request.attributes.get('_route') in ['app_profile', 'app_publication', 'app_publication_index', 'app_publication_new', 'app_publication_delete', 'app_publication_show', 'app_publication_edit']) %}
                     {% include 'profile-menu/index.html.twig' %}
                 {% endif %}
             </div>
