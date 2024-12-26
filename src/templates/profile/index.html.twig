@@ -6,22 +6,53 @@
 <div class="min-h-screen bg-gray-50">
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <!-- Profile Section -->
-        <div id="profile" class="section space-y-6">
-            <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
-                <div class="flex items-center space-x-4 mb-6">
-                    <div class="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
-                        <span class="text-2xl text-white font-bold">{{ app.user.email|first|upper }}</span>
-                    </div>
-                    <div>
-                        <h2 class="text-2xl font-bold text-gray-900">Profile Information</h2>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <p class="text-gray-600">{{ app.user.email }}</p>
-                        {% endif %}
-                    </div>
-                </div>
+    
+    <!-- Profile Section -->
+    <div class="bg-white rounded-xl shadow-sm p-8 border border-gray-100">
+        <div class="flex items-center space-x-4 mb-6">
+            <div class="h-16 w-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
+                <span class="text-2xl text-white font-bold">{{ app.user.name|first|upper }}</span>
+            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900">Profile Information</h2>
+                <p class="text-gray-600">{{ app.user.email }}</p>
             </div>
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div>
+                <h3 class="text-gray-700 font-semibold">Name</h3>
+                <p class="text-gray-900">{{ app.user.name }} {{ app.user.lastname }}</p>
+            </div>
+            <div>
+                <h3 class="text-gray-700 font-semibold">Phone Number</h3>
+                <p class="text-gray-900">{{ app.user.phoneNumber }}</p>
+            </div>
+            <div>
+                <h3 class="text-gray-700 font-semibold">Gender</h3>
+                <p class="text-gray-900">{{ app.user.gender|title }}</p>
+            </div>
+        </div>
+
+        <div class="mt-8 flex space-x-4">
+            <a href="{{ path('app_profile_edit') }}" 
+               class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                Edit Profile
+            </a>
+            <a href="{{ path('app_change_password') }}"
+               class="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors">
+                Change Password
+            </a>
+            <form action="{{ path('app_profile_delete') }}" method="post" class="inline">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete-account') }}">
+                <button type="submit" 
+                        class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                        onclick="return confirm('Are you sure you want to delete your account?')">
+                    Delete Account
+                </button>
+            </form>
+        </div>
+    </div>
 
         <!-- Publications Section -->
         <div id="publications" class="section hidden space-y-6 mt-8">
