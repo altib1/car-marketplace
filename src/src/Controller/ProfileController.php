@@ -10,19 +10,23 @@ use App\Entity\Publication;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-
+use App\Form\ProfileType;
+use App\Form\ChangePasswordType;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends AbstractController
 {
     #[Route('/profile', name: 'app_profile')]
     public function index(Request $request, EntityManagerInterface $entityManager, PublicationRepository $publicationRepository): Response
     {
-        // usually you'll want to make sure the user is authenticated first,
-        // see "Authorization" below
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+
         $publication = new Publication();
-        $publication->setUser($this->getUser());
+        $publication->setUser($user);
 
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
@@ -30,23 +34,97 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($publication);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Publication created successfully!');
             return $this->redirectToRoute('app_profile');
         }
 
-        $publications = $publicationRepository->findBy(['user' => $this->getUser()]);
+        $publications = $publicationRepository->findBy(['user' => $user]);
 
-        // returns your User object, or null if the user is not authenticated
-        // use inline documentation to tell your editor your exact User class
-        /** @var \App\Entity\User $user */
-        $user = $this->getUser();
-
-        // Call whatever methods you've added to your User class
-        // For example, if you added a getFirstName() method, you can use that.
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'publicationForm' => $form->createView(),
             'publications' => $publications,
         ]);
+    }
+
+    #[Route('/profile/edit', name: 'app_profile_edit')]
+    public function edit(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $entityManager->flush();
+                $this->addFlash('success', 'Profile updated successfully!');
+                return $this->redirectToRoute('app_profile');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'An error occurred while updating your profile.');
+            }
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/profile/change-password', name: 'app_change_password')]
+    public function changePassword(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordType::class);
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Verify current password
+            if (!$passwordHasher->isPasswordValid($user, $form->get('currentPassword')->getData())) {
+                $this->addFlash('error', 'Current password is incorrect');
+                return $this->redirectToRoute('app_change_password');
+            }
+    
+            try {
+                $user->setPassword(
+                    $passwordHasher->hashPassword($user, $form->get('newPassword')->getData())
+                );
+                $entityManager->flush();
+                $this->addFlash('success', 'Password changed successfully!');
+                return $this->redirectToRoute('app_profile');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'An error occurred while changing your password.');
+            }
+        }
+    
+        return $this->render('profile/change_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/profile/delete', name: 'app_profile_delete', methods: ['POST'])]
+    public function delete(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        if (!$this->isCsrfTokenValid('delete-account', $request->request->get('_token'))) {
+            throw new AccessDeniedException('Invalid CSRF token.');
+        }
+
+        try {
+            /** @var \App\Entity\User $user */
+            $user = $this->getUser();
+            $entityManager->remove($user);
+            $entityManager->flush();
+            $this->addFlash('success', 'Your account has been deleted.');
+            return $this->redirectToRoute('app_logout');
+        } catch (\Exception $e) {
+            $this->addFlash('error', 'An error occurred while deleting your account.');
+            return $this->redirectToRoute('app_profile');
+        }
     }
 }

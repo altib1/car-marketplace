@@ -24,8 +24,10 @@ final class PublicationController extends AbstractController
     #[Route(name: '_index', methods: ['GET'])]
     public function index(PublicationRepository $publicationRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findAll(),
+            'publications' => $publicationRepository->findBy(['user' => $this->getUser()]),
         ]);
     }
 
@@ -36,7 +38,10 @@ final class PublicationController extends AbstractController
         FileUploader $fileUploader
         ): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $publication = new Publication();
+        $publication->setUser($this->getUser());
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
@@ -85,6 +90,11 @@ final class PublicationController extends AbstractController
     #[Route('/{id}', name: '_show', methods: ['GET'])]
     public function show(Publication $publication): Response
     {
+        // Check if current user owns the publication
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot view this publication.');
+        }
+
         return $this->render('publication/show.html.twig', [
             'publication' => $publication,
         ]);
@@ -93,6 +103,11 @@ final class PublicationController extends AbstractController
     #[Route('/{id}/remove-image/{image}', name: '_remove_image', methods: ['GET'])]
     public function removeImage(Publication $publication, string $image, EntityManagerInterface $entityManager): Response
     {
+        // Check if current user owns the publication
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot edit this publication.');
+        }
+
         $imageFilenames = $publication->getImageFilenames();
         if (($key = array_search($image, $imageFilenames)) !== false) {
             unset($imageFilenames[$key]);
@@ -111,6 +126,11 @@ final class PublicationController extends AbstractController
         FileUploader $fileUploader
         ): Response
     {
+        // Check if current user owns the publication
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot edit this publication.');
+        }
+
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 
@@ -148,6 +168,11 @@ final class PublicationController extends AbstractController
     #[Route('/{id}', name: '_delete', methods: ['POST'])]
     public function delete(Request $request, Publication $publication, EntityManagerInterface $entityManager): Response
     {
+        // Check if current user owns the publication
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot delete this publication.');
+        }
+
         if ($this->isCsrfTokenValid('delete'.$publication->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($publication);
             $entityManager->flush();
