@@ -11,9 +11,6 @@ fos_elastica:
               finder: ~
           properties:
               id: ~
-              title:
-                  type: text
-                  boost: 3.0
               description:
                   type: text
               price:
@@ -40,3 +37,13 @@ fos_elastica:
                   properties:
                       id: ~
                       email: { type: keyword }
+              mileage:
+                  type: integer
+              fuelType:
+                  type: keyword
+              gearbox:
+                  type: keyword
+              condition:
+                  type: keyword
+              hasWarranty:
+                  type: boolean

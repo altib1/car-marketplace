@@ -4,10 +4,6 @@
         <form method="get" action="{{ path('app_cars') }}">
             <div class="space-y-6">
                 <!-- Search -->
-                <div>
-                    <label for="q" class="block text-sm font-medium text-gray-700">Search</label>
-                    <input type="text" name="q" id="q" value="{{ criteria.q }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                </div>
 
                 <!-- Price -->
                 <div class="grid grid-cols-2 gap-4">
@@ -66,6 +62,55 @@
                     </select>
                 </div>
 
+                <!-- Mileage -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label for="mileage_min" class="block text-sm font-medium text-gray-700">Min Mileage</label>
+                        <input type="number" name="mileage_min" id="mileage_min" value="{{ criteria.mileage_min }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div>
+                        <label for="mileage_max" class="block text-sm font-medium text-gray-700">Max Mileage</label>
+                        <input type="number" name="mileage_max" id="mileage_max" value="{{ criteria.mileage_max }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+
+                <!-- Fuel Type -->
+                <div>
+                    <label for="fuel_type" class="block text-sm font-medium text-gray-700">Fuel Type</label>
+                    <select name="fuel_type" id="fuel_type" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Fuel Type</option>
+                        <option value="diesel" {% if criteria.fuel_type == 'diesel' %}selected{% endif %}>Diesel</option>
+                        <option value="gasoline" {% if criteria.fuel_type == 'gasoline' %}selected{% endif %}>Gasoline</option>
+                        <option value="electric" {% if criteria.fuel_type == 'electric' %}selected{% endif %}>Electric</option>
+                        <option value="hybrid" {% if criteria.fuel_type == 'hybrid' %}selected{% endif %}>Hybrid</option>
+                    </select>
+                </div>
+
+                <!-- Gearbox -->
+                <div>
+                    <label for="gearbox" class="block text-sm font-medium text-gray-700">Gearbox</label>
+                    <select name="gearbox" id="gearbox" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Gearbox</option>
+                        <option value="manual" {% if criteria.gearbox == 'manual' %}selected{% endif %}>Manual</option>
+                        <option value="automatic" {% if criteria.gearbox == 'automatic' %}selected{% endif %}>Automatic</option>
+                    </select>
+                </div>
+
+                <!-- Condition -->
+                <div>
+                    <label for="condition" class="block text-sm font-medium text-gray-700">Condition</label>
+                    <select name="condition" id="condition" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Condition</option>
+                        <option value="new" {% if criteria.condition == 'new' %}selected{% endif %}>New</option>
+                        <option value="used" {% if criteria.condition == 'used' %}selected{% endif %}>Used</option>
+                    </select>
+                </div>
+
+                <!-- Warranty -->
+                <div class="flex items-center">
+                    <input type="checkbox" name="has_warranty" id="has_warranty" {% if criteria.has_warranty %}checked{% endif %} class="h-4 w-4 rounded border-gray-300">
+                    <label for="has_warranty" class="ml-2 block text-sm font-medium text-gray-700">Has Warranty</label>
+                </div>
                 <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">Search</button>
             </div>
         </form>
@@ -73,6 +118,19 @@
 
 <!-- Results Section -->
 <div class="w-full lg:w-3/4">
+    <!-- Sort and Results Count -->
+    <div class="w-full lg:w-3/4 mb-4 flex justify-between items-center">
+        <p class="text-gray-600">{{ results.pagination.total_results }} results found</p>
+        <div class="flex items-center space-x-4">
+            <label for="sort" class="text-sm text-gray-600">Sort by:</label>
+            <select name="sort" id="sort" onchange="window.location.href=this.value" class="border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500">
+                <option value="{{ path('app_cars', criteria|merge({sort: 'price_asc'})) }}" {% if criteria.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'price_desc'})) }}" {% if criteria.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_asc'})) }}" {% if criteria.sort == 'mileage_asc' %}selected{% endif %}>Mileage: Low to High</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_desc'})) }}" {% if criteria.sort == 'mileage_desc' %}selected{% endif %}>Mileage: High to Low</option>
+            </select>
+        </div>
+    </div>
     {% if results.results|length > 0 %}
         <div class="grid grid-cols-1 gap-6">
             {% for publication in results.results %}
@@ -168,44 +226,45 @@
             <p class="text-gray-500">No results found for your search criteria.</p>
         </div>
     {% endif %}
+    <!-- Pagination Section -->
+    {% if results.pagination.total_pages > 1 %}
+        <div class="mt-8">
+            <nav aria-label="Pagination" class="relative w-full">
+                <div class="flex items-center bg-white shadow-lg rounded-lg overflow-hidden">
+                    <!-- Pagination controls -->
+                    <ul class="inline-flex space-x-4 py-3 px-6 w-full justify-between items-center">
+                        {% if results.pagination.previous_page %}
+                            <li>
+                                <a href="{{ path('app_cars', criteria|merge({ page: results.pagination.previous_page })) }}" 
+                                   class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l4.293 4.293a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                    <span class="ml-2">Previous</span>
+                                </a>
+                            </li>
+                        {% endif %}
+
+                        <li class="text-gray-500 text-sm font-medium">
+                            Page {{ results.pagination.current_page }} of {{ results.pagination.total_pages }}
+                        </li>
+
+                        {% if results.pagination.next_page %}
+                            <li>
+                                <a href="{{ path('app_cars', criteria|merge({ page: results.pagination.next_page })) }}" 
+                                   class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
+                                    <span class="mr-2">Next</span>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-4.293-4.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    {% endif %}
 </div>
 
-<!-- Pagination Section -->
-{% if results.pagination.total_pages > 1 %}
-    <div class="mt-6 flex justify-center">
-        <nav aria-label="Pagination" class="relative w-full max-w-4xl">
-            <div class="flex items-center bg-white shadow-lg rounded-lg overflow-hidden">
-                <!-- Pagination controls -->
-                <ul class="inline-flex space-x-4 py-3 px-6 w-full justify-between items-center">
-                    {% if results.pagination.previous_page %}
-                        <li>
-                            <a href="{{ path('app_publications_search', criteria|merge({ page: results.pagination.previous_page })) }}" 
-                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l4.293 4.293a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                </svg>
-                                <span class="ml-2">Previous</span>
-                            </a>
-                        </li>
-                    {% endif %}
-
-                    <li class="text-gray-500 text-sm font-medium">
-                        Page {{ results.pagination.current_page }} of {{ results.pagination.total_pages }}
-                    </li>
-
-                    {% if results.pagination.next_page %}
-                        <li>
-                            <a href="{{ path('app_publications_search', criteria|merge({ page: results.pagination.next_page })) }}" 
-                               class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
-                                <span class="mr-2">Next</span>
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-4.293-4.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                </svg>
-                            </a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
-    </div>
-{% endif %}
+</div>
