@@ -45,13 +45,47 @@
                 {{ form_start(form) }}
 
                 <div class="grid grid-cols-1 gap-6">
-                    {% for field in [form.title, form.description, form.price, form.year, form.brand, form.model, form.motorizationType] %}
+                    {% for field in [
+                        form.description, 
+                        form.price, 
+                        form.year, 
+                        form.brand, 
+                        form.model, 
+                        form.motorizationType, 
+                        form.mileage, 
+                        form.gearbox, 
+                        form.fuelType, 
+                        form.engineSize, 
+                        form.hasWarranty, 
+                        form.warrantyMonths, 
+                        form.sellerLocation, 
+                        form.condition
+                        ] %}
                         <div>
                             {{ form_label(field, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
                             {{ form_widget(field, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
                             {{ form_errors(field) }}
                         </div>
                     {% endfor %}
+                </div>
+
+                <!-- Equipment & Features -->
+                <div class="bg-gray-50 p-4 rounded-lg mb-4 mt-6">
+                    <h3 class="text-lg font-medium text-gray-900 mb-4">Equipment & Features</h3>
+                    <div class="mb-4" id="equipment-collection"
+                         data-prototype="{{ form_widget(form.equipment.vars.prototype)|e('html_attr') }}">
+                        {% for equipmentField in form.equipment %}
+                            <div class="equipment-item mb-2 flex items-center">
+                                {{ form_widget(equipmentField, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                                <button type="button" class="remove-equipment-item ml-2 bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm">
+                                    Remove
+                                </button>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="add-equipment-item bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-md text-sm">
+                        Add Equipment Item
+                    </button>
                 </div>
 
                 <!-- Existing Images -->
@@ -108,4 +142,31 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const equipmentCollection = document.getElementById('equipment-collection');
+        const addEquipmentButton = document.querySelector('.add-equipment-item');
+        let index = {{ form.equipment|length }};
+
+        addEquipmentButton.addEventListener('click', function() {
+            const prototype = equipmentCollection.dataset.prototype.replace(/__name__/g, index);
+            const newItem = document.createElement('div');
+            newItem.classList.add('equipment-item', 'mb-2', 'flex', 'items-center');
+            newItem.innerHTML = prototype + '<button type="button" class="remove-equipment-item ml-2 bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm">Remove</button>';
+            equipmentCollection.appendChild(newItem);
+            index++;
+
+            newItem.querySelector('.remove-equipment-item').addEventListener('click', function() {
+                newItem.remove();
+            });
+        });
+
+        document.querySelectorAll('.remove-equipment-item').forEach(button => {
+            button.addEventListener('click', function() {
+                button.closest('.equipment-item').remove();
+            });
+        });
+    });
+</script>
 {% endblock %}
