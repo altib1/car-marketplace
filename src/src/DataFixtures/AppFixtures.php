@@ -313,6 +313,10 @@ class AppFixtures extends Fixture
         // Create a default user
         $user = new User();
         $user->setEmail('altiballa@gmail.com');
+        $user->setName('alti');
+        $user->setLastname('balla');
+        $user->setPhoneNumber('0605991577');
+        $user->setGender('male');
         $user->setPassword('$argon2id$v=19$m=65536,t=3,p=4$pEvuZ5KxA6iGQ47cUa+u5w$p+DAjc9fAoylQpZX3MfHpGawZWfKuqw98bS1HD4jEN8');
         $user->setRoles(['ROLE_USER']);
         $manager->persist($user);

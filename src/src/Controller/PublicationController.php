@@ -46,34 +46,20 @@ final class PublicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Get the selected model and motorization type
-            $carBrand = $entityManager->getRepository(CarBrand::class)->find($form->get('brand')->getData());
-            $carModel = $entityManager->getRepository(CarModel::class)->find($form->get('model')->getData());
-            $motorizationType = $entityManager->getRepository(MotorizationType::class)->find($form->get('motorizationType')->getData());
+            // Get the submitted data
+            $formData = $form->getData();
             
-            // If you want to associate these with the publication
-            $publication->setBrand($carBrand);
-            $publication->setModel($carModel);
-            $publication->setMotorizationType($motorizationType);
+            // Handle file uploads
+            $this->handleFileUploads($form, $publication, $fileUploader);
             
-        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile[] $imageFiles */
-        $imageFiles = $form->get('images')->getData();
-
-        foreach ($imageFiles as $imageFile) {
-            if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                // Assuming you have a method to add image filenames to the publication
-                $publication->addImageFilename($imageFileName);
+            // Set default values for nullable fields if they're not provided
+            $this->setDefaultValues($publication);
+            
+            // Handle the equipment collection
+            $equipmentData = $request->request->all('publication')['equipment'] ?? [];
+            if (!empty($equipmentData)) {
+                $publication->setEquipment(array_values(array_filter($equipmentData)));
             }
-        }
-
-        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $videoFile */
-        $videoFile = $form->get('video')->getData();
-
-        if ($videoFile) {
-            $videoFileName = $fileUploader->upload($videoFile);
-            $publication->setVideoFilename($videoFileName);
-        }
 
             $entityManager->persist($publication);
             $entityManager->flush();
@@ -135,28 +121,18 @@ final class PublicationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile[] $imageFiles */
-            $imageFiles = $form->get('images')->getData();
-
-            foreach ($imageFiles as $imageFile) {
-                if ($imageFile) {
-                    $imageFileName = $fileUploader->upload($imageFile);
-                    $publication->addImageFilename($imageFileName);
-                }
-            }
-        
-            /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $videoFile */
-            $videoFile = $form->get('video')->getData();
-        
-            if ($videoFile) {
-                $videoFileName = $fileUploader->upload($videoFile);
-                $publication->setVideoFilename($videoFileName);
+            // Handle file uploads
+            $this->handleFileUploads($form, $publication, $fileUploader);
+            
+            // Handle the equipment collection
+            $equipmentData = $request->request->all('publication')['equipment'] ?? [];
+            if (!empty($equipmentData)) {
+                $publication->setEquipment(array_values(array_filter($equipmentData)));
             }
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_publication_show', ['id' => $publication->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_publication_show', ['id' => $publication->getId()]);
         }
 
         return $this->render('publication/edit.html.twig', [
@@ -215,5 +191,42 @@ final class PublicationController extends AbstractController
         }
 
         return new JsonResponse($data);
+    }
+
+    private function handleFileUploads($form, Publication $publication, FileUploader $fileUploader): void
+    {
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile[] $imageFiles */
+        $imageFiles = $form->get('images')->getData();
+
+        foreach ($imageFiles as $imageFile) {
+            if ($imageFile) {
+                $imageFileName = $fileUploader->upload($imageFile);
+                $publication->addImageFilename($imageFileName);
+            }
+        }
+
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $videoFile */
+        $videoFile = $form->get('video')->getData();
+
+        if ($videoFile) {
+            $videoFileName = $fileUploader->upload($videoFile);
+            $publication->setVideoFilename($videoFileName);
+        }
+    }
+
+    private function setDefaultValues(Publication $publication): void
+    {
+
+        if ($publication->getHasWarranty() === null) {
+            $publication->setHasWarranty(false);
+        }
+        
+        if ($publication->getEquipment() === null) {
+            $publication->setEquipment([]);
+        }
+        
+        if ($publication->getImageFilenames() === null) {
+            $publication->setImageFilenames([]);
+        }
     }
 }

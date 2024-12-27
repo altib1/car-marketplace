@@ -16,9 +16,6 @@ class Publication
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
-
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
@@ -55,6 +52,33 @@ class Publication
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private $videoFilename;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $mileage = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $fuelType = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $gearbox = null;
+
+    #[ORM\Column]
+    private ?bool $hasWarranty = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $warrantyMonths = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sellerLocation = null;
+
+    #[ORM\Column(name: 'vehicle_condition', type: Types::STRING, length: 255)]
+    private ?string $condition = null;
+
+    #[ORM\Column(name: 'vehicle_equipment', type: Types::JSON, nullable: true)]
+    private array $equipment = [];
+
+    #[ORM\Column(nullable: true)]
+    private ?float $engineSize = null;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -63,18 +87,6 @@ class Publication
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function getDescription(): ?string
@@ -219,6 +231,123 @@ class Publication
     {
         $this->videoFilename = $videoFilename;
 
+        return $this;
+    }
+
+        public function getMileage(): ?int
+    {
+        return $this->mileage;
+    }
+
+    public function setMileage(?int $mileage): self
+    {
+        $this->mileage = $mileage;
+        return $this;
+    }
+
+    public function getFuelType(): ?string
+    {
+        return $this->fuelType;
+    }
+
+    public function setFuelType(?string $fuelType): self
+    {
+        $this->fuelType = $fuelType;
+        return $this;
+    }
+
+    public function getEngineSize(): ?float
+    {
+        return $this->engineSize;
+    }
+
+    public function setEngineSize(?float $engineSize): self
+    {
+        $this->engineSize = $engineSize;
+        return $this;
+    }
+
+    public function getGearbox(): ?string
+    {
+        return $this->gearbox;
+    }
+
+    public function setGearbox(?string $gearbox): self
+    {
+        $this->gearbox = $gearbox;
+        return $this;
+    }
+
+    public function getHasWarranty(): ?bool
+    {
+        return $this->hasWarranty;
+    }
+
+    public function setHasWarranty(bool $hasWarranty): self
+    {
+        $this->hasWarranty = $hasWarranty;
+        return $this;
+    }
+
+    public function getWarrantyMonths(): ?int
+    {
+        return $this->warrantyMonths;
+    }
+
+    public function setWarrantyMonths(?int $warrantyMonths): self
+    {
+        $this->warrantyMonths = $warrantyMonths;
+        return $this;
+    }
+
+    public function getSellerLocation(): ?string
+    {
+        return $this->sellerLocation;
+    }
+
+    public function setSellerLocation(?string $sellerLocation): self
+    {
+        $this->sellerLocation = $sellerLocation;
+        return $this;
+    }
+
+    public function getCondition(): ?string
+    {
+        return $this->condition;
+    }
+
+    public function setCondition(?string $condition): self
+    {
+        $this->condition = $condition;
+        return $this;
+    }
+
+    public function getEquipment(): array
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(?array $equipment): self
+    {
+        $this->equipment = $equipment;
+        return $this;
+    }
+
+    public function addEquipment(string $item): self
+    {
+        if (!in_array($item, $this->equipment)) {
+            $this->equipment[] = $item;
+        }
+        return $this;
+    }
+
+    public function removeEquipment(string $item): self
+    {
+        $key = array_search($item, $this->equipment);
+        if ($key !== false) {
+            unset($this->equipment[$key]);
+            $this->equipment = array_values($this->equipment);
+        }
         return $this;
     }
     

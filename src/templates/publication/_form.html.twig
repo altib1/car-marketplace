@@ -1,61 +1,169 @@
 <!-- templates/publication/_form.html.twig -->
 
 {{ form_start(form) }}
-    <div class="mb-4">
-        {{ form_label(form.title, 'Title', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.title, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.title) }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="mb-4">
+            {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.price) }}
+        </div>
     </div>
 
     <div class="mb-4">
         {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+        {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-32'}}) }}
         {{ form_errors(form.description) }}
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.price) }}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="mb-4">
+            {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.brand) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.model) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.motorizationType) }}
+        </div>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.year) }}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="mb-4">
+            {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.year) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.mileage, 'Mileage', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.mileage, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.mileage) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.engineSize, 'Engine Size (Chevaux)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.engineSize, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.engineSize) }}
+        </div>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.brand) }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mb-4">
+            {{ form_label(form.fuelType, 'Fuel Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.fuelType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.fuelType) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.gearbox, 'Gearbox', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.gearbox, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.gearbox) }}
+        </div>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.model) }}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="mb-4">
+            {{ form_label(form.condition, 'Vehicle Condition', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.condition, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.condition) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.sellerLocation, 'Location', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.sellerLocation, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.sellerLocation) }}
+        </div>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.motorizationType) }}
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Warranty Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-4">
+                {{ form_label(form.hasWarranty, 'Has Warranty', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.hasWarranty, {'attr': {'class': 'mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded'}}) }}
+                {{ form_errors(form.hasWarranty) }}
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.warrantyMonths, 'Warranty Duration (months)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.warrantyMonths, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                {{ form_errors(form.warrantyMonths) }}
+            </div>
+        </div>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.images, 'Images', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.images, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.images) }}
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Equipment & Features</h3>
+        <div class="mb-4" id="equipment-collection"
+             data-prototype="{{ form_widget(form.equipment.vars.prototype)|e('html_attr') }}">
+            {% for equipmentField in form.equipment %}
+                <div class="equipment-item mb-2">
+                    {{ form_widget(equipmentField, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <button type="button" class="add-equipment-item bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-md text-sm">
+            Add Equipment Item
+        </button>
     </div>
 
-    <div class="mb-4">
-        {{ form_label(form.video, 'Video', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-        {{ form_widget(form.video, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
-        {{ form_errors(form.video) }}
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">Media</h3>
+        <div class="mb-4">
+            {{ form_label(form.images, 'Images', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.images, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.images) }}
+        </div>
+
+        <div class="mb-4">
+            {{ form_label(form.video, 'Video', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_widget(form.video, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+            {{ form_errors(form.video) }}
+        </div>
     </div>
 
     <div class="flex justify-end">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow-md transition-all">{{ button_label|default('Save') }}</button>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md shadow-md transition-all">
+            {{ button_label|default('Save') }}
+        </button>
     </div>
 {{ form_end(form) }}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Equipment collection handling
+    const addEquipmentButton = document.querySelector('.add-equipment-item');
+    const equipmentCollection = document.querySelector('#equipment-collection');
+    let equipmentIndex = document.querySelectorAll('.equipment-item').length;
+
+    addEquipmentButton.addEventListener('click', function() {
+        const prototype = equipmentCollection.dataset.prototype;
+        const newForm = prototype.replace(/__name__/g, equipmentIndex);
+        const div = document.createElement('div');
+        div.className = 'equipment-item mb-2 flex gap-2';
+        div.innerHTML = newForm;
+        
+        // Add remove button
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.className = 'bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm';
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            div.remove();
+        };
+        
+        div.appendChild(removeButton);
+        equipmentCollection.appendChild(div);
+        equipmentIndex++;
+    });
+});
+</script>

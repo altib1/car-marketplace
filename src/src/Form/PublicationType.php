@@ -12,12 +12,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\All;
+use Doctrine\ORM\EntityManagerInterface;
 
 class PublicationType extends AbstractType
 {
@@ -31,16 +34,14 @@ class PublicationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class, [
-                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
-            ])
             ->add('description', TextareaType::class, [
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
-            ->add('price', NumberType::class, [
+            ->add('price', MoneyType::class, [
+                'currency' => 'EUR',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
-            ->add('year', NumberType::class, [
+            ->add('year', IntegerType::class, [
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('brand', EntityType::class, [
@@ -59,7 +60,60 @@ class PublicationType extends AbstractType
                 'class' => MotorizationType::class,
                 'choice_label' => 'name',
                 'placeholder' => 'Choose a motorisation type',
-                'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_motorizationType'],
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('mileage', IntegerType::class, [
+                'required' => false,
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('fuelType', ChoiceType::class, [
+                'choices' => [
+                    'Diesel' => 'diesel',
+                    'Gasoline' => 'gasoline',
+                    'Electric' => 'electric',
+                    'Hybrid' => 'hybrid',
+                ],
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('gearbox', ChoiceType::class, [
+                'choices' => [
+                    'Manual' => 'manual',
+                    'Automatic' => 'automatic',
+                ],
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('engineSize', NumberType::class, [
+                'required' => false,
+                'scale' => 1,
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('hasWarranty', CheckboxType::class, [
+                'required' => false,
+                'attr' => ['class' => 'h-4 w-4 rounded border-gray-300'],
+            ])
+            ->add('warrantyMonths', IntegerType::class, [
+                'required' => false,
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('sellerLocation', TextType::class, [
+                'required' => false,
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('condition', ChoiceType::class, [
+                'choices' => [
+                    'New' => 'new',
+                    'Used' => 'used',
+                ],
+                'empty_data' => 'used',
+                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ])
+            ->add('equipment', CollectionType::class, [
+                'entry_type' => TextType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+                'required' => false,
+                'attr' => ['class' => 'w-full'],
             ])
             ->add('images', FileType::class, [
                 'label' => 'Images (PNG, JPG, JPEG, WEBP files)',
