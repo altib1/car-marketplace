@@ -82,9 +82,46 @@ class PublicationSearchService
             $nestedQuery->setQuery($termQuery);
             $boolQuery->addFilter($nestedQuery);
         }
-    
+
+        // Mileage range
+        if (!empty($criteria['mileage_min']) || !empty($criteria['mileage_max'])) {
+            $rangeQuery = new Range();
+            $range = [];
+            if (!empty($criteria['mileage_min'])) {
+            $range['gte'] = $criteria['mileage_min'];
+            }
+            if (!empty($criteria['mileage_max'])) {
+            $range['lte'] = $criteria['mileage_max'];
+            }
+            $rangeQuery->addField('mileage', $range);
+            $boolQuery->addFilter($rangeQuery);
+        }
+
+        // Fuel type filter
+        if (!empty($criteria['fuel_type'])) {
+            $termQuery = new Term(['fuelType' => $criteria['fuel_type']]);
+            $boolQuery->addFilter($termQuery);
+        }
+
+        // Gearbox filter
+        if (!empty($criteria['gearbox'])) {
+            $termQuery = new Term(['gearbox' => $criteria['gearbox']]);
+            $boolQuery->addFilter($termQuery);
+        }
+
+        // Condition filter
+        if (!empty($criteria['condition'])) {
+            $termQuery = new Term(['condition' => $criteria['condition']]);
+            $boolQuery->addFilter($termQuery);
+        }
+
+        // Warranty filter
+        if (!empty($criteria['has_warranty'])) {
+            $termQuery = new Term(['hasWarranty' => true]);
+            $boolQuery->addFilter($termQuery);
+        }
+
         $query = new Query($boolQuery);
-    
         // Add sorting
         if (!empty($criteria['sort'])) {
             switch ($criteria['sort']) {
@@ -97,6 +134,16 @@ class PublicationSearchService
                 case 'year_desc':
                     $query->addSort(['year' => ['order' => 'desc']]);
                     break;
+                case 'year_asc':
+                    $query->addSort(['year' => ['order' => 'asc']]);
+                    break;
+                case 'mileage_desc':
+                    $query->addSort(['mileage' => ['order' => 'desc']]);
+                    break;
+                case 'mileage_asc':
+                    $query->addSort(['mileage' => ['order' => 'asc']]);
+                    break;
+                
             }
         }
     
@@ -115,6 +162,7 @@ class PublicationSearchService
             'pagination' => [
                 'current_page' => $page,
                 'total_pages' => ceil($paginatedResults->getNbResults() / $perPage),
+                'total_results' => $paginatedResults->getNbResults(),
                 'previous_page' => $page > 1 ? $page - 1 : null,
                 'next_page' => $page < ceil($paginatedResults->getNbResults() / $perPage) ? $page + 1 : null,
             ]

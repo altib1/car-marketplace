@@ -33,6 +33,12 @@ class CarsController extends AbstractController
             'brand' => $request->query->get('brand'),
             'model' => $request->query->get('model'),
             'motorization_type' => $request->query->get('motorization_type'),
+            'mileage_min' => $request->query->get('mileage_min'),
+            'mileage_max' => $request->query->get('mileage_max'),
+            'fuel_type' => $request->query->get('fuel_type'),
+            'gearbox' => $request->query->get('gearbox'),
+            'condition' => $request->query->get('condition'),
+            'has_warranty' => $request->query->get('has_warranty'),
             'sort' => $request->query->get('sort'),
             'page' => $request->query->getInt('page', 1),
             'per_page' => 10

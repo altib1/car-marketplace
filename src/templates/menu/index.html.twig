@@ -115,9 +115,11 @@
                     {% endif %}
                     <!-- Desktop CTA Buttons -->
                     <div class="hidden lg:flex lg:items-center lg:space-x-6">
+                        {% if not app.user %}
                         <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600 transition-colors">
                             Connexion
                         </a>
+                        {% endif %}
                         <a href="{{ path('app_publication_new') }}" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
                             Déposer une annonce
                         </a>
