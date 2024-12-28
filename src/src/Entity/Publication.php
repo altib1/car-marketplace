@@ -79,6 +79,9 @@ class Publication
     #[ORM\Column(nullable: true)]
     private ?float $engineSize = null;
 
+    #[ORM\ManyToMany(targetEntity: Wishlist::class, mappedBy: 'publications')]
+    private Collection $wishlists;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -348,6 +351,32 @@ class Publication
             unset($this->equipment[$key]);
             $this->equipment = array_values($this->equipment);
         }
+        return $this;
+    }
+    /**
+     * @return Collection<int, Wishlist>
+     */
+    public function getWishlists(): Collection
+    {
+        return $this->wishlists;
+    }
+
+    public function addWishlist(Wishlist $wishlist): static
+    {
+        if (!$this->wishlists->contains($wishlist)) {
+            $this->wishlists->add($wishlist);
+            $wishlist->addPublication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWishlist(Wishlist $wishlist): static
+    {
+        if ($this->wishlists->removeElement($wishlist)) {
+            $wishlist->removePublication($this);
+        }
+
         return $this;
     }
     
