@@ -56,6 +56,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
+    private ?Wishlist $wishlist = null;
+
     public function __construct()
     {
         $this->publications = new ArrayCollection();
@@ -222,6 +225,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setGender(string $gender): static
     {
         $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getWishlist(): ?Wishlist
+    {
+        return $this->wishlist;
+    }
+
+    public function setWishlist(?Wishlist $wishlist): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($wishlist === null && $this->wishlist !== null) {
+            $this->wishlist->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($wishlist !== null && $wishlist->getUser() !== $this) {
+            $wishlist->setUser($this);
+        }
+
+        $this->wishlist = $wishlist;
 
         return $this;
     }

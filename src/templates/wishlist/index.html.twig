@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Wishlist{% endblock %}
+
+{% block body %}
+<div class="min-h-screen pt-16">
+    <!-- Hero Section -->
+    <div class="bg-white border-b">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                    </svg>
+                    <h1 class="text-3xl font-bold text-gray-900">My Wishlist</h1>
+                </div>
+                <a href="{{ path('app_cars') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Browse More Cars
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-gray-50">
+        {% if wishlist is empty %}
+            <div class="text-center py-16 bg-white rounded-2xl shadow-sm">
+                <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                </svg>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">Your wishlist is empty</h3>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto">Start exploring our collection to find your dream car and add it to your wishlist.</p>
+                <a href="{{ path('app_cars') }}" class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300">
+                    Discover Cars
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </a>
+            </div>
+        {% else %}
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for publication in publications %}
+                    <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+                    <!-- Image Section -->
+                    <div class="relative w-full md:w-1/3 h-44 md:h-auto rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden">
+                        <div class="absolute inset-0 bg-cover bg-center h-full transform group-hover:scale-105 transition-transform duration-300"
+                             style="background-image: url('{{ publication.imageFilenames|length > 0 ? asset('uploads/brochures/' ~ publication.imageFilenames[0]) : 'your-placeholder-image-url.jpg' }}');">
+                            {% if publication.imageFilenames|length == 0 %}
+                                <div class="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80">
+                                    <p class="text-white text-sm font-medium">No image available</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="absolute bottom-4 right-4 bg-black bg-opacity-60 text-white px-2 py-1 rounded-md text-xs">
+                            {{ publication.imageFilenames|length }} photos
+                        </div>
+                    </div>
+
+                        <!-- Car Info Section -->
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">{{ publication.brand }} {{ publication.model }}{{ publication.motorizationType }}</h3>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span class="flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        {{ publication.year }}
+                                    </span>
+                                    <span class="mx-2">•</span>
+                                    <span>{{ publication.sellerLocation|default('Location N/A') }}</span>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4 py-4 border-t border-b border-gray-100">
+                                <div class="flex flex-col">
+                                    <span class="text-sm text-gray-500">Price</span>
+                                    <span class="font-semibold text-lg text-blue-600">{{ publication.price }} €</span>
+                                </div>
+                                <div class="flex flex-col">
+                                    <span class="text-sm text-gray-500">Mileage</span>
+                                    <span class="font-semibold">{{ publication.mileage|default('N/A') }} km</span>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-4">
+                                <a href="{{ path('app_car_show', { id: publication.id }) }}" 
+                                   class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex-grow mr-2">
+                                    View Details
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                                <button onclick="location.href='{{ path('app_wishlist_remove', {id: publication.id}) }}'"
+                                        class="p-2 text-gray-400 hover:text-red-500 rounded-lg hover:bg-gray-100 transition-all duration-300">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

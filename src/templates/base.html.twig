@@ -31,7 +31,19 @@
         <!-- Main Content -->
         <main class="flex-1 px-20 pt-10">
             <div class="flex h-full">
-                {% if app.user and (app.request.attributes.get('_route') in ['app_profile', 'app_profile_edit', 'app_change_password', 'app_publication', 'app_publication_index', 'app_publication_new', 'app_publication_delete', 'app_publication_show', 'app_publication_edit']) %}
+                {% if app.user and (app.request.attributes.get('_route') in [
+                    'app_profile', 
+                    'app_profile_edit', 
+                    'app_change_password', 
+                    'app_publication', 
+                    'app_publication_index', 
+                    'app_publication_new', 
+                    'app_publication_delete', 
+                    'app_publication_show', 
+                    'app_publication_edit',
+                    'app_wishlist',
+                    'app_wishlist_edit',
+                    ]) %}
                     <aside class="flex-none">
                         {% include 'profile-menu/index.html.twig' %}
                     </aside>
