@@ -19,7 +19,6 @@ class WishlistController extends AbstractController
         $wishlist = $user->getWishlist();
 
         return $this->render('wishlist/index.html.twig', [
-            'wishlist' => $wishlist,
             'publications' => $wishlist ? $wishlist->getPublications() : [],
         ]);
     }
