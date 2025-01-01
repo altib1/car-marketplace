@@ -1,64 +1,101 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Login to Your Account{% endblock %}
 
 {% block body %}
-<div class="bg-gray-100 flex justify-center items-center h-screen">
+<div class="min-h-screen flex">
     <!-- Left: Image -->
-    <div class="w-1/2 h-screen hidden lg:block">
-        <img src="https://placehold.co/800x/667fff/ffffff.png?text=Your+Image&font=Montserrat" alt="Placeholder Image" class="object-cover w-full h-full">
+    <div class="hidden lg:block lg:w-1/2 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/90 to-blue-800/90 mix-blend-multiply"></div>
+        <img src="{{ asset('website/homepage/logo-login.jpg')}}" 
+             alt="Background" 
+             class="object-cover w-full h-full">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-center p-12">
+                <h2 class="text-4xl font-bold mb-4">Welcome Back!</h2>
+                <p class="text-lg text-white/80">Find your perfect car today</p>
+            </div>
+        </div>
     </div>
-    <!-- Right: Login Form -->
-    <div class="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-        <h1 class="text-2xl font-semibold mb-4">Login</h1>
-        <form action="{{ path('app_login') }}" method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+    <!-- Right: Login Form -->
+    <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-24">
+        <div class="w-full max-w-md space-y-8">
+            <div class="text-center">
+                <h1 class="text-3xl font-bold text-gray-900">Sign in to your account</h1>
+                <p class="mt-2 text-gray-600">Or 
+                    <a href="{{ path('app_register') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                        create a new account
+                    </a>
+                </p>
+            </div>
+
+            {% if error %}
+                <div class="bg-red-50 text-red-800 rounded-lg p-4 flex items-center">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
                 </div>
             {% endif %}
 
-            <!-- Username Input -->
-            <div class="mb-4">
-                <label for="username" class="block text-gray-600">Email</label>
-                <input type="email" value="{{ last_username }}" name="_username" id="username" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="email" required autofocus>
-            </div>
-            <!-- Password Input -->
-            <div class="mb-4">
-                <label for="password" class="block text-gray-600">Password</label>
-                <input type="password" name="_password" id="password" class="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" autocomplete="current-password" required>
-            </div>
-            <!-- Remember Me Checkbox -->
-            <div class="mb-4 flex items-center">
-                <input type="checkbox" id="remember_me" name="_remember_me" class="text-blue-500">
-                <label for="remember_me" class="text-gray-600 ml-2">Remember Me</label>
-            </div>
-            <!-- Forgot Password Link -->
-            <div class="mb-6 text-blue-500">
-                <a href="#" class="hover:underline">Forgot Password?</a>
-            </div>
-            <!-- CSRF Token -->
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <!-- Login Button -->
-            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
-        </form>
+            <form action="{{ path('app_login') }}" method="post" class="mt-8 space-y-6">
+                <!-- Email Input -->
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"/>
+                        </svg>
+                    </div>
+                    <input type="email" 
+                           id="username" 
+                           name="_username" 
+                           value="{{ last_username }}"
+                           class="pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                           placeholder="Email address"
+                           required>
+                </div>
 
-         {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
+                <!-- Password Input -->
+                <div class="relative">
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+                    <input type="password" 
+                           id="password" 
+                           name="_password"
+                           class="pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
+                           placeholder="Password"
+                           required>
+                </div>
 
-            <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
-            </div>
-        #}
-        <!-- Sign up Link -->
-        <div class="mt-6 text-blue-500 text-center">
-            <a href="{{ path('app_register') }}" class="hover:underline">Sign up Here</a>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" 
+                               id="remember_me" 
+                               name="_remember_me"
+                               class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                        <label for="remember_me" class="ml-2 text-sm text-gray-600">
+                            Remember me
+                        </label>
+                    </div>
+                    <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-500">
+                        Forgot password?
+                    </a>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button type="submit" 
+                        class="w-full flex justify-center items-center px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-lg shadow-blue-500/30 transition-all">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                    </svg>
+                    Sign in
+                </button>
+            </form>
         </div>
     </div>
 </div>
