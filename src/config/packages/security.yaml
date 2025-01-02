@@ -11,7 +11,7 @@ security:
                 property: email
     
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_SHOP]
     
     firewalls:
         dev:
@@ -47,6 +47,7 @@ security:
          - { path: ^/profile, roles: ROLE_USER }
          - { path: ^/publication, roles: ROLE_USER }
          - { path: ^/wishlist, roles: ROLE_USER }
+         - { path: ^/shop, roles: ROLE_SHOP }
 
 when@test:
     security:
