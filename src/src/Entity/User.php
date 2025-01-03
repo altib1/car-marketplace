@@ -59,6 +59,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'User', cascade: ['persist', 'remove'])]
     private ?Wishlist $wishlist = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Shop $shop = null;
+
     public function __construct()
     {
         $this->publications = new ArrayCollection();
@@ -247,6 +250,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->wishlist = $wishlist;
+
+        return $this;
+    }
+
+    public function getShop(): ?Shop
+    {
+        return $this->shop;
+    }
+
+    public function setShop(?Shop $shop): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($shop === null && $this->shop !== null) {
+            $this->shop->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($shop !== null && $shop->getUser() !== $this) {
+            $shop->setUser($this);
+        }
+
+        $this->shop = $shop;
 
         return $this;
     }

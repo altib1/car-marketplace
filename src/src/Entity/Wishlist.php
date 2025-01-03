@@ -18,7 +18,7 @@ class Wishlist
     #[ORM\OneToOne(inversedBy: 'wishlist', cascade: ['persist', 'remove'])]
     private ?User $User = null;
 
-    #[ORM\ManyToMany(targetEntity: Publication::class)]
+    #[ORM\ManyToMany(targetEntity: Publication::class, inversedBy: 'wishlists')]
     #[ORM\JoinTable(name: 'wishlist_publications')]
     private Collection $publications;
 

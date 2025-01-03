@@ -14,6 +14,15 @@
 
     <!-- Navigation Links -->
     <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+
+        <a href="{{ path('app_shop') }}" 
+           class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 {% if app.request.get('_route') == 'app_shop' %}bg-blue-50 text-blue-600{% endif %}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+            <span class="font-medium">My shop</span>
+        </a>
+
         <a href="{{ path('app_profile') }}" 
            class="flex items-center space-x-3 px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-lg transition-all duration-200 {% if app.request.get('_route') == 'app_profile' %}bg-blue-50 text-blue-600{% endif %}">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
