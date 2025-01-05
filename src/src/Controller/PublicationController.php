@@ -39,9 +39,15 @@ final class PublicationController extends AbstractController
         ): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        /** @var \App\Entity\User $user */
+        $user = $this->getUser();
         
         $publication = new Publication();
-        $publication->setUser($this->getUser());
+        $publication->setUser($user);
+        if ($user->getShop()) {
+            $publication->setShop($user->getShop());
+        }
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
 

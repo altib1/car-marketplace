@@ -34,6 +34,9 @@ class Publication
     #[ORM\ManyToOne(inversedBy: 'publications')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'publications')]
+    private ?Shop $shop = null;
+
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?CarBrand $brand = null;
@@ -169,6 +172,19 @@ class Publication
 
         return $this;
     }
+
+    public function getShop(): ?Shop
+    {
+        return $this->shop;
+    }
+
+    public function setShop(?Shop $shop): static
+    {
+        $this->user = $shop;
+
+        return $this;
+    }
+
 
     public function getBrand(): ?CarBrand
     {
