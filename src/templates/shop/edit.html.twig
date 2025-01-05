@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Shop{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 mt-8 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-2xl p-6">
+                <h3 class="text-2xl font-semibold text-center">Edit Shop</h3>
+                <p class="text-blue-100 text-center mt-2">Update the details below to edit your shop</p>
+            </div>
+            
+            <div class="p-8">
+                {{ form_start(form, {'attr': {'class': 'needs-validation space-y-6'}}) }}
+                    {# Basic Information Section #}
+                    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+                        <h4 class="text-lg font-medium text-gray-900">Basic Information</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                {{ form_label(form.name, 'Shop Name', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                {{ form_widget(form.name, {
+                                    'attr': {
+                                        'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
+                                        'placeholder': 'Enter your shop name'
+                                    }
+                                }) }}
+                            </div>
+                            <div class="space-y-2">
+                                {{ form_label(form.creationDate, 'Opening Date', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                {{ form_widget(form.creationDate, {
+                                    'attr': {
+                                        'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg datepicker transition-colors duration-200'
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Location & Hours Section #}
+                    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+                        <h4 class="text-lg font-medium text-gray-900">Location & Hours</h4>
+                        <div class="space-y-4">
+                            <div>
+                                {{ form_label(form.address, 'Shop Address', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                {{ form_widget(form.address, {
+                                    'attr': {
+                                        'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
+                                        'placeholder': 'Enter complete address'
+                                    }
+                                }) }}
+                            </div>
+                            <div>
+                                {{ form_label(form.workHours, 'Business Hours', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                {{ form_widget(form.workHours, {
+                                    'attr': {
+                                        'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
+                                        'placeholder': 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Images Section #}
+                    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+                        <h4 class="text-lg font-medium text-gray-900">Shop Images</h4>
+                        <div class="space-y-6">
+                            <div class="space-y-2">
+                                {{ form_label(form.backgroundImageFileName, 'Background Image', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-500 transition-colors duration-200">
+                                    <div class="space-y-1 text-center">
+                                        {% if shop.backgroundImageFileName %}
+                                            <img src="{{ asset('uploads/brochures/' ~ shop.backgroundImageFileName) }}" 
+                                                 alt="Current background image" 
+                                                 class="mx-auto h-48 w-auto mb-4">
+                                        {% else %}
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        {% endif %}
+                                        {{ form_widget(form.backgroundImageFileName, {
+                                            'attr': {'class': 'hidden'}
+                                        }) }}
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="{{ form.backgroundImageFileName.vars.id }}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <span>Upload a new file</span>
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                {{ form_label(form.logoImageFileName, 'Logo Image', {
+                                    'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                                }) }}
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-500 transition-colors duration-200">
+                                    <div class="space-y-1 text-center">
+                                        {% if shop.logoImageFileName %}
+                                            <img src="{{ asset('uploads/brochures/' ~ shop.logoImageFileName) }}" 
+                                                 alt="Current logo image" 
+                                                 class="mx-auto h-48 w-auto mb-4">
+                                        {% else %}
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        {% endif %}
+                                        {{ form_widget(form.logoImageFileName, {
+                                            'attr': {'class': 'hidden'}
+                                        }) }}
+                                        <div class="flex text-sm text-gray-600">
+                                            <label for="{{ form.logoImageFileName.vars.id }}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                                <span>Upload a new file</span>
+                                            </label>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {# Services Section #}
+                    <div class="bg-gray-50 rounded-xl p-6 space-y-6">
+                        <h4 class="text-lg font-medium text-gray-900">Services</h4>
+                        <div class="space-y-4">
+                            {{ form_label(form.services, 'Shop Services', {
+                                'label_attr': {'class': 'text-sm font-medium text-gray-700'}
+                            }) }}
+                            <div id="services-collection" 
+                                 data-prototype="{{ form_widget(form.services.vars.prototype)|e('html_attr') }}"
+                                 class="space-y-3">
+                                {% for service in form.services %}
+                                    <div class="service-entry flex items-center space-x-2">
+                                        {{ form_widget(service, {
+                                            'attr': {
+                                                'class': 'flex-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
+                                                'placeholder': 'Enter service name'
+                                            }
+                                        }) }}
+                                        <button type="button" class="remove-service p-2 text-red-500 hover:text-red-700 transition-colors duration-200">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button type="button" class="add-service-btn mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                                <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Add Service
+                            </button>
+                        </div>
+                    </div>
+
+                    {# Action Buttons #}
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
+                        <button type="submit" class="flex-1 transform transition-all duration-200 hover:-translate-y-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white py-3 px-4 rounded-xl text-lg flex items-center justify-center shadow-lg hover:shadow-xl">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Save Changes
+                        </button>
+                        <a href="{{ path('app_shop') }}" class="flex-1 transform transition-all duration-200 hover:-translate-y-1 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl text-lg flex items-center justify-center hover:bg-gray-50 shadow-md hover:shadow-lg">
+                            <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
+                            </svg>
+                            Back to List
+                        </a>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+{% endblock %}

@@ -20,10 +20,10 @@ class Shop
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
-    private ?array $backgroundImageFileName = null;
+    private ?string $backgroundImageFileName = null;
 
     #[ORM\Column]
-    private array $logoImageFileName = [];
+    private ?string $logoImageFileName = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $creationDate = null;
@@ -68,24 +68,24 @@ class Shop
         return $this;
     }
 
-    public function getBackgroundImageFileName(): ?array
+    public function getBackgroundImageFileName(): ?string
     {
         return $this->backgroundImageFileName;
     }
 
-    public function setBackgroundImageFileName(?array $backgroundImageFileName): static
+    public function setBackgroundImageFileName(?string $backgroundImageFileName): static
     {
         $this->backgroundImageFileName = $backgroundImageFileName;
 
         return $this;
     }
 
-    public function getLogoImageFileName(): array
+    public function getLogoImageFileName(): ?string
     {
         return $this->logoImageFileName;
     }
 
-    public function setLogoImageFileName(array $logoImageFileName): static
+    public function setLogoImageFileName(string $logoImageFileName): static
     {
         $this->logoImageFileName = $logoImageFileName;
 
@@ -180,5 +180,10 @@ class Shop
         }
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }
