@@ -37,8 +37,9 @@ class ShopType extends AbstractType
                     ])
                 ],
             ])
+            
             ->add('logoImageFileName', FileType::class, [
-                'mapped' => false,
+                'mapped' => false, 
                 'required' => false,
                 'attr' => [
                     'accept' => 'image/*',

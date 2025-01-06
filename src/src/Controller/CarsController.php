@@ -62,8 +62,16 @@ class CarsController extends AbstractController
     #[Route('cars/{id}', name: 'app_car_show', methods: ['GET'])]
     public function show(Publication $publication): Response
     {
+        /** @var \App\Entity\User|null */
+        $user = $this->getUser();
+        $shop = null;
+
+        if ($user && method_exists($user, 'getShop')) {
+            $shop = $user->getShop();
+        }
         return $this->render('cars/show.html.twig', [
             'publication' => $publication,
+            'shop' => $shop,
         ]);
     }
 }

@@ -180,7 +180,7 @@ class Publication
 
     public function setShop(?Shop $shop): static
     {
-        $this->user = $shop;
+        $this->shop = $shop;
 
         return $this;
     }
