@@ -198,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // template edit.html.twig of the shop
+// template create.html.twig of the shop
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize flatpickr
@@ -245,139 +246,74 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-
-    // Add remove functionality to existing service entries
-    document.querySelectorAll('.remove-service').forEach(button => {
-        button.addEventListener('click', function() {
-            this.closest('.service-entry').remove();
+    
+        // Add remove functionality to existing service entries
+        document.querySelectorAll('.remove-service').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.service-entry').remove();
+            });
         });
-    });
-
-    // File Upload Preview
-    function handleFileUpload(input) {
-        const container = input.closest('.border-dashed');
-        const originalContent = container.innerHTML;
-
-        input.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        container.innerHTML = `
-                            <div class="space-y-2">
-                                <img src="${e.target.result}" class="mx-auto h-32 w-32 object-cover rounded-lg" />
-                                <div class="text-center">
-                                    <button type="button" class="text-sm text-red-600 hover:text-red-800">
-                                        Remove
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-
-                        // Add remove functionality
-                        container.querySelector('button').addEventListener('click', function() {
-                            container.innerHTML = originalContent;
-                            input.value = '';
-                            handleFileUpload(input);
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                }
-            }
-        });
-    }
-
-    // Initialize file upload handlers
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        handleFileUpload(input);
-    });
-
-    // Drag and drop functionality
-    const dropZones = document.querySelectorAll('.border-dashed');
-    dropZones.forEach(zone => {
-        zone.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            this.classList.add('border-blue-500', 'bg-blue-50');
-        });
-
-        zone.addEventListener('dragleave', function(e) {
-            e.preventDefault();
-            this.classList.remove('border-blue-500', 'bg-blue-50');
-        });
-
-        zone.addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.classList.remove('border-blue-500', 'bg-blue-50');
-            
-            const input = this.querySelector('input[type="file"]');
-            if (input) {
-                const dt = new DataTransfer();
-                dt.items.add(e.dataTransfer.files[0]);
-                input.files = dt.files;
-                input.dispatchEvent(new Event('change'));
-            }
-        });
-    });
-});
-
-// template create.html.twig of the shop
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize flatpickr
-    flatpickr('.datepicker', {
-        dateFormat: 'Y-m-d',
-        allowInput: true,
-        monthSelectorType: 'static',
-        disableMobile: true
-    });
 
     // File Upload Handler
     document.querySelectorAll('.border-dashed').forEach(zone => {
         const input = zone.querySelector('input[type="file"]');
-        const previewArea = zone.querySelector('.preview-area');
-        const defaultContent = previewArea.innerHTML;
+        const previewContainer = zone.querySelector('.space-y-1');
+        const defaultContent = previewContainer.innerHTML;
 
+        // Drag & drop handlers
         zone.addEventListener('dragover', e => {
             e.preventDefault();
-            zone.classList.add('border-blue-500');
+            zone.classList.add('border-blue-500', 'bg-blue-50');
         });
 
         zone.addEventListener('dragleave', e => {
             e.preventDefault();
-            zone.classList.remove('border-blue-500');
+            zone.classList.remove('border-blue-500', 'bg-blue-50');
         });
 
         zone.addEventListener('drop', e => {
             e.preventDefault();
-            zone.classList.remove('border-blue-500');
+            zone.classList.remove('border-blue-500', 'bg-blue-50');
             if (input) {
                 input.files = e.dataTransfer.files;
                 input.dispatchEvent(new Event('change'));
             }
         });
 
+        // File change handler
         if (input) {
             input.addEventListener('change', () => {
                 const file = input.files[0];
                 if (file && file.type.startsWith('image/')) {
                     const reader = new FileReader();
                     reader.onload = e => {
-                        previewArea.innerHTML = `
-                            <div class="space-y-2 text-center">
-                                <img src="${e.target.result}" class="mx-auto h-32 w-32 object-cover rounded-lg" />
-                                <button type="button" class="text-sm text-red-600 hover:text-red-800">Remove</button>
+                        // Create new preview
+                        const preview = document.createElement('div');
+                        preview.className = 'space-y-1 text-center';
+                        preview.innerHTML = `
+                            <img src="${e.target.result}" class="mx-auto h-48 w-auto mb-4">
+                            <div class="flex text-sm text-gray-600">
+                                <label for="${input.id}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500">
+                                    <span>Change image</span>
+                                </label>
+                                <button type="button" class="ml-2 text-red-600 hover:text-red-800">Cancel</button>
                             </div>
+                            <p class="text-xs text-gray-500">${file.name}</p>
                         `;
+
+                        // Replace content while keeping input
+                        previewContainer.innerHTML = '';
+                        previewContainer.appendChild(preview);
+                        previewContainer.appendChild(input);
+
+                        // Add cancel handler
+                        preview.querySelector('button').addEventListener('click', () => {
+                            input.value = '';
+                            previewContainer.innerHTML = defaultContent;
+                            previewContainer.appendChild(input);
+                        });
                     };
                     reader.readAsDataURL(file);
-                }
-            });
-
-            zone.addEventListener('click', e => {
-                if (e.target.tagName === 'BUTTON') {
-                    previewArea.innerHTML = defaultContent;
-                    input.value = '';
                 }
             });
         }
