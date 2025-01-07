@@ -95,6 +95,22 @@ class ShopController extends AbstractController
         ]);
     }
 
+    #[Route('/autoshop/{id}', name: 'app_autoshop_show', methods: ['GET'])]
+    public function show(int $id, ShopRepository $shopRepository): Response
+    {
+        $shop = $shopRepository->find($id);
+        
+        if (!$shop) {
+            throw $this->createNotFoundException('Shop not found');
+        }
+
+        return $this->render('shop/show.html.twig', [
+            'shop' => $shop,
+            'publications' => $shop->getPublications(),
+            'controller_name' => 'ShopController',
+        ]);
+    }
+
     #[Route('/shop/delete/{id}', name: 'app_shop_delete', methods: ['POST'])]
     public function delete(int $id, ShopRepository $shopRepository): Response
     {
