@@ -283,6 +283,14 @@
                                 </svg>
                                 Contact {{ publication.shop ? 'Shop' : 'Seller' }}
                             </button>
+                            {% if publication.shop %}
+                            <a href="{{ path('app_autoshop_show', {'id': publication.shop.id}) }}" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                </svg>
+                                Visit Shop
+                            </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -294,32 +302,4 @@
 <!-- Swiper CSS & JS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Initialize Swiper with improved options
-    const swiper = new Swiper(".mySwiper", {
-        loop: true,
-        effect: "fade",
-        fadeEffect: {
-            crossFade: true
-        },
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-            dynamicBullets: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-        spaceBetween: 0,
-        speed: 800,
-    });
-});
-</script>
 {% endblock %}
