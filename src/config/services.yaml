@@ -29,5 +29,15 @@ services:
         arguments:
             $targetDirectory: '%brochures_directory%'
 
+    App\MessageHandler\Chat\SendChatMessageHandler:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $conversationRepository: '@App\Repository\ConversationRepository'
+            $publicationRepository: '@App\Repository\PublicationRepository'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Repository\ConversationRepository:
+        tags: ['doctrine.repository_service']
+
+    App\Repository\PublicationRepository:
+        tags: ['doctrine.repository_service']

@@ -62,9 +62,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Shop $shop = null;
 
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Conversation::class)]
+    private Collection $sentConversations;
+
+    #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: Conversation::class)]
+    private Collection $receivedConversations;
+
     public function __construct()
     {
         $this->publications = new ArrayCollection();
+        $this->sentConversations = new ArrayCollection();
+        $this->receivedConversations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -272,6 +280,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->shop = $shop;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getSentConversations(): Collection
+    {
+        return $this->sentConversations;
+    }
+
+    public function addSentConversation(Conversation $sentConversation): static
+    {
+        if (!$this->sentConversations->contains($sentConversation)) {
+            $this->sentConversations->add($sentConversation);
+            $sentConversation->setSender($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSentConversation(Conversation $sentConversation): static
+    {
+        if ($this->sentConversations->removeElement($sentConversation)) {
+            // set the owning side to null (unless already changed)
+            if ($sentConversation->getSender() === $this) {
+                $sentConversation->setSender(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Conversation>
+     */
+    public function getReceivedConversations(): Collection
+    {
+        return $this->receivedConversations;
+    }
+
+    public function addReceivedConversation(Conversation $receivedConversation): static
+    {
+        if (!$this->receivedConversations->contains($receivedConversation)) {
+            $this->receivedConversations->add($receivedConversation);
+            $receivedConversation->setRecipient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReceivedConversation(Conversation $receivedConversation): static
+    {
+        if ($this->receivedConversations->removeElement($receivedConversation)) {
+            // set the owning side to null (unless already changed)
+            if ($receivedConversation->getRecipient() === $this) {
+                $receivedConversation->setRecipient(null);
+            }
+        }
 
         return $this;
     }

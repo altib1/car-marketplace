@@ -1,0 +1,136 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat - {{ conversation.publication.brand }} {{ conversation.publication.model }}{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8 max-w-4xl">
+    {# Header #}
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white">
+                    <span class="text-2xl font-bold">{{ conversation.publication.brand|first }}</span>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">{{ conversation.publication.brand }} {{ conversation.publication.model }}</h1>
+                    <p class="text-gray-600 flex items-center mt-1">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                        </svg>
+                        {% if conversation.sender == app.user %}
+                            {{ conversation.recipient.email }}
+                        {% else %}
+                            {{ conversation.sender.email }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            <a href="{{ path('app_chat_inbox') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back
+            </a>
+        </div>
+    </div>
+
+    {# Chat Container #}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
+        <div id="messages" class="p-6 space-y-6 h-[500px] overflow-y-auto">
+            {% for message in messages %}
+                <div class="flex {% if message.sender == app.user %}justify-end{% else %}justify-start{% endif %} items-end gap-2">
+                    {% if message.sender != app.user %}
+                        <div class="w-8 h-8 rounded-full bg-indigo-100 flex-shrink-0 flex items-center justify-center">
+                            <span class="text-sm font-medium text-indigo-600">{{ message.sender.email|first|upper }}</span>
+                        </div>
+                    {% endif %}
+                    
+                    <div class="{% if message.sender == app.user %}
+                        bg-blue-600 text-white rounded-2xl rounded-br-none
+                        {% else %}
+                        bg-gray-100 text-gray-900 rounded-2xl rounded-bl-none
+                        {% endif %}
+                        px-4 py-2 max-w-[80%] shadow-sm group hover:shadow-md transition-shadow">
+                        <p class="text-sm">{{ message.content }}</p>
+                        <span class="text-xs opacity-75 mt-1 block group-hover:opacity-100 transition-opacity">
+                            {{ message.createdAt|date('H:i') }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {# Message Form #}
+        <div class="p-4 border-t border-gray-100">
+            <form id="messageForm" class="flex items-center gap-4">
+                <input type="hidden" name="recipientId" value="{% if conversation.sender == app.user %}{{ conversation.recipient.id }}{% else %}{{ conversation.sender.id }}{% endif %}">
+                <input type="hidden" name="publicationId" value="{{ conversation.publication.id }}">
+                <input type="text" 
+                       name="content" 
+                       class="flex-1 rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500 py-3"
+                       placeholder="Type your message..."
+                       required
+                       autocomplete="off">
+                <button type="submit" 
+                        class="px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    <span>Send</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ parent() }}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('messageForm');
+    const messagesContainer = document.getElementById('messages');
+
+    // Scroll to bottom initially
+    if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    form?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.disabled = true;
+        
+        try {
+            const response = await fetch('{{ path('app_chat_send') }}', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                location.reload();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        } finally {
+            submitButton.disabled = false;
+        }
+    });
+
+    // Poll for new messages
+    setInterval(async () => {
+        const response = await fetch(window.location.href);
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const newMessages = doc.getElementById('messages');
+        
+        if (newMessages && newMessages.innerHTML !== messagesContainer.innerHTML) {
+            messagesContainer.innerHTML = newMessages.innerHTML;
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+    }, 3000);
+});
+</script>
+{% endblock %}
