@@ -13,7 +13,10 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-    public function findByConversation(int $conversationId)
+    /**
+     * @return Message[]
+     */
+    public function findByConversation(int $conversationId): array
     {
         return $this->createQueryBuilder('m')
             ->andWhere('m.conversation = :val')

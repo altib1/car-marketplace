@@ -11,6 +11,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\MessageRepository;
 use App\Entity\Conversation;
+use App\Repository\UserRepository;
 use App\Entity\User;
 
 #[Route('/chat')]
@@ -32,7 +33,11 @@ class ChatController extends AbstractController
     }
 
     #[Route('/send', name: 'app_chat_send', methods: ['POST'])]
-    public function send(Request $request, MessageBusInterface $bus): Response
+    public function send(
+        Request $request, 
+        MessageBusInterface $bus,
+        UserRepository $userRepository
+    ): Response
     {
         /** @var User */
         $user = $this->getUser();
@@ -40,31 +45,36 @@ class ChatController extends AbstractController
         if (!$user) {
             throw $this->createAccessDeniedException('You must be logged in to send messages');
         }
-
+    
         $recipientId = $request->request->get('recipientId');
         
         if (!$recipientId) {
             throw $this->createNotFoundException('Recipient is required');
         }
-
+    
         if ($recipientId == $user->getId()) {
             throw $this->createAccessDeniedException('Cannot send message to yourself');
+        }
+    
+        $recipient = $userRepository->find($recipientId);
+        if (!$recipient) {
+            throw $this->createNotFoundException('Recipient not found');
         }
 
         $content = $request->request->get('content');
         if (empty(trim($content))) {
             throw $this->createNotFoundException('Message content cannot be empty');
         }
-
+    
         $message = new SendChatMessage(
             $user->getId(),
-            $recipientId,
+            $recipient->getId(),
             $content,
-            $request->request->get('publicationId')
+            (int) $request->request->get('publicationId')
         );
-
+    
         $bus->dispatch($message);
-
+    
         return $this->json(['status' => 'success']);
     }
 

@@ -15,7 +15,7 @@ class ConversationRepository extends ServiceEntityRepository
         parent::__construct($registry, Conversation::class);
     }
 
-    public function findByUser(User $user)
+    public function findByUser(User $user): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.sender = :user OR c.recipient = :user')
@@ -25,7 +25,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findByPublication(int $publicationId)
+    public function findByPublication(int $publicationId): array
     {
         return $this->createQueryBuilder('c')
             ->andWhere('c.publication = :publicationId')
@@ -35,10 +35,11 @@ class ConversationRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findExistingConversation(int $senderId, int $recipientId, int $publicationId)
+    public function findExistingConversation(int $senderId, int $recipientId, int $publicationId): ?Conversation
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('(c.sender = :senderId AND c.recipient = :recipientId) OR (c.sender = :recipientId AND c.recipient = :senderId)')
+            ->where('(c.sender = :senderId AND c.recipient = :recipientId) OR (c.sender = :recipientId AND c.recipient = :senderId)')
+            ->andWhere('c.publication = :publicationId')
             ->setParameters(new ArrayCollection([
                 'senderId' => $senderId,
                 'recipientId' => $recipientId,
@@ -48,7 +49,7 @@ class ConversationRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function getUnreadCount(User $user)
+    public function getUnreadCount(User $user): int
     {
         return $this->createQueryBuilder('c')
             ->select('COUNT(m.id)')
