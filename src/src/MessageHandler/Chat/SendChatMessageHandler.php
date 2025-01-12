@@ -18,28 +18,28 @@ use App\Repository\UserRepository;
 class SendChatMessageHandler
 {
     public function __construct(
-        private EntityManagerInterface $entityManager,
-        private ConversationRepository $conversationRepository,
-        private PublicationRepository $publicationRepository,
-        private UserRepository $userRepository
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository,
+        private readonly PublicationRepository $publicationRepository,
+        private readonly ConversationRepository $conversationRepository
     ) {}
 
     public function __invoke(SendChatMessage $message): void
     {
+        // Load full entities
         $sender = $this->userRepository->find($message->getSenderId());
         $recipient = $this->userRepository->find($message->getRecipientId());
         $publication = $this->publicationRepository->find($message->getPublicationId());
 
         if (!$sender || !$recipient || !$publication) {
-            throw new \InvalidArgumentException('One or more entities not found');
+            throw new \InvalidArgumentException('Required entity not found');
         }
 
-        $conversation = $this->getOrCreateConversation($sender, $recipient, $publication);
-        $this->createAndSaveMessage($message->getContent(), $sender, $conversation);
-    }
+        if (empty($message->getContent())) {
+            throw new ValidatorException('Message content cannot be empty');
+        }
 
-    private function getOrCreateConversation(User $sender, User $recipient, Publication $publication): Conversation
-    {
+        // Find or create conversation using full entities
         $conversation = $this->conversationRepository->findExistingConversation(
             $sender->getId(),
             $recipient->getId(),
@@ -48,21 +48,16 @@ class SendChatMessageHandler
 
         if (!$conversation) {
             $conversation = new Conversation();
-            $conversation->setSender($sender)
-                        ->setRecipient($recipient)
-                        ->setPublication($publication);
+            $conversation->setSender($sender);
+            $conversation->setRecipient($recipient);
+            $conversation->setPublication($publication);
             $this->entityManager->persist($conversation);
         }
 
-        return $conversation;
-    }
-
-    private function createAndSaveMessage(string $content, User $sender, Conversation $conversation): void
-    {
         $chatMessage = new Message();
-        $chatMessage->setContent($content)
-                   ->setSender($sender)
-                   ->setConversation($conversation);
+        $chatMessage->setContent($message->getContent());
+        $chatMessage->setSender($sender);
+        $chatMessage->setConversation($conversation);
         
         $this->entityManager->persist($chatMessage);
         $this->entityManager->flush();

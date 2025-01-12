@@ -2,38 +2,27 @@
 
 namespace App\Message\Chat;
 
-class SendChatMessage implements \Serializable
+final class SendChatMessage
 {
-    private int $senderId;
-    private int $recipientId;
-    private string $content;
-    private int $publicationId;
-
     public function __construct(
-        int $senderId,
-        int $recipientId,
-        string $content,
-        int $publicationId
-    ) {
-        $this->senderId = $senderId;
-        $this->recipientId = $recipientId;
-        $this->content = $content;
-        $this->publicationId = $publicationId;
-    }
+        private readonly int $senderId,
+        private readonly int $recipientId,
+        private readonly string $content,
+        private readonly int $publicationId
+    ) {}
 
-    public function serialize(): string
+    public function __serialize(): array
     {
-        return serialize([
+        return [
             'senderId' => $this->senderId,
             'recipientId' => $this->recipientId,
             'content' => $this->content,
             'publicationId' => $this->publicationId,
-        ]);
+        ];
     }
 
-    public function unserialize(string $data): void
+    public function __unserialize(array $data): void
     {
-        $data = unserialize($data);
         $this->senderId = $data['senderId'];
         $this->recipientId = $data['recipientId'];
         $this->content = $data['content'];

@@ -38,15 +38,13 @@ class ConversationRepository extends ServiceEntityRepository
     public function findExistingConversation(int $senderId, int $recipientId, int $publicationId): ?Conversation
     {
         return $this->createQueryBuilder('c')
-            ->where('(c.sender = :senderId AND c.recipient = :recipientId) OR (c.sender = :recipientId AND c.recipient = :senderId)')
-            ->andWhere('c.publication = :publicationId')
-            ->setParameters(new ArrayCollection([
-                'senderId' => $senderId,
-                'recipientId' => $recipientId,
-                'publicationId' => $publicationId
-            ]))
-            ->getQuery()
-            ->getOneOrNullResult();
+        ->where('(c.sender = :senderId AND c.recipient = :recipientId) OR (c.sender = :recipientId AND c.recipient = :senderId)')
+        ->andWhere('c.publication = :publicationId')
+        ->setParameter('senderId', $senderId)
+        ->setParameter('recipientId', $recipientId)
+        ->setParameter('publicationId', $publicationId)
+        ->getQuery()
+        ->getOneOrNullResult();
     }
 
     public function getUnreadCount(User $user): int
