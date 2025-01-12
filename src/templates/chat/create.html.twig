@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chat - {{ conversation.publication.title }}{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8">
+    {# Header #}
+    <div class="mb-6 flex items-center justify-between">
+        <div>
+            <h1 class="text-2xl font-bold">{{ conversation.publication.title }}</h1>
+            <p class="text-gray-500">
+                With: {% if conversation.sender == app.user %}
+                    {{ conversation.recipient.email }}
+                {% else %}
+                    {{ conversation.sender.email }}
+                {% endif %}
+            </p>
+        </div>
+        <a href="{{ path('app_chat_inbox') }}" class="text-blue-600 hover:text-blue-700">
+            Back to Inbox
+        </a>
+    </div>
+
+    {# Messages Container #}
+    <div class="bg-white rounded-xl shadow-sm p-6 mb-4">
+        <div id="messages" class="space-y-4 max-h-[500px] overflow-y-auto">
+            {% for message in messages %}
+                <div class="flex {% if message.sender == app.user %}justify-end{% endif %}">
+                    <div class="{% if message.sender == app.user %}
+                        bg-blue-600 text-white
+                        {% else %}
+                        bg-gray-100 text-gray-900
+                        {% endif %} 
+                        rounded-xl px-4 py-2 max-w-[80%]"
+                    >
+                        <p>{{ message.content }}</p>
+                        <span class="text-xs opacity-75">
+                            {{ message.createdAt|date('H:i') }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {# Message Form #}
+    <form id="messageForm" class="flex gap-4">
+        <input type="hidden" name="recipientId" value="{% if conversation.sender == app.user %}{{ conversation.recipient.id }}{% else %}{{ conversation.sender.id }}{% endif %}">
+        <input type="hidden" name="publicationId" value="{{ conversation.publication.id }}">
+        <input type="text" 
+               name="content" 
+               class="flex-1 rounded-xl border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+               placeholder="Type your message..."
+               required>
+        <button type="submit" 
+                class="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
+            Send
+        </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('messageForm');
+    const messagesContainer = document.getElementById('messages');
+
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('{{ path('app_chat_send') }}', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                form.reset();
+                // Reload messages
+                location.reload();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+
+    // Auto-scroll to bottom
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+});
+</script>
+{% endblock %}

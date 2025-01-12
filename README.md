@@ -65,3 +65,29 @@ to launch tests of phpunit :
 sudo docker exec php-container ./vendor/bin/phpunit
 
 ```
+
+## To launch messages
+
+to launch messages on the app : 
+
+```
+# For development
+php bin/console messenger:consume async -vv
+
+# For production (with supervisor recommended)
+php bin/console messenger:consume async --limit=10 --time-limit=3600
+
+```
+
+For production, you should set up Supervisor to keep the consumer running. Here's an example supervisor configuration:
+
+```
+[program:messenger-consume]
+command=php /path/to/your/project/bin/console messenger:consume async --time-limit=3600 --limit=10
+user=www-data
+numprocs=2
+autostart=true
+autorestart=true
+process_name=%(program_name)s_%(process_num)02d
+
+```

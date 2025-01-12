@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messages{% endblock %}
+
+{% block body %}
+<div class="container mx-auto px-4 py-8 mt-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-gray-800 border-b pb-4">Messages</h1>
+        
+        {% if conversations|length > 0 %}
+            <div class="space-y-4">
+                {% for conversation in conversations %}
+                    <a href="{{ path('app_chat_conversation', {'id': conversation.id}) }}" 
+                       class="block bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 border border-gray-100">
+                        <div class="flex justify-between items-center gap-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center">
+                                    <span class="text-indigo-600 font-semibold text-lg">
+                                        {{- (conversation.sender == app.user ? conversation.recipient.email : conversation.sender.email)|first|upper -}}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900 mb-1">
+                                        {% if conversation.sender == app.user %}
+                                            {{ conversation.recipient.email }}
+                                        {% else %}
+                                            {{ conversation.sender.email }}
+                                        {% endif %}
+                                    </h3>
+                                    <p class="text-sm text-gray-600 flex items-center">
+                                        <svg class="w-4 h-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                        {{ conversation.publication.brand ~ ' ' ~ conversation.publication.model }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                                    {{ conversation.createdAt|date('d/m/Y H:i') }}
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-12 bg-gray-50 rounded-2xl">
+                <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                </svg>
+                <p class="text-gray-500 text-lg">Pas de messages pour le moment</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

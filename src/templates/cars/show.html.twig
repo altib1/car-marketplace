@@ -277,11 +277,13 @@
                                 </svg>
                                 <span class="phone-text">Show Phone Number</span>
                             </button>
-                            <button class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 flex items-center justify-center">
+                            <button 
+                                data-modal-target="chatModal"
+                                class="w-full bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 flex items-center justify-center">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                                 </svg>
-                                Contact {{ publication.shop ? 'Shop' : 'Seller' }}
+                                Message Seller
                             </button>
                             {% if publication.shop %}
                             <a href="{{ path('app_autoshop_show', {'id': publication.shop.id}) }}" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 flex items-center justify-center">
@@ -295,6 +297,84 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+{# Chat Modal #}
+<div id="chatModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full transform transition-all duration-300">
+            {% if app.user %}
+                {% if app.user.id == publication.user.id %}
+                    <div class="p-8 text-center">
+                        <div class="mb-4">
+                            <svg class="w-16 h-16 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">This is your publication</h3>
+                        <p class="text-gray-600 mb-4">You cannot send a message to yourself.</p>
+                        <button type="button" data-modal-close 
+                            class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200">
+                            Close
+                        </button>
+                    </div>
+                {% else %}
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-gray-900">Send a Message</h3>
+                            <button type="button" data-modal-close class="text-gray-400 hover:text-gray-500">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <form id="sendMessageForm" class="space-y-4">
+                            <input type="hidden" name="recipientId" value="{{ publication.user.id }}">
+                            <input type="hidden" name="publicationId" value="{{ publication.id }}">
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Your message</label>
+                                <textarea 
+                                    id="message"
+                                    name="content"
+                                    rows="4"
+                                    class="w-full border-gray-300 rounded-xl shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-all duration-200"
+                                    placeholder="Hi, I'm interested in your {{ publication.brand }} {{ publication.model }}..."
+                                    required
+                                ></textarea>
+                            </div>
+                            <div class="flex justify-end gap-3">
+                                <button type="submit" 
+                                    class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-200">
+                                    Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="p-8 text-center">
+                    <div class="mb-4">
+                        <svg class="w-16 h-16 text-blue-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Want to send a message?</h3>
+                    <p class="text-gray-600 mb-6">Please create an account or sign in to contact the seller</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="{{ path('app_login') }}" 
+                            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-200">
+                            Sign In
+                        </a>
+                        <a href="{{ path('app_register') }}" 
+                            class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-200">
+                            Create Account
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

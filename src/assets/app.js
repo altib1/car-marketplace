@@ -348,3 +348,40 @@ document.addEventListener('DOMContentLoaded', function () {
         speed: 800,
     });
 });
+
+// chat modal script
+
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('chatModal');
+    const form = document.getElementById('sendMessageForm');
+    
+    // Modal handlers
+    document.querySelector('[data-modal-target="chatModal"]')?.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+    
+    document.querySelector('[data-modal-close]')?.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    // Form submission
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('/chat/send', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (response.ok) {
+                modal.classList.add('hidden');
+                form.reset();
+                window.location.href = '/chat';
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+});
