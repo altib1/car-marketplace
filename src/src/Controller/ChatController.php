@@ -95,4 +95,26 @@ class ChatController extends AbstractController
             'messages' => $messageRepository->findByConversation($conversation->getId())
         ]);
     }
+
+    #[Route('/conversation/{id}/delete', name: 'app_chat_conversation_delete', methods: ['POST'])]
+    public function delete(
+        Conversation $conversation,
+        ConversationRepository $conversationRepository,
+        MessageRepository $messageRepository
+    ): Response
+    {
+        // Security check
+        if ($conversation->getSender() !== $this->getUser() && 
+            $conversation->getRecipient() !== $this->getUser()) {
+            throw $this->createAccessDeniedException();
+        }
+
+        // Delete all messages
+        $messageRepository->deleteByConversation($conversation->getId());
+
+        // Delete conversation
+        $conversationRepository->remove($conversation, true);
+
+        return $this->redirectToRoute('app_chat_inbox');
+    }
 }

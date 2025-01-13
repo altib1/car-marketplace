@@ -62,4 +62,11 @@ class ConversationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    public function remove(Conversation $conversation): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($conversation);
+        $entityManager->flush();
+    }
 }
