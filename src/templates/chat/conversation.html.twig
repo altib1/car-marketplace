@@ -3,7 +3,7 @@
 {% block title %}Chat - {{ conversation.publication.brand }} {{ conversation.publication.model }}{% endblock %}
 
 {% block body %}
-<div class="container mx-auto px-4 py-8 max-w-4xl">
+<div class="container mx-auto px-4 py-12 max-w-4xl mt-8">
     {# Header #}
     <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mb-6">
         <div class="flex items-center justify-between">
@@ -12,17 +12,29 @@
                     <span class="text-2xl font-bold">{{ conversation.publication.brand|first }}</span>
                 </div>
                 <div>
-                    <h1 class="text-2xl font-bold text-gray-900">{{ conversation.publication.brand }} {{ conversation.publication.model }}</h1>
-                    <p class="text-gray-600 flex items-center mt-1">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                        </svg>
-                        {% if conversation.sender == app.user %}
-                            {{ conversation.recipient.email }}
-                        {% else %}
-                            {{ conversation.sender.email }}
-                        {% endif %}
-                    </p>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-3">
+                        {{ conversation.publication.brand }} {{ conversation.publication.model }}
+                    </h1>
+                    <div class="flex items-center space-x-4">
+                        <a href="{{ path('app_car_show', {'id': conversation.publication.id}) }}" 
+                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            View Publication
+                        </a>
+                        <p class="text-gray-600 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                            </svg>
+                            {% if conversation.sender == app.user %}
+                                {{ conversation.recipient.email }}
+                            {% else %}
+                                {{ conversation.sender.email }}
+                            {% endif %}
+                        </p>
+                    </div>
                 </div>
             </div>
             <a href="{{ path('app_chat_inbox') }}" class="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors">
@@ -36,7 +48,7 @@
 
     {# Chat Container #}
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100">
-        <div id="messages" class="p-6 space-y-6 h-[500px] overflow-y-auto">
+        <div id="messages" class="p-6 space-y-6 h-[300px] overflow-y-auto">
             {% for message in messages %}
                 <div class="flex {% if message.sender == app.user %}justify-end{% else %}justify-start{% endif %} items-end gap-2">
                     {% if message.sender != app.user %}
@@ -53,7 +65,13 @@
                         px-4 py-2 max-w-[80%] shadow-sm group hover:shadow-md transition-shadow">
                         <p class="text-sm">{{ message.content }}</p>
                         <span class="text-xs opacity-75 mt-1 block group-hover:opacity-100 transition-opacity">
-                            {{ message.createdAt|date('H:i') }}
+                            {% if message.createdAt|date('Y-m-d') == "now"|date('Y-m-d') %}
+                                {{ message.createdAt|date('H:i') }}
+                            {% elseif message.createdAt|date('Y-m-d') == "now"|date_modify('-1 day')|date('Y-m-d') %}
+                                Yesterday at {{ message.createdAt|date('H:i') }}
+                            {% else %}
+                                {{ message.createdAt|date('M d, Y H:i') }}
+                            {% endif %}
                         </span>
                     </div>
                 </div>

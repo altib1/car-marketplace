@@ -39,4 +39,15 @@ class MessageRepository extends ServiceEntityRepository
             ->getQuery()
             ->execute();
     }
+    
+    public function deleteByConversation(int $conversationId): int
+    {
+        return $this->createQueryBuilder('m')
+            ->delete()
+            ->where('m.conversation = :conversationId')
+            ->setParameter('conversationId', $conversationId)
+            ->getQuery()
+            ->execute();
+    }
+
 }
