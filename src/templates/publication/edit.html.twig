@@ -108,23 +108,29 @@
                 <!-- Upload New Images -->
                 <div class="mt-6">
                     {{ form_label(form.images, 'Upload New Images', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
-                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md hover:border-blue-400 transition-colors duration-200">
                         <div class="space-y-1 text-center">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
                                 <path d="M28 8H20a2 2 0 00-2 2v4H8v28h32V14H30v-4a2 2 0 00-2-2zM20 4h8a4 4 0 014 4v4h8a4 4 0 014 4v28a4 4 0 01-4 4H8a4 4 0 01-4-4V14a4 4 0 014-4h8V8a4 4 0 014-4z" />
                             </svg>
-                            <div class="flex text-sm text-gray-600">
-                                <label for="{{ form.images.vars.id }}" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                    <span>Upload a file</span>
+                            <div class="flex flex-col items-center text-sm text-gray-600">
+                                <label for="{{ form.images.vars.id }}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500 transition-colors duration-200">
+                                    <span class="inline-flex items-center px-4 py-2 bg-blue-50 hover:bg-blue-100 rounded-lg">
+                                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                        </svg>
+                                        Choose files
+                                    </span>
                                     {{ form_widget(form.images, {
                                         'attr': {
                                             'class': 'sr-only',
                                             'multiple': 'multiple',
-                                            'id': form.images.vars.id
+                                            'id': form.images.vars.id,
+                                            'onchange': 'showImagePreviews(this)'
                                         }
                                     }) }}
                                 </label>
-                                <p class="pl-1">or drag and drop</p>
+                                <p class="mt-2">or drag and drop files here</p>
                             </div>
                             <p class="text-xs text-gray-500">
                                 PNG, JPG, JPEG, WEBP up to 10MB
@@ -132,6 +138,12 @@
                         </div>
                     </div>
                     {{ form_errors(form.images) }}
+                    <div id="imagePreview" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4"></div>
+                </div>
+                <div class="mb-4 hidden">
+                    {{ form_label(form.video, 'Video', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                    {{ form_widget(form.video, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                    {{ form_errors(form.video) }}
                 </div>
 
                 <div class="flex justify-end mt-6">
@@ -168,5 +180,44 @@
             });
         });
     });
+
+    function showImagePreviews(input) {
+    const preview = document.getElementById('imagePreview');
+    preview.innerHTML = '';
+        
+        Array.from(input.files).forEach((file, index) => {
+            const reader = new FileReader();
+            reader.onload = e => {
+                preview.insertAdjacentHTML('beforeend', `
+                    <div class="relative" data-index="${index}">
+                        <img src="${e.target.result}" class="w-full h-32 object-cover rounded-lg" alt="${file.name}">
+                        <button type="button" onclick="removeImage(this, ${index})" 
+                                class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                        <p class="mt-1 text-xs text-gray-500 truncate">${file.name}</p>
+                    </div>
+                `);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    
+    function removeImage(button, index) {
+        const input = document.getElementById('{{ form.images.vars.id }}');
+        const dt = new DataTransfer();
+        const { files } = input;
+        
+        for(let i = 0; i < files.length; i++) {
+            if(i !== index) {
+                dt.items.add(files[i]);
+            }
+        }
+        
+        input.files = dt.files;
+        button.closest('.relative').remove();
+    }
 </script>
 {% endblock %}
