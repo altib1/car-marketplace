@@ -8,18 +8,38 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use App\Repository\PublicationRepository;
+use Knp\Component\Pager\PaginatorInterface;
 
 class WishlistController extends AbstractController
 {
     #[Route('/wishlist', name: 'app_wishlist')]
-    public function index(): Response
+    public function index(PublicationRepository $publicationRepository, Request $request, PaginatorInterface $paginator): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         /** @var User $user */
         $user = $this->getUser();
         $wishlist = $user->getWishlist();
 
+        if ($wishlist) {
+            $queryBuilder = $publicationRepository->createQueryBuilder('p')
+                ->where('p IN (:publications)')
+                ->setParameter('publications', $wishlist->getPublications());
+
+            $page = $request->query->getInt('page', 1);
+            $publications = $paginator->paginate(
+                $queryBuilder,
+                $page,
+                6
+            );
+        } else {
+            $publications = [];
+        }
+
         return $this->render('wishlist/index.html.twig', [
-            'publications' => $wishlist ? $wishlist->getPublications() : [],
+            'publications' => $publications,
         ]);
     }
 

@@ -13,12 +13,17 @@ use App\Repository\MessageRepository;
 use App\Entity\Conversation;
 use App\Repository\UserRepository;
 use App\Entity\User;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/chat')]
 class ChatController extends AbstractController
 {
     #[Route('/', name: 'app_chat_inbox')]
-    public function inbox(ConversationRepository $conversationRepository): Response
+    public function inbox(
+        ConversationRepository $conversationRepository, 
+        Request $request, 
+        PaginatorInterface $paginator
+    ): Response
     {
         /** @var User */
         $user = $this->getUser();
@@ -27,8 +32,16 @@ class ChatController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
+        $page = $request->query->getInt('page', 1);
+        $conversationsQuery = $conversationRepository->findByUser($user);
+        $conversations = $paginator->paginate(
+            $conversationsQuery,
+            $page,
+            10
+        );
+
         return $this->render('chat/inbox.html.twig', [
-            'conversations' => $conversationRepository->findByUser($user)
+            'conversations' => $conversations
         ]);
     }
 
