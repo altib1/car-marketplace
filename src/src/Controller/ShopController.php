@@ -10,6 +10,7 @@ use App\Form\ShopType;
 use App\Entity\Shop;
 use App\Repository\ShopRepository;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 
 
 class ShopController extends AbstractController
@@ -96,7 +97,7 @@ class ShopController extends AbstractController
     }
 
     #[Route('/autoshop/{id}', name: 'app_autoshop_show', methods: ['GET'])]
-    public function show(int $id, ShopRepository $shopRepository): Response
+    public function show(int $id, Request $request, ShopRepository $shopRepository, PaginatorInterface $paginator): Response
     {
         $shop = $shopRepository->find($id);
         
@@ -104,9 +105,17 @@ class ShopController extends AbstractController
             throw $this->createNotFoundException('Shop not found');
         }
 
+        $page = $request->query->getInt('page', 1);
+        $publications = $shop->getPublications();
+        $publications = $paginator->paginate(
+            $publications,
+            $page,
+            9
+        );
+
         return $this->render('shop/show.html.twig', [
             'shop' => $shop,
-            'publications' => $shop->getPublications(),
+            'publications' => $publications,
             'controller_name' => 'ShopController',
         ]);
     }
