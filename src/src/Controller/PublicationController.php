@@ -17,17 +17,29 @@ use App\Repository\CarModelRepository;
 use App\Repository\MotorizationTypeRepository;
 use App\Entity\CarBrand;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/publication', name: 'app_publication')]
 final class PublicationController extends AbstractController
 {
     #[Route(name: '_index', methods: ['GET'])]
-    public function index(PublicationRepository $publicationRepository): Response
+    public function index(PublicationRepository $publicationRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
+        $queryBuilder = $publicationRepository->createQueryBuilder('p')
+            ->where('p.user = :user')
+            ->setParameter('user', $this->getUser());
+
+        $page = $request->query->getInt('page', 1);
+        $publications = $paginator->paginate(
+            $queryBuilder,
+            $page,
+            8
+        );
+
         return $this->render('publication/index.html.twig', [
-            'publications' => $publicationRepository->findBy(['user' => $this->getUser()]),
+            'publications' => $publications,
         ]);
     }
 

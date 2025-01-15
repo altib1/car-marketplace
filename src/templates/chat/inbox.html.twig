@@ -64,6 +64,16 @@
                 </div>
                 </div>
             {% endfor %}
+                        <!-- Pagination -->
+            {% if conversations.getPageCount > 1 %}
+                <div class="col-span-full mt-8">
+                    <div class="flex justify-center">
+                        <div class="bg-white px-4 py-3 rounded-lg shadow-sm">
+                            {{ knp_pagination_render(conversations, 'pagination/tailwind_pagination.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
             </div>
 
             <!-- Delete Confirmation Modal -->
