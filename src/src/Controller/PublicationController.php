@@ -218,8 +218,8 @@ final class PublicationController extends AbstractController
 
         foreach ($imageFiles as $imageFile) {
             if ($imageFile) {
-                $imageFileName = $fileUploader->upload($imageFile);
-                $publication->addImageFilename($imageFileName);
+                $imageFileName = $fileUploader->upload($imageFile, 'publications', false);
+                $publication->addImageFilename($imageFileName["filename"]);
             }
         }
 
@@ -227,8 +227,8 @@ final class PublicationController extends AbstractController
         $videoFile = $form->get('video')->getData();
 
         if ($videoFile) {
-            $videoFileName = $fileUploader->upload($videoFile);
-            $publication->setVideoFilename($videoFileName);
+            $videoFileName = $fileUploader->upload($videoFile, 'publications', false);
+            $publication->setVideoFilename($videoFileName["filename"]);
         }
     }
 

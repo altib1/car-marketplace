@@ -1,0 +1,35 @@
+{% macro responsive_image(urls, alt, class = '') %}
+    <picture class="{{ class }}">
+        {# Show smallest version first for quick loading #}
+        <img 
+            src="{{ asset(urls.small ?? urls.original) }}"
+            data-src="{{ asset(urls.original) }}"
+            {% if urls.small is defined %}
+                srcset="
+                    {{ asset(urls.small) }} 320w,
+                    {{ asset(urls.medium) }} 640w,
+                    {{ asset(urls.large) }} 1024w,
+                    {{ asset(urls.original) }} 1200w
+                "
+                sizes="(max-width: 320px) 320px,
+                       (max-width: 640px) 640px,
+                       (max-width: 1024px) 1024px,
+                       1200px"
+            {% endif %}
+            alt="{{ alt }}"
+            class="lazy-load {{ class }}"
+            loading="lazy"
+        >
+    </picture>
+{% endmacro %}
+
+{% macro document_preview(url, filename, class = '') %}
+    <div class="{{ class }}">
+        <img 
+            src="{{ asset(url) }}" 
+            alt="{{ filename }}"
+            class="document-preview"
+            loading="lazy"
+        >
+    </div>
+{% endmacro %}

@@ -19,8 +19,19 @@ RUN apt-get update && apt-get install -y \
     libmcrypt-dev \
     libxml2-dev
 
-# Install PHP extensions for MySQL, PostgreSQL, and others
-RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql zip opcache intl gd
+# Configure GD with proper support for JPEG
+RUN docker-php-ext-configure gd \
+    --with-jpeg
+
+# Install PHP extensions
+RUN docker-php-ext-install -j$(nproc) \
+    pdo \
+    pdo_mysql \
+    pdo_pgsql \
+    zip \
+    opcache \
+    intl \
+    gd
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -27,7 +27,7 @@ services:
     
     App\Service\FileUploader:
         arguments:
-            $targetDirectory: '%brochures_directory%'
+            $baseUploadDirectory: '%kernel.project_dir%/public/uploads'
 
     App\MessageHandler\Chat\SendChatMessageHandler:
         arguments:
