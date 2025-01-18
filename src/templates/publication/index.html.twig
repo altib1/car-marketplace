@@ -3,6 +3,8 @@
 {% block title %}Publications{% endblock %}
 
 {% block body %}
+{% import "components/_image.html.twig" as images %}
+
 <div class="min-h-screen mt-8 py-12">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Hero Section -->
@@ -33,10 +35,12 @@
                         <!-- Card Image with Badges -->
                         <div class="aspect-w-16 aspect-h-9 relative overflow-hidden">
                             {% if publication.imageFilenames is defined and publication.imageFilenames %}
-                                <img src="{{ asset('uploads/brochures/' ~ publication.imageFilenames[0]) }}" 
-                                     alt="{{ publication.brand }} {{ publication.model }}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                                />
+                                    {{ images.responsive_image(
+                                        publication.imageFilenames[0],
+                                        'Photo of ' ~ publication.brand ~ ' ' ~ publication.model,
+                                        'w-full h-full object-cover group-hover:scale-105 transition-transform duration-200',
+                                        'publication'
+                                    ) }}
                             {% else %}
                                 <div class="w-full h-full flex items-center justify-center bg-gray-50">
                                     <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

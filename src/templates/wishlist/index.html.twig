@@ -3,6 +3,8 @@
 {% block title %}My Wishlist{% endblock %}
 
 {% block body %}
+{% import "components/_image.html.twig" as images %}
+
 <div class="min-h-screen pt-12 mt-8">
     <!-- Hero Section -->
     <div class="bg-white rounded-xl border-b mx-8">
@@ -47,10 +49,12 @@
                         <!-- Image Section -->
                         {% if publication.imageFilenames is defined and publication.imageFilenames %}
                             <div class="h-48 overflow-hidden">
-                                <img src="{{ asset('uploads/brochures/' ~ publication.imageFilenames[0]) }}" 
-                                     alt="{{ publication.brand }} {{ publication.model }}" 
-                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                                />
+                                {{ images.responsive_image(
+                                    publication.imageFilenames[0],
+                                    publication.brand ~ ' ' ~ publication.model,
+                                    'w-full h-full object-cover group-hover:scale-105 transition-transform duration-200',
+                                    'publication'
+                                ) }}
                             </div>
                         {% else %}
                             <div class="h-48 flex items-center justify-center bg-gray-50">

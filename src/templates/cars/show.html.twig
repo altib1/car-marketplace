@@ -3,6 +3,8 @@
 {% block title %}{{ publication.brand }} {{ publication.model }} - {{ publication.year }}{% endblock %}
 
 {% block body %}
+{% import "components/_image.html.twig" as images %}
+
 <div class="min-h-screen mt-16">
     <!-- Hero Section with Slider and Quick Info -->
     <div class="max-w-7xl mx-auto px-4 mt-4">
@@ -14,10 +16,12 @@
                         <div class="swiper-wrapper">
                             {% for imageFilename in publication.imageFilenames %}
                                 <div class="swiper-slide">
-                                    <img src="{{ asset('uploads/brochures/' ~ imageFilename) }}" 
-                                         alt="{{ publication.brand }} {{ publication.model }}" 
-                                         class="w-full h-full object-cover"
-                                    />
+                                    {{ images.responsive_image(
+                                        imageFilename,
+                                        'Photo of ' ~ publication.brand.name ~ ' ' ~ publication.model.name,
+                                        'w-full h-full object-cover',
+                                        'publication'
+                                    ) }}
                                 </div>
                             {% endfor %}
                         </div>
@@ -245,9 +249,12 @@
                             {% if publication.shop %}
                                 <div class="w-20 h-20 mx-auto mb-4">
                                     {% if publication.shop.logoImageFileName %}
-                                        <img src="{{ asset('uploads/brochures/' ~ publication.shop.logoImageFileName) }}" 
-                                             alt="{{ publication.shop.logoImageFileName }}" 
-                                             class="w-full h-full object-cover rounded-full">
+                                        {{ images.responsive_image(
+                                            publication.shop.logoImageFileName,
+                                            publication.shop.name ~ ' logo',
+                                            'w-full h-full object-cover rounded-full',
+                                            'shop'
+                                        ) }}
                                     {% else %}
                                         <div class="w-full h-full bg-gray-100 rounded-full flex items-center justify-center">
                                             <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

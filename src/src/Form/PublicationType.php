@@ -124,7 +124,7 @@ class PublicationType extends AbstractType
                     new All([
                         'constraints' => [
                             new File([
-                                'maxSize' => '20000k',
+                                'maxSize' => '200000k',
                                 'maxSizeMessage' => 'The file is too large ({{ size }} {{ suffix }}). Maximum size is {{ limit }} {{ suffix }}.',
                                 'mimeTypes' => [
                                     'image/png',

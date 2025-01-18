@@ -3,6 +3,7 @@
 {% block title %}{{ publication.brand }} {{ publication.model }}{% endblock %}
 
 {% block body %}
+{% import "components/_image.html.twig" as images %}
 <div class="min-h-screen flex flex-col items-center mt-8 py-12">
     <div class="max-w-6xl w-full bg-white shadow-lg rounded-2xl overflow-hidden">
         <!-- Image Slider -->
@@ -12,10 +13,12 @@
                     <div class="swiper-wrapper">
                         {% for imageFilename in publication.imageFilenames %}
                             <div class="swiper-slide">
-                                <img src="{{ asset('uploads/brochures/' ~ imageFilename) }}" 
-                                     alt="{{ publication.brand }} {{ publication.model }}" 
-                                     class="w-full h-full object-cover"
-                                />
+                                {{ images.responsive_image(
+                                    imageFilename,
+                                    'Photo of ' ~ publication.brand.name ~ ' ' ~ publication.model.name,
+                                    'w-full h-full object-cover',
+                                    'publication'
+                                ) }}
                             </div>
                         {% endfor %}
                     </div>
