@@ -32,6 +32,7 @@ class ShopType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10024k',
+                        'maxSizeMessage' => 'The file is too large ({{ size }} {{ suffix }}). Maximum size is {{ limit }} {{ suffix }}.',
                         'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])
@@ -47,6 +48,7 @@ class ShopType extends AbstractType
                 'constraints' => [
                     new File([
                         'maxSize' => '10024k',
+                        'maxSizeMessage' => 'The file is too large ({{ size }} {{ suffix }}). Maximum size is {{ limit }} {{ suffix }}.',
                         'mimeTypes' => ['image/jpeg', 'image/png', 'image/webp'],
                         'mimeTypesMessage' => 'Please upload a valid image',
                     ])

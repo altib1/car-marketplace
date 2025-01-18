@@ -385,3 +385,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+// warning users before uploading too large photos
+
+document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', function() {
+        const maxSize = 20 * 1024 * 1024; // 20MB
+        const file = this.files[0];
+        
+        // Remove any existing messages
+        this.parentElement.querySelectorAll('.file-message').forEach(msg => msg.remove());
+        
+        if (file) {
+            // Create message container
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'file-message text-sm mt-2';
+            const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+            
+            if (file.size > maxSize) {
+                messageDiv.className += ' text-red-500';
+                messageDiv.textContent = `File too large: ${fileSizeMB}MB (maximum: 20MB)`;
+                this.value = '';
+            } else {
+                messageDiv.className += ' text-green-500';
+                messageDiv.textContent = `File size: ${fileSizeMB}MB`;
+            }
+            
+            this.parentElement.appendChild(messageDiv);
+        }
+    });
+});

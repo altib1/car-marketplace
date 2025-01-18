@@ -1,0 +1,60 @@
+{# Image macro with fallback support #}
+{% macro responsive_image(image, alt, class = '', contexte) %}
+    <picture class="{{ class }}">
+        {% if image is iterable and image.urls is defined %}
+            {# New format with responsive sizes #}
+            <img 
+                src="{{ asset(image.urls.small ?? image.urls.original) }}"
+                data-src="{{ asset(image.urls.original) }}"
+                srcset="
+                    {{ asset(image.urls.small) }} 320w,
+                    {{ asset(image.urls.medium) }} 640w,
+                    {{ asset(image.urls.large) }} 1024w,
+                    {{ asset(image.urls.original) }} 1200w
+                "
+                sizes="(max-width: 320px) 320px,
+                       (max-width: 640px) 640px,
+                       (max-width: 1024px) 1024px,
+                       1200px"
+                alt="{{ alt }}"
+                class="lazy-load {{ class }}"
+                loading="lazy"
+            >
+        {% else %}
+            {% if contexte == 'publication' %}
+                <img 
+                    src="{{ asset('uploads/publications/original/' ~ image) }}"
+                    alt="{{ alt }}"
+                    class="{{ class }}"
+                    loading="lazy"
+                >
+            {% elseif contexte == 'shop' %}
+                <img 
+                    src="{{ asset('uploads/shop/original/' ~ image) }}"
+                    alt="{{ alt }}"
+                    class="{{ class }}"
+                    loading="lazy"
+                >
+            {% else %}
+                {# Default or fallback logic for other contexts #}
+                <img 
+                    src="{{ asset(image) }}"
+                    alt="{{ alt }}"
+                    class="{{ class }}"
+                    loading="lazy"
+                >
+            {% endif %}
+        {% endif %}
+    </picture>
+{% endmacro %}
+
+{% macro document_preview(url, filename, class = '') %}
+    <div class="{{ class }}">
+        <img 
+            src="{{ asset(url) }}" 
+            alt="{{ filename }}"
+            class="document-preview"
+            loading="lazy"
+        >
+    </div>
+{% endmacro %}

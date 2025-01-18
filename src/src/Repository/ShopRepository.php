@@ -58,41 +58,16 @@ class ShopRepository extends ServiceEntityRepository
         $imageFile = $form->get('backgroundImageFileName')->getData();
 
         if ($imageFile) {
-            $imageFileName = $fileUploader->upload($imageFile);
-            $shop->setBackgroundImageFileName($imageFileName);
+            $imageFileName = $fileUploader->upload($imageFile, 'shop', false);
+            $shop->setBackgroundImageFileName($imageFileName["filename"]);
         }
 
         /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $imageFile */
         $imageFile = $form->get('logoImageFileName')->getData();
 
         if ($imageFile) {
-            $imageFileName = $fileUploader->upload($imageFile);
-            $shop->setLogoImageFileName($imageFileName);
+            $imageFileName = $fileUploader->upload($imageFile, 'shop', false);
+            $shop->setLogoImageFileName($imageFileName["filename"]);
         }
     }
-
-//    /**
-//     * @return Shop[] Returns an array of Shop objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Shop
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
