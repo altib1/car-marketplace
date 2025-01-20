@@ -53,6 +53,13 @@ Encore
         config.corejs = '3.23';
     })
 
+    // Add support for modern JavaScript
+    .configureBabel((config) => {
+        config.plugins.push('@babel/plugin-proposal-class-properties');
+    })
+
+    .enableSourceMaps(!Encore.isProduction())
+
     // enables Sass/SCSS support
     //.enableSassLoader()
 

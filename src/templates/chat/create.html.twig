@@ -59,35 +59,3 @@
     </form>
 </div>
 {% endblock %}
-
-{% block javascripts %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('messageForm');
-    const messagesContainer = document.getElementById('messages');
-
-    form.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const formData = new FormData(form);
-        
-        try {
-            const response = await fetch('{{ path('app_chat_send') }}', {
-                method: 'POST',
-                body: formData
-            });
-            
-            if (response.ok) {
-                form.reset();
-                // Reload messages
-                location.reload();
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    });
-
-    // Auto-scroll to bottom
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-});
-</script>
-{% endblock %}

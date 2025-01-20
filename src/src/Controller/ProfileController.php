@@ -118,11 +118,13 @@ class ProfileController extends AbstractController
         try {
             /** @var \App\Entity\User $user */
             $user = $this->getUser();
+            $this->container->get('security.token_storage')->setToken(null);
             $entityManager->remove($user);
             $entityManager->flush();
             $this->addFlash('success', 'Your account has been deleted.');
-            return $this->redirectToRoute('app_logout');
+            return $this->redirectToRoute('app_home');
         } catch (\Exception $e) {
+            $this->container->get('logger')->error('Error deleting user account: ' . $e->getMessage());
             $this->addFlash('error', 'An error occurred while deleting your account.');
             return $this->redirectToRoute('app_profile');
         }
