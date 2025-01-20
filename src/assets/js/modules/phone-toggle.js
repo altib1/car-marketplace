@@ -1,18 +1,22 @@
-export const initializePhoneToggle = () => {
-    const phoneButtons = document.querySelectorAll('[data-phone]');
-    
-    phoneButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const phoneNumber = this.dataset.phone;
-            const phoneText = this.querySelector('.phone-text');
-            
-            const isShowing = phoneText.textContent !== 'Show Phone Number';
-            phoneText.textContent = isShowing ? 'Show Phone Number' : phoneNumber;
-            
-            this.classList.toggle('bg-blue-600', isShowing);
-            this.classList.toggle('hover:bg-blue-700', isShowing);
-            this.classList.toggle('bg-green-600', !isShowing);
-            this.classList.toggle('hover:bg-green-700', !isShowing);
+export function initializePhoneToggle() {
+    document.addEventListener('DOMContentLoaded', function() {
+        const phoneButtons = document.querySelectorAll('[data-phone]');
+        
+        phoneButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const phoneNumber = this.dataset.phone;
+                const phoneText = this.querySelector('.phone-text');
+                
+                if (phoneText.textContent === 'Show Phone Number') {
+                    phoneText.textContent = phoneNumber;
+                    this.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    this.classList.add('bg-green-600', 'hover:bg-green-700');
+                } else {
+                    phoneText.textContent = 'Show Phone Number';
+                    this.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    this.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
         });
     });
-};
+}

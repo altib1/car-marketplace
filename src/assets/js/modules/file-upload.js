@@ -1,33 +1,65 @@
-export const initializeFileUpload = () => {
-    const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
+export function initializeFileUpload() {
+    document.querySelectorAll('.border-dashed').forEach(zone => {
+        const input = zone.querySelector('input[type="file"]');
+        const previewContainer = zone.querySelector('.space-y-1');
+        const defaultContent = previewContainer.innerHTML;
 
-    document.querySelectorAll('input[type="file"]').forEach(input => {
-        input.addEventListener('change', function() {
-            handleFileSelection(this, MAX_FILE_SIZE);
+        // Drag & drop handlers
+        zone.addEventListener('dragover', e => {
+            e.preventDefault();
+            zone.classList.add('border-blue-500', 'bg-blue-50');
         });
+
+        zone.addEventListener('dragleave', e => {
+            e.preventDefault();
+            zone.classList.remove('border-blue-500', 'bg-blue-50');
+        });
+
+        zone.addEventListener('drop', e => {
+            e.preventDefault();
+            zone.classList.remove('border-blue-500', 'bg-blue-50');
+            if (input) {
+                input.files = e.dataTransfer.files;
+                input.dispatchEvent(new Event('change'));
+            }
+        });
+
+        // File change handler
+        if (input) {
+            input.addEventListener('change', () => {
+                const file = input.files[0];
+                if (file && file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        // Create new preview
+                        const preview = document.createElement('div');
+                        preview.className = 'space-y-1 text-center';
+                        preview.innerHTML = `
+                            <img src="${e.target.result}" class="mx-auto h-48 w-auto mb-4">
+                            <div class="flex text-sm text-gray-600">
+                                <label for="${input.id}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500">
+                                    <span>Change image</span>
+                                </label>
+                                <button type="button" class="ml-2 text-red-600 hover:text-red-800">Cancel</button>
+                            </div>
+                            <p class="text-xs text-gray-500">${file.name}</p>
+                        `;
+
+                        // Replace content while keeping input
+                        previewContainer.innerHTML = '';
+                        previewContainer.appendChild(preview);
+                        previewContainer.appendChild(input);
+
+                        // Add cancel handler
+                        preview.querySelector('button').addEventListener('click', () => {
+                            input.value = '';
+                            previewContainer.innerHTML = defaultContent;
+                            previewContainer.appendChild(input);
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
     });
-
-    initializeDragAndDrop();
-};
-
-const handleFileSelection = (input, maxSize) => {
-    // Remove any existing messages
-    const existingMessages = input.parentElement.querySelectorAll('.file-message');
-    existingMessages.forEach(msg => msg.remove());
-
-    const file = input.files[0];
-    if (!file) return;
-
-    const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `file-message text-sm mt-2 ${file.size > maxSize ? 'text-red-500' : 'text-green-500'}`;
-    
-    if (file.size > maxSize) {
-        messageDiv.textContent = `File too large: ${fileSizeMB}MB (maximum: 20MB)`;
-        input.value = '';
-    } else {
-        messageDiv.textContent = `File size: ${fileSizeMB}MB`;
-    }
-    
-    input.parentElement.appendChild(messageDiv);
-};
+}
