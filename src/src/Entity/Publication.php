@@ -49,6 +49,10 @@ class Publication
     #[ORM\JoinColumn(nullable: false)]
     private ?MotorizationType $motorizationType = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Country $country = null;
+
     #[ORM\Column(type: Types::JSON, nullable: true)]
     private $imageFilenames = [];
 
@@ -70,8 +74,9 @@ class Publication
     #[ORM\Column(nullable: true)]
     private ?int $warrantyMonths = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $sellerLocation = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Region $sellerLocation = null;
 
     #[ORM\Column(name: 'vehicle_condition', type: Types::STRING, length: 255)]
     private ?string $condition = null;
@@ -319,14 +324,25 @@ class Publication
         return $this;
     }
 
-    public function getSellerLocation(): ?string
+    public function getSellerLocation(): ?Region
     {
         return $this->sellerLocation;
     }
 
-    public function setSellerLocation(?string $sellerLocation): self
+    public function setSellerLocation(?Region $sellerLocation): self
     {
         $this->sellerLocation = $sellerLocation;
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
         return $this;
     }
 

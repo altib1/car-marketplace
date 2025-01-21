@@ -17,6 +17,7 @@ import { initializeFileUpload } from './js/modules/file-upload';
 import { initializeChatModal } from './js/modules/chat-modal';
 import { initializeImageSlider } from './js/modules/image-slider';
 import { initializeConversation } from './js/modules/conversation';
+import { initializeCars } from './js/modules/cars';
 
 // Initialize all modules when DOM is ready
 initializeFormHandlers();
@@ -26,3 +27,4 @@ initializeFileUpload();
 initializeChatModal();
 initializeImageSlider();
 initializeConversation();
+initializeCars();

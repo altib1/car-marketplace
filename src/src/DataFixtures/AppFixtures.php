@@ -8,6 +8,9 @@ use App\Entity\MotorizationType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
+use App\Entity\Country;
+use App\Entity\Region;
+use App\Entity\Department;
 
 class AppFixtures extends Fixture
 {
@@ -321,6 +324,56 @@ class AppFixtures extends Fixture
         $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
 
+       
+       
+        // Create countrie, regions and departments
+
+        $albania = new Country();
+        $albania->setName('Albania');
+        
+        $regions = [
+            'Qarku i Beratit',
+            'Qarku i Dibrës',
+            'Qarku i Durrësit', 
+            'Qarku i Elbasanit',
+            'Qarku i Fierit',
+            'Qarku i Gjirokastrës',
+            'Qarku i Korçës',
+            'Qarku i Kukësit',
+            'Qarku i Lezhës',
+            'Qarku i Shkodrës',
+            'Qarku i Tiranës',
+            'Qarku i Vlorës'
+        ];
+
+        foreach ($regions as $regionName) {
+            $region = new Region();
+            $region->setName($regionName);
+            $region->setCountry($albania);
+            $manager->persist($region);
+        }
+
+        
+        $kosova = new Country();
+        $kosova->setName('Kosova');
+
+        $regions = [
+            'Qarku i Ferizaj',
+            'Qarku i Gjakovë',
+            'Qarku i Gjilan',
+            'Qarku i Mitrovicë',
+            'Qarku i Pejë',
+            'Qarku i Prishtinë',
+            'Qarku i Prizren'
+        ];
+
+        foreach ($regions as $regionName) {
+            $region = new Region();
+            $region->setName($regionName);
+            $region->setCountry($kosova);
+            $manager->persist($region);
+        }
+        
         // Flush all changes to the database
         $manager->flush();
     }
