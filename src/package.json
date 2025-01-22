@@ -14,5 +14,9 @@
   "scripts": {
     "dev": "encore dev --watch",
     "build": "encore production"
+  },
+  "dependencies": {
+    "flatpickr": "^4.6.13",
+    "swiper": "^11.2.1"
   }
 }

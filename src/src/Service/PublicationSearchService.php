@@ -83,6 +83,24 @@ class PublicationSearchService
             $boolQuery->addFilter($nestedQuery);
         }
 
+        // seller location filter
+        if (!empty($criteria['seller_location'])) {
+            $nestedQuery = new Nested();
+            $nestedQuery->setPath('sellerLocation');
+            $termQuery = new Term(['sellerLocation.id' => $criteria['seller_location']]);
+            $nestedQuery->setQuery($termQuery);
+            $boolQuery->addFilter($nestedQuery);
+        }
+
+        // country filter
+        if (!empty($criteria['country'])) {
+            $nestedQuery = new Nested();
+            $nestedQuery->setPath('country');
+            $termQuery = new Term(['country.id' => $criteria['country']]);
+            $nestedQuery->setQuery($termQuery);
+            $boolQuery->addFilter($nestedQuery);
+        }
+
         // Mileage range
         if (!empty($criteria['mileage_min']) || !empty($criteria['mileage_max'])) {
             $rangeQuery = new Range();

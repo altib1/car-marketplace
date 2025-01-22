@@ -18,6 +18,7 @@ import { initializeChatModal } from './js/modules/chat-modal';
 import { initializeImageSlider } from './js/modules/image-slider';
 import { initializeConversation } from './js/modules/conversation';
 import { initializeCars } from './js/modules/cars';
+import { initializeLocation } from './js/modules/location';
 
 // Initialize all modules when DOM is ready
 initializeFormHandlers();
@@ -28,3 +29,4 @@ initializeChatModal();
 initializeImageSlider();
 initializeConversation();
 initializeCars();
+initializeLocation();

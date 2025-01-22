@@ -16,6 +16,7 @@ use App\Repository\PublicationRepository;
 use App\Repository\CarModelRepository;
 use App\Repository\MotorizationTypeRepository;
 use App\Entity\CarBrand;
+use App\Repository\RegionRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -189,6 +190,21 @@ final class PublicationController extends AbstractController
                 'name' => $model->getName(),
             ];
         }
+
+        return new JsonResponse($data);
+    }
+    #[Route('/locations/{countryId}', name: 'get_locations', methods: ['GET'])]
+    public function getLocations(
+        int $countryId, 
+        RegionRepository $regionRepository
+        ): JsonResponse{
+        $regions = $regionRepository->findByCountry($countryId);
+        $data = array_map(function($region) {
+            return [
+            'id' => $region->getId(),
+            'name' => $region->getName()
+            ];
+        }, $regions);
 
         return new JsonResponse($data);
     }

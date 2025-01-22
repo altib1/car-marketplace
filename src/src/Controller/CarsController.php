@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Service\PublicationSearchService;
 use App\Entity\Publication;
+use App\Repository\CountryRepository;
+use App\Repository\RegionRepository;
 
 
 class CarsController extends AbstractController
@@ -22,6 +24,8 @@ class CarsController extends AbstractController
         CarModelRepository $carModelRepository,
         MotorizationTypeRepository $motorizationTypeRepository,
         PublicationSearchService $searchService,
+        CountryRepository $countryRepository,
+        RegionRepository $sellerLocationRepository
     ): Response {
 
         $criteria = [
@@ -33,6 +37,8 @@ class CarsController extends AbstractController
             'brand' => $request->query->get('brand'),
             'model' => $request->query->get('model'),
             'motorization_type' => $request->query->get('motorization_type'),
+            'country' => $request->query->get('country'),
+            'seller_location' => $request->query->get('seller_location'),
             'mileage_min' => $request->query->get('mileage_min'),
             'mileage_max' => $request->query->get('mileage_max'),
             'fuel_type' => $request->query->get('fuel_type'),
@@ -49,11 +55,15 @@ class CarsController extends AbstractController
         $brands = $carBrandRepository->findAll();
         $models = $carModelRepository->findAll();
         $motorizationTypes = $motorizationTypeRepository->findAll();
+        $countries = $countryRepository->findAll();
+        $sellerLocations = $sellerLocationRepository->findAll();
 
         return $this->render('cars/index.html.twig', [
             'brands' => $brands,
             'models' => $models,
             'motorizationTypes' => $motorizationTypes,
+            'countries' => $countries,
+            'sellerLocations' => $sellerLocations,
             'results' => $results,  // results from search service
             'criteria' => $criteria,
         ]);
