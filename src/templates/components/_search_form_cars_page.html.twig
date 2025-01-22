@@ -63,6 +63,28 @@
                     </select>
                 </div>
 
+                <!-- Country -->
+                <div>
+                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <select name="country" id="publication_country" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Country</option>
+                        {% for country in countries %}
+                            <option value="{{ country.id }}" {% if criteria.country == country.id %}selected{% endif %}>{{ country.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Seller Location -->
+                <div>
+                    <label for="seller_location" class="block text-sm font-medium text-gray-700">Seller Location</label>
+                    <select name="seller_location" id="publication_sellerLocation" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Seller Location</option>
+                        {% for location in sellerLocations %}
+                            <option value="{{ location.id }}" {% if criteria.seller_location == location.id %}selected{% endif %}>{{ location.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
                 <!-- Mileage -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -120,7 +142,7 @@
 <!-- Results Section -->
 <div class="w-full lg:w-3/4">
     <!-- Sort and Results Count -->
-    <div class="w-full lg:w-3/4 mb-4 flex justify-between items-center">
+    <div class="w-full lg:w-4/4 mb-4 flex justify-between items-center">
         <p class="text-gray-600">{{ results.pagination.total_results }} results found</p>
         <div class="flex items-center space-x-4">
             <label for="sort" class="text-sm text-gray-600">Sort by:</label>

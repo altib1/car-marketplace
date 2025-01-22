@@ -21,6 +21,8 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\All;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Region;
+use App\Entity\Country;
 
 class PublicationType extends AbstractType
 {
@@ -95,9 +97,17 @@ class PublicationType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
-            ->add('sellerLocation', TextType::class, [
-                'required' => false,
-                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+            ->add('sellerLocation', EntityType::class, [
+                'class' => Region::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choose a region',
+                'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_region'],
+            ])
+            ->add('country', EntityType::class, [
+                'class' => Country::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Choose a country',
+                'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_country'],
             ])
             ->add('condition', ChoiceType::class, [
                 'choices' => [

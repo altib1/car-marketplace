@@ -1,3 +1,5 @@
+import flatpickr from "flatpickr";
+
 export function initializeFormHandlers() {
     document.addEventListener('DOMContentLoaded', function() {
         // Initialize flatpickr for date inputs

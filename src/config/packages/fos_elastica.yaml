@@ -32,6 +32,16 @@ fos_elastica:
                   properties:
                       id: ~
                       name: { type: keyword }
+              country:
+                  type: nested
+                  properties:
+                      id: ~
+                      name: { type: keyword }
+              sellerLocation:
+                  type: nested
+                  properties:
+                      id: ~
+                      name: { type: keyword }                      
               user:
                   type: nested
                   properties:

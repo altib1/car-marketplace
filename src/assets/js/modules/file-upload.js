@@ -2,6 +2,7 @@ export function initializeFileUpload() {
     document.querySelectorAll('.border-dashed').forEach(zone => {
         const input = zone.querySelector('input[type="file"]');
         const previewContainer = zone.querySelector('.space-y-1');
+        if (!input || !previewContainer) return;
         const defaultContent = previewContainer.innerHTML;
 
         // Drag & drop handlers

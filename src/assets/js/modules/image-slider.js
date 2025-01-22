@@ -1,3 +1,8 @@
+import Swiper from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 export function initializeImageSlider() {
     document.addEventListener('DOMContentLoaded', function () {
         // Initialize Swiper with improved options

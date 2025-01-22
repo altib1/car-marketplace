@@ -9,6 +9,8 @@ use App\Repository\CarModelRepository;
 use App\Repository\MotorizationTypeRepository;
 use App\Service\PublicationSearchService;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CountryRepository;
+use App\Repository\RegionRepository;
 
 
 class HomePageController extends AbstractController
@@ -20,6 +22,8 @@ class HomePageController extends AbstractController
         CarModelRepository $carModelRepository,
         MotorizationTypeRepository $motorizationTypeRepository,
         PublicationSearchService $searchService,
+        CountryRepository $countryRepository,
+        RegionRepository $sellerLocationRepository
     ): Response {
         $criteria = [
             'q' => $request->query->get('q'),
@@ -30,6 +34,8 @@ class HomePageController extends AbstractController
             'brand' => $request->query->get('brand'),
             'model' => $request->query->get('model'),
             'motorization_type' => $request->query->get('motorization_type'),
+            'country' => $request->query->get('country'),
+            'seller_location' => $request->query->get('seller_location'),
             'sort' => $request->query->get('sort'),
             'page' => $request->query->getInt('page', 1),
             'per_page' => 10
@@ -40,11 +46,15 @@ class HomePageController extends AbstractController
         $brands = $carBrandRepository->findAll();
         $models = $carModelRepository->findAll();
         $motorizationTypes = $motorizationTypeRepository->findAll();
+        $countries = $countryRepository->findAll();
+        $sellerLocations = $sellerLocationRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'brands' => $brands,
             'models' => $models,
             'motorizationTypes' => $motorizationTypes,
+            'countries' => $countries,
+            'sellerLocations' => $sellerLocations,
             'results' => $results,  // results from search service
             'criteria' => $criteria,
         ]);
