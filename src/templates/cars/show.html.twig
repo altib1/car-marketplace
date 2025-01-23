@@ -43,7 +43,7 @@
                             <svg class="w-12 h-12 text-gray-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
-                            <p class="text-gray-400 mt-2 text-sm">No images available</p>
+                            <p class="text-gray-400 mt-2 text-sm">{{ 'car.no_images'|trans}}</p>
                         </div>
                     </div>
                 {% endif %}
@@ -68,7 +68,7 @@
                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                                 <span class="font-medium">
-                                    {{ isInWishlist ? 'Saved' : 'Save' }}
+                                    {{ isInWishlist ? 'car.saved'|trans : 'car.save'|trans }}
                                 </span>
                             </a>
                         {% else %}
@@ -78,13 +78,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
-                                <span class="font-medium">Save</span>
+                                <span class="font-medium">{{ 'car.save'|trans }}</span>
                             </a>
                         {% endif %}
                     </div>
                     <div class="flex justify-between items-center mt-4">
                         <div>
-                            <p class="text-sm text-gray-500">Price</p>
+                            <p class="text-sm text-gray-500">{{ 'car.price'|trans }}</p>
                             <p class="text-3xl font-bold text-blue-600">€{{ publication.price|number_format(2, ',', ' ') }}</p>
                         </div>
                         {% if publication.hasWarranty %}
@@ -93,7 +93,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                 </svg>
                                 <span class="px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-                                    {{ publication.warrantyMonths }} months warranty
+                                    {{ publication.warrantyMonths }} {{ 'car.months_warranty'|trans }}
                                 </span>
                             </div>
                         {% endif %}

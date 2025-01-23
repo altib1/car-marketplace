@@ -16,6 +16,7 @@
         "imagine/imagine": "^1.5",
         "knplabs/knp-paginator-bundle": "^6.6",
         "lcobucci/jwt": "^5.3",
+        "pentatrion/vite-bundle": "^7.1",
         "symfony/asset-mapper": "6.4.*",
         "symfony/console": "6.4.*",
         "symfony/doctrine-messenger": "6.4.*",
@@ -31,9 +32,9 @@
         "symfony/runtime": "6.4.*",
         "symfony/security-bundle": "6.4.*",
         "symfony/serializer": "6.4.*",
+        "symfony/translation": "6.4.*",
         "symfony/twig-bundle": "6.4.*",
         "symfony/validator": "6.4.*",
-        "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "6.4.*",
         "symfonycasts/tailwind-bundle": "^0.6.0",
         "symfonycasts/verify-email-bundle": "^1.17"

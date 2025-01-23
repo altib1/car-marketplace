@@ -1,0 +1,13 @@
+car:
+    title: 'Cars'
+    details: 'Car Details'
+    brand: 'Brand'
+    model: 'Model'
+    price: 'Price'
+    no_images: 'No images available'
+    saved: 'Saved'
+    save: 'Save'
+    months_warranty: 'months warranty'
+    actions:
+        edit: 'Edit'
+        delete: 'Delete'

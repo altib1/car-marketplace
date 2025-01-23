@@ -1,0 +1,13 @@
+car:
+    title: 'Vetura'
+    details: 'Detajet e Veturës'
+    brand: 'Marka'
+    model: 'Modeli'
+    price: 'Çmimi'
+    saved: 'E ruajtur'
+    save: 'Ruaj'
+    months_warranty: 'muaj garanci'
+    no_images: 'Nuk ka foto në dispozicion'
+    actions:
+        edit: 'Ndrysho'
+        delete: 'Fshij'

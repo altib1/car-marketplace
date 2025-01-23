@@ -116,6 +116,10 @@
                         </div>
                     </div>
                     {% endif %}
+
+                    <!-- Language Switcher -->
+                    {% include 'components/_language_switch.html.twig' %}
+                    
                     <!-- Desktop CTA Buttons -->
                     <div class="hidden lg:flex lg:items-center lg:space-x-6">
                         {% if not app.user %}
