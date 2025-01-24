@@ -9,11 +9,11 @@
                 <!-- Price -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label for="price_min" class="block text-sm font-medium text-gray-700">Min Price</label>
+                        <label for="price_min" class="block text-sm font-medium text-gray-700">{{'search.filters.min_price'|trans}}</label>
                         <input type="number" name="price_min" id="price_min" value="{{ criteria.price_min }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label for="price_max" class="block text-sm font-medium text-gray-700">Max Price</label>
+                        <label for="price_max" class="block text-sm font-medium text-gray-700">{{'search.filters.max_price'|trans}}</label>
                         <input type="number" name="price_max" id="price_max" value="{{ criteria.price_max }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
@@ -21,20 +21,20 @@
                 <!-- Year -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label for="year_min" class="block text-sm font-medium text-gray-700">Min Year</label>
+                        <label for="year_min" class="block text-sm font-medium text-gray-700">{{'search.filters.min_year'|trans}}</label>
                         <input type="number" name="year_min" id="year_min" value="{{ criteria.year_min }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label for="year_max" class="block text-sm font-medium text-gray-700">Max Year</label>
+                        <label for="year_max" class="block text-sm font-medium text-gray-700">{{'search.filters.max_year'|trans}}</label>
                         <input type="number" name="year_max" id="year_max" value="{{ criteria.year_max }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
                 <!-- Brand -->
                 <div>
-                    <label for="brand" class="block text-sm font-medium text-gray-700">Brand</label>
+                    <label for="brand" class="block text-sm font-medium text-gray-700">{{'search.filters.brand'|trans}}</label>
                     <select name="brand" id="publication_brand" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Brand</option>
+                        <option value="">{{'search.filters.brand_select'|trans}}</option>
                         {% for brand in brands %}
                             <option value="{{ brand.id }}" {% if criteria.brand == brand.id %}selected{% endif %}>{{ brand.name }}</option>
                         {% endfor %}
@@ -43,9 +43,9 @@
 
                 <!-- Model -->
                 <div>
-                    <label for="model" class="block text-sm font-medium text-gray-700">Model</label>
+                    <label for="model" class="block text-sm font-medium text-gray-700">{{'search.filters.model'|trans}}</label>
                     <select name="model" id="publication_model" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Model</option>
+                        <option value="">{{'search.filters.model_select'|trans}}</option>
                         {% for model in models %}
                             <option value="{{ model.id }}" {% if criteria.model == model.id %}selected{% endif %}>{{ model.name }}</option>
                         {% endfor %}
@@ -54,9 +54,9 @@
 
                 <!-- Motorization -->
                 <div>
-                    <label for="motorization_type" class="block text-sm font-medium text-gray-700">Motorization Type</label>
+                    <label for="motorization_type" class="block text-sm font-medium text-gray-700">{{'search.filters.engine'|trans}}</label>
                     <select name="motorization_type" id="publication_motorizationType" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Motorization Type</option>
+                        <option value="">{{'search.filters.engine_select'|trans}}</option>
                         {% for motorizationType in motorizationTypes %}
                             <option value="{{ motorizationType.id }}" {% if criteria.motorization_type == motorizationType.id %}selected{% endif %}>{{ motorizationType.name }}</option>
                         {% endfor %}

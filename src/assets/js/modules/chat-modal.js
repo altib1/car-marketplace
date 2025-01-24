@@ -2,7 +2,7 @@ export function initializeChatModal() {
     document.addEventListener('DOMContentLoaded', function() {
         const modal = document.getElementById('chatModal');
         const form = document.getElementById('sendMessageForm');
-        
+        const locale = document.documentElement.lang || 'en';
         // Modal handlers
         document.querySelector('[data-modal-target="chatModal"]')?.addEventListener('click', () => {
             modal.classList.remove('hidden');
@@ -18,7 +18,7 @@ export function initializeChatModal() {
             const formData = new FormData(form);
             
             try {
-                const response = await fetch('/chat/send', {
+                const response = await fetch(`/${locale}/chat/send`, {
                     method: 'POST',
                     body: formData
                 });
@@ -26,7 +26,7 @@ export function initializeChatModal() {
                 if (response.ok) {
                     modal.classList.add('hidden');
                     form.reset();
-                    window.location.href = '/chat';
+                    window.location.href = `/${locale}/chat`;
                 }
             } catch (error) {
                 console.error('Error:', error);
