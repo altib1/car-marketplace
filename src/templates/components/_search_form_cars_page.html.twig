@@ -65,9 +65,9 @@
 
                 <!-- Country -->
                 <div>
-                    <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                    <label for="country" class="block text-sm font-medium text-gray-700">{{'search.filters.country'|trans}}</label>
                     <select name="country" id="publication_country" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Country</option>
+                        <option value="">{{'search.filters.country_select'|trans}}</option>
                         {% for country in countries %}
                             <option value="{{ country.id }}" {% if criteria.country == country.id %}selected{% endif %}>{{ country.name }}</option>
                         {% endfor %}
@@ -76,9 +76,9 @@
 
                 <!-- Seller Location -->
                 <div>
-                    <label for="seller_location" class="block text-sm font-medium text-gray-700">Seller Location</label>
+                    <label for="seller_location" class="block text-sm font-medium text-gray-700">{{'search.filters.location'|trans}}</label>
                     <select name="seller_location" id="publication_sellerLocation" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Seller Location</option>
+                        <option value="">{{'search.filters.location_select'|trans}}</option>
                         {% for location in sellerLocations %}
                             <option value="{{ location.id }}" {% if criteria.seller_location == location.id %}selected{% endif %}>{{ location.name }}</option>
                         {% endfor %}
@@ -88,20 +88,20 @@
                 <!-- Mileage -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label for="mileage_min" class="block text-sm font-medium text-gray-700">Min Mileage</label>
+                        <label for="mileage_min" class="block text-sm font-medium text-gray-700">{{'search.filters.min_mileage'|trans}}</label>
                         <input type="number" name="mileage_min" id="mileage_min" value="{{ criteria.mileage_min }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
-                        <label for="mileage_max" class="block text-sm font-medium text-gray-700">Max Mileage</label>
+                        <label for="mileage_max" class="block text-sm font-medium text-gray-700">{{'search.filters.max_mileage'|trans}}</label>
                         <input type="number" name="mileage_max" id="mileage_max" value="{{ criteria.mileage_max }}" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
                 <!-- Fuel Type -->
                 <div>
-                    <label for="fuel_type" class="block text-sm font-medium text-gray-700">Fuel Type</label>
+                    <label for="fuel_type" class="block text-sm font-medium text-gray-700">{{'search.filters.fuel'|trans}}</label>
                     <select name="fuel_type" id="fuel_type" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Fuel Type</option>
+                        <option value="">{{'search.filters.fuel_select'|trans}}</option>
                         <option value="diesel" {% if criteria.fuel_type == 'diesel' %}selected{% endif %}>Diesel</option>
                         <option value="gasoline" {% if criteria.fuel_type == 'gasoline' %}selected{% endif %}>Gasoline</option>
                         <option value="electric" {% if criteria.fuel_type == 'electric' %}selected{% endif %}>Electric</option>
@@ -111,9 +111,9 @@
 
                 <!-- Gearbox -->
                 <div>
-                    <label for="gearbox" class="block text-sm font-medium text-gray-700">Gearbox</label>
+                    <label for="gearbox" class="block text-sm font-medium text-gray-700">{{'search.filters.gearbox'|trans}}</label>
                     <select name="gearbox" id="gearbox" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Gearbox</option>
+                        <option value="">{{'search.filters.gearbox_select'|trans}}</option>
                         <option value="manual" {% if criteria.gearbox == 'manual' %}selected{% endif %}>Manual</option>
                         <option value="automatic" {% if criteria.gearbox == 'automatic' %}selected{% endif %}>Automatic</option>
                     </select>
@@ -121,9 +121,9 @@
 
                 <!-- Condition -->
                 <div>
-                    <label for="condition" class="block text-sm font-medium text-gray-700">Condition</label>
+                    <label for="condition" class="block text-sm font-medium text-gray-700">{{'search.filters.condition'|trans}}</label>
                     <select name="condition" id="condition" class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
-                        <option value="">Select Condition</option>
+                        <option value="">{{'search.filters.condition_select'|trans}}</option>
                         <option value="new" {% if criteria.condition == 'new' %}selected{% endif %}>New</option>
                         <option value="used" {% if criteria.condition == 'used' %}selected{% endif %}>Used</option>
                     </select>
@@ -132,9 +132,9 @@
                 <!-- Warranty -->
                 <div class="flex items-center">
                     <input type="checkbox" name="has_warranty" id="has_warranty" {% if criteria.has_warranty %}checked{% endif %} class="h-4 w-4 rounded border-gray-300">
-                    <label for="has_warranty" class="ml-2 block text-sm font-medium text-gray-700">Has Warranty</label>
+                    <label for="has_warranty" class="ml-2 block text-sm font-medium text-gray-700">{{'search.filters.warranty'|trans}}</label>
                 </div>
-                <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">Search</button>
+                <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">{{'search.search'|trans}}</button>
             </div>
         </form>
     </div>
@@ -143,14 +143,14 @@
 <div class="w-full lg:w-3/4">
     <!-- Sort and Results Count -->
     <div class="w-full lg:w-4/4 mb-4 flex justify-between items-center">
-        <p class="text-gray-600">{{ results.pagination.total_results }} results found</p>
+        <p class="text-gray-600">{{ results.pagination.total_results }} {{'search.results.found'|trans}}</p>
         <div class="flex items-center space-x-4">
-            <label for="sort" class="text-sm text-gray-600">Sort by:</label>
+            <label for="sort" class="text-sm text-gray-600">{{'search.results.sort.title'|trans}}</label>
             <select name="sort" id="sort" onchange="window.location.href=this.value" class="border border-gray-300 rounded-md text-sm focus:ring-blue-500 focus:border-blue-500">
-                <option value="{{ path('app_cars', criteria|merge({sort: 'price_asc'})) }}" {% if criteria.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
-                <option value="{{ path('app_cars', criteria|merge({sort: 'price_desc'})) }}" {% if criteria.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
-                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_asc'})) }}" {% if criteria.sort == 'mileage_asc' %}selected{% endif %}>Mileage: Low to High</option>
-                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_desc'})) }}" {% if criteria.sort == 'mileage_desc' %}selected{% endif %}>Mileage: High to Low</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'price_asc'})) }}" {% if criteria.sort == 'price_asc' %}selected{% endif %}>{{'search.results.sort.price_asc'|trans}}</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'price_desc'})) }}" {% if criteria.sort == 'price_desc' %}selected{% endif %}>{{'search.results.sort.price_desc'|trans}}</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_asc'})) }}" {% if criteria.sort == 'mileage_asc' %}selected{% endif %}>{{'search.results.sort.mileage_asc'|trans}}</option>
+                <option value="{{ path('app_cars', criteria|merge({sort: 'mileage_desc'})) }}" {% if criteria.sort == 'mileage_desc' %}selected{% endif %}>{{'search.results.sort.mileage_desc'|trans}}</option>
             </select>
         </div>
     </div>
@@ -169,11 +169,11 @@
                             ) }}
                         {% else %}
                             <div class="absolute inset-0 flex items-center justify-center bg-gray-300">
-                                <p class="text-gray-600 text-sm font-medium">No image available</p>
+                                <p class="text-gray-600 text-sm font-medium">{{'search.card.no_images'|trans}}</p>
                             </div>
                         {% endif %}
                         <div class="absolute bottom-4 right-4 bg-black bg-opacity-60 text-white px-2 py-1 rounded-md text-xs">
-                            {{ publication.imageFilenames|length }} photos
+                            {{ publication.imageFilenames|length }} {{'search.card.photos'|trans}}
                         </div>
                     </div>
 
@@ -213,23 +213,23 @@
 
                             <div class="mt-4 grid grid-cols-3 gap-4">
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-500">Price</span>
+                                    <span class="text-sm text-gray-500">{{'search.card.price'|trans}}</span>
                                     <span class="font-semibold text-lg text-gray-900">{{ publication.price }} €</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-500">Mileage</span>
+                                    <span class="text-sm text-gray-500">{{'search.card.mileage'|trans}}</span>
                                     <span class="font-semibold">{{ publication.mileage|default('N/A') }} km</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-500">Transmission</span>
+                                    <span class="text-sm text-gray-500">{{'search.card.gearbox'|trans}}</span>
                                     <span class="font-semibold">{{ publication.gearBox|default('N/A') }}</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-500">Fuel Type</span>
+                                    <span class="text-sm text-gray-500">{{'search.card.fuel'|trans}}</span>
                                     <span class="font-semibold">{{ publication.fuelType|default('N/A') }}</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
-                                    <span class="text-sm text-gray-500">Engine Size</span>
+                                    <span class="text-sm text-gray-500">{{'search.card.engine'|trans}}</span>
                                     <span class="font-semibold">{{ publication.engineSize|default('N/A') }}</span>
                                 </div>
                                 <div class="flex items-center space-x-2">
@@ -238,7 +238,7 @@
                                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            Warranty
+                                            {{'search.card.warranty'|trans}}
                                         </span>
                                     {% endif %}
                                 </div>
@@ -248,7 +248,7 @@
                         <div class="flex items-center justify-between mt-6">
                             <a href="{{ path('app_car_show', { id: publication.id }) }}" 
                                class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium">
-                                View Details
+                                {{'search.card.view_details'|trans}}
                                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
@@ -260,7 +260,7 @@
         </div>
     {% else %}
         <div class="flex items-center justify-center h-40 bg-gray-50 rounded-xl">
-            <p class="text-gray-500">No results found for your search criteria.</p>
+            <p class="text-gray-500">{{'search.results.no_results'|trans}}</p>
         </div>
     {% endif %}
     <!-- Pagination Section -->
@@ -277,20 +277,20 @@
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l4.293 4.293a1 1 0 01-1.414 1.414l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 0z" clip-rule="evenodd" />
                                     </svg>
-                                    <span class="ml-2">Previous</span>
+                                    <span class="ml-2">{{'search.pagination.previous'|trans}}</span>
                                 </a>
                             </li>
                         {% endif %}
 
                         <li class="text-gray-500 text-sm font-medium">
-                            Page {{ results.pagination.current_page }} of {{ results.pagination.total_pages }}
+                            {{'search.pagination.page'|trans}} {{ results.pagination.current_page }} {{'search.pagination.of'|trans}} {{ results.pagination.total_pages }}
                         </li>
 
                         {% if results.pagination.next_page %}
                             <li>
                                 <a href="{{ path('app_cars', criteria|merge({ page: results.pagination.next_page })) }}" 
                                    class="bg-white border border-gray-300 text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg flex items-center transition duration-300">
-                                    <span class="mr-2">Next</span>
+                                    <span class="mr-2">{{'search.pagination.next'|trans}}</span>
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10l-4.293-4.293a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                                     </svg>
