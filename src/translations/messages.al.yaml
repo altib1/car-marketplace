@@ -40,6 +40,49 @@ car:
         sign_up: 'Krijo Llogari'
 
 profile:
+    index:
+        title: 'Profili'
+        information: 'Informacioni i Profilit'
+        name: 'Emri'
+        phone: 'Numri i Telefonit'
+        gender: 'Gjinia'
+        actions:
+          edit: 'Modifiko Profilin'
+          change_password: 'Ndrysho Fjalëkalimin'
+          delete: 'Fshij Llogarinë'
+        modal:
+          title: 'Fshij Llogarinë'
+          confirmation: 'A jeni i sigurt që dëshironi të fshini llogarinë tuaj? Ky veprim nuk mund të zhbëhet.'
+          cancel: 'Anulo'
+          delete: 'Fshij'
+    edit:
+        title: 'Modifiko Profilin'
+        header: 'Modifiko Profilin'
+        back: 'Kthehu te Profili'
+        save: 'Ruaj Ndryshimet'
+        form:
+          name: 'Emri'
+          lastname: 'Mbiemri'
+          phone: 'Numri i Telefonit'
+          gender: 'Gjinia'
+          gender_options:
+            male: 'Mashkull'
+            female: 'Femër'
+            other: 'Tjetër'
+    password:
+        title: 'Ndrysho Fjalëkalimin'
+        header: 'Ndrysho Fjalëkalimin'
+        back: 'Kthehu te Profili'
+        submit: 'Ruaj Ndryshimet'
+        form:
+          current: 'Fjalëkalimi Aktual'
+          new: 'Fjalëkalimi i Ri'
+          confirm: 'Konfirmo Fjalëkalimin'
+        validation:
+          current_required: 'Ju lutemi vendosni fjalëkalimin aktual'
+          must_match: 'Fjalëkalimet duhet të përputhen'
+          required: 'Ju lutemi vendosni fjalëkalimin'
+          min_length: 'Fjalëkalimi duhet të jetë së paku {{ limit }} karaktere'
     chat:
         view_publication: 'Shiko Postimin'
         actions:
@@ -55,6 +98,18 @@ profile:
             cancel: 'Anulo'
             delete: 'Fshij'
         no_messages: 'Nuk ka mesazhe në dispozicion'
+profile_menu:
+    user:
+        member: 'Anëtar'
+    nav:
+        my_shop: 'Dyqani Im'
+        profile: 'Profili'
+        messages: 'Mesazhet'
+        publications: 'Postimet'
+        wishlist: 'Lista e Dëshirave'
+    settings:
+        title: 'Cilësimet'
+    logout: 'Dil'
 search:
     title: 'Kërko'
     search: 'Kërko'
@@ -148,4 +203,28 @@ homepage:
         title: 'Gjeni veturën tuaj të ardhshme'
         description: 'Nëse keni nevojë për një veturë të re, këtu do të gjeni atë që ju nevojitet.'
         button: 'Shikoni veturat tona'
+menu:
+  brand: 'Qendra Auto'
+  vehicles:
+    title: 'Veturat'
+    new: 'Veturat e reja'
+    used: 'Veturat e përdorura'
+    electric: 'Veturat Elektrike'
+  announcements:
+    title: 'Njoftimet'
+    post: 'Posto Nje Publikim'
+    my_listings: 'Publikimet e Mija'
+    advanced_search: 'Kërkimi i Avancuar'
+  services: 'Shërbimet Tona'
+  user:
+    profile: 'Profili Im'
+    messages: 'Mesazhet e Mija'
+    wishlist: 'Lista e Dëshirave'
+    logout: 'Dil'
+  auth:
+    login: 'Konektohu'
+    post_listing: 'Posto Nje Publikim'
+  mobile:
+    menu: 'Menu'
+    close: 'Mbyll Menunë'
         

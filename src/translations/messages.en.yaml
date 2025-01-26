@@ -40,6 +40,52 @@ car:
         sign_up: 'Create Account'
 
 profile:
+    index:
+        title: 'Profile'
+        information: 'Profile Information'
+        name: 'Name'
+        phone: 'Phone Number'
+        gender: 'Gender'
+        actions:
+          edit: 'Edit Profile'
+          change_password: 'Change Password'
+          delete: 'Delete Account'
+        modal:
+          title: 'Delete Account'
+          confirmation: 'Are you sure you want to delete your account? This action cannot be undone.'
+          cancel: 'Cancel'
+          delete: 'Delete'
+    edit:
+        title: 'Edit Profile'
+        header: 'Edit Profile'
+        back: 'Back to Profile'
+        save: 'Save Changes'
+        form:
+          name: 'Name'
+          lastname: 'Last Name'
+          phone: 'Phone Number'
+          gender: 'Gender'
+          gender_options:
+            male: 'Male'
+            female: 'Female'
+            other: 'Other'
+    flash:
+        success: 'Profile updated successfully'
+        error: 'An error occurred while updating your profile'
+    password:
+        title: 'Change Password'
+        header: 'Change Password'
+        back: 'Back to Profile'
+        submit: 'Change Password'
+        form:
+          current: 'Current Password'
+          new: 'New Password'
+          confirm: 'Confirm New Password'
+        validation:
+          current_required: 'Please enter your current password'
+          must_match: 'The password fields must match'
+          required: 'Please enter a password'
+          min_length: 'Your password should be at least {{ limit }} characters'
     chat:
         view_publication: 'View Publication'
         actions:
@@ -55,6 +101,18 @@ profile:
             cancel: 'Cancel'
             delete: 'Delete'
         no_messages: 'No messages available'
+profile_menu:
+  user:
+    member: 'Member'
+  nav:
+    my_shop: 'My shop'
+    profile: 'Profile'
+    messages: 'Messages'
+    publications: 'Publications'
+    wishlist: 'Wishlist'
+  settings:
+    title: 'Settings'
+  logout: 'Logout'
 search:
     title: 'Search'
     search: 'Search'
@@ -149,3 +207,29 @@ homepage:
         title: 'Find your next car'
         description: 'An exclusive selection of vehicles that meet your expectations'
         button: 'Discover our vehicles'
+menu:
+  brand: 'Qendra Auto'
+  vehicles:
+    title: 'Cars'
+    new: 'New cars'
+    used: 'Used cars'
+    utility: 'Utility vehicles'
+    electric: 'Electric cars'
+  announcements:
+    title: 'Listings'
+    post: 'Post a listing'
+    my_listings: 'My listings'
+    advanced_search: 'Advanced search'
+  services: 'Our services'
+  user:
+    profile: 'My profile'
+    messages: 'My messages'
+    wishlist: 'Wishlist'
+    logout: 'Logout'
+  auth:
+    login: 'Login'
+    post_listing: 'Post a listing'
+  mobile:
+    menu: 'Menu'
+    close: 'Close menu'
+

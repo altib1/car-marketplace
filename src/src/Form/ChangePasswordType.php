@@ -15,6 +15,7 @@ class ChangePasswordType extends AbstractType
     {
         $builder
             ->add('currentPassword', PasswordType::class, [
+                'label' => 'profile.password.form.current',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter your current password',
@@ -25,8 +26,8 @@ class ChangePasswordType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
                 'required' => true,
-                'first_options'  => ['label' => 'New Password'],
-                'second_options' => ['label' => 'Confirm New Password'],
+                'first_options'  => ['label' => 'profile.password.form.new'],
+                'second_options' => ['label' => 'profile.password.form.confirm'],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
