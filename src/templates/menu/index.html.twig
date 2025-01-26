@@ -8,7 +8,7 @@
                     <div class="flex-shrink-0">
                         <a href="{{ path('app_home') }}" class="flex items-center">
                             <span class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                                Qendra Auto
+                                {{ 'menu.brand'|trans }}
                             </span>
                         </a>
                     </div>
@@ -18,7 +18,7 @@
                         <!-- Vehicles Dropdown -->
                         <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                             <button class="group inline-flex items-center px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                                <span>Voitures</span>
+                                <span>{{ 'menu.vehicles.title'|trans }}</span>
                                 <svg class="ml-2 h-4 w-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -33,13 +33,13 @@
                                  class="absolute left-0 mt-2 w-72 rounded-xl bg-white p-2 shadow-xl ring-1 ring-black ring-opacity-5"
                                  style="display: none;">
                                 <a href="{{ path('app_cars', {'condition': 'new'}) }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Voitures neuves</span>
+                                    <span class="ml-3">{{ 'menu.vehicles.new'|trans }}</span>
                                 </a>
                                 <a href="{{ path('app_cars', {'condition': 'used'}) }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Voitures d'occasion</span>
+                                    <span class="ml-3">{{ 'menu.vehicles.used'|trans }}</span>
                                 </a>
                                 <a href="{{ path('app_cars', {'fuel_type': 'electric'}) }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Voitures électriques</span>
+                                    <span class="ml-3">{{ 'menu.vehicles.electric'|trans }}</span>
                                 </a>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                         <!-- Announcements Dropdown -->
                         <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                             <button class="group inline-flex items-center px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
-                                <span>Annonces</span>
+                                <span>{{ 'menu.announcements.title'|trans }}</span>
                                 <svg class="ml-2 h-4 w-4 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
@@ -62,18 +62,18 @@
                                  class="absolute left-0 mt-2 w-72 rounded-xl bg-white p-2 shadow-xl ring-1 ring-black ring-opacity-5"
                                  style="display: none;">
                                 <a href="{{ path('app_publication_new') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Déposer une annonce</span>
+                                    <span class="ml-3">{{ 'menu.announcements.post'|trans }}</span>
                                 </a>
                                 <a href="{{ path('app_publication_index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Mes annonces</span>
+                                    <span class="ml-3">{{ 'menu.announcements.my_listings'|trans }}</span>
                                 </a>
                                 <a href="{{ path('app_cars') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                    <span class="ml-3">Recherche avancée</span>
+                                    <span class="ml-3">{{ 'menu.announcements.advanced_search'|trans }}</span>
                                 </a>
                             </div>
                         </div>
 
-                        <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">Nos services</a>
+                        <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">{{ 'menu.services'|trans }}</a>
                     </div>
                     {% if app.user %}
                     <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
@@ -96,35 +96,39 @@
                              class="absolute right-0 mt-2 w-48 rounded-xl bg-white p-2 shadow-xl ring-1 ring-black ring-opacity-5"
                              style="display: none;">
                             <a href="{{ path('app_publication_new') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Déposer une annonce</span>
+                                <span class="ml-3">{{ 'menu.auth.post_listing'|trans }}</span>
                             </a>
                             <a href="{{ path('app_publication_index') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Mes annonces</span>
+                                <span class="ml-3">{{ 'menu.announcements.my_listings'|trans }}</span>
                             </a>
                             <a href="{{ path('app_chat_inbox') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Mes messages</span>
+                                <span class="ml-3">{{ 'menu.user.messages'|trans }}</span>
                             </a>
                             <a href="{{ path('app_profile') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Mon profil</span>
+                                <span class="ml-3">{{ 'menu.user.profile'|trans }}</span>
                             </a>
                             <a href="{{ path('app_wishlist') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Wishlist</span>
+                                <span class="ml-3">{{ 'menu.user.wishlist'|trans }}</span>
                             </a>
                             <a href="{{ path('app_logout') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">
-                                <span class="ml-3">Déconnexion</span>
+                                <span class="ml-3">{{ 'menu.user.logout'|trans }}</span>
                             </a>
                         </div>
                     </div>
                     {% endif %}
+
+                    <!-- Language Switcher -->
+                    {% include 'components/_language_switch.html.twig' %}
+                    
                     <!-- Desktop CTA Buttons -->
                     <div class="hidden lg:flex lg:items-center lg:space-x-6">
                         {% if not app.user %}
                         <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-600 transition-colors">
-                            Connexion
+                            {{ 'menu.auth.login'|trans }}
                         </a>
                         {% endif %}
                         <a href="{{ path('app_publication_new') }}" class="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors">
-                            Déposer une annonce
+                            {{ 'menu.auth.post_listing'|trans }}
                         </a>
                     </div>
 
@@ -179,31 +183,30 @@
                         <!-- Vehicles Section -->
                         <div x-data="{ open: false }">
                             <button @click="open = !open" class="w-full flex items-center justify-between text-gray-700 hover:text-blue-600">
-                                <span class="text-base font-medium">Voitures</span>
+                                <span class="text-base font-medium">{{ 'menu.vehicles.title'|trans }}</span>
                                 <svg class="ml-2 h-5 w-5" :class="{ 'transform rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
                             <div x-show="open" class="mt-4 space-y-4 pl-4">
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Voitures neuves</a>
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Voitures d'occasion</a>
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Utilitaires</a>
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Voitures électriques</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.vehicles.new'|trans }}</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.vehicles.used'|trans }}</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.vehicles.electric'|trans }}</a>
                             </div>
                         </div>
 
                         <!-- Announcements Section -->
                         <div x-data="{ open: false }">
                             <button @click="open = !open" class="w-full flex items-center justify-between text-gray-700 hover:text-blue-600">
-                                <span class="text-base font-medium">Annonces</span>
+                                <span class="text-base font-medium">{{ 'menu.announcements.title'|trans }}</span>
                                 <svg class="ml-2 h-5 w-5" :class="{ 'transform rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                                 </svg>
                             </button>
                             <div x-show="open" class="mt-4 space-y-4 pl-4">
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Déposer une annonce</a>
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Mes annonces</a>
-                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">Recherche avancée</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.announcements.post'|trans }}</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.announcements.my_listings'|trans }}</a>
+                                <a href="#" class="block text-sm text-gray-600 hover:text-blue-600">{{ 'menu.announcements.advanced_search'|trans }}</a>
                             </div>
                         </div>
 
@@ -212,10 +215,10 @@
 
                     <div class="mt-8 space-y-4">
                         <a href="#" class="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700">
-                            Déposer une annonce
+                            {{ 'menu.announcements.post'|trans }}
                         </a>
                         <a href="#" class="w-full inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-full text-gray-700 bg-white hover:bg-gray-50">
-                            Connexion
+                            {{ 'menu.auth.login'|trans }}
                         </a>
                     </div>
                 </div>

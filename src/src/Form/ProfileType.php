@@ -14,15 +14,23 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('phoneNumber', TextType::class)
+            ->add('name', TextType::class, [
+                'label' => 'profile.edit.form.name'
+            ])
+            ->add('lastname', TextType::class, [
+                'label' => 'profile.edit.form.lastname'
+            ])
+            ->add('phoneNumber', TextType::class, [
+                'label' => 'profile.edit.form.phone'
+            ])
             ->add('gender', ChoiceType::class, [
+                'label' => 'profile.edit.form.gender',
                 'choices' => [
-                    'Male' => 'male',
-                    'Female' => 'female',
-                    'Other' => 'other'
-                ]
+                    'profile.edit.form.gender_options.male' => 'male',
+                    'profile.edit.form.gender_options.female' => 'female',
+                    'profile.edit.form.gender_options.other' => 'other'
+                ],
+                'choice_translation_domain' => true
             ]);
     }
 
@@ -30,6 +38,7 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'translation_domain' => 'messages'
         ]);
     }
 }

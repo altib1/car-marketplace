@@ -43,7 +43,7 @@
                             <svg class="w-12 h-12 text-gray-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
-                            <p class="text-gray-400 mt-2 text-sm">No images available</p>
+                            <p class="text-gray-400 mt-2 text-sm">{{ 'car.no_images'|trans}}</p>
                         </div>
                     </div>
                 {% endif %}
@@ -68,7 +68,7 @@
                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                                 <span class="font-medium">
-                                    {{ isInWishlist ? 'Saved' : 'Save' }}
+                                    {{ isInWishlist ? 'car.saved'|trans : 'car.save'|trans }}
                                 </span>
                             </a>
                         {% else %}
@@ -78,13 +78,13 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                           d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
-                                <span class="font-medium">Save</span>
+                                <span class="font-medium">{{ 'car.save'|trans }}</span>
                             </a>
                         {% endif %}
                     </div>
                     <div class="flex justify-between items-center mt-4">
                         <div>
-                            <p class="text-sm text-gray-500">Price</p>
+                            <p class="text-sm text-gray-500">{{ 'car.price'|trans }}</p>
                             <p class="text-3xl font-bold text-blue-600">€{{ publication.price|number_format(2, ',', ' ') }}</p>
                         </div>
                         {% if publication.hasWarranty %}
@@ -93,7 +93,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                 </svg>
                                 <span class="px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-sm font-medium">
-                                    {{ publication.warrantyMonths }} months warranty
+                                    {{ publication.warrantyMonths }} {{ 'car.months_warranty'|trans }}
                                 </span>
                             </div>
                         {% endif %}
@@ -108,7 +108,7 @@
                                 <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                             <div>
-                                <p class="text-sm text-gray-600">Year</p>
+                                <p class="text-sm text-gray-600">{{'car.year'|trans}}</p>
                                 <p class="font-semibold">{{ publication.year }}</p>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                 <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                             <div>
-                                <p class="text-sm text-gray-600">Mileage</p>
+                                <p class="text-sm text-gray-600">{{'car.mileage'|trans}}</p>
                                 <p class="font-semibold">{{ publication.mileage|number_format(0, ',', ' ') }} km</p>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
 
                 <!-- Key Features -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h3 class="font-semibold mb-4">Key Features</h3>
+                    <h3 class="font-semibold mb-4">{{ 'car.key_features'|trans}}</h3>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Back to List
+                {{ 'car.back_to_list'|trans }}
             </a>
         </div>
 
@@ -179,37 +179,37 @@
 
                 <!-- Technical Specifications -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold mb-6">Technical Specifications</h2>
+                    <h2 class="text-xl font-bold mb-6">{{ 'car.tech_spec'|trans}}</h2>
                     <div class="grid grid-cols-2 gap-6">
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Brand</p>
+                                <p class="text-sm text-gray-500">{{ 'car.brand'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.brand }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Model</p>
+                                <p class="text-sm text-gray-500">{{ 'car.model'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.model }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Motorization Type</p>
+                                <p class="text-sm text-gray-500">{{'car.engine'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.motorizationType }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Fuel Type</p>
+                                <p class="text-sm text-gray-500">{{'car.fuel'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.fuelType }}</p>
                             </div>
                         </div>
                         <div class="space-y-4">
                             <div>
-                                <p class="text-sm text-gray-500">Gearbox</p>
+                                <p class="text-sm text-gray-500">{{'car.gearbox'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.gearbox }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Condition</p>
+                                <p class="text-sm text-gray-500">{{'car.condition'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.condition }}</p>
                             </div>
                             <div>
-                                <p class="text-sm text-gray-500">Location</p>
+                                <p class="text-sm text-gray-500">{{'car.location'|trans}}</p>
                                 <p class="text-lg font-medium">{{ publication.sellerLocation }}</p>
                             </div>
                         </div>
@@ -218,14 +218,14 @@
 
                 <!-- Description -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold mb-4">Description</h2>
+                    <h2 class="text-xl font-bold mb-4">{{'car.description'|trans}}</h2>
                     <p class="text-gray-600 leading-relaxed">{{ publication.description }}</p>
                 </div>
 
                 <!-- Features & Equipment -->
                 {% if publication.equipment|length > 0 %}
                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h2 class="text-xl font-bold mb-4">Equipment & Features</h2>
+                    <h2 class="text-xl font-bold mb-4">{{'car.features'|trans}}</h2>
                     <div class="grid grid-cols-2 gap-4">
                         {% for item in publication.equipment %}
                             <div class="flex items-center space-x-2">
@@ -282,7 +282,7 @@
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
-                                <span class="phone-text">Show Phone Number</span>
+                                <span class="phone-text">{{'car.show_phone'|trans}}</span>
                             </button>
                             <button 
                                 data-modal-target="chatModal"
@@ -290,14 +290,14 @@
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                                 </svg>
-                                Message Seller
+                                {{ 'car.send_message'|trans }}
                             </button>
                             {% if publication.shop %}
                             <a href="{{ path('app_autoshop_show', {'id': publication.shop.id}) }}" class="w-full bg-gray-100 text-gray-700 px-6 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 flex items-center justify-center">
                                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                                 </svg>
-                                Visit Shop
+                                {{ 'car.visit_shop'|trans }}
                             </a>
                             {% endif %}
                         </div>
@@ -321,17 +321,17 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-2">This is your publication</h3>
-                        <p class="text-gray-600 mb-4">You cannot send a message to yourself.</p>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ 'car.your_publication_1'|trans}}</h3>
+                        <p class="text-gray-600 mb-4">{{ 'car.your_publication_2'|trans}}</p>
                         <button type="button" data-modal-close 
                             class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all duration-200">
-                            Close
+                            {{ 'car.actions.close'|trans }}
                         </button>
                     </div>
                 {% else %}
                     <div class="p-6">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="text-xl font-semibold text-gray-900">Send a Message</h3>
+                            <h3 class="text-xl font-semibold text-gray-900">{{ 'car.message.send'|trans}}</h3>
                             <button type="button" data-modal-close class="text-gray-400 hover:text-gray-500">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -342,7 +342,7 @@
                             <input type="hidden" name="recipientId" value="{{ publication.user.id }}">
                             <input type="hidden" name="publicationId" value="{{ publication.id }}">
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Your message</label>
+                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">{{ 'car.message.your_message'|trans}}</label>
                                 <textarea 
                                     id="message"
                                     name="content"
@@ -355,7 +355,7 @@
                             <div class="flex justify-end gap-3">
                                 <button type="submit" 
                                     class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-200">
-                                    Send Message
+                                    {{ 'car.message.send_message'|trans }}
                                 </button>
                             </div>
                         </form>
@@ -368,16 +368,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Want to send a message?</h3>
-                    <p class="text-gray-600 mb-6">Please create an account or sign in to contact the seller</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">{{'car.want_to_send_message_1'|trans}}</h3>
+                    <p class="text-gray-600 mb-6">{{'car.want_to_send_message_2'|trans}}</p>
                     <div class="flex justify-center gap-4">
                         <a href="{{ path('app_login') }}" 
                             class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-sm hover:shadow-md transition-all duration-200">
-                            Sign In
+                            {{'car.conexion.sign_in'|trans}}
                         </a>
                         <a href="{{ path('app_register') }}" 
                             class="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-all duration-200">
-                            Create Account
+                            {{'car.conexion.sign_up'|trans}}
                         </a>
                     </div>
                 </div>
@@ -389,4 +389,23 @@
 <!-- Swiper CSS & JS -->
 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper(".mySwiper", {
+        loop: true,
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        });
+    });
+</script>
 {% endblock %}

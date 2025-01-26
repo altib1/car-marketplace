@@ -3,6 +3,8 @@ export function initializeCars() {
         const brandSelect = document.getElementById('publication_brand');
         const modelSelect = document.getElementById('publication_model');
         const motorisationTypeSelect = document.getElementById('publication_motorizationType');
+        const locale = document.documentElement.lang || 'en';
+
         brandSelect.addEventListener('change', function() {
             const brandId = this.value;
             motorisationTypeSelect.innerHTML = '<option value="">Choose a motorisation type</option>';
@@ -13,7 +15,7 @@ export function initializeCars() {
             fetchMotorisationTypes(modelId);
         });
         function fetchModels(brandId) {
-            fetch(`/publication/models/${brandId}`)
+            fetch(`/${locale}/publication/models/${brandId}`)
                 .then(response => response.json())
                 .then(data => {
                     modelSelect.innerHTML = '<option value="">Choose a model</option>';
@@ -26,7 +28,7 @@ export function initializeCars() {
                 });
         }
         function fetchMotorisationTypes(modelId) {
-            fetch(`/publication/motorisation-types/${modelId}`)
+            fetch(`/${locale}/publication/motorisation-types/${modelId}`)
                 .then(response => response.json())
                 .then(data => {
                     motorisationTypeSelect.innerHTML = '';

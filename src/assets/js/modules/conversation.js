@@ -2,7 +2,7 @@ export function initializeConversation() {
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('messageForm');
         const messagesContainer = document.getElementById('messages');
-    
+        const locale = document.documentElement.lang || 'en';
         // Scroll to bottom initially
         if (messagesContainer) {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
@@ -15,7 +15,7 @@ export function initializeConversation() {
             submitButton.disabled = true;
             
             try {
-                const response = await fetch('/chat/send', {
+                const response = await fetch(`/${locale}/chat/send`, {
                     method: 'POST',
                     body: formData
                 });

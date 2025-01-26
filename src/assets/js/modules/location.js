@@ -2,6 +2,7 @@ export function initializeLocation() {
     document.addEventListener('DOMContentLoaded', function() {
         const countrySelect = document.getElementById('publication_country');
         const locationSelect = document.getElementById('publication_sellerLocation');
+        const locale = document.documentElement.lang || 'en';
 
         if (countrySelect && locationSelect) {
             countrySelect.addEventListener('change', function() {
@@ -13,7 +14,7 @@ export function initializeLocation() {
         function fetchLocations(countryId) {
             if (!countryId) return;
 
-            fetch(`/publication/locations/${countryId}`)
+            fetch(`/${locale}/publication/locations/${countryId}`)
                 .then(response => response.json())
                 .then(data => {
                     locationSelect.innerHTML = '<option value="">Choose a location</option>';

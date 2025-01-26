@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html class="h-full">
+<html class="h-full" lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            {{ vite_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
         <style>
@@ -18,9 +19,6 @@
             }
         </style>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body class="flex flex-col min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50">
         <!-- Navbar -->
@@ -57,6 +55,9 @@
         
                 <div class="flex-1 p-4 overflow-y-auto scroll-hidden">
                     {% block body %}{% endblock %}
+                    {% block javascripts %}
+                        {{ vite_entry_script_tags('app') }}
+                    {% endblock %}
                 </div>
             </div>
             <!-- Back to top button -->
