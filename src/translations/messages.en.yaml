@@ -101,6 +101,54 @@ profile:
             cancel: 'Cancel'
             delete: 'Delete'
         no_messages: 'No messages available'
+    publication:
+      show:
+        no_images: 'No images available'
+        photo_of: 'Photo of'
+        year: 'Year'
+        price: 'Price'
+        specs:
+          mileage: 'Mileage'
+          fuel_type: 'Fuel Type'
+          engine_size: 'Engine Size'
+          transmission: 'Transmission'
+          condition: 'Condition'
+          location: 'Location'
+        description: 'Description'
+        equipment:
+          title: 'Equipment & Features'
+        warranty:
+          included: 'Warranty Included'
+          coverage: '%count% months warranty coverage'
+        actions:
+          edit: 'Edit'
+          back: 'Back to List'
+      index:
+        title: 'Publications'
+        new: 'New Publication'
+        create: 'Create New Publication'
+        card:
+          warranty: 'Warranty'
+          photo_of: 'Photo of'
+          view_details: 'View Details'
+        empty:
+          title: 'No publications yet'
+          description: 'Get started by creating your first publication.'
+      new:
+        title: 'New Publication'
+        header:
+          title: 'Create New Publication'
+          subtitle: 'Fill in the details for your new publication'
+          back: 'Back to List'
+        form:
+          details: 'Publication Details'
+          required: 'All fields marked with * are required'
+          button: 'Create Publication'
+          edit_later: 'You can edit these details later'
+          cancel: 'Cancel'
+        help:
+          title: 'Need Help?'
+          content: 'Make sure to provide accurate details for your publication. All fields marked with an asterisk (*) are required.'
 profile_menu:
   user:
     member: 'Member'

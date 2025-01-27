@@ -9,15 +9,15 @@
         <div class="mb-8">
             <div class="flex items-center justify-between">
                 <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">Create New Publication</h1>
-                    <p class="mt-2 text-gray-600">Fill in the details for your new publication</p>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">{{ 'profile.publication.new.header.title'|trans }}</h1>
+                    <p class="mt-2 text-gray-600">{{ 'profile.publication.new.header.subtitle'|trans }}</p>
                 </div>
                 <a href="{{ path('app_publication_index') }}" 
                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white rounded-lg border border-gray-300 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                     </svg>
-                    Back to List
+                    {{ 'profile.publication.new.header.back'|trans }}
                 </a>
             </div>
         </div>
@@ -34,8 +34,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h2 class="text-xl font-semibold text-white">Publication Details</h2>
-                        <p class="text-blue-100 text-sm mt-1">All fields marked with * are required</p>
+                        <h2 class="text-xl font-semibold text-white">{{ 'profile.publication.new.form.details'|trans }}</h2>
+                        <p class="text-blue-100 text-sm mt-1">{{ 'profile.publication.new.form.required'|trans }}</p>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             <!-- Form Content -->
             <div class="p-6">
                 {{ include('publication/_form.html.twig', {
-                    'button_label': 'Create Publication',
+                    'button_label': 'profile.publication.new.form.button'|trans,
                     'button_class': 'w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200'
                 }) }}
             </div>
@@ -56,11 +56,11 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
                                   d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
-                        <span>You can edit these details later</span>
+                        <span>{{ 'profile.publication.new.form.edit_later'|trans }}</span>
                     </div>
                     <a href="{{ path('app_publication_index') }}" 
                        class="text-blue-600 hover:text-blue-800 transition-colors">
-                        Cancel
+                        {{ 'profile.publication.new.form.cancel'|trans }}
                     </a>
                 </div>
             </div>
@@ -77,9 +77,9 @@
                         </svg>
                     </div>
                     <div class="ml-3">
-                        <h3 class="text-sm font-medium text-gray-900">Need Help?</h3>
+                        <h3 class="text-sm font-medium text-gray-900">{{ 'profile.publication.new.help.title'|trans }}</h3>
                         <div class="mt-2 text-sm text-gray-500">
-                            <p>Make sure to provide accurate details for your publication. All fields marked with an asterisk (*) are required.</p>
+                            <p>{{ 'profile.publication.new.help.content'|trans }}</p>
                         </div>
                     </div>
                 </div>

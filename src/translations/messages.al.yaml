@@ -98,6 +98,54 @@ profile:
             cancel: 'Anulo'
             delete: 'Fshij'
         no_messages: 'Nuk ka mesazhe në dispozicion'
+    publication:
+      show:
+        no_images: 'Nuk ka foto në dispozicion'
+        photo_of: 'Foto e'
+        year: 'Viti'
+        price: 'Çmimi'
+        specs:
+          mileage: 'Kilometrazhi'
+          fuel_type: 'Lloji i Karburantit'
+          engine_size: 'Kapaciteti i Motorit'
+          transmission: 'Kutia e Shpejtësive'
+          condition: 'Gjendja'
+          location: 'Vendndodhja'
+        description: 'Përshkrimi'
+        equipment:
+          title: 'Pajisjet & Karakteristikat'
+        warranty:
+          included: 'Garancia e Përfshirë'
+          coverage: '%count% muaj garanci'
+        actions:
+          edit: 'Modifiko'
+          back: 'Kthehu te Profili'
+      index:
+        title: 'Postimet'
+        new: 'Krijo Postim të Ri'
+        create: 'Krijo Postim të Ri'
+        card:
+          warranty: 'Garancia'
+          photo_of: 'Foto e'
+          view_details: 'Shiko Detajet'
+        empty:
+          title: 'Nuk ka postime akoma'
+          description: 'Krijo postime të reja për të shfaqur në profilin tënd'
+      new:
+        title: 'Krijo Postim të Ri'
+        header:
+          title: 'Krijo Postim të Ri'
+          subtitle: 'Plotëso detajet për postimin tënd të ri'
+          back: 'Kthehu te Lista e postimeve'
+        form:
+          details: 'Detajet e Postimit'
+          required: 'Fushat e shënuara me yll (*) janë të detyrueshme'
+          button: 'Krijo Postim'
+          edit_later: 'Mund ti ndryshosh këto detaje më vonë'
+          cancel: 'Anulo'
+        help:
+          title: 'Ke nevojë për ndihmë?'
+          content: 'Nëse ke nevojë për ndihmë ose këshilla për të krijuar postimin tënd, mos hezito të na kontaktoni.'
 profile_menu:
     user:
         member: 'Anëtar'
