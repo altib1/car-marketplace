@@ -37,87 +37,103 @@ class PublicationType extends AbstractType
     {
         $builder
             ->add('description', TextareaType::class, [
+                'label' => 'profile.publication.form.publication.description',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('price', MoneyType::class, [
+                'label' => 'profile.publication.form.publication.price',
                 'currency' => 'EUR',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('year', IntegerType::class, [
+                'label' => 'profile.publication.form.publication.year',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('brand', EntityType::class, [
+                'label' => 'profile.publication.form.publication.brand.label',
                 'class' => CarBrand::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choose a brand',
+                'placeholder' => 'profile.publication.form.publication.brand.placeholder',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_brand'],
             ])
             ->add('model', EntityType::class, [
+                'label' => 'profile.publication.form.publication.model.label',
                 'class' => CarModel::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choose a model',
+                'placeholder' => 'profile.publication.form.publication.model.placeholder',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_model'],
             ])
             ->add('motorizationType', EntityType::class, [
+                'label' => 'profile.publication.form.publication.motorization.label',
                 'class' => MotorizationType::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choose a motorisation type',
+                'placeholder' => 'profile.publication.form.publication.motorization.placeholder',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('mileage', IntegerType::class, [
+                'label' => 'profile.publication.form.publication.mileage',
                 'required' => false,
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('fuelType', ChoiceType::class, [
+                'label' => 'profile.publication.form.publication.fuel_type.label',
                 'choices' => [
-                    'Diesel' => 'diesel',
-                    'Gasoline' => 'gasoline',
-                    'Electric' => 'electric',
-                    'Hybrid' => 'hybrid',
+                    'profile.publication.form.publication.fuel_type.choices.diesel' => 'diesel',
+                    'profile.publication.form.publication.fuel_type.choices.gasoline' => 'gasoline',
+                    'profile.publication.form.publication.fuel_type.choices.electric' => 'electric',
+                    'profile.publication.form.publication.fuel_type.choices.hybrid' => 'hybrid',
                 ],
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('gearbox', ChoiceType::class, [
+                'label' => 'profile.publication.form.publication.gearbox.label',
                 'choices' => [
-                    'Manual' => 'manual',
-                    'Automatic' => 'automatic',
+                    'profile.publication.form.publication.gearbox.choices.manual' => 'manual',
+                    'profile.publication.form.publication.gearbox.choices.automatic' => 'automatic',
                 ],
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('engineSize', NumberType::class, [
+                'label' => 'profile.publication.form.publication.engine_size',
                 'required' => false,
                 'scale' => 1,
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('hasWarranty', CheckboxType::class, [
+                'label' => 'profile.publication.form.publication.warranty.has',
                 'required' => false,
                 'attr' => ['class' => 'h-4 w-4 rounded border-gray-300'],
             ])
             ->add('warrantyMonths', IntegerType::class, [
+                'label' => 'profile.publication.form.publication.warranty.months',
                 'required' => false,
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('sellerLocation', EntityType::class, [
+                'label' => 'profile.publication.form.publication.location.region.label',
                 'class' => Region::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choose a region',
+                'placeholder' => 'profile.publication.form.publication.location.region.placeholder',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_region'],
             ])
             ->add('country', EntityType::class, [
+                'label' => 'profile.publication.form.publication.location.country.label',
                 'class' => Country::class,
                 'choice_label' => 'name',
-                'placeholder' => 'Choose a country',
+                'placeholder' => 'profile.publication.form.publication.location.country.placeholder',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg', 'id' => 'publication_country'],
             ])
             ->add('condition', ChoiceType::class, [
+                'label' => 'profile.publication.form.publication.condition.label',
                 'choices' => [
-                    'New' => 'new',
-                    'Used' => 'used',
+                    'profile.publication.form.publication.condition.choices.new' => 'new',
+                    'profile.publication.form.publication.condition.choices.used' => 'used',
                 ],
                 'empty_data' => 'used',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('equipment', CollectionType::class, [
+                'label' => 'profile.publication.form.publication.equipment',
                 'entry_type' => TextType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
@@ -126,7 +142,7 @@ class PublicationType extends AbstractType
                 'attr' => ['class' => 'w-full'],
             ])
             ->add('images', FileType::class, [
-                'label' => 'Images (PNG, JPG, JPEG, WEBP files)',
+                'label' => 'profile.publication.form.publication.images.label',
                 'mapped' => false,
                 'required' => false,
                 'multiple' => true,

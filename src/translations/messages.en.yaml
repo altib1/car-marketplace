@@ -149,6 +149,84 @@ profile:
         help:
           title: 'Need Help?'
           content: 'Make sure to provide accurate details for your publication. All fields marked with an asterisk (*) are required.'
+      edit:
+        title: 'Edit Publication'
+        header:
+          title: 'Edit Publication'
+          subtitle: 'Update the details for your publication'
+          back: 'Back to List'
+        form:
+          details: 'Publication Details'
+          required: 'Make sure all fields are correctly filled'
+          equipment:
+            title: 'Equipment & Features'
+            add: 'Add Equipment Item'
+            remove: 'Remove'
+          images:
+            existing: 'Existing Images'
+            photo_of: 'Photo of'
+            new: 'Upload New Images'
+            choose: 'Choose files'
+            drag_drop: 'or drag and drop files here'
+            formats: 'PNG, JPG, JPEG, WEBP up to 10MB'
+          save: 'Save'
+      form:
+        publication:
+          description: 'Description'
+          price: 'Price'
+          year: 'Year'
+          brand:
+            label: 'Brand'
+            placeholder: 'Choose a brand'
+          model:
+            label: 'Model'
+            placeholder: 'Choose a model'
+          motorization:
+            label: 'Motorization Type'
+            placeholder: 'Choose a motorisation type'
+          mileage: 'Mileage'
+          fuel_type:
+            label: 'Fuel Type'
+            choices:
+              diesel: 'Diesel'
+              gasoline: 'Gasoline'
+              electric: 'Electric'
+              hybrid: 'Hybrid'
+          gearbox:
+            label: 'Gearbox'
+            choices:
+              manual: 'Manual'
+              automatic: 'Automatic'
+          engine_size: 'Engine Size'
+          warranty:
+            title: 'Warranty Information'
+            has: 'Has Warranty'
+            months: 'Warranty Duration (Months)'
+          location:
+            region:
+              label: 'Region'
+              placeholder: 'Choose a region'
+            country:
+              label: 'Country'
+              placeholder: 'Choose a country'
+          condition:
+            label: 'Condition'
+            choices:
+              new: 'New'
+              used: 'Used'
+          equipment: 'Equipment'
+          equipment_add: 'Add Equipment Item'
+          equipment_remove: 'Remove'
+          images:
+            label: 'Images (PNG, JPG, JPEG, WEBP files)'
+            size_error: 'The file is too large ({{ size }} {{ suffix }}). Maximum size is {{ limit }} {{ suffix }}.'
+            type_error: 'Please upload a valid Image'
+            upload: 'Upload Images'
+            drag_drop: 'Drag and drop your images or click to browse'
+            max_files: 'Maximum 10MB per image'
+          video:
+            label: 'Video (MP4 file)'
+            type_error: 'Please upload a valid MP4 video'
 profile_menu:
   user:
     member: 'Member'

@@ -4,33 +4,33 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <div class="mb-4">
-            {{ form_label(form.price, 'Price', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.price, 'profile.publication.form.publication.price'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.price, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.price) }}
         </div>
     </div>
 
     <div class="mb-4">
-        {{ form_label(form.description, 'Description', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+        {{ form_label(form.description, 'profile.publication.form.publication.description'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
         {{ form_widget(form.description, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-32'}}) }}
         {{ form_errors(form.description) }}
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="mb-4">
-            {{ form_label(form.brand, 'Brand', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.brand, 'profile.publication.form.publication.brand.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.brand, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.brand) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.model, 'Model', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.model, 'profile.publication.form.publication.model.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.model, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.model) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.motorizationType, 'Motorisation Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.motorizationType, 'profile.publication.form.publication.motorization.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.motorizationType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.motorizationType) }}
         </div>
@@ -38,19 +38,19 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="mb-4">
-            {{ form_label(form.year, 'Year', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.year, 'profile.publication.form.publication.year'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.year, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.year) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.mileage, 'Mileage', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.mileage, 'profile.publication.form.publication.mileage'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.mileage, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.mileage) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.engineSize, 'Engine Size (Chevaux)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.engineSize, 'profile.publication.form.publication.engine_size'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.engineSize, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.engineSize) }}
         </div>
@@ -58,13 +58,13 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="mb-4">
-            {{ form_label(form.fuelType, 'Fuel Type', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.fuelType, 'profile.publication.form.publication.fuel_type.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.fuelType, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.fuelType) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.gearbox, 'Gearbox', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.gearbox, 'profile.publication.form.publication.gearbox.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.gearbox, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.gearbox) }}
         </div>
@@ -72,35 +72,35 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="mb-4">
-            {{ form_label(form.condition, 'Vehicle Condition', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.condition, 'profile.publication.form.publication.condition.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.condition, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.condition) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.country, 'Country', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.country, 'profile.publication.form.publication.location.country.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.country, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.country) }}
         </div>
 
         <div class="mb-4">
-            {{ form_label(form.sellerLocation, 'Location', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+            {{ form_label(form.sellerLocation, 'profile.publication.form.publication.location.region.label'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
             {{ form_widget(form.sellerLocation, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
             {{ form_errors(form.sellerLocation) }}
         </div>
     </div>
 
     <div class="bg-gray-50 p-4 rounded-lg mb-4">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Warranty Information</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">{{'profile.publication.form.publication.warranty.title'|trans}}</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="mb-4">
-                {{ form_label(form.hasWarranty, 'Has Warranty', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_label(form.hasWarranty, 'profile.publication.form.publication.warranty.has'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
                 {{ form_widget(form.hasWarranty, {'attr': {'class': 'mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded'}}) }}
                 {{ form_errors(form.hasWarranty) }}
             </div>
 
             <div class="mb-4">
-                {{ form_label(form.warrantyMonths, 'Warranty Duration (months)', {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_label(form.warrantyMonths, 'profile.publication.form.publication.warranty.months'|trans, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
                 {{ form_widget(form.warrantyMonths, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
                 {{ form_errors(form.warrantyMonths) }}
             </div>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="bg-gray-50 p-4 rounded-lg mb-4">
-        <h3 class="text-lg font-medium text-gray-900 mb-4">Equipment & Features</h3>
+        <h3 class="text-lg font-medium text-gray-900 mb-4">{{'profile.publication.form.publication.equipment'|trans}}</h3>
         <div class="mb-4" id="equipment-collection"
              data-prototype="{{ form_widget(form.equipment.vars.prototype)|e('html_attr') }}">
             {% for equipmentField in form.equipment %}
@@ -118,13 +118,13 @@
             {% endfor %}
         </div>
         <button type="button" class="add-equipment-item bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-md text-sm">
-            Add Equipment Item
+            {{'profile.publication.form.publication.equipment_add'|trans}}
         </button>
     </div>
 
     <div class="bg-gray-50 p-4 rounded-lg mb-4">
         <div class="mb-6">
-            {{ form_label(form.images, 'Vehicle Images', {'label_attr': {'class': 'block text-xl font-semibold text-gray-800 mb-3'}}) }}
+            {{ form_label(form.images, 'profile.publication.form.publication.images.label'|trans, {'label_attr': {'class': 'block text-xl font-semibold text-gray-800 mb-3'}}) }}
             <div class="mt-2 flex flex-col items-center p-8 border-3 border-blue-100 border-dashed rounded-xl hover:border-blue-300 transition-all duration-300 bg-gradient-to-b from-blue-50 to-white shadow-sm">
             <div class="animate-bounce-slow">
                 <svg class="h-16 w-16 text-blue-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -133,12 +133,12 @@
             </div>
             <label for="{{ form.images.vars.id }}" class="cursor-pointer group mt-4">
                 <span class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-full text-sm font-medium inline-flex items-center transform transition-all duration-200 hover:scale-105 hover:shadow-lg">
-                <span class="mr-2">📸</span> Upload Photos
+                <span class="mr-2">📸</span> {{'profile.publication.form.publication.images.upload'|trans}}
                 </span>
                 {{ form_widget(form.images, {'attr': {'class': 'hidden', 'onchange': 'handleImageSelection(event)', 'multiple': 'multiple', 'accept': 'image/*'}}) }}
             </label>
-            <p class="text-sm text-gray-500 mt-3">Drag and drop your images or click to browse</p>
-            <p class="text-xs text-gray-400 mt-1">Maximum 5MB per image</p>
+            <p class="text-sm text-gray-500 mt-3">{{'profile.publication.form.publication.images.drag_drop'|trans}}</p>
+            <p class="text-xs text-gray-400 mt-1">{{'profile.publication.form.publication.images.max_files'|trans}}</p>
             </div>
             <div id="image-preview" class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
             {{ form_errors(form.images) }}
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.className = 'bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm';
-        removeButton.textContent = 'Remove';
+        removeButton.textContent = '{{'profile.publication.form.publication.equipment_remove'|trans}}';
         removeButton.onclick = function() {
             div.remove();
         };
