@@ -15,7 +15,7 @@
                             <div class="swiper-slide">
                                 {{ images.responsive_image(
                                     imageFilename,
-                                    'Photo of ' ~ publication.brand.name ~ ' ' ~ publication.model.name,
+                                    'profile.publication.show.photo_of'|trans ~ ' ' ~ publication.brand.name ~ ' ' ~ publication.model.name,
                                     'w-full h-full object-cover',
                                     'publication'
                                 ) }}
@@ -32,7 +32,7 @@
                         <svg class="w-20 h-20 text-gray-400 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
-                        <p class="text-gray-500 mt-4">No images available</p>
+                        <p class="text-gray-500 mt-4">{{ 'profile.publication.show.no_images'|trans }}</p>
                     </div>
                 </div>
             {% endif %}
@@ -44,52 +44,52 @@
             <div class="flex justify-between items-start mb-8">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-900">{{ publication.brand }} {{ publication.model }}</h1>
-                    <p class="text-lg text-gray-600 mt-2">Year {{ publication.year }}</p>
+                    <p class="text-lg text-gray-600 mt-2">{{ 'profile.publication.show.year'|trans }} {{ publication.year }}</p>
                 </div>
                 <div class="text-right">
                     <p class="text-4xl font-bold text-blue-600">€{{ publication.price|number_format(2, ',', ' ') }}</p>
-                    <p class="text-sm text-gray-500 mt-1">Price</p>
+                    <p class="text-sm text-gray-500 mt-1">{{ 'profile.publication.show.price'|trans }}</p>
                 </div>
             </div>
 
             <!-- Vehicle Specs Grid -->
             <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Mileage</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.mileage'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.mileage|number_format(0, ',', ' ') }} km</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Fuel Type</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.fuel_type'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.fuelType|title }}</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Engine Size</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.engine_size'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.engineSize }} HP</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Transmission</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.transmission'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.gearbox|title }}</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Condition</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.condition'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.condition|title }}</p>
                 </div>
                 <div class="bg-gray-50 p-4 rounded-xl">
-                    <p class="text-sm text-gray-500">Location</p>
+                    <p class="text-sm text-gray-500">{{ 'profile.publication.show.specs.location'|trans }}</p>
                     <p class="text-lg font-semibold">{{ publication.sellerLocation }}</p>
                 </div>
             </div>
 
             <!-- Description -->
             <div class="mb-8">
-                <h2 class="text-xl font-semibold mb-4">Description</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ 'profile.publication.show.description'|trans }}</h2>
                 <p class="text-gray-600 leading-relaxed">{{ publication.description }}</p>
             </div>
 
             <!-- Equipment -->
             {% if publication.equipment|length > 0 %}
             <div class="mb-8">
-                <h2 class="text-xl font-semibold mb-4">Equipment & Features</h2>
+                <h2 class="text-xl font-semibold mb-4">{{ 'profile.publication.show.equipment.title'|trans }}</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
                     {% for item in publication.equipment %}
                         <div class="flex items-center space-x-2">
@@ -111,8 +111,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                     </svg>
                     <div>
-                        <h3 class="font-semibold text-blue-900">Warranty Included</h3>
-                        <p class="text-blue-700">{{ publication.warrantyMonths }} months warranty coverage</p>
+                        <h3 class="font-semibold text-blue-900">{{ 'profile.publication.show.warranty.included'|trans }}</h3>
+                        <p class="text-blue-700">{{ 'profile.publication.show.warranty.coverage'|trans({'%count%': publication.warrantyMonths}) }}</p>
                     </div>
                 </div>
             </div>
@@ -122,11 +122,11 @@
             <div class="flex justify-end space-x-4">
                 <a href="{{ path('app_publication_edit', {'id': publication.id}) }}" 
                    class="px-6 py-3 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                    Edit
+                    {{ 'profile.publication.show.actions.edit'|trans }}
                 </a>
                 <a href="{{ path('app_publication_index') }}" 
                    class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                    Back to List
+                        {{ 'profile.publication.show.actions.back'|trans }}
                 </a>
             </div>
         </div>

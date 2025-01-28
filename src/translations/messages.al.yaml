@@ -98,6 +98,132 @@ profile:
             cancel: 'Anulo'
             delete: 'Fshij'
         no_messages: 'Nuk ka mesazhe në dispozicion'
+    publication:
+      show:
+        no_images: 'Nuk ka foto në dispozicion'
+        photo_of: 'Foto e'
+        year: 'Viti'
+        price: 'Çmimi'
+        specs:
+          mileage: 'Kilometrazhi'
+          fuel_type: 'Lloji i Karburantit'
+          engine_size: 'Kapaciteti i Motorit'
+          transmission: 'Kutia e Shpejtësive'
+          condition: 'Gjendja'
+          location: 'Vendndodhja'
+        description: 'Përshkrimi'
+        equipment:
+          title: 'Pajisjet & Karakteristikat'
+        warranty:
+          included: 'Garancia e Përfshirë'
+          coverage: '%count% muaj garanci'
+        actions:
+          edit: 'Modifiko'
+          back: 'Kthehu te Lista e postimeve'
+      index:
+        title: 'Postimet'
+        new: 'Krijo Postim të Ri'
+        create: 'Krijo Postim të Ri'
+        card:
+          warranty: 'Garancia'
+          photo_of: 'Foto e'
+          view_details: 'Shiko Detajet'
+        empty:
+          title: 'Nuk ka postime akoma'
+          description: 'Krijo postime të reja për të shfaqur në profilin tënd'
+      new:
+        title: 'Krijo Postim të Ri'
+        header:
+          title: 'Krijo Postim të Ri'
+          subtitle: 'Plotëso detajet për postimin tënd të ri'
+          back: 'Kthehu te Lista e postimeve'
+        form:
+          details: 'Detajet e Postimit'
+          required: 'Fushat e shënuara me yll (*) janë të detyrueshme'
+          button: 'Krijo Postim'
+          edit_later: 'Mund ti ndryshosh këto detaje më vonë'
+          cancel: 'Anulo'
+        help:
+          title: 'Ke nevojë për ndihmë?'
+          content: 'Nëse ke nevojë për ndihmë ose këshilla për të krijuar postimin tënd, mos hezito të na kontaktoni.'
+      edit:
+        title: 'Modifiko Postimin'
+        header:
+          title: 'Modifiko Postimin'
+          subtitle: 'Ndrysho detajet për postimin tënd'
+          back: 'Kthehu te Lista e postimeve'
+        form:
+          details: 'Detajet e Postimit'
+          required: 'Sigurohu që të gjitha fushat janë të plotësuara saktë'
+          equipment:
+            title: 'Pajisjet & Karakteristikat'
+            add: 'Shto Pajisje'
+            remove: 'Fshij'
+          images:
+            existing: 'Foto Ekzistuese'
+            photo_of: 'Foto e'
+            new: 'Ngarko Foto të Reja'
+            choose: 'Zgjidh fotot'
+            drag_drop: 'ose tërheq dhe lësho fotot këtu'
+            formats: 'PNG, JPG, JPEG, WEBP deri në 10MB'
+          save: 'Ruaj'
+      form:
+        publication:
+          description: 'Përshkrimi'
+          price: 'Çmimi'
+          year: 'Viti i Prodhimit'
+          brand:
+            label: 'Marka'
+            placeholder: 'Zgjidh një markë'
+          model:
+            label: 'Modeli'
+            placeholder: 'Zgjidh një model'
+          motorization:
+            label: 'Motorizimi'
+            placeholder: 'Zgjidh një motorizim'
+          mileage: 'Kilometrazhi'
+          fuel_type:
+            label: 'Lloji i Karburantit'
+            choices:
+              diesel: 'Diesel'
+              gasoline: 'Benzinë'
+              electric: 'Elektrik'
+              hybrid: 'Hibrid'
+          gearbox:
+            label: 'Kutia e Shpejtësive'
+            choices:
+              manual: 'Manuale'
+              automatic: 'Automatike'
+          engine_size: 'Kapaciteti i Motorit'
+          warranty:
+            title: 'Informacioni i Garancisë'
+            has: 'Ka Garanci'
+            months: 'Muaj Garanci'
+          location:
+            region:
+              label: 'Rajoni'
+              placeholder: 'Zgjidh një rajon'
+            country:
+              label: 'Shteti'
+              placeholder: 'Zgjidh një shtet'
+          condition:
+            label: 'Gjendja'
+            choices:
+              new: 'E Re'
+              used: 'E Përdorur'
+          equipment: 'Pajisjet & Karakteristikat'
+          equipment_add: 'Shto Pajisje'
+          equipment_remove: 'Fshij'
+          images:
+            label: 'Fotot ne formatin PNG, JPG, JPEG, WEBP deri në 10MB'
+            size_error: 'The file is too large ({{ size }} {{ suffix }}). Maximum size is {{ limit }} {{ suffix }}.'
+            type_error: 'Please upload a valid Image'
+            upload: 'Ngarko Fotot'
+            drag_drop: 'tërheq dhe lësho fotot këtu'
+            max_files: 'limiti i fotove është 10mb'
+          video:
+            label: 'Video (MP4 file)'
+            type_error: 'Please upload a valid MP4 video'
 profile_menu:
     user:
         member: 'Anëtar'
