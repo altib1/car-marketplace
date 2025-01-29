@@ -12,8 +12,8 @@
              class="object-cover w-full h-full">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-center p-12">
-                <h2 class="text-4xl font-bold mb-4">Welcome Back!</h2>
-                <p class="text-lg text-white/80">Find your perfect car today</p>
+                <h2 class="text-4xl font-bold mb-4">{{ 'login.hero.title'|trans }}</h2>
+                <p class="text-lg text-white/80">{{ 'login.hero.subtitle'|trans }}</p>
             </div>
         </div>
     </div>
@@ -22,10 +22,10 @@
     <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-24">
         <div class="w-full max-w-md space-y-8">
             <div class="text-center">
-                <h1 class="text-3xl font-bold text-gray-900">Sign in to your account</h1>
-                <p class="mt-2 text-gray-600">Or 
+                <h1 class="text-3xl font-bold text-gray-900">{{ 'login.form.header.title'|trans }}</h1>
+                <p class="mt-2 text-gray-600">{{ 'login.form.header.register'|trans }}
                     <a href="{{ path('app_register') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                        create a new account
+                        {{ 'login.form.header.register_link'|trans }}
                     </a>
                 </p>
             </div>
@@ -52,7 +52,7 @@
                            name="_username" 
                            value="{{ last_username }}"
                            class="pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                           placeholder="Email address"
+                           placeholder="{{ 'login.form.inputs.email'|trans }}"
                            required>
                 </div>
 
@@ -67,7 +67,7 @@
                            id="password" 
                            name="_password"
                            class="pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none"
-                           placeholder="Password"
+                           placeholder="{{ 'login.form.inputs.password'|trans }}"
                            required>
                 </div>
 
@@ -78,11 +78,11 @@
                                name="_remember_me"
                                class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
                         <label for="remember_me" class="ml-2 text-sm text-gray-600">
-                            Remember me
+                            {{ 'login.form.inputs.remember_me'|trans }}
                         </label>
                     </div>
                     <a href="#" class="text-sm font-medium text-blue-600 hover:text-blue-500">
-                        Forgot password?
+                        {{ 'login.form.inputs.forgot_password'|trans }}
                     </a>
                 </div>
 
@@ -93,7 +93,7 @@
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
                     </svg>
-                    Sign in
+                    {{ 'login.form.submit'|trans }}
                 </button>
             </form>
         </div>

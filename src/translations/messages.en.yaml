@@ -358,4 +358,99 @@ menu:
   mobile:
     menu: 'Menu'
     close: 'Close menu'
+registration:
+  title: 'Create Your Account'
+  hero:
+    title: 'Join Our Community'
+    subtitle: 'Start your journey to find your perfect car'
+  form:
+    title: 'Create your account'
+    signin:
+      text: 'Already have an account?'
+      link: 'Sign in'
+    labels:
+      firstname: 'First name'
+      lastname: 'Last name'
+      email: 'Email address'
+      phone: 'Phone number'
+      gender: 'Gender'
+      password: 'Password'
+      confirm_password: 'Confirm Password'
+    placeholders:
+      firstname: 'First name'
+      lastname: 'Last name'
+      email: 'Email address'
+      phone: 'Phone number'
+      password: 'Create a password'
+      confirm_password: 'Confirm your password'
+    terms:
+      label: 'I agree to the Terms and Conditions'
+    submit: 'Create account'
+    gender_options:
+      male: 'Male'
+      female: 'Female'
+      other: 'Other'
+login:
+  title: 'Login to Your Account'
+  hero:
+    title: 'Welcome Back!'
+    subtitle: 'Find your perfect car today'
+  form:
+    header:
+      title: 'Sign in to your account'
+      register: 'Or'
+      register_link: 'create a new account'
+    inputs:
+      email: 'Email address'
+      password: 'Password'
+      remember_me: 'Remember me'
+      forgot_password: 'Forgot password?'
+    submit: 'Sign in'
+shop:
+  index:
+    title: 'Car Marketplace - Your Shop'
+    nav:
+      brand: 'AutoDealerHub'
+      browse: 'Browse Marketplace'
+    existing:
+      images:
+        background: 'Shop background'
+        logo: 'Logo'
+      badges:
+        listed_cars: 'Listed Cars'
+        rating: 'Waiting for verification'
+      actions:
+        edit: 'Edit Shop'
+        new_car: 'List New Car'
+      services:
+        title: 'Services Offered'
+      stats:
+        views:
+          label: 'Total Views'
+        listings:
+          label: 'Active Listings'
+        inquiries:
+          label: 'Inquiries'
+    create:
+      header:
+        title: 'Start Your Car Dealership Journey'
+        subtitle: 'Join our thriving marketplace and connect with thousands of potential buyers looking for their next vehicle.'
+      features:
+        global:
+          title: 'Global Reach'
+          description: 'Connect with buyers across the country and expand your market presence.'
+        secure:
+          title: 'Secure Platform'
+          description: 'Benefit from our verified user system and secure transaction process.'
+        analytics:
+          title: 'Growth Analytics'
+          description: 'Track your performance with detailed insights and sales analytics.'
+      cta:
+        ready: 'Ready to start?'
+        create: 'Create Your Shop'
+      help:
+        title: 'Need Help Getting Started?'
+        text: 'Check out our dealer guide or contact support.'
+        guide: 'dealer guide'
+        support: 'contact support'
 

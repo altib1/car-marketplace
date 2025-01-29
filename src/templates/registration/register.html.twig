@@ -12,8 +12,8 @@
              class="object-cover w-full h-full">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-white text-center p-12">
-                <h2 class="text-4xl font-bold mb-4">Join Our Community</h2>
-                <p class="text-lg text-white/80">Start your journey to find your perfect car</p>
+                <h2 class="text-4xl font-bold mb-4">{{ 'registration.hero.title'|trans }}</h2>
+                <p class="text-lg text-white/80">{{ 'registration.hero.subtitle'|trans }}</p>
             </div>
         </div>
     </div>
@@ -22,10 +22,10 @@
     <div class="w-full lg:w-1/2 flex items-center justify-center p-8 lg:p-16">
         <div class="w-full max-w-xl space-y-8">
             <div class="text-center">
-                <h1 class="text-3xl font-bold text-gray-900">Create your account</h1>
-                <p class="mt-2 text-gray-600">Already have an account? 
+                <h1 class="text-3xl font-bold text-gray-900">{{ 'registration.form.title'|trans }}</h1>
+                <p class="mt-2 text-gray-600">{{ 'registration.form.signin.text'|trans }}
                     <a href="{{ path('app_login') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                        Sign in
+                        {{ 'registration.form.signin.link'|trans }}
                     </a>
                 </p>
             </div>
@@ -49,7 +49,7 @@
                 <!-- Name and Lastname -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.name, null, { 
+                        {{ form_label(registrationForm.name, 'registration.form.labels.firstname'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -63,7 +63,7 @@
                             {{ form_widget(registrationForm.name, { 
                                 attr: { 
                                     class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                    placeholder: 'First name'
+                                    placeholder: 'registration.form.placeholders.firstname'|trans
                                 } 
                             }) }}
                         </div>
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.lastname, null, { 
+                        {{ form_label(registrationForm.lastname, 'registration.form.labels.lastname'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -85,7 +85,7 @@
                             {{ form_widget(registrationForm.lastname, { 
                                 attr: { 
                                     class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                    placeholder: 'Last name'
+                                    placeholder: 'registration.form.placeholders.lastname'|trans
                                 } 
                             }) }}
                         </div>
@@ -95,7 +95,7 @@
 
                 <!-- Email Input -->
                 <div class="space-y-2">
-                    {{ form_label(registrationForm.email, null, { 
+                    {{ form_label(registrationForm.email, 'registration.form.labels.email'|trans, { 
                         label_attr: { 
                             class: 'block text-sm font-medium text-gray-700'
                         } 
@@ -109,7 +109,7 @@
                         {{ form_widget(registrationForm.email, { 
                             attr: { 
                                 class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                placeholder: 'Email address'
+                                placeholder: 'registration.form.placeholders.email'|trans
                             } 
                         }) }}
                     </div>
@@ -119,7 +119,7 @@
                 <!-- Phone and Gender -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.phoneNumber, null, { 
+                        {{ form_label(registrationForm.phoneNumber, 'registration.form.labels.phone'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -133,7 +133,7 @@
                             {{ form_widget(registrationForm.phoneNumber, { 
                                 attr: { 
                                     class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                    placeholder: 'Phone number'
+                                    placeholder: 'registration.form.placeholders.phone'|trans
                                 } 
                             }) }}
                         </div>
@@ -141,7 +141,7 @@
                     </div>
 
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.gender, null, { 
+                        {{ form_label(registrationForm.gender, 'registration.form.labels.gender'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -165,7 +165,7 @@
                 <!-- Password Fields -->
                 <div class="space-y-4">
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.plainPassword.first, 'Password', { 
+                        {{ form_label(registrationForm.plainPassword.first, 'registration.form.labels.password'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -179,7 +179,7 @@
                             {{ form_widget(registrationForm.plainPassword.first, { 
                                 attr: { 
                                     class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                    placeholder: 'Create a password'
+                                    placeholder: 'registration.form.placeholders.password'|trans
                                 } 
                             }) }}
                         </div>
@@ -187,7 +187,7 @@
                     </div>
 
                     <div class="space-y-2">
-                        {{ form_label(registrationForm.plainPassword.second, 'Confirm Password', { 
+                        {{ form_label(registrationForm.plainPassword.second, 'registration.form.labels.confirm_password'|trans, { 
                             label_attr: { 
                                 class: 'block text-sm font-medium text-gray-700'
                             } 
@@ -201,7 +201,7 @@
                             {{ form_widget(registrationForm.plainPassword.second, { 
                                 attr: { 
                                     class: 'pl-10 w-full px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none',
-                                    placeholder: 'Confirm your password'
+                                    placeholder: 'registration.form.placeholders.confirm_password'|trans
                                 } 
                             }) }}
                         </div>
@@ -216,7 +216,7 @@
                             class: 'h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded'
                         } 
                     }) }}
-                    {{ form_label(registrationForm.agreeTerms, 'I agree to the Terms and Conditions', { 
+                    {{ form_label(registrationForm.agreeTerms, 'registration.form.terms.label'|trans, { 
                         label_attr: { 
                             class: 'ml-2 block text-sm text-gray-700'
                         }
@@ -227,7 +227,7 @@
                 <!-- Submit Button -->
                 <div>
                     <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all">
-                        Create account
+                        {{ 'registration.form.submit'|trans }}
                     </button>
                 </div>
 

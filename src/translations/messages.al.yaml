@@ -353,4 +353,99 @@ menu:
   mobile:
     menu: 'Menu'
     close: 'Mbyll Menunë'
-        
+registration:
+  title: 'Krijo llogatinë tënde'
+  hero:
+    title: 'Bëhu pjesë e komunitetit të Veturave'
+    subtitle: 'Filloni aventurën tuaj ne botën e veturave sot'
+  form:
+    title: 'Krijo llogarinë tënde'
+    signin:
+      text: 'Keni një llogari?'
+      link: 'konektohu'
+    labels:
+      firstname: 'Emri'
+      lastname: 'Mbiemri'
+      email: 'Email'
+      phone: 'Numri i Telefonit' 
+      gender: 'Gjinia'
+      password: 'Fjalëkalimi'
+      confirm_password: 'Konfirmo Fjalëkalimin'
+    placeholders:
+      firstname: 'Shkruaj emrin tënd'
+      lastname: 'Shkruaj mbiemrin tënd'
+      email: 'Shkruaj emailin tënd'
+      phone: 'Shkruaj numrin tënd të telefonit'
+      password: 'Shkruaj fjalëkalimin tënd'
+      confirm_password: 'Konfirmo fjalëkalimin tënd'
+    terms:
+      label: 'Duke klikuar në "Krijo llogarinë", ju pranoni kushtet tona të përdorimit dhe politikën e privatësisë.'
+    submit: 'Krijo llogarinë'
+    gender_options:
+      male: 'Mashkull'
+      female: 'Femër'
+      other: 'Tjetër'
+login:
+  title: 'Hyr në llogarinë tënde'
+  hero:
+    title: 'Mirë se vini'
+    subtitle: 'Gjej veturat më të mira në treg'
+  form:
+    header:
+      title: 'Hyr në llogarinë tënde'
+      register: 'ose'
+      register_link: 'krijo një llogari të re'
+    inputs:
+      email: 'Email'
+      password: 'Fjalëkalimi'
+      remember_me: 'Mbaj mend'
+      forgot_password: 'Keni harruar fjalëkalimin?'
+    submit: 'Hyr'
+
+shop:
+  index:
+    title: 'Dyqani Im'
+    nav:
+      brand: 'AutoDealerHub'
+      browse: 'Kërko Veturat'
+    existing:
+      images:
+        background: 'Fotografia e Prapavijës'
+        logo: 'Logoja e Dyqanit'
+      badges:
+        listed_cars: 'Veturat e Listuara'
+        rating: 'Ne pritje te verifikimit'
+      actions:
+        edit: 'Modifiko Dyqanin'
+        new_car: 'Posto Veturë të Re'
+      services:
+        title: 'Shërbimet Tona'
+      stats:
+        views:
+          label: 'Shikimet'
+        listings:
+          label: 'Postimet'
+        inquiries:
+          label: 'Pyetjet'
+    create:
+      header:
+        title: 'Fillo aventurën tënde në tregun e veturave'
+        subtitle: 'Bashkohu me komunitetin e AutoDealerHub dhe shit veturat me lehtësi'
+      features:
+        global:
+          title: 'Shtrirje Globale'
+          description: 'Lidhu me blerës në të gjithë vendin dhe zgjero praninë tënde në treg.'
+        secure:
+          title: 'Platformë e Sigurt'
+          description: 'Përfitoni nga sistemi ynë i verifikuar i përdoruesve dhe procesi i sigurt i transaksioneve.'
+        analytics:
+          title: 'Analitika e Rritjes'
+          description: 'Ndiq performancën tënde me informacione të detajuara dhe analitikë të shitjeve.'
+      cta:
+        ready: 'Gati për të filluar?'
+        create: 'Krijo Dyqanin Tënd'
+      help:
+        title: 'Ke nevojë për ndihmë?'
+        text: 'Shiko udhëzuesin tonë ose kontakto mbështetjen.'
+        guide: 'udhëzuesi'
+        support: 'kontakto mbështetjen'   
