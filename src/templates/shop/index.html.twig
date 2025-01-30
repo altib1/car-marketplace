@@ -16,7 +16,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
                             </svg>
                         </div>
-                        <h1 class="text-2xl font-bold text-gray-900">AutoDealerHub</h1>
+                        <h1 class="text-2xl font-bold text-gray-900">{{ 'shop.index.nav.brand'|trans }}</h1>
                     </div>
                     <div class="flex items-center space-x-4">
                         <a href="{{ path('app_cars') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md">
@@ -24,7 +24,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                             </svg>
-                            Browse Marketplace
+                            {{ 'shop.index.nav.browse'|trans }}
                         </a>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         {% if shop.backgroundImageFileName %}
                             {{ images.responsive_image(
                                 shop.backgroundImageFileName,
-                                'Shop background',
+                                'shop.index.existing.images.background'|trans,
                                 'w-full h-full object-cover opacity-50',
                                 'shop'
                             ) }}
@@ -66,13 +66,12 @@
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                                     </svg>
-                                        ajouter le parametre Listed Cars
                                     </span>
                                     <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
                                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                                         </svg>
-                                        {{ shop.rating|default('New') }}
+                                        {{ shop.rating|default('shop.index.existing.badges.rating'|trans) }}
                                     </span>
                                 </div>
                             </div>
@@ -82,21 +81,21 @@
                                     <svg class="w-5 h-5 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                     </svg>
-                                    Edit Shop
+                                    {{ 'shop.index.existing.actions.edit'|trans }}
                                 </a>
                                 <a href="{{ path('app_publication_index') }}" 
                                    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md">
                                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                                     </svg>
-                                    List New Car
+                                    {{ 'shop.index.existing.actions.new_car'|trans }}
                                 </a>
                             </div>
                         </div>
 
                         {% if shop.services|length > 0 %}
                             <div class="mt-8 border-t pt-6">
-                                <h3 class="text-lg font-semibold text-gray-900 mb-4">Services Offered</h3>
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ 'shop.index.existing.services.title'|trans }}</h3>
                                 <div class="flex flex-wrap gap-2">
                                     {% for service in shop.services %}
                                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
@@ -114,7 +113,7 @@
                     <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Total Views</p>
+                                <p class="text-sm font-medium text-gray-600">{{ 'shop.index.existing.stats.views.label'|trans }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ shop.views|default(0) }}</p>
                             </div>
                             <div class="p-3 bg-blue-100 rounded-lg">
@@ -128,7 +127,7 @@
                     <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Active Listings</p>
+                                <p class="text-sm font-medium text-gray-600">{{ 'shop.index.existing.stats.listings.label'|trans }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ shop.activeCars|default(0) }}</p>
                             </div>
                             <div class="p-3 bg-green-100 rounded-lg">
@@ -141,7 +140,7 @@
                     <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-all duration-300">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-sm font-medium text-gray-600">Inquiries</p>
+                                <p class="text-sm font-medium text-gray-600">{{ 'shop.index.existing.stats.inquiries.label'|trans }}</p>
                                 <p class="text-2xl font-bold text-gray-900">{{ shop.inquiries|default(0) }}</p>
                             </div>
                             <div class="p-3 bg-purple-100 rounded-lg">
@@ -158,9 +157,9 @@
                 <div class="text-center space-y-12">
                     <div class="max-w-3xl mx-auto space-y-4">
                         <h2 class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-                            Start Your Car Dealership Journey
+                            {{ 'shop.index.create.header.title'|trans }}
                         </h2>
-                        <p class="text-xl text-gray-600">Join our thriving marketplace and connect with thousands of potential buyers looking for their next vehicle.</p>
+                        <p class="text-xl text-gray-600">{{ 'shop.index.create.header.subtitle'|trans }}</p>
                     </div>
 
                     <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -170,8 +169,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
                                                                     </svg>
                             </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Global Reach</h3>
-                            <p class="text-gray-600">Connect with buyers across the country and expand your market presence.</p>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">{{ 'shop.index.create.features.global.title'|trans }}</h3>
+                            <p class="text-gray-600">{{ 'shop.index.create.features.global.description'|trans }}</p>
                         </div>
 
                         <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -180,8 +179,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Secure Platform</h3>
-                            <p class="text-gray-600">Benefit from our verified user system and secure transaction process.</p>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">{{ 'shop.index.create.features.secure.title'|trans }}</h3>
+                            <p class="text-gray-600">{{ 'shop.index.create.features.secure.description'|trans }}</p>
                         </div>
 
                         <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
@@ -190,8 +189,8 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-semibold text-gray-900 mb-4">Growth Analytics</h3>
-                            <p class="text-gray-600">Track your performance with detailed insights and sales analytics.</p>
+                            <h3 class="text-xl font-semibold text-gray-900 mb-4">{{ 'shop.index.create.features.analytics.title'|trans }}</h3>
+                            <p class="text-gray-600">{{ 'shop.index.create.features.analytics.description'|trans }}</p>
                         </div>
                     </div>
 
@@ -200,7 +199,7 @@
                             <div class="w-full border-t border-gray-200"></div>
                         </div>
                         <div class="relative flex justify-center">
-                            <span class="px-4 bg-gradient-to-br from-gray-50 to-blue-50 text-sm text-gray-500">Ready to start?</span>
+                            <span class="px-4 bg-gradient-to-br from-gray-50 to-blue-50 text-sm text-gray-500">{{ 'shop.index.create.cta.ready'|trans }}</span>
                         </div>
                     </div>
 
@@ -210,7 +209,7 @@
                             <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                             </svg>
-                            Create Your Shop
+                            {{ 'shop.index.create.cta.create'|trans }}
                         </a>
                     </div>
 
@@ -223,10 +222,10 @@
                             </div>
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-blue-900">
-                                    Need Help Getting Started?
+                                    {{ 'shop.index.create.help.title'|trans }}
                                 </p>
                                 <p class="text-sm text-blue-700">
-                                    Check out our <a href="#" class="font-medium underline">dealer guide</a> or <a href="#" class="font-medium underline">contact support</a>.
+                                   {{ 'shop.index.create.help.text'|trans }}
                                 </p>
                             </div>
                         </div>

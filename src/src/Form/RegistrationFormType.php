@@ -44,9 +44,9 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
-                    'Male' => 'male',
-                    'Female' => 'female',
-                    'Other' => 'other',
+                    'registration.form.gender_options.male' => 'male',
+                    'registration.form.gender_options.female' => 'female',
+                    'registration.form.gender_options.other' => 'other',
                 ],
                 'constraints' => [
                     new NotBlank([

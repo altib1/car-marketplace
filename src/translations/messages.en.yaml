@@ -358,4 +358,191 @@ menu:
   mobile:
     menu: 'Menu'
     close: 'Close menu'
-
+registration:
+  title: 'Create Your Account'
+  hero:
+    title: 'Join Our Community'
+    subtitle: 'Start your journey to find your perfect car'
+  form:
+    title: 'Create your account'
+    signin:
+      text: 'Already have an account?'
+      link: 'Sign in'
+    labels:
+      firstname: 'First name'
+      lastname: 'Last name'
+      email: 'Email address'
+      phone: 'Phone number'
+      gender: 'Gender'
+      password: 'Password'
+      confirm_password: 'Confirm Password'
+    placeholders:
+      firstname: 'First name'
+      lastname: 'Last name'
+      email: 'Email address'
+      phone: 'Phone number'
+      password: 'Create a password'
+      confirm_password: 'Confirm your password'
+    terms:
+      label: 'I agree to the Terms and Conditions'
+    submit: 'Create account'
+    gender_options:
+      male: 'Male'
+      female: 'Female'
+      other: 'Other'
+login:
+  title: 'Login to Your Account'
+  hero:
+    title: 'Welcome Back!'
+    subtitle: 'Find your perfect car today'
+  form:
+    header:
+      title: 'Sign in to your account'
+      register: 'Or'
+      register_link: 'create a new account'
+    inputs:
+      email: 'Email address'
+      password: 'Password'
+      remember_me: 'Remember me'
+      forgot_password: 'Forgot password?'
+    submit: 'Sign in'
+shop:
+  index:
+    title: 'Car Marketplace - Your Shop'
+    nav:
+      brand: 'AutoDealerHub'
+      browse: 'Browse Marketplace'
+    existing:
+      images:
+        background: 'Shop background'
+        logo: 'Logo'
+      badges:
+        listed_cars: 'Listed Cars'
+        rating: 'Waiting for verification'
+      actions:
+        edit: 'Edit Shop'
+        new_car: 'List New Car'
+      services:
+        title: 'Services Offered'
+      stats:
+        views:
+          label: 'Total Views'
+        listings:
+          label: 'Active Listings'
+        inquiries:
+          label: 'Inquiries'
+    create:
+      header:
+        title: 'Start Your Car Dealership Journey'
+        subtitle: 'Join our thriving marketplace and connect with thousands of potential buyers looking for their next vehicle.'
+      features:
+        global:
+          title: 'Global Reach'
+          description: 'Connect with buyers across the country and expand your market presence.'
+        secure:
+          title: 'Secure Platform'
+          description: 'Benefit from our verified user system and secure transaction process.'
+        analytics:
+          title: 'Growth Analytics'
+          description: 'Track your performance with detailed insights and sales analytics.'
+      cta:
+        ready: 'Ready to start?'
+        create: 'Create Your Shop'
+      help:
+        title: 'Need Help Getting Started?'
+        text: 'Check out our dealer guide or contact support.'
+        guide: 'dealer guide'
+        support: 'contact support'
+  create:
+    title: 'Create New Shop'
+    header:
+      title: 'Create New Shop'
+      subtitle: 'Fill in the details below to create your shop'
+    basic_info:
+      title: 'Basic Information'
+      shop_name: 'Shop Name'
+      shop_name_placeholder: 'Enter your shop name'
+      opening_date: 'Opening Date'
+    location:
+      title: 'Location & Hours'
+      address: 'Shop Address'
+      address_placeholder: 'Enter complete address'
+      business_hours: 'Business Hours'
+      hours_placeholder: 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+    images:
+      title: 'Shop Images'
+      background: 'Background Image'
+      logo: 'Logo Image'
+      upload_text: 'Upload a file'
+      drag_drop_text: 'or drag and drop'
+      format_text: 'PNG, JPG, JPEG up to 10MB'
+    services:
+      title: 'Services'
+      label: 'Shop Services'
+      placeholder: 'Enter service name'
+      add: 'Add Service'
+    buttons:
+      create: 'Create Shop'
+      back: 'Back to List'
+  edit:
+    title: 'Edit Shop'
+    header:
+      title: 'Edit Shop'
+      subtitle: 'Update the details below to edit your shop'
+    basic_info:
+      title: 'Basic Information'
+      shop_name: 'Shop Name'
+      shop_name_placeholder: 'Enter your shop name'
+      opening_date: 'Opening Date'
+    location:
+      title: 'Location & Hours'
+      address: 'Shop Address'
+      address_placeholder: 'Enter complete address'
+      business_hours: 'Business Hours'
+      hours_placeholder: 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+    images:
+      title: 'Shop Images'
+      background: 'Background Image'
+      background_alt: 'Background image of %shop_name%'
+      logo: 'Logo Image'
+      logo_alt: 'Logo image of %shop_name%'
+      upload_text: 'Upload a new file'
+      drag_drop_text: 'or drag and drop'
+      format_text: 'PNG, JPG, JPEG up to 10MB'
+    services:
+      title: 'Services'
+      label: 'Shop Services'
+      placeholder: 'Enter service name'
+      add: 'Add Service'
+    buttons:
+      save: 'Save Changes'
+      back: 'Back to List'
+  show:
+    title_suffix: 'Premium Auto Dealer'
+    images:
+      background_alt: 'Background image of %shop_name%'
+      logo_alt: 'Logo of %shop_name%'
+    cards:
+      working_hours: 'Working Hours'
+      established: 'Established'
+      services: 'Services'
+    vehicles:
+      title: 'Available Vehicles'
+      count: '%count% vehicles available'
+      empty:
+        title: 'No Vehicles Available'
+        message: 'Our inventory is currently being updated. Please check back soon.'
+    warranty: 'm warranty'
+wishlist:
+  page_title: 'My Wishlist'
+  title: 'My Wishlist'
+  browse_more: 'Browse More Cars'
+  empty:
+    title: 'Your wishlist is empty'
+    description: 'Start exploring our collection to find your dream car and add it to your wishlist.'
+  discover_cars: 'Discover Cars'
+  car:
+    price: 'Price'
+    mileage: 'Mileage'
+    view_details: 'View Details'
+    location_na: 'Location N/A'

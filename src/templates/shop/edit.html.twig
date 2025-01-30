@@ -14,29 +14,29 @@
     <div class="max-w-4xl mx-auto">
         <div class="bg-white rounded-2xl shadow-xl transform transition-all duration-300 hover:shadow-2xl">
             <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-t-2xl p-6">
-                <h3 class="text-2xl font-semibold text-center">Edit Shop</h3>
-                <p class="text-blue-100 text-center mt-2">Update the details below to edit your shop</p>
+                <h3 class="text-2xl font-semibold text-center">{{ 'shop.edit.header.title'|trans }}</h3>
+                <p class="text-blue-100 text-center mt-2">{{ 'shop.edit.header.subtitle'|trans }}</p>
             </div>
             
             <div class="p-8">
                 {{ form_start(form, {'attr': {'class': 'needs-validation space-y-6'}}) }}
                     {# Basic Information Section #}
                     <div class="bg-gray-50 rounded-xl p-6 space-y-6">
-                        <h4 class="text-lg font-medium text-gray-900">Basic Information</h4>
+                        <h4 class="text-lg font-medium text-gray-900">{{ 'shop.edit.basic_info.title'|trans }}</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div class="space-y-2">
-                                {{ form_label(form.name, 'Shop Name', {
+                                {{ form_label(form.name, 'shop.edit.basic_info.shop_name'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 {{ form_widget(form.name, {
                                     'attr': {
                                         'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
-                                        'placeholder': 'Enter your shop name'
+                                        'placeholder': 'shop.edit.basic_info.shop_name_placeholder'|trans
                                     }
                                 }) }}
                             </div>
                             <div class="space-y-2">
-                                {{ form_label(form.creationDate, 'Opening Date', {
+                                {{ form_label(form.creationDate, 'shop.edit.basic_info.opening_date'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 {{ form_widget(form.creationDate, {
@@ -50,27 +50,27 @@
 
                     {# Location & Hours Section #}
                     <div class="bg-gray-50 rounded-xl p-6 space-y-6">
-                        <h4 class="text-lg font-medium text-gray-900">Location & Hours</h4>
+                        <h4 class="text-lg font-medium text-gray-900">{{'shop.edit.location.title'|trans}}</h4>
                         <div class="space-y-4">
                             <div>
-                                {{ form_label(form.address, 'Shop Address', {
+                                {{ form_label(form.address, 'shop.edit.location.address'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 {{ form_widget(form.address, {
                                     'attr': {
                                         'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
-                                        'placeholder': 'Enter complete address'
+                                        'placeholder': 'shop.edit.location.address_placeholder'|trans
                                     }
                                 }) }}
                             </div>
                             <div>
-                                {{ form_label(form.workHours, 'Business Hours', {
+                                {{ form_label(form.workHours, 'shop.edit.location.business_hours'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 {{ form_widget(form.workHours, {
                                     'attr': {
                                         'class': 'mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
-                                        'placeholder': 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+                                        'placeholder': 'shop.edit.location.hours_placeholder'|trans
                                     }
                                 }) }}
                             </div>
@@ -79,10 +79,10 @@
 
                     {# Images Section #}
                     <div class="bg-gray-50 rounded-xl p-6 space-y-6">
-                        <h4 class="text-lg font-medium text-gray-900">Shop Images</h4>
+                        <h4 class="text-lg font-medium text-gray-900">{{'shop.edit.images.title'|trans}}</h4>
                         <div class="space-y-6">
                             <div class="space-y-2">
-                                {{ form_label(form.backgroundImageFileName, 'Background Image', {
+                                {{ form_label(form.backgroundImageFileName, 'shop.edit.images.background'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-500 transition-colors duration-200">
@@ -104,17 +104,17 @@
                                         }) }}
                                         <div class="flex text-sm text-gray-600">
                                             <label for="{{ form.backgroundImageFileName.vars.id }}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                                <span>Upload a new file</span>
+                                                <span>{{'shop.edit.images.upload_text'|trans}}</span>
                                             </label>
-                                            <p class="pl-1">or drag and drop</p>
+                                            <p class="pl-1">{{'shop.edit.images.drag_drop_text'|trans}}</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">{{'shop.edit.images.format_text'|trans}}</p>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="space-y-2">
-                                {{ form_label(form.logoImageFileName, 'Logo Image', {
+                                {{ form_label(form.logoImageFileName, 'shop.edit.images.logo'|trans, {
                                     'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                                 }) }}
                                 <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-500 transition-colors duration-200">
@@ -136,11 +136,11 @@
                                         }) }}
                                         <div class="flex text-sm text-gray-600">
                                             <label for="{{ form.logoImageFileName.vars.id }}" class="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-                                                <span>Upload a new file</span>
+                                                <span>{{'shop.edit.images.upload_text'|trans}}</span>
                                             </label>
-                                            <p class="pl-1">or drag and drop</p>
+                                            <p class="pl-1">{{'shop.edit.images.drag_drop_text'|trans}}</p>
                                         </div>
-                                        <p class="text-xs text-gray-500">PNG, JPG, JPEG up to 10MB</p>
+                                        <p class="text-xs text-gray-500">{{'shop.edit.images.format_text'|trans}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -149,9 +149,9 @@
 
                     {# Services Section #}
                     <div class="bg-gray-50 rounded-xl p-6 space-y-6">
-                        <h4 class="text-lg font-medium text-gray-900">Services</h4>
+                        <h4 class="text-lg font-medium text-gray-900">{{'shop.edit.services.title'|trans}}</h4>
                         <div class="space-y-4">
-                            {{ form_label(form.services, 'Shop Services', {
+                            {{ form_label(form.services, 'shop.edit.services.label'|trans, {
                                 'label_attr': {'class': 'text-sm font-medium text-gray-700'}
                             }) }}
                             <div id="services-collection" 
@@ -162,7 +162,7 @@
                                         {{ form_widget(service, {
                                             'attr': {
                                                 'class': 'flex-1 rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 text-lg transition-colors duration-200',
-                                                'placeholder': 'Enter service name'
+                                                'placeholder': 'shop.edit.services.placeholder'|trans
                                             }
                                         }) }}
                                         <button type="button" class="remove-service p-2 text-red-500 hover:text-red-700 transition-colors duration-200">
@@ -177,7 +177,7 @@
                                 <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                 </svg>
-                                Add Service
+                                {{'shop.edit.services.add'|trans}}
                             </button>
                         </div>
                     </div>
@@ -188,13 +188,13 @@
                             <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            Save Changes
+                            {{ 'shop.edit.buttons.save'|trans }}
                         </button>
                         <a href="{{ path('app_shop') }}" class="flex-1 transform transition-all duration-200 hover:-translate-y-1 border border-gray-300 text-gray-700 py-3 px-4 rounded-xl text-lg flex items-center justify-center hover:bg-gray-50 shadow-md hover:shadow-lg">
                             <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
                             </svg>
-                            Back to List
+                            {{ 'shop.edit.buttons.back'|trans }}
                         </a>
                     </div>
                 {{ form_end(form) }}
