@@ -449,3 +449,68 @@ shop:
         text: 'Shiko udhëzuesin tonë ose kontakto mbështetjen.'
         guide: 'udhëzuesi'
         support: 'kontakto mbështetjen'   
+
+  create:
+    title: 'Krijo një Dyqan të Ri'
+    header:
+      title: 'Krijo një Dyqan të Ri'
+      subtitle: 'Plotëso detajet e mëposhtme për të krijuar dyqanin tënd'
+    basic_info:
+      title: 'Informacioni Bazë'
+      shop_name: 'Emri i Dyqanit'
+      shop_name_placeholder: 'Shkruaj emrin e dyqanit'
+      opening_date: 'Data e Hapjes'
+    location:
+      title: 'Vendndodhja & Orari'
+      address: 'Adresa e Dyqanit'
+      address_placeholder: 'Shkruaj adresën e plotë'
+      business_hours: 'Orari i Punës'
+      hours_placeholder: 'p.sh., Hën-Pre: 9:00-18:00, Sht: 10:00-16:00'
+    images:
+      title: 'Fotot e Dyqanit'
+      background: 'Foto e madhe(background)'
+      logo: 'Logoja'
+      upload_text: 'Ngarko një foto'
+      drag_drop_text: 'ose tërhiq dhe lësho'
+      format_text: 'PNG, JPG, JPEG deri në 10MB'
+    services:
+      title: 'Shërbimet'
+      label: 'Shërbimet e Dyqanit'
+      placeholder: 'Shkruaj emrin e shërbimit'
+      add: 'Shto Shërbim'
+    buttons:
+      create: 'Krijo Dyqanin'
+      back: 'Kthehu te Lista'
+  edit:
+    title: 'Modifiko Dyqanin'
+    header:
+      title: 'Modifiko Dyqanin'
+      subtitle: 'Përditëso të dhënat e mëposhtme për të modifikuar dyqanin tuaj'
+    basic_info:
+      title: 'Informacioni Bazë'
+      shop_name: 'Emri i Dyqanit'
+      shop_name_placeholder: 'Shkruaj emrin e dyqanit'
+      opening_date: 'Data e Hapjes'
+    location:
+      title: 'Vendndodhja & Orari'
+      address: 'Adresa e Dyqanit'
+      address_placeholder: 'Shkruaj adresën e plotë'
+      business_hours: 'Orari i Punës'
+      hours_placeholder: 'p.sh., E Hënë-E Premte: 09:00-18:00, E Shtunë: 10:00-16:00'
+    images:
+      title: 'Fotot e Dyqanit'
+      background: 'Fotografia e madhe(background)'
+      background_alt: 'Fotografia e prapavijës e %shop_name%'
+      logo: 'Logoja'
+      logo_alt: 'Logoja e %shop_name%'
+      upload_text: 'Ngarko një foto të re'
+      drag_drop_text: 'ose tërheq dhe lësho'
+      format_text: 'PNG, JPG, JPEG deri në 10MB'
+    services:
+      title: 'Shërbimet'
+      label: 'Shërbimet e Dyqanit'
+      placeholder: 'Shkruaj emrin e shërbimit'
+      add: 'Shto Shërbim'
+    buttons:
+      save: 'Ruaj Ndryshimet'
+      back: 'Kthehu te Lista'

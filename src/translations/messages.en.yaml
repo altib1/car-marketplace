@@ -453,4 +453,68 @@ shop:
         text: 'Check out our dealer guide or contact support.'
         guide: 'dealer guide'
         support: 'contact support'
+  create:
+    title: 'Create New Shop'
+    header:
+      title: 'Create New Shop'
+      subtitle: 'Fill in the details below to create your shop'
+    basic_info:
+      title: 'Basic Information'
+      shop_name: 'Shop Name'
+      shop_name_placeholder: 'Enter your shop name'
+      opening_date: 'Opening Date'
+    location:
+      title: 'Location & Hours'
+      address: 'Shop Address'
+      address_placeholder: 'Enter complete address'
+      business_hours: 'Business Hours'
+      hours_placeholder: 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+    images:
+      title: 'Shop Images'
+      background: 'Background Image'
+      logo: 'Logo Image'
+      upload_text: 'Upload a file'
+      drag_drop_text: 'or drag and drop'
+      format_text: 'PNG, JPG, JPEG up to 10MB'
+    services:
+      title: 'Services'
+      label: 'Shop Services'
+      placeholder: 'Enter service name'
+      add: 'Add Service'
+    buttons:
+      create: 'Create Shop'
+      back: 'Back to List'
+  edit:
+    title: 'Edit Shop'
+    header:
+      title: 'Edit Shop'
+      subtitle: 'Update the details below to edit your shop'
+    basic_info:
+      title: 'Basic Information'
+      shop_name: 'Shop Name'
+      shop_name_placeholder: 'Enter your shop name'
+      opening_date: 'Opening Date'
+    location:
+      title: 'Location & Hours'
+      address: 'Shop Address'
+      address_placeholder: 'Enter complete address'
+      business_hours: 'Business Hours'
+      hours_placeholder: 'e.g., Mon-Fri: 9AM-6PM, Sat: 10AM-4PM'
+    images:
+      title: 'Shop Images'
+      background: 'Background Image'
+      background_alt: 'Background image of %shop_name%'
+      logo: 'Logo Image'
+      logo_alt: 'Logo image of %shop_name%'
+      upload_text: 'Upload a new file'
+      drag_drop_text: 'or drag and drop'
+      format_text: 'PNG, JPG, JPEG up to 10MB'
+    services:
+      title: 'Services'
+      label: 'Shop Services'
+      placeholder: 'Enter service name'
+      add: 'Add Service'
+    buttons:
+      save: 'Save Changes'
+      back: 'Back to List'
 

@@ -49,6 +49,8 @@ class ShopController extends AbstractController
 
         $shop = new Shop();
         $shop->setUser($user);
+        // Only if you need to force English for dates
+        $request->setLocale('en');
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 
@@ -81,6 +83,9 @@ class ShopController extends AbstractController
         if ($shop->getUser()->getId() !== $user->getId()) {
             return $this->redirectToRoute('app_shop');
         }
+        
+        // Only if you need to force English for dates
+        $request->setLocale('en');
         $form = $this->createForm(ShopType::class, $shop);
         $form->handleRequest($request);
 
