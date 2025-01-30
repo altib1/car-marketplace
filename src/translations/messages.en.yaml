@@ -517,4 +517,32 @@ shop:
     buttons:
       save: 'Save Changes'
       back: 'Back to List'
-
+  show:
+    title_suffix: 'Premium Auto Dealer'
+    images:
+      background_alt: 'Background image of %shop_name%'
+      logo_alt: 'Logo of %shop_name%'
+    cards:
+      working_hours: 'Working Hours'
+      established: 'Established'
+      services: 'Services'
+    vehicles:
+      title: 'Available Vehicles'
+      count: '%count% vehicles available'
+      empty:
+        title: 'No Vehicles Available'
+        message: 'Our inventory is currently being updated. Please check back soon.'
+    warranty: 'm warranty'
+wishlist:
+  page_title: 'My Wishlist'
+  title: 'My Wishlist'
+  browse_more: 'Browse More Cars'
+  empty:
+    title: 'Your wishlist is empty'
+    description: 'Start exploring our collection to find your dream car and add it to your wishlist.'
+  discover_cars: 'Discover Cars'
+  car:
+    price: 'Price'
+    mileage: 'Mileage'
+    view_details: 'View Details'
+    location_na: 'Location N/A'

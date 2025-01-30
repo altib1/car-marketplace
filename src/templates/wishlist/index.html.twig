@@ -14,13 +14,13 @@
                     <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
-                    <h1 class="text-3xl font-bold text-gray-900">My Wishlist</h1>
+                    <h1 class="text-3xl font-bold text-gray-900">{{ 'wishlist.title'|trans }}</h1>
                 </div>
                 <a href="{{ path('app_cars') }}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                     </svg>
-                    Browse More Cars
+                    {{ 'wishlist.browse_more'|trans }}
                 </a>
             </div>
         </div>
@@ -33,10 +33,10 @@
                 <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                 </svg>
-                <h3 class="text-xl font-semibold text-gray-900 mb-3">Your wishlist is empty</h3>
-                <p class="text-gray-500 mb-8 max-w-md mx-auto">Start exploring our collection to find your dream car and add it to your wishlist.</p>
+                <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ 'wishlist.empty.title'|trans }}</h3>
+                <p class="text-gray-500 mb-8 max-w-md mx-auto">{{ 'wishlist.empty.description'|trans }}</p>
                 <a href="{{ path('app_cars') }}" class="inline-flex items-center px-6 py-3 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300">
-                    Discover Cars
+                    {{ 'wishlist.discover_cars'|trans }}
                     <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
@@ -82,11 +82,11 @@
 
                             <div class="grid grid-cols-2 gap-4 py-4 border-t border-b border-gray-100">
                                 <div class="flex flex-col">
-                                    <span class="text-sm text-gray-500">Price</span>
+                                    <span class="text-sm text-gray-500">{{ 'wishlist.car.price'|trans }}</span>
                                     <span class="font-semibold text-lg text-blue-600">{{ publication.price }} €</span>
                                 </div>
                                 <div class="flex flex-col">
-                                    <span class="text-sm text-gray-500">Mileage</span>
+                                    <span class="text-sm text-gray-500">{{ 'wishlist.car.mileage'|trans }}</span>
                                     <span class="font-semibold">{{ publication.mileage|default('N/A') }} km</span>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                             <div class="flex items-center justify-between pt-4">
                                 <a href="{{ path('app_car_show', { id: publication.id }) }}" 
                                    class="inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 text-sm font-medium flex-grow mr-2">
-                                    View Details
+                                    {{ 'wishlist.car.view_details'|trans }}
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>

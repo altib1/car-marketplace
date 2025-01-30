@@ -514,3 +514,32 @@ shop:
     buttons:
       save: 'Ruaj Ndryshimet'
       back: 'Kthehu te Lista'
+  show:
+    title_suffix: 'Shitës Premium i Makinave'
+    images:
+      background_alt: 'Imazhi i sfondit i %shop_name%'
+      logo_alt: 'Logoja e %shop_name%'
+    cards:
+      working_hours: 'Orari i Punës'
+      established: 'Themeluar'
+      services: 'Shërbimet'
+    vehicles:
+      title: 'Makina të Disponueshme'
+      count: '%count% makina në dispozicion'
+      empty:
+        title: 'Nuk ka Makina të Disponueshme'
+        message: 'Inventari ynë është duke u përditësuar. Ju lutemi kontrolloni sërish së shpejti.'
+    warranty: 'm garanci'
+wishlist:
+  page_title: 'Lista e Dëshirave'
+  title: 'Lista Ime e Dëshirave'
+  browse_more: 'Shfletoni më Shumë Makina'
+  empty:
+    title: 'Lista juaj e dëshirave është bosh'
+    description: 'Filloni të eksploroni koleksionin tonë për të gjetur makinën tuaj të ëndrrave dhe shtojeni në listën e dëshirave.'
+  discover_cars: 'Zbuloni Makinat'
+  car:
+    price: 'Çmimi'
+    mileage: 'Kilometrazhi'
+    view_details: 'Shiko Detajet'
+    location_na: 'Vendndodhja nuk dihet'
