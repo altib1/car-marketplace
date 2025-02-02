@@ -80,7 +80,7 @@
 
         {# Message Form #}
         <div class="p-4 border-t border-gray-100">
-            <form id="messageForm" class="flex items-center gap-4">
+            <form id="messageForm" class="flex items-center gap-4" data-user-email="{{ app.user.email }}">
                 <input type="hidden" name="recipientId" value="{% if conversation.sender == app.user %}{{ conversation.recipient.id }}{% else %}{{ conversation.sender.id }}{% endif %}">
                 <input type="hidden" name="publicationId" value="{{ conversation.publication.id }}">
                 <input type="text" 
