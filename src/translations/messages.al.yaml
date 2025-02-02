@@ -92,6 +92,8 @@ profile:
             type_message: 'Shkruaj mesazhin tënd...'
         index_title: 'Mesazhet'
         index_button: 'Shfleto Veturat'
+        index_refresh_button: 'Rifresko'
+        index_refreshing_button: 'duke u rifreskuar...'
         delete_modal:
             title: 'Fshij Bisedën'
             message: 'A jeni i sigurt që dëshironi të fshini këtë bisedë? Ky veprim nuk mund të zhbëhet.'
@@ -330,7 +332,7 @@ homepage:
         description: 'Nëse keni nevojë për një veturë të re, këtu do të gjeni atë që ju nevojitet.'
         button: 'Shikoni veturat tona'
 menu:
-  brand: 'Qendra Auto'
+  brand: 'AutoSmart'
   vehicles:
     title: 'Veturat'
     new: 'Veturat e reja'

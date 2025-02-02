@@ -40,6 +40,13 @@ class ChatController extends AbstractController
             10
         );
 
+        // If it's an AJAX request, only return the conversations partial
+        if ($request->headers->get('X-Requested-With') === 'XMLHttpRequest') {
+            return $this->render('chat/_conversations.html.twig', [
+                'conversations' => $conversations
+            ]);
+        }
+
         return $this->render('chat/inbox.html.twig', [
             'conversations' => $conversations
         ]);
