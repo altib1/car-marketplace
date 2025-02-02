@@ -408,6 +408,53 @@ login:
       remember_me: 'Remember me'
       forgot_password: 'Forgot password?'
     submit: 'Sign in'
+  reset_password:
+    page_title: 'Reset Your Password'
+    hero:
+      title: 'Create New Password'
+      subtitle: 'Choose a strong password to secure your account'
+    form:
+      title: 'Set New Password'
+      subtitle: 'Please enter your new password below'
+      new_password: 'New Password'
+      new_password_placeholder: 'Enter your new password'
+      repeat_password: 'Confirm Password'
+      repeat_password_placeholder: 'Repeat your new password'
+      submit: 'Reset Password'
+      requirements:
+        title: 'Password Requirements'
+        length: 'At least 12 characters long'
+        complexity: 'Include uppercase, lowercase, numbers, and symbols'
+    request:
+      title: 'Reset Password'
+      hero:
+        title: 'Password Recovery'
+        subtitle: 'Get back access to your account safely'
+      form:
+        title: 'Forgot Password?'
+        subtitle: "Don't worry, we'll send you reset instructions"
+        email_placeholder: 'Enter your email address'
+        help_text: "We'll send you an email with a link to reset your password. Please check your spam folder if you don't receive it."
+        submit: 'Send Reset Link'
+    check_email:
+      title: 'Check Your Email'
+      hero:
+        title: 'Email Sent'
+        subtitle: 'Follow the instructions to reset your password'
+      content:
+        title: 'Check Your Inbox'
+        message: 'If an account matching your email exists, we have sent you instructions to reset your password.'
+        expiration: 'The reset link will expire in'
+        spam_notice: "Didn't receive the email? Check your spam folder or"
+        try_again: 'try again'
+        back_to_login: 'Back to Login'
+    email:
+      greeting: 'Hello!'
+      message: 'We received a request to reset your password. Click the button below to create a new password.'
+      button: 'Reset Password'
+      expiration_notice: 'This reset link will expire in'
+      security_notice: 'If you did not request a password reset, please ignore this email or contact support if you have concerns.'
+      footer: '© AutoSmart 2025. All rights reserved.'
 shop:
   index:
     title: 'Car Marketplace - Your Shop'

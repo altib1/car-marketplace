@@ -403,6 +403,53 @@ login:
       remember_me: 'Mbaj mend'
       forgot_password: 'Keni harruar fjalëkalimin?'
     submit: 'Hyr'
+  reset_password:
+    page_title: 'Rivendos Fjalëkalimin'
+    hero:
+      title: 'Rivendos Fjalëkalimin'
+      subtitle: 'Krijo një fjalëkalim të ri për llogarinë tënde'
+    form:
+      title: 'Rivendos Fjalëkalimin'
+      subtitle: 'Krijo një fjalëkalim të ri për llogarinë tënde'
+      new_password: 'Fjalëkalimi i Ri'
+      new_password_placeholder: 'Shkruaj fjalëkalimin tënd të ri'
+      repeat_password: 'Përsërit Fjalëkalimin'
+      repeat_password_placeholder: 'Përsërit fjalëkalimin tënd të ri'
+      submit: 'Rivendos Fjalëkalimin'
+      requirements:
+        title: 'Kërkesat për fjalëkalimin'
+        length: 'Së paku 12 karaktere'
+        complexity: 'Përfshij të paktën një shkronjë të madhe, një shkronjë të vogël, një numër dhe një karakter special'
+    request:
+      title: 'Kërko Rivendosjen e Fjalëkalimit'
+      hero:
+        title: 'Ke harruar fjalëkalimin tënd?'
+        subtitle: 'Nuk ka problem, ne do të dërgojmë instruksionet për rivendosjen e fjalëkalimit në emailin tënd.'
+      form:
+        title: 'Kërko Rivendosjen e Fjalëkalimit'
+        subtitle: "Shkruaj emailin tënd për të marrë instruksionet për rivendosjen e fjalëkalimit"
+        email_placeholder: 'Shkruaj emailin tënd'
+        help_text: "Nëse nuk e merr emailin për rivendosjen e fjalëkalimit, kontrollo dosjen e spamit ose kontakto mbështetjen."
+        submit: 'Dërgo'
+    check_email:
+      title: 'Kontrollo Emailin'
+      hero:
+        title: 'Kontrollo Emailin për Rivendosjen e Fjalëkalimit'
+        subtitle: 'Instruksionet për rivendosjen e fjalëkalimit janë dërguar në emailin tënd.'
+      content:
+        title: 'Instruksionet për Rivendosjen e Fjalëkalimit janë dërguar'
+        message: 'Instruksionet për rivendosjen e fjalëkalimit janë dërguar në emailin tënd. Kontrollo emailin tënd dhe ndiq udhëzimet për të rivendosur fjalëkalimin.'
+        expiration: 'Ky link do të skadojë pas 60 minutash.'
+        spam_notice: "Nëse nuk e merr emailin për rivendosjen e fjalëkalimit, kontrollo dosjen e spamit ose kontakto mbështetjen."
+        try_again: 'Dërgo një email tjetër'
+        back_to_login: 'Kthehu te hyrja'
+    email:
+      greeting: 'Përshëndetje!'
+      message: 'Ke marrë këtë email sepse kemi marrë një kërkesë për rivendosjen e fjalëkalimit për llogarinë tënde.'
+      button: 'Rivendos Fjalëkalimin'
+      expiration_notice: 'Ky link do të skadojë pas 60 minutash.'
+      security_notice: 'Nëse nuk e keni kërkuar këtë veprim, ju lutemi hyni në llogarinë tuaj dhe ndryshoni fjalëkalimin tuaj.'
+      footer: '@ AutoSmart 2025. Të gjitha të drejtat e rezervuara.'
 
 shop:
   index:
