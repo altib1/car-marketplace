@@ -1,36 +1,43 @@
-<div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
+<div class="relative" 
+    x-data="{ open: false }" 
+    @click.away="open = false"
+    @click="open = !open">
     <button class="group inline-flex items-center px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200">
-        <span class="flex items-center">
-            {% if app.request.get('_locale') == 'en' or app.request.get('_locale') is null %}
-                <span class="fi fi-gb rounded-sm mr-2"></span>
-                <span class="font-medium">EN</span>
-            {% elseif app.request.get('_locale') == 'al' %}
-                <span class="fi fi-es rounded-sm mr-2"></span>
-                <span class="font-medium">AL</span>
-            {% endif %}
-        </span>
-        <svg class="ml-2 h-4 w-4 transform group-hover:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-        </svg>
+       <span class="flex items-center">
+          {% if app.request.get('_locale') == 'en' or app.request.get('_locale') is null %}
+             <span class="fi fi-gb rounded-sm mr-2"></span>
+             <span class="font-medium">EN</span>
+          {% elseif app.request.get('_locale') == 'al' %}
+             <span class="fi fi-es rounded-sm mr-2"></span>
+             <span class="font-medium">AL</span>
+          {% endif %}
+       </span>
+       <svg class="ml-2 h-4 w-4 transform group-hover:rotate-180 transition-transform duration-200" 
+           :class="{'rotate-180': open}"
+           fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+       </svg>
     </button>
     <div x-show="open"
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 scale-95"
-         x-transition:enter-end="opacity-100 scale-100"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 scale-100"
-         x-transition:leave-end="opacity-0 scale-95"
-         class="absolute right-0 mt-2 w-48 rounded-xl bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5"
-         style="display: none;">
-        <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'en'})) }}" 
-           class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200">
-            <span class="fi fi-gb rounded-sm"></span>
-            <span class="ml-3 font-medium">English</span>
-        </a>
-        <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'al'})) }}"
-           class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200">
-            <span class="fi fi-es rounded-sm"></span>
-            <span class="ml-3 font-medium">Albanian</span>
-        </a>
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        class="absolute right-0 mt-2 w-48 rounded-xl bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 md:right-0 sm:left-0"
+        style="display: none;">
+       <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'en'})) }}" 
+         class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200"
+         @click="open = false">
+          <span class="fi fi-gb rounded-sm"></span>
+          <span class="ml-3 font-medium">English</span>
+       </a>
+       <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'al'})) }}"
+         class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200"
+         @click="open = false">
+          <span class="fi fi-es rounded-sm"></span>
+          <span class="ml-3 font-medium">Albanian</span>
+       </a>
     </div>
 </div>
