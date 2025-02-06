@@ -1,11 +1,30 @@
 {% import "components/_image.html.twig" as images %}
 <div class="container mx-auto py-8 flex flex-col lg:flex-row gap-8">
     <!-- Filter Section -->
-    <div class="w-full lg:w-1/4 bg-white p-6 rounded-xl shadow-xl">
+        <div id="filter-section" class="w-full lg:w-1/4 bg-white p-6 rounded-xl shadow-xl transform transition-all duration-300 ease-in-out 
+        lg:translate-x-0 lg:opacity-100 
+        fixed lg:static inset-x-0 top-0 lg:z-40 z-50 h-screen lg:h-auto 
+        overflow-y-auto lg:overflow-visible
+        -translate-x-full opacity-0">
+
+         <!-- Close Button for Mobile -->
+        <button id="close-filters" class="lg:hidden absolute top-4 right-4 text-gray-600 hover:text-gray-900">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
         <form method="get" action="{{ path('app_cars') }}">
             <div class="space-y-6">
                 <!-- Search -->
-
+                <div class="flex items-center space-x-3 mb-6">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                    </svg>
+                    <h2 class="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+                        {{'search.filters.title'|trans}}
+                    </h2>
+                </div>
                 <!-- Price -->
                 <div class="grid grid-cols-2 gap-4">
                     <div>
@@ -141,6 +160,10 @@
 
 <!-- Results Section -->
 <div class="w-full lg:w-3/4">
+
+        <button id="toggle-filters" class="lg:hidden w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition mb-4">
+            {{ 'search.filters.toggle'|trans }}
+        </button>
     <!-- Sort and Results Count -->
     <div class="w-full lg:w-4/4 mb-4 flex justify-between items-center">
         <p class="text-gray-600">{{ results.pagination.total_results }} {{'search.results.found'|trans}}</p>

@@ -245,6 +245,7 @@ search:
         title: 'Filtrat'
         min_price: 'Çmimi Minimal'
         max_price: 'Çmimi Maksimal'
+        toggle: 'Hapni/Fshini Filtrat'
         min_year: 'Viti Minimal'
         max_year: 'Viti Maksimal'
         min_mileage: 'Kilometrazhi Minimal'

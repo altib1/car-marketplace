@@ -36,7 +36,7 @@ final class PublicationController extends AbstractController
         $publications = $paginator->paginate(
             $queryBuilder,
             $page,
-            8
+            9
         );
 
         return $this->render('publication/index.html.twig', [

@@ -28,7 +28,7 @@
 
         <!-- Main Content -->
         <main class="flex-1 px-20 pt-10">
-            <div class="flex h-full">
+            <div class="flex h-full max-w-[1400px] mx-auto">
                 {% if app.user and (app.request.attributes.get('_route') in [
                     'app_profile', 
                     'app_profile_edit', 
@@ -48,7 +48,7 @@
                     'app_chat_inbox',
                     'app_chat_conversation',
                     ]) %}
-                    <aside class="flex-none">
+                    <aside class="flex-none hidden lg:block">
                         {% include 'profile-menu/index.html.twig' %}
                     </aside>
                 {% endif %}
