@@ -593,3 +593,209 @@ wishlist:
     mileage: 'Kilometrazhi'
     view_details: 'Shiko Detajet'
     location_na: 'Vendndodhja nuk dihet'
+
+terms:
+    title: 'Kushtet e Përdorimit'
+    toc:
+        title: 'Tabela e Përmbajtjes'
+    intro:
+        title: 'Kushtet e Përdorimit të AutoSmart'
+        description: 'AutoSmart.com është një platformë online e dedikuar për tregtimin e automjeteve, që lehtëson lidhjet e sigurta midis shitësve dhe blerësve potencialë. Duke përdorur shërbimet tona, ju pranoni këto terma dhe kushte.'
+        last_updated: 'Përditësuar së fundmi: 6 shkurt 2025'
+    sections:
+        general:
+            title: 'Kushtet e Përgjithshme'
+            content: >
+                Platforma jonë ofron shërbime ndërmjetësimi për tregtimin e automjeteve. Administratori shprehimisht refuzon çdo përgjegjësi për:
+                - Transaksionet e drejtpërdrejta midis përdoruesve
+                - Cilësinë ose gjendjen e automjeteve
+                - Saktësinë e listimeve
+                - Marrëveshjet financiare midis palëve
+                - Mosmarrëveshjet midis përdoruesve
+                - Përdoruesit duhet të jenë të paktën 18 vjeç dhe ligjërisht të aftë për të hyrë në kontrata të detyrueshme.
+        security:
+            title: 'Siguria'
+            content: >
+                Masat e sigurisë së platformës përfshijnë:
+                - Protokollet HTTPS me enkriptim TLS 1.3
+                - Integrimi i sigurt i pagesave
+                - Auditime të rregullta të sigurisë
+                - Mbyllja e sesionit pas pasivitetit
+                - Përdoruesit janë përgjegjës për ruajtjen e sigurisë së llogarisë së tyre.
+        personal_data:
+            title: 'Mbrojtja e të Dhënave Personale'
+            content: >
+                Ne përpunojmë të dhënat tuaja në përputhje me GDPR dhe ligjet lokale të mbrojtjes së të dhënave:
+                - Mbledhja e të dhënave kufizohet në informacionin e nevojshëm
+                - Nuk ndahen me palë të treta pa pëlqim
+                - E drejta për të aksesuar, modifikuar ose fshirë të dhënat tuaja
+                - Auditime të rregullta të mbrojtjes së të dhënave
+                - Procedurat e njoftimit të shkeljeve
+                - Politikat e ruajtjes së të dhënave
+        technical:
+            title: 'Të Dhënat Teknike dhe Cookies'
+            content: >
+                Ne mbledhim dhe përpunojmë:
+                - Adresat IP
+                - Informacionin e shfletuesit
+                - Detajet e pajisjes
+                - Modelet e përdorimit
+                - Cookies për:
+                  * Menaxhimin e sesionit
+                  * Preferencat e përdoruesit
+                  * Analitikë
+                  * Masa sigurie
+                Ju mund të menaxhoni preferencat e cookies në cilësimet tuaja.
+        user_responsibilities:
+            title: 'Përgjegjësitë e Përdoruesit'
+            content: >
+                Përdoruesit duhet:
+                - Të japin informacion të saktë
+                - Të ruajnë sigurinë e llogarisë
+                - Të raportojnë aktivitetet e dyshimta
+                - Të respektojnë përdoruesit e tjerë
+                - Të mos përfshihen në mashtrim
+                - Të mos përdorin sisteme të automatizuara
+                - Të mos kopjojnë ose shpërndajnë përmbajtjen e platformës
+        liability:
+            title: 'Kufizimi i Përgjegjësisë'
+            content: >
+                AutoSmart nuk është përgjegjës për:
+                - Gjendjen e automjeteve
+                - Mosmarrëveshjet e përdoruesve
+                - Humbjet financiare
+                - Ndërprerjet e shërbimit
+                - Veprimet e palëve të treta
+                - Përgjegjësia maksimale kufizohet në tarifat e shërbimit të paguara.
+        copyright:
+            title: 'E Drejta e Autorit dhe Pronësia Intelektuale'
+            content: >
+                Të gjitha të drejtat i rezervohen AutoSmart:
+                - Dizajni i platformës
+                - Kodi burimor
+                - Përmbajtja e bazës së të dhënave
+                - Logot dhe branding
+                - Të drejtat e përmbajtjes së përdoruesit i përkasin përdoruesve
+                - Licencë e kufizuar vetëm për përdorim personal
+    hosting:
+        title: 'Informacioni i Hostimit'
+        content: >
+            Faqja web hostohet nga HOSTINGER INTERNATIONAL LTD
+            61 Lordou Vironos Street
+            6023 Larnaca, Qipro
+            Vendndodhja e Qendrës së të Dhënave: BE
+            Kontakt: https://www.hostinger.fr/contact
+    legal:
+        title: 'Kuadri Ligjor'
+        content: >
+            Kjo marrëveshje rregullohet nga ligjet e BE-së
+            Juridiksioni: Gjykatat e Shqipërisë
+            Zgjidhja e Mosmarrëveshjeve: Ndërmjetësim i detyrueshëm përpara gjykimit
+    termination:
+        title: 'Përfundimi i Llogarisë'
+        content: >
+            Ne rezervojmë të drejtën të mbyllim llogaritë për:
+            - Shkelje të kushteve
+            - Aktivitet mashtrues
+            - Pasivitet të zgjatur
+            - Kërkesa ligjore
+    changes:
+        title: 'Ndryshimet në Kushte'
+        content: 'Ne mund të përditësojmë këto kushte me njoftim 30 ditor'
+    footer:
+        copyright: '© %year% AutoSmart. Të gjitha të drejtat e rezervuara. Në përputhje me EU-GDPR.'
+
+privacy_policy:
+    title: 'Politika e Privatësisë'
+    last_updated: 'Përditësuar më: Maj 2024'
+    intro:
+        title: 'Përmbledhje'
+        description: 'Ne marrim seriozisht privatësinë tuaj. Kjo politikë shpjegon se si mbledhim, përdorim dhe mbrojmë të dhënat tuaja personale në përputhje me GDPR dhe ligjet lokale të privatësisë.'
+    personal_data:
+        title: 'Mbledhja e të Dhënave Personale'
+        description: 'Ne mbledhim dhe përpunojmë të dhënat e mëposhtme vetëm me pëlqimin tuaj të shprehur:'
+        items:
+            name: 'Emri i plotë: Për identifikimin tuaj'
+            email: 'Adresa e email-it: Për komunikim dhe verifikim'
+            phone: 'Numri i telefonit: Për verifikim dhe siguri shtesë'
+            id: 'Dokumenti i identifikimit: Për verifikimin e llogarisë (opsionale)'
+            location: 'Vendndodhja: Vetëm për listimin e automjeteve'
+            payment: 'Të dhënat e pagesës: Të enkriptuara dhe të procesuara nga ofrues të certifikuar'
+    data_usage:
+        title: 'Përdorimi i të Dhënave'
+        purposes:
+            account: 'Menaxhimi i llogarisë suaj'
+            listings: 'Publikimi i listimeve të automjeteve'
+            communications: 'Komunikime të rëndësishme'
+            security: 'Siguria dhe parandalimi i mashtrimit'
+            legal: 'Përputhshmëria ligjore'
+    data_protection:
+        title: 'Mbrojtja e të Dhënave'
+        measures:
+            encryption: 'Enkriptim i të dhënave në transferim dhe ruajtje'
+            access: 'Kontroll i rreptë i aksesit'
+    user_rights:
+        title: 'Të Drejtat Tuaja'
+        rights:
+            access: 'E drejta për të aksesuar të dhënat tuaja'
+            correction: 'E drejta për të korrigjuar të dhënat'
+            deletion: 'E drejta për të fshirë të dhënat ("E drejta për tu harruar")'
+            portability: 'E drejta për bartjen e të dhënave'
+            objection: 'E drejta për të kundërshtuar përpunimin'
+            withdrawal: 'E drejta për të tërhequr pëlqimin'
+    analytics:
+        title: 'Analitika dhe Gjurmimi'
+        description: 'Përdorim shërbime të palëve të treta me marrëveshje të rrepta të privatësisë:'
+        services:
+            google: 'Google Analytics (me IP të anonimizuar)'
+            sentry: 'Sentry për monitorimin e performancës'
+            hotjar: 'Hotjar për përmirësimin e përdorshmërisë'
+    cookies:
+        title: 'Menaxhimi i Cookies'
+        description: 'Kontrolloni përdorimin e cookies në faqen tonë:'
+        types:
+            essential: 'Thelbësore: Të domosdoshme për funksionimin e faqes'
+            functional: 'Funksionale: Përmirësojnë përvojën tuaj'
+            analytics: 'Analitike: Na ndihmojnë të përmirësojmë shërbimet'
+            advertising: 'Reklamimi: Gjithmonë opsionale'
+    data_retention:
+        title: 'Ruajtja e të Dhënave'
+        periods:
+            account: 'Të dhënat e llogarisë: Deri në fshirjen e llogarisë'
+            listings: 'Listrimet: 6 muaj pas përfundimit'
+            messages: 'Mesazhet: 12 muaj'
+            transactions: 'Të dhënat e transaksioneve: 7 vjet (kërkesë ligjore)'
+    security_measures:
+        title: 'Masat e Sigurisë'
+        measures:
+            ssl: 'SSL/TLS i detyrueshëm për të gjitha komunikimet'
+            updates: 'Përditësime të rregullta të sigurisë'
+    third_parties:
+        title: 'Palët e Treta'
+        description: 'Ndajmë të dhëna vetëm me:'
+        parties:
+            payment: 'Procesorët e pagesave të certifikuar'
+            hosting: 'Ofruesit e hostimit në BE'
+            legal: 'Autoritetet (vetëm me kërkesë ligjore)'
+    contact:
+        title: 'Na Kontaktoni për Privatësinë'
+        description: 'Për çdo pyetje në lidhje me privatësinë tuaj:'
+        methods:
+            email: 'Email: contact@autosmart.com'
+            dpo: 'Zyrtari i Mbrojtjes së të Dhënave: contact@autosmart.com'
+            address: 'Adresa: [Adresa juaj fizike]'
+            phone: 'Tel: [Numri i telefonit]'
+
+footer:
+    about_us: 'Rreth Nesh'
+    about_description: 'Ne jemi një treg makinash udhëheqës që ofron marrëveshjet më të mira për makina të reja dhe të përdorura.'
+    quick_links: 'Lidhje të Shpejta'
+    home: 'Kryefaqja'
+    contact: 'Kontakt'
+    privacy_policy: 'Politika e Privatësisë'
+    contact_us: 'Na Kontaktoni'
+    email: 'Email'
+    phone: 'Telefon'
+    address: 'Adresa'
+    copyright: '© year Car Marketplace. Të gjitha të drejtat të rezervuara.'
+    terms_of_use: 'Kushtet e Përdorimit'

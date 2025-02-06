@@ -12,6 +12,6 @@ controllers:
     type: attribute
     prefix: '/{_locale}'
     requirements:
-        _locale: 'en|al'
+        _locale: 'en|sq'
     defaults:
         _locale: 'en'

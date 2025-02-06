@@ -1,28 +1,25 @@
 <footer class="bg-gray-800 text-white py-8 mt-8">
     <div class="container mx-auto px-4 max-w-[1400px]">
         <div class="flex flex-wrap">
-            <div class="w-full md:w-1/3 mb-6 md:mb-0">
-                <h5 class="text-lg font-bold mb-2">About Us</h5>
-                <p>We are a leading car marketplace providing the best deals on new and used cars.</p>
+            <div class="w-full md:w-1/3 mb-6 md:mb-0 px-4">
+                <h5 class="text-lg font-bold mb-2">{{ 'footer.about_us'|trans }}</h5>
+                <p>{{ 'footer.about_description'|trans }}</p>
             </div>
             <div class="w-full md:w-1/3 mb-6 md:mb-0">
-                <h5 class="text-lg font-bold mb-2">Quick Links</h5>
+                <h5 class="text-lg font-bold mb-2">{{ 'footer.quick_links'|trans }}</h5>
                 <ul>
-                    <li><a href="{{ path('app_home') }}" class="text-gray-400 hover:text-white">Home</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">About</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Contact</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="{{ path('app_home') }}" class="text-gray-400 hover:text-white">{{ 'footer.home'|trans }}</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">{{ 'footer.contact'|trans }}</a></li>
+                    <li><a href="{{ path('app_privacy_policy') }}" class="text-gray-400 hover:text-white">{{ 'footer.privacy_policy'|trans }}</a></li>
+                    <li><a href="{{ path('app_terms_of_use') }}" class="text-gray-400 hover:text-white">{{ 'footer.terms_of_use'|trans }}</a></li>
                 </ul>
             </div>
             <div class="w-full md:w-1/3">
-                <h5 class="text-lg font-bold mb-2">Contact Us</h5>
-                <p>Email: <a href="mailto:info@carmarketplace.com" class="text-gray-400 hover:text-white">info@carmarketplace.com</a></p>
-                <p>Phone: <a href="tel:+1234567890" class="text-gray-400 hover:text-white">+1 234 567 890</a></p>
-                <p>Address: 123 Car St, Auto City, CA 12345</p>
+                <h5 class="text-lg font-bold mb-2">{{ 'footer.contact_us'|trans }}</h5>
+                <p>{{ 'footer.email'|trans }}: <a href="mailto:info@carmarketplace.com" class="text-gray-400 hover:text-white">contact@carmarketplace.com</a></p>
+                <p>{{ 'footer.address'|trans }}: Tirane, Albania</p>
             </div>
         </div>
         <div class="mt-8 text-center">
-            <p>&copy; {{ "now"|date("Y") }} Car Marketplace. All rights reserved.</p>
+            <p>{{ 'footer.copyright'|trans({'year': "now"|date("Y")}) }}</p>
         </div>
-    </div>
-</footer>

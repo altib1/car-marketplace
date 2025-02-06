@@ -598,3 +598,209 @@ wishlist:
     mileage: 'Mileage'
     view_details: 'View Details'
     location_na: 'Location N/A'
+
+terms:
+    title: 'Terms of Use'
+    toc:
+        title: 'Table of Contents'
+    intro:
+        title: 'AutoSmart Terms of Use'
+        description: 'AutoSmart.com is a dedicated online platform for vehicle trading, facilitating secure connections between sellers and potential buyers. By using our services, you agree to these terms and conditions.'
+        last_updated: 'Last updated: 6th february 2025'
+    sections:
+        general:
+            title: 'General Terms'
+            content: >
+                Our platform provides intermediary services for vehicle trading. The administrator explicitly disclaims any responsibility for:
+                - Direct transactions between users
+                - Quality or condition of vehicles
+                - Accuracy of listings
+                - Financial agreements between parties
+                - Disputes between users
+                - Users must be at least 18 years old and legally capable of entering binding contracts.
+        security:
+            title: 'Security'
+            content: >
+                Platform security measures include:
+                - HTTPS protocols with TLS 1.3 encryption
+                - Secure payment gateway integration
+                - Regular security audits
+                - Session timeout after inactivity
+                - Users are responsible for maintaining their account security.
+        personal_data:
+            title: 'Personal Data Protection'
+            content: >
+                We process your data in accordance with GDPR and local data protection laws:
+                - Data collection limited to necessary information
+                - No sharing with third parties without consent
+                - Right to access, modify, or delete your data
+                - Regular data protection audits
+                - Breach notification procedures
+                - Data retention policies
+        technical:
+            title: 'Technical Data & Cookies'
+            content: >
+                We collect and process:
+                - IP addresses
+                - Browser information
+                - Device details
+                - Usage patterns
+                - Cookies for:
+                  * Session management
+                  * User preferences
+                  * Analytics
+                  * Security measures
+                You can manage cookie preferences in your settings.
+        user_responsibilities:
+            title: 'User Responsibilities'
+            content: >
+                Users must:
+                - Provide accurate information
+                - Maintain account security
+                - Report suspicious activities
+                - Respect other users
+                - Not engage in fraud
+                - Not use automated systems
+                - Not copy or distribute platform content
+        liability:
+            title: 'Limitation of Liability'
+            content: >
+                AutoSmart is not liable for:
+                - Vehicle conditions
+                - User disputes
+                - Financial losses
+                - Service interruptions
+                - Third-party actions
+                - Maximum liability limited to service fees paid.
+        copyright:
+            title: 'Copyright and Intellectual Property'
+            content: >
+                All rights reserved to AutoSmart:
+                - Platform design
+                - Source code
+                - Database content
+                - Logos and branding
+                - User content rights retained by users
+                - Limited license for personal use only
+    hosting:
+        title: 'Hosting Information'
+        content: >
+            Website hosted by HOSTINGER INTERNATIONAL LTD
+            61 Lordou Vironos Street
+            6023 Larnaca, Cyprus
+            Data Center Location: EU
+            Contact: https://www.hostinger.fr/contact
+    legal:
+        title: 'Legal Framework'
+        content: >
+            This agreement is governed by EU laws
+            Jurisdiction: Courts of Albania
+            Dispute Resolution: Mandatory mediation before litigation
+    termination:
+        title: 'Account Termination'
+        content: >
+            We reserve the right to terminate accounts for:
+            - Terms violation
+            - Fraudulent activity
+            - Extended inactivity
+            - Legal requirements
+    changes:
+        title: 'Changes to Terms'
+        content: 'We may update these terms with 30 days notice'
+    footer:
+        copyright: '© %year% AutoSmart. All rights reserved. EU-GDPR Compliant.'
+
+privacy_policy:
+    title: 'Privacy Policy'
+    last_updated: 'Last Updated: May 2024'
+    intro:
+        title: 'Overview'
+        description: 'We take your privacy seriously. This policy explains how we collect, use, and protect your personal data in compliance with GDPR and local privacy laws.'
+    personal_data:
+        title: 'Personal Data Collection'
+        description: 'We collect and process the following data only with your explicit consent:'
+        items:
+            name: 'Full name: For your identification'
+            email: 'Email address: For communication and verification'
+            phone: 'Phone number: For verification and additional security'
+            id: 'ID document: For account verification (optional)'
+            location: 'Location: Only for vehicle listings'
+            payment: 'Payment data: Encrypted and processed by certified providers'
+    data_usage:
+        title: 'Data Usage'
+        purposes:
+            account: 'Managing your account'
+            listings: 'Publishing vehicle listings'
+            communications: 'Essential communications'
+            security: 'Security and fraud prevention'
+            legal: 'Legal compliance'
+    data_protection:
+        title: 'Data Protection'
+        measures:
+            encryption: 'Data encryption in transit and at rest'
+            access: 'Strict access control'
+    user_rights:
+        title: 'Your Rights'
+        rights:
+            access: 'Right to access your data'
+            correction: 'Right to correct your data'
+            deletion: 'Right to delete your data ("Right to be forgotten")'
+            portability: 'Right to data portability'
+            objection: 'Right to object to processing'
+            withdrawal: 'Right to withdraw consent'
+    analytics:
+        title: 'Analytics and Tracking'
+        description: 'We use third-party services with strict privacy agreements:'
+        services:
+            google: 'Google Analytics (with anonymized IP)'
+            sentry: 'Sentry for performance monitoring'
+            hotjar: 'Hotjar for usability improvements'
+    cookies:
+        title: 'Cookie Management'
+        description: 'Control cookie usage on our site:'
+        types:
+            essential: 'Essential: Required for site functionality'
+            functional: 'Functional: Enhance your experience'
+            analytics: 'Analytics: Help us improve services'
+            advertising: 'Advertising: Always optional'
+    data_retention:
+        title: 'Data Retention'
+        periods:
+            account: 'Account data: Until account deletion'
+            listings: 'Listings: 6 months after completion'
+            messages: 'Messages: 12 months'
+            transactions: 'Transaction data: 7 years (legal requirement)'
+    security_measures:
+        title: 'Security Measures'
+        measures:
+            ssl: 'Mandatory SSL/TLS for all communications'
+            updates: 'Regular security updates'
+    third_parties:
+        title: 'Third Parties'
+        description: 'We share data only with:'
+        parties:
+            payment: 'Certified payment processors'
+            hosting: 'EU-based hosting providers'
+            legal: 'Authorities (only when legally required)'
+    contact:
+        title: 'Privacy Contact'
+        description: 'For any privacy-related queries:'
+        methods:
+            email: 'Email: contact@autosmart.com'
+            dpo: 'Data Protection Officer: contact@autosmart.com'
+            address: 'Address: [Your physical address]'
+            phone: 'Tel: [Phone number]'
+
+footer:
+    about_us: 'About Us'
+    about_description: 'We are a leading car marketplace providing the best deals on new and used cars.'
+    quick_links: 'Quick Links'
+    home: 'Home'
+    contact: 'Contact'
+    privacy_policy: 'Privacy Policy'
+    contact_us: 'Contact Us'
+    email: 'Email'
+    phone: 'Phone'
+    address: 'Address'
+    copyright: '© year Car Marketplace. All rights reserved.'
+    terms_of_use: 'Terms of Use'
