@@ -5,14 +5,15 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "vite": "^5.0",
-        "vite-plugin-symfony": "^7.1",
         "autoprefixer": "^10.4.20",
         "postcss": "^8.4.47",
-        "tailwindcss": "^3.4.12"
+        "tailwindcss": "^3.4.12",
+        "vite": "^5.0",
+        "vite-plugin-symfony": "^7.1"
     },
     "dependencies": {
-      "flatpickr": "^4.6.13",
-      "swiper": "^11.2.1"
+        "flatpickr": "^4.6.13",
+        "swiper": "^11.2.1",
+        "tarteaucitronjs": "^1.19.0"
     }
 }

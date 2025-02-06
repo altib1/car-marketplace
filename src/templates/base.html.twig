@@ -7,6 +7,7 @@
         {% block stylesheets %}
             {{ vite_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('tarteaucitron/css/tarteaucitron.css') }}">
         {% endblock %}
         <style>
             .scroll-hidden::-webkit-scrollbar {
@@ -19,8 +20,66 @@
             }
         </style>
 
+        {# cookies consent      #}
+
+        <script src="{{ asset('tarteaucitron/tarteaucitron.js') }}"></script>
+        <script type="text/javascript">
+
+        tarteaucitron.lang = '{{ app.request.locale }}';
+
+        tarteaucitron.init({
+    	  "privacyUrl": "{{ path('app_privacy_policy') }}", /* Url de la politique de confidentialité */
+          "bodyPosition": "top", /* top place le bandeau de consentement au début du code html, mieux pour l'accessibilité */
+
+    	  "hashtag": "#tarteaucitron", /* Hashtag qui permet d'ouvrir le panneau de contrôle  */
+    	  "cookieName": "tarteaucitron", /* Nom du cookie (uniquement lettres et chiffres) */
+    
+    	  "orientation": "middle", /* Position de la bannière (top - bottom - popup - banner) */
+       
+          "groupServices": true, /* Grouper les services par catégorie */
+          "showDetailsOnClick": true, /* Cliquer pour ouvrir la description */
+          "serviceDefaultState": "wait", /* Statut par défaut (true - wait - false) */
+                           
+    	  "showAlertSmall": false, /* Afficher la petite bannière en bas à droite */
+    	  "cookieslist": false, /* Afficher la liste des cookies */
+                           
+          "closePopup": true, /* Afficher un X pour fermer la bannière */
+
+          "showIcon": true, /* Afficher un cookie pour ouvrir le panneau */
+          //"iconSrc": "", /* Optionnel: URL ou image en base64 */
+          "iconPosition": "BottomLeft", /* Position de l'icons: (BottomRight - BottomLeft - TopRight - TopLeft) */
+
+    	  "adblocker": false, /* Afficher un message si un Adblocker est détecté */
+                           
+          "DenyAllCta" : true, /* Afficher le bouton Tout refuser */
+          "AcceptAllCta" : true, /* Afficher le bouton Tout accepter */
+          "highPrivacy": true, /* Attendre le consentement */
+          "alwaysNeedConsent": false, /* Demander le consentement même pour les services "Privacy by design" */
+                           
+    	  "handleBrowserDNTRequest": false, /* Refuser tout par défaut si Do Not Track est activé sur le navigateur */
+
+    	  "removeCredit": true, /* Retirer le lien de crédit vers tarteaucitron.io */
+    	  "moreInfoLink": true, /* Afficher le lien En savoir plus */
+
+          "useExternalCss": false, /* Mode expert : désactiver le chargement des fichiers .css tarteaucitron */
+          "useExternalJs": false, /* Mode expert : désactiver le chargement des fichiers .js tarteaucitron */
+
+    	  //"cookieDomain": ".my-multisite-domaine.fr", /* Optionnel: domaine principal pour partager le consentement avec des sous domaines */
+                          
+          "readmoreLink": "", /* Changer le lien En savoir plus par défaut */
+
+          "mandatory": true, /* Afficher un message pour l'utilisation de cookies obligatoires */
+          "mandatoryCta": false, /* Afficher un bouton pour les cookies obligatoires (déconseillé) */
+    
+          //"customCloserId": "", /* Optionnel a11y: ID personnalisé pour ouvrir le panel */
+          
+          "googleConsentMode": true, /* Activer le Google Consent Mode v2 pour Google ads et GA4 */
+          
+          "partnersList": true /* Afficher le détail du nombre de partenaires sur la bandeau */
+        });
+        </script>
     </head>
-    <body class="flex flex-col min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50">
+    <body class="flex flex-col min-h-screen bg-gradient-to-r from-blue-50 to-indigo-50">     
         <!-- Navbar -->
         <nav class="w-full">
             {% include 'menu/index.html.twig' %}
