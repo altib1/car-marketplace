@@ -796,7 +796,7 @@ footer:
     about_description: 'We are a leading car marketplace providing the best deals on new and used cars.'
     quick_links: 'Quick Links'
     home: 'Home'
-    contact: 'Contact'
+    contact: 'Contact us'
     privacy_policy: 'Privacy Policy'
     contact_us: 'Contact Us'
     email: 'Email'
@@ -804,3 +804,26 @@ footer:
     address: 'Address'
     copyright: '© year Car Marketplace. All rights reserved.'
     terms_of_use: 'Terms of Use'
+
+contact:
+    title: 'Contact Us'
+    subtitle: 'Get in Touch'
+    description: 'Have questions? We would love to hear from you. Send us a message and we will respond as soon as possible.'
+    form:
+        name: 'Your Name'
+        email: 'Email Address'
+        subject: 'Subject'
+        message: 'Your Message'
+        submit: 'Send Message'
+    info:
+        title: 'Contact Information'
+        address: 'Tirana, Albania'
+        email: 'contact@autosmart.com'
+        phone: '+355 69 XXX XXXX'
+        hours: 'Mon-Fri: 9:00 AM - 5:00 PM'
+    success: 'Your message has been sent successfully!'
+    error:
+        rate_limit: 'Please wait 5 minutes before sending another message.'
+        send_failed: 'Failed to send message. Please try again.'
+    email:
+        subject: 'New Contact Form Submission - AutoSmart'
