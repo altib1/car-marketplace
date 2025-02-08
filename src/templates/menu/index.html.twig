@@ -73,7 +73,7 @@
                             </div>
                         </div>
 
-                        <a href="#" class="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">{{ 'menu.services'|trans }}</a>
+                        <a href="{{ path('app_about') }}" class="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">{{ 'menu.services'|trans }}</a>
                     </div>
                     {% if app.user %}
                     <div class="relative hidden lg:block" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
