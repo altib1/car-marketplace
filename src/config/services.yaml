@@ -6,6 +6,7 @@
 parameters:
     brochures_directory: '%env(resolve:BROCHURES_DIRECTORY)%'
     locale: 'en'
+    contact_email: '%env(resolve:COMPANY_EMAIL)%'
 services:
     # default configuration for services in *this* file
     _defaults:

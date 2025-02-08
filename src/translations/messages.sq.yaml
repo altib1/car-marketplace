@@ -791,7 +791,7 @@ footer:
     about_description: 'Ne jemi një treg makinash udhëheqës që ofron marrëveshjet më të mira për makina të reja dhe të përdorura.'
     quick_links: 'Lidhje të Shpejta'
     home: 'Kryefaqja'
-    contact: 'Kontakt'
+    contact: 'Na Kontaktoni'
     privacy_policy: 'Politika e Privatësisë'
     contact_us: 'Na Kontaktoni'
     email: 'Email'
@@ -799,3 +799,26 @@ footer:
     address: 'Adresa'
     copyright: '© year Car Marketplace. Të gjitha të drejtat të rezervuara.'
     terms_of_use: 'Kushtet e Përdorimit'
+
+contact:
+    title: 'Na Kontaktoni'
+    subtitle: 'Lidhuni me Ne'
+    description: 'Keni pyetje? Do të donim të dëgjonim nga ju. Na dërgoni një mesazh dhe do t''ju përgjigjemi sa më shpejt të jetë e mundur.'
+    form:
+        name: 'Emri Juaj'
+        email: 'Adresa Email'
+        subject: 'Subjekti'
+        message: 'Mesazhi Juaj'
+        submit: 'Dërgo Mesazhin'
+    info:
+        title: 'Informacione Kontakti'
+        address: 'Tiranë, Shqipëri'
+        email: 'contact@autosmart.com'
+        phone: '+355 69 XXX XXXX'
+        hours: 'E Hënë-E Premte: 9:00 - 17:00'
+    success: 'Mesazhi juaj u dërgua me sukses!'
+    error:
+        rate_limit: 'Ju lutemi prisni 5 minuta para se të dërgoni një mesazh tjetër.'
+        send_failed: 'Dërgimi i mesazhit dështoi. Ju lutemi provoni përsëri.'
+    email:
+        subject: 'Mesazh i Ri nga Formulari i Kontaktit - AutoSmart'
