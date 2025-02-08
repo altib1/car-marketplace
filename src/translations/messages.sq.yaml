@@ -799,6 +799,7 @@ footer:
     address: 'Adresa'
     copyright: '© year Car Marketplace. Të gjitha të drejtat të rezervuara.'
     terms_of_use: 'Kushtet e Përdorimit'
+    services: 'Shërbimet Tona'
 
 contact:
     title: 'Na Kontaktoni'
@@ -822,3 +823,61 @@ contact:
         send_failed: 'Dërgimi i mesazhit dështoi. Ju lutemi provoni përsëri.'
     email:
         subject: 'Mesazh i Ri nga Formulari i Kontaktit - AutoSmart'
+
+about:
+    title: 'Rreth AutoSmart'
+    hero:
+        title: 'Gjeni Makinën Tuaj të Përsosur'
+        description: 'Mënyra më e thjeshtë për të lidhur blerësit dhe shitësit e makinave në të gjithë Shqipërinë edhe Kosovën'
+        cta: 'Fillo Kërkimin'
+    
+    benefits:
+        search:
+            title: 'Kërkim i Lehtë'
+            description: 'Gjeni saktësisht atë që po kërkoni me filtrat tanë të fuqishëm të kërkimit'
+        connect:
+            title: 'Lidhje e Drejtpërdrejtë'
+            description: 'Lidhuni direkt me shitësit - pa ndërmjetës, pa tarifa shtesë'
+        decide:
+            title: 'Vendime të Informuara'
+            description: 'Listime të detajuara me foto dhe specifikime për të zgjedhur me mençuri'
+    
+    how_it_works:
+        title: 'Si Funksionon AutoSmart'
+        steps:
+            browse:
+                title: 'Shfleto Listat'
+                description: 'Kërkoni në bazën tonë të gjerë të të dhënave duke përdorur filtrat'
+            contact:
+                title: 'Kontakto Shitësin'
+                description: 'Lidhuni direkt me shitësin përmes sistemit tonë të mesazheve'
+            meet:
+                title: 'Takohuni & Vendosni'
+                description: 'Takoni shitësin, inspektoni makinën dhe merrni vendimin tuaj'
+    
+    features:
+        listings:
+            title: 'Listime të Detajuara'
+            description: 'Informacion i plotë për çdo automjet me foto të shumta'
+        search:
+            title: 'Kërkim Inteligjent'
+            description: 'Gjeni makina sipas markës, modelit, vitit, çmimit dhe më shumë'
+        filters:
+            title: 'Filtra të Avancuar'
+            description: 'Filtro sipas karakteristikave specifike, gjendjes dhe vendndodhjes'
+        messaging:
+            title: 'Mesazhe të Sigurta'
+            description: 'Komunikoni në mënyrë të sigurt me shitësit përmes platformës sonë'
+    
+    coverage:
+        title: 'Tregu në Rritje i Makinave në Shqipëri dhe Kosovë'
+        cities: 'Qytete të Mbuluara'
+        listings: 'Listime Aktive'
+        users: 'Përdorues Aktivë'
+        brands: 'Marka Makinash'
+    
+    cta:
+        title: 'Gati për të Gjetur Makinën Tuaj të Radhës?'
+        description: 'Bashkohuni me mijëra të tjerë që kanë gjetur makinën e tyre të përsosur në AutoSmart'
+        register: 'Krijo Llogari'
+        contact: 'Na Kontaktoni'

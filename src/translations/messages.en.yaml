@@ -804,6 +804,7 @@ footer:
     address: 'Address'
     copyright: '© year Car Marketplace. All rights reserved.'
     terms_of_use: 'Terms of Use'
+    services: 'Our Services'
 
 contact:
     title: 'Contact Us'
@@ -827,3 +828,60 @@ contact:
         send_failed: 'Failed to send message. Please try again.'
     email:
         subject: 'New Contact Form Submission - AutoSmart'
+about:
+    title: 'About AutoSmart'
+    hero:
+        title: 'Find Your Perfect Car'
+        description: 'The simplest way to connect car buyers and sellers across Albania and Kosova'
+        cta: 'Start Browsing'
+    
+    benefits:
+        search:
+            title: 'Easy Search'
+            description: 'Find exactly what you are looking for with our powerful search filters'
+        connect:
+            title: 'Direct Connection'
+            description: 'Connect directly with sellers - no middlemen, no extra fees'
+        decide:
+            title: 'Make Informed Decisions'
+            description: 'Detailed listings with photos and specifications help you choose wisely'
+    
+    how_it_works:
+        title: 'How AutoSmart Works'
+        steps:
+            browse:
+                title: 'Browse Listings'
+                description: 'Search through our extensive database of cars using filters'
+            contact:
+                title: 'Contact Seller'
+                description: 'Connect directly with the seller through our messaging system'
+            meet:
+                title: 'Meet & Decide'
+                description: 'Meet the seller, inspect the car, and make your decision'
+    
+    features:
+        listings:
+            title: 'Detailed Listings'
+            description: 'Comprehensive information about each vehicle with multiple photos'
+        search:
+            title: 'Smart Search'
+            description: 'Find cars by brand, model, year, price, and more'
+        filters:
+            title: 'Advanced Filters'
+            description: 'Filter by specific features, condition, and location'
+        messaging:
+            title: 'Secure Messaging'
+            description: 'Communicate safely with sellers through our platform'
+    
+    coverage:
+        title: 'Albania and Kosovas Growing Car Marketplace'
+        cities: 'Cities Covered'
+        listings: 'Active Listings'
+        users: 'Active Users'
+        brands: 'Car Brands'
+    
+    cta:
+        title: 'Ready to Find Your Next Car?'
+        description: 'Join thousands of others who have found their perfect car on AutoSmart'
+        register: 'Create Account'
+        contact: 'Contact Us'
