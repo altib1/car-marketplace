@@ -122,6 +122,13 @@ profile:
         actions:
           edit: 'Modifiko'
           back: 'Kthehu te Lista e postimeve'
+          remove: 'Fshij'
+        remove:
+          title: 'Statusi i Postimit'
+          sold: 'Kjo veturë është shitur'
+          date: 'Data e shitjes'
+          cancel: 'Anulo'
+          confirm: 'Fshij'
       index:
         title: 'Postimet'
         new: 'Krijo Postim të Ri'

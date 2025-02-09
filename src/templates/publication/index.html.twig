@@ -31,7 +31,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {% if publications|length > 0 %}
                 {% for publication in publications %}
-                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group">
+                    <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden group" data-publication-id="{{ publication.id }}">
                         <!-- Card Image with Badges -->
                         <div class="aspect-w-16 aspect-h-9 relative overflow-hidden">
                             {% if publication.imageFilenames is defined and publication.imageFilenames %}
@@ -105,6 +105,9 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
                                     </svg>
                                 </a>
+                                <button type="button" data-modal-target="#removeModal" data-publication-id="{{ publication.id }}" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200">
+                                    {{ 'profile.publication.show.actions.remove'|trans }}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -142,6 +145,33 @@
                 </div>
             {% endif %}
         </div>
+    </div>
+</div>
+
+<!-- Remove Modal -->
+<div id="removeModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center hidden modal-overlay">
+    <div class="bg-white rounded-lg p-8 max-w-lg w-full" onclick="event.stopPropagation()">
+        <h2 class="text-2xl font-bold mb-4">{{ 'profile.publication.show.remove.title'|trans }}</h2>
+        {{ form_start(form, {'action': path('app_publication_remove', {'id': '__PUBLICATION_ID__'})}) }}
+            <div class="mb-4">
+                {{ form_label(form.sold) }}
+                {{ form_widget(form.sold) }}
+            </div>
+            <div class="mb-4">
+                {{ form_label(form.saleDate) }}
+                {{ form_widget(form.saleDate) }}
+            </div>
+            <div class="flex justify-end space-x-4">
+                <button type="button" data-modal-close="#removeModal" 
+                        class="px-6 py-3 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors duration-200">
+                    {{ 'profile.publication.show.remove.cancel'|trans }}
+                </button>
+                <button type="submit" 
+                        class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200">
+                    {{ 'profile.publication.show.remove.confirm'|trans }}
+                </button>
+            </div>
+        {{ form_end(form) }}
     </div>
 </div>
 {% endblock %}

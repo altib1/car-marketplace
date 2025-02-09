@@ -125,6 +125,13 @@ profile:
         actions:
           edit: 'Edit'
           back: 'Back to List'
+          remove: 'Remove'
+        remove:
+          title: 'Update Publication Status'
+          sold: 'Was this vehicle sold?'
+          date: 'Sale Date'
+          cancel: 'Cancel'
+          confirm: 'Confirm'
       index:
         title: 'Publications'
         new: 'New Publication'
