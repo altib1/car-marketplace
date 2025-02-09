@@ -25,7 +25,9 @@ class WishlistController extends AbstractController
 
         if ($wishlist) {
             $queryBuilder = $publicationRepository->createQueryBuilder('p')
+                ->leftJoin('p.saleStatus', 's')
                 ->where('p IN (:publications)')
+                ->andWhere('s.id IS NULL')
                 ->setParameter('publications', $wishlist->getPublications());
 
             $page = $request->query->getInt('page', 1);

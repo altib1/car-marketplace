@@ -7,8 +7,11 @@ fos_elastica:
           persistence:
               driver: orm
               model: App\Entity\Publication
-              provider: ~
+              provider: 
+                query_builder_method: createIsNotSoldQueryBuilder
               finder: ~
+              elastica_to_model_transformer:
+                hydrate: true
           properties:
               id: ~
               description:
@@ -57,3 +60,9 @@ fos_elastica:
                   type: keyword
               hasWarranty:
                   type: boolean
+              saleStatus:
+                  type: nested
+                  properties:
+                      id: ~
+                      sold: { type: boolean }
+                      saleDate: { type: date }

@@ -79,6 +79,11 @@ class CarsController extends AbstractController
         if ($user && method_exists($user, 'getShop')) {
             $shop = $user->getShop();
         }
+
+        if($publication->getSaleStatus() !== null) {
+            return $this->redirectToRoute('app_cars');
+        }
+        
         return $this->render('cars/show.html.twig', [
             'publication' => $publication,
             'shop' => $shop,

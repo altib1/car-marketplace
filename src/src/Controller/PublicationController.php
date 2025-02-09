@@ -19,6 +19,8 @@ use App\Entity\CarBrand;
 use App\Repository\RegionRepository;
 use App\Service\FileUploader;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Entity\SaleStatus;
+use App\Form\SaleStatusType;
 
 #[Route('/publication', name: 'app_publication')]
 final class PublicationController extends AbstractController
@@ -29,7 +31,9 @@ final class PublicationController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $queryBuilder = $publicationRepository->createQueryBuilder('p')
+            ->leftJoin('p.saleStatus', 's')
             ->where('p.user = :user')
+            ->andWhere('s.id IS NULL')
             ->setParameter('user', $this->getUser());
 
         $page = $request->query->getInt('page', 1);
@@ -39,8 +43,13 @@ final class PublicationController extends AbstractController
             9
         );
 
+         // Create a new SaleStatus form
+         $saleStatus = new SaleStatus();
+         $form = $this->createForm(SaleStatusType::class, $saleStatus);
+
         return $this->render('publication/index.html.twig', [
             'publications' => $publications,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -100,6 +109,10 @@ final class PublicationController extends AbstractController
             throw $this->createAccessDeniedException('You cannot view this publication.');
         }
 
+        if($publication->getSaleStatus() !== null) {
+            return $this->redirectToRoute('app_publication_index');
+        }
+
         return $this->render('publication/show.html.twig', [
             'publication' => $publication,
         ]);
@@ -133,6 +146,10 @@ final class PublicationController extends AbstractController
     {
         // Check if current user owns the publication
         if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot edit this publication.');
+        }
+
+        if($publication->getSaleStatus() !== null) {
             throw $this->createAccessDeniedException('You cannot edit this publication.');
         }
 
@@ -176,7 +193,7 @@ final class PublicationController extends AbstractController
         return $this->redirectToRoute('app_publication_index', [], Response::HTTP_SEE_OTHER);
     }
 
- #[Route('/models/{brandId}', name: 'get_models', methods: ['GET'])]
+    #[Route('/models/{brandId}', name: 'get_models', methods: ['GET'])]
     public function getModels(
         int $brandId, 
         CarModelRepository $carModelRepository
@@ -209,7 +226,7 @@ final class PublicationController extends AbstractController
         return new JsonResponse($data);
     }
 
-#[Route('/motorisation-types/{modelId}', name: 'get_motorisation_types', methods: ['GET'])]
+    #[Route('/motorisation-types/{modelId}', name: 'get_motorisation_types', methods: ['GET'])]
     public function getMotorisationTypes(
         int $modelId, 
         MotorizationTypeRepository $motorizationTypeRepository
@@ -262,5 +279,35 @@ final class PublicationController extends AbstractController
         if ($publication->getImageFilenames() === null) {
             $publication->setImageFilenames([]);
         }
+    }
+
+    #[Route('/publication/{id}/remove', name: '_remove', methods: ['POST'])]
+    public function remove(Request $request, Publication $publication, EntityManagerInterface $entityManager): Response
+    {
+        // Check if current user owns the publication
+        if ($publication->getUser() !== $this->getUser()) {
+            throw $this->createAccessDeniedException('You cannot delete this publication.');
+        }
+
+        $saleStatus = new SaleStatus();
+        $form = $this->createForm(SaleStatusType::class, $saleStatus);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $saleStatus->setPublication($publication);
+            $publication->setSaleStatus($saleStatus);
+            
+            if ($saleStatus->isSold()) {
+                $saleStatus->setSaleDate(new \DateTime());
+            }
+
+            $entityManager->persist($saleStatus);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Publication status updated successfully.');
+            return $this->redirectToRoute('app_publication_index');
+        }
+
+        return $this->redirectToRoute('app_publication_index');
     }
 }

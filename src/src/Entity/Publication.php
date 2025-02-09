@@ -90,6 +90,9 @@ class Publication
     #[ORM\ManyToMany(targetEntity: Wishlist::class, mappedBy: 'publications')]
     private Collection $wishlists;
 
+    #[ORM\OneToOne(mappedBy: 'publication', targetEntity: SaleStatus::class, cascade: ['persist', 'remove'])]
+    private ?SaleStatus $saleStatus = null;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -408,6 +411,22 @@ class Publication
         if ($this->wishlists->removeElement($wishlist)) {
             $wishlist->removePublication($this);
         }
+
+        return $this;
+    }
+
+    public function getSaleStatus(): ?SaleStatus
+    {
+        return $this->saleStatus;
+    }
+
+    public function setSaleStatus(?SaleStatus $saleStatus): self
+    {
+        if ($saleStatus !== null && $saleStatus->getPublication() !== $this) {
+            $saleStatus->setPublication($this);
+        }
+
+        $this->saleStatus = $saleStatus;
 
         return $this;
     }

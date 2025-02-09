@@ -20,6 +20,7 @@ import { initializeConversation } from './js/modules/conversation';
 import { initializeCars } from './js/modules/cars';
 import { initializeLocation } from './js/modules/location';
 import { initializeShop } from './js/modules/shop';
+import { initializePublications } from './js/modules/publications';
 
 // Initialize all modules when DOM is ready
 initializeFormHandlers();
@@ -32,3 +33,4 @@ initializeConversation();
 initializeCars();
 initializeLocation();
 initializeShop();
+initializePublications();
