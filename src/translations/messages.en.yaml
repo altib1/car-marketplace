@@ -38,6 +38,23 @@ car:
     conexion:
         sign_in: 'Sign In'
         sign_up: 'Create Account'
+    loan_simulator:
+        title: 'Loan Calculator'
+        disclaimer: 'This is a simplified loan calculator. Actual loan terms and payments may vary based on your bank, credit score, and other factors.'
+        vehicle_price: 'Vehicle Price'
+        interest_rate: 'Interest Rate'
+        loan_duration: 'Loan Duration'
+        months: 'months'
+        monthly_payment: 'Estimated Monthly Payment'
+        total_interest: 'Total Interest'
+        warning: 'Please note: These calculations are estimates only. Contact your bank or financial institution for accurate loan terms and conditions.'
+        responsibility: 'Important: All loans must be repaid. Please ensure you can afford the monthly payments before taking out a loan. You are responsible for any financial commitments you make.'
+    warranty:
+        title: 'Warranty Information'
+        available_months: 'This vehicle comes with a %months%-month warranty.'
+        explanation: 'If warranty is offered, the seller must provide all warranty documentation and honor its terms.'
+        request: 'Please request and review all warranty documentation before purchase.'
+        disclaimer: 'IMPORTANT: Our platform only displays warranty information as provided by sellers. We are not responsible for warranty claims.'
 
 profile:
     index:

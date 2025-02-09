@@ -38,6 +38,23 @@ car:
     conexion:
         sign_in: 'Hyr ne Llogari'
         sign_up: 'Krijo Llogari'
+    loan_simulator:
+        title: 'Kalkulatori i Kredisë'
+        disclaimer: 'Ky është një kalkulator i thjeshtuar kredie. Kushtet dhe pagesat aktuale të kredisë mund të ndryshojnë në varësi të bankës suaj, rezultatit të kredisë dhe faktorëve të tjerë.'
+        vehicle_price: 'Çmimi i Automjetit'
+        interest_rate: 'Norma e Interesit'
+        loan_duration: 'Kohëzgjatja e Kredisë'
+        months: 'muaj'
+        monthly_payment: 'Pagesa Mujore e Përllogaritur'
+        total_interest: 'Interesi Total'
+        warning: 'Ju lutemi vini re: Këto llogaritje janë vetëm përllogaritje. Kontaktoni bankën ose institucionin tuaj financiar për kushte dhe kushte të sakta kredie.'
+        responsibility: 'E rëndësishme: Të gjitha kreditë duhet të shlyhen. Ju lutemi sigurohuni që mund të përballoni pagesat mujore përpara se të merrni një kredi. Ju jeni përgjegjës për çdo angazhim financiar që bëni.'
+    warranty:
+        title: 'Informacioni i Garancisë'
+        available_months: 'Ky automjet vjen me një garanci prej %months% muajsh.'
+        explanation: 'Nëse ofrohet garancia, shitësi duhet të sigurojë të gjithë dokumentacionin e garancisë dhe të respektojë kushtet e saj.'
+        request: 'Ju lutemi kërkoni dhe rishikoni të gjithë dokumentacionin e garancisë përpara blerjes.'
+        disclaimer: 'E RËNDËSISHME: Platforma jonë shfaq vetëm informacionin e garancisë të dhënë nga shitësit. Ne nuk jemi përgjegjës për pretendimet e garancisë.'
 
 profile:
     index:

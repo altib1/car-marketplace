@@ -78,4 +78,54 @@ export function initializeCars() {
             }
         });
     });
+
+    // Bank estimation
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const vehiclePriceInput = document.getElementById('vehiclePrice');
+        const interestRateInput = document.getElementById('interestRate');
+        const loanDurationSelect = document.getElementById('loanDuration');
+        const monthlyPaymentDisplay = document.getElementById('monthlyPayment');
+        const totalInterestDisplay = document.getElementById('totalInterest');
+    
+        function calculateLoan() {
+            const principal = parseFloat(vehiclePriceInput.value);
+            const annualRate = parseFloat(interestRateInput.value) / 100;
+            const months = parseInt(loanDurationSelect.value);
+            
+            if (isNaN(principal) || isNaN(annualRate) || principal <= 0 || annualRate < 0) {
+                monthlyPaymentDisplay.textContent = '€0.00';
+                totalInterestDisplay.textContent = '€0.00';
+                return;
+            }
+    
+            const monthlyRate = annualRate / 12;
+            
+            // Using the amortization formula
+            const monthlyPayment = principal * 
+                (monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+                (Math.pow(1 + monthlyRate, months) - 1);
+                
+            const totalPayment = monthlyPayment * months;
+            const totalInterest = totalPayment - principal;
+    
+            // Format numbers with thousands separator
+            const formatter = new Intl.NumberFormat('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+    
+            monthlyPaymentDisplay.textContent = formatter.format(monthlyPayment);
+            totalInterestDisplay.textContent = formatter.format(totalInterest);
+        }
+    
+        vehiclePriceInput.addEventListener('input', calculateLoan);
+        interestRateInput.addEventListener('input', calculateLoan);
+        loanDurationSelect.addEventListener('change', calculateLoan);
+    
+        // Initial calculation
+        calculateLoan();
+    });
 }
