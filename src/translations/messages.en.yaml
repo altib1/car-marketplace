@@ -201,6 +201,14 @@ profile:
           description: 'Description'
           price: 'Price'
           year: 'Year'
+          import:
+            title: 'Import Information'
+            isImport: 'Is this an imported vehicle?'
+            country:
+              label: 'Country of Origin'
+              placeholder: 'Choose a country'
+            isCustomsDutyPaid: 'Is customs duty paid?'
+            details: 'Import Details'
           brand:
             label: 'Brand'
             placeholder: 'Choose a brand'

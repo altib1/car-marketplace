@@ -83,6 +83,8 @@ export function initializeCars() {
 
     document.addEventListener('DOMContentLoaded', function() {
         const vehiclePriceInput = document.getElementById('vehiclePrice');
+        if (!vehiclePriceInput) return;
+        
         const interestRateInput = document.getElementById('interestRate');
         const loanDurationSelect = document.getElementById('loanDuration');
         const monthlyPaymentDisplay = document.getElementById('monthlyPayment');

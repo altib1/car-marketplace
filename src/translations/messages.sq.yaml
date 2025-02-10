@@ -198,6 +198,14 @@ profile:
           description: 'Përshkrimi'
           price: 'Çmimi'
           year: 'Viti i Prodhimit'
+          import:
+            title: 'Informacioni i Importit'
+            isImport: 'Kjo veturë është importuar ?'
+            country:
+              label: 'Prejardhja e Veturës'
+              placeholder: 'Zgjidh një shtet'
+            isCustomsDutyPaid: 'Detyra Doganore është paguar ?'
+            details: 'Detajet e Importit'
           brand:
             label: 'Marka'
             placeholder: 'Zgjidh një markë'

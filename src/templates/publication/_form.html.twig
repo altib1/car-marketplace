@@ -109,6 +109,35 @@
     </div>
 
     <div class="bg-gray-50 p-4 rounded-lg mb-4">
+        <h3 class="text-lg font-medium text-gray-900 mb-4">{{'profile.publication.form.publication.import.title'|trans}}</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="mb-4">
+                {{ form_label(form.isImport, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.isImport, {'attr': {'class': 'mt-1 h-4 w-4 text-blue-600 border-gray-300 rounded'}}) }}
+                {{ form_errors(form.isImport) }}
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.importCountry, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.importCountry, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                {{ form_errors(form.importCountry) }}
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.isCustomsDutyPaid, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.isCustomsDutyPaid, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                {{ form_errors(form.isCustomsDutyPaid) }}
+            </div>
+
+            <div class="mb-4">
+                {{ form_label(form.importDetails, null, {'label_attr': {'class': 'block text-sm font-medium text-gray-700'}}) }}
+                {{ form_widget(form.importDetails, {'attr': {'class': 'mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md'}}) }}
+                {{ form_errors(form.importDetails) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
         <h3 class="text-lg font-medium text-gray-900 mb-4">{{'profile.publication.form.publication.equipment'|trans}}</h3>
         <div class="mb-4" id="equipment-collection"
              data-prototype="{{ form_widget(form.equipment.vars.prototype)|e('html_attr') }}">

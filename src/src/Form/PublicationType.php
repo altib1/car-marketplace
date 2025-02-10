@@ -23,6 +23,10 @@ use Symfony\Component\Validator\Constraints\All;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Region;
 use App\Entity\Country;
+use App\Entity\ImportCountry;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 
 class PublicationType extends AbstractType
 {
@@ -132,6 +136,14 @@ class PublicationType extends AbstractType
                 'empty_data' => 'used',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
+            ->add('isImport', CheckboxType::class, [
+                'label' => 'profile.publication.form.publication.import.isImport',
+                'required' => false,
+                'attr' => [
+                    'class' => 'h-4 w-4 rounded border-gray-300',
+                    'data-toggle-import-fields' => true,
+                ],
+            ])
             ->add('equipment', CollectionType::class, [
                 'label' => 'profile.publication.form.publication.equipment',
                 'entry_type' => TextType::class,
@@ -178,6 +190,53 @@ class PublicationType extends AbstractType
                     ])
                 ],
             ]);
+
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $publication = $event->getData();
+                $form = $event->getForm();
+    
+                $this->addImportFields($form, $publication?->isImport());
+            });
+    
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+                $data = $event->getData();
+                $form = $event->getForm();
+    
+                $this->addImportFields($form, !empty($data['isImport']));
+            });
+    }
+
+    private function addImportFields(FormInterface $form, bool $isImport): void
+    {
+        $form->add('importCountry', EntityType::class, [
+            'label' => 'profile.publication.form.publication.import.country.label',
+            'class' => ImportCountry::class,
+            'choice_label' => 'name',
+            'placeholder' => 'profile.publication.form.publication.import.country.placeholder',
+            'attr' => [
+                'class' => 'w-full p-3 border rounded-lg import-field',
+                'id' => 'publication_import_country'
+            ],
+            'required' => $isImport,
+            'disabled' => !$isImport,
+        ])
+        ->add('isCustomsDutyPaid', CheckboxType::class, [
+            'label' => 'profile.publication.form.publication.import.isCustomsDutyPaid',
+            'required' => false,
+            'attr' => [
+                'class' => 'h-4 w-4 rounded border-gray-300 import-field',
+            ],
+            'disabled' => !$isImport,
+        ])
+        ->add('importDetails', TextareaType::class, [
+            'label' => 'profile.publication.form.publication.import.details',
+            'attr' => [
+                'class' => 'w-full p-3 border rounded-lg import-field',
+            ],
+            'required' => $isImport,
+            'disabled' => !$isImport,
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
