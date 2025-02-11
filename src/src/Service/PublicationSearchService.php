@@ -139,6 +139,12 @@ class PublicationSearchService
             $boolQuery->addFilter($termQuery);
         }
 
+        // import filter
+        if (!empty($criteria['is_import'])) {
+            $termQuery = new Term(['isImport' => true]);
+            $boolQuery->addFilter($termQuery);
+        }
+
         $query = new Query($boolQuery);
         // Add sorting
         if (!empty($criteria['sort'])) {

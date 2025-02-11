@@ -87,6 +87,7 @@
                             <p class="text-sm text-gray-500">{{ 'car.price'|trans }}</p>
                             <p class="text-3xl font-bold text-blue-600">€{{ publication.price|number_format(2, ',', ' ') }}</p>
                         </div>
+                        <div>
                         {% if publication.hasWarranty %}
                             <div class="flex items-center">
                                 <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,6 +98,23 @@
                                 </span>
                             </div>
                         {% endif %}
+
+                        {% if publication.isImport %}
+                            <div class="flex items-center">
+                                <svg class="w-5 h-5 text-amber-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                </svg>
+                                <span class="px-3 py-1.5 bg-amber-50 text-amber-700 rounded-full text-sm font-medium">
+                                    {{ 'car.imported_from'|trans({'%country%': publication.importCountry.name}) }}
+                                    {% if publication.isCustomsDutyPaid %}
+                                        <span class="ml-1 text-green-600">•</span>
+                                    {% else %}
+                                        <span class="ml-1 text-red-600">•</span>
+                                    {% endif %}
+                                </span>
+                            </div>
+                        {% endif %}
+                        </div>
                     </div>
                 </div>
 
@@ -294,6 +312,74 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Import Information -->
+                {% if publication.isImport %}
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-xl font-bold mb-4">{{ 'car.import.title'|trans }}</h2>
+                
+                    <div class="mb-4 p-4 bg-amber-50 border-l-4 border-amber-400">
+                        <p class="text-sm text-amber-700">
+                            {{ 'car.import.from_country'|trans({'%country%': publication.importCountry.name}) }}
+                        </p>
+                    </div>
+                
+                    <div class="space-y-4">
+                        <div class="space-y-6">
+                            <!-- Customs Status -->
+                            <div class="rounded-xl bg-gradient-to-r {{ publication.isCustomsDutyPaid ? 'from-green-50 to-green-100' : 'from-red-50 to-red-100' }} p-5 shadow-sm">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-6 h-6 {{ publication.isCustomsDutyPaid ? 'text-green-500' : 'text-red-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            {% if publication.isCustomsDutyPaid %}
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            {% else %}
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                            {% endif %}
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium {{ publication.isCustomsDutyPaid ? 'text-green-700' : 'text-red-700' }} mb-1">
+                                            {{ publication.isCustomsDutyPaid ? 'car.import.customs_paid'|trans : 'car.import.customs_not_paid'|trans }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Import Details -->
+                            {% if publication.importDetails %}
+                            <div class="rounded-xl bg-gradient-to-r from-blue-50 to-blue-100 p-5 shadow-sm">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-blue-700 mb-1">{{ 'car.import.details'|trans }}</h4>
+                                        <p class="text-blue-600 text-sm">{{ publication.importDetails }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                
+                            <!-- Import Disclaimer -->
+                            <div class="rounded-xl bg-gradient-to-r from-amber-50 to-amber-100 p-5 shadow-sm">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-amber-700 mb-1">{{ 'car.import.disclaimer'|trans }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
                 <!-- Bank estimations -->
                 <div class="bg-white rounded-xl shadow-lg p-6">

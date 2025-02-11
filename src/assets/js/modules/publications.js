@@ -37,27 +37,26 @@ export function initializePublications() {
 
     document.addEventListener('DOMContentLoaded', function() {
         const isImportCheckbox = document.querySelector('[data-toggle-import-fields]');
+        const importFieldsContainer = document.querySelector('.import-fields');
         const importFields = document.querySelectorAll('.import-field');
     
         function toggleImportFields() {
             const isEnabled = isImportCheckbox.checked;
+            importFieldsContainer.style.display = isEnabled ? 'grid' : 'none';
+            
             importFields.forEach(field => {
-                const parentDiv = field.closest('.form-group');
-                if (parentDiv) {
-                    parentDiv.style.display = isEnabled ? 'block' : 'none';
-                }
                 field.disabled = !isEnabled;
-                if (isEnabled) {
-                    field.required = field.id !== 'publication_isCustomsDutyPaid';
+                if (field.id !== 'publication_isCustomsDutyPaid') {
+                    field.required = isEnabled;
                 }
             });
         }
     
         if (isImportCheckbox) {
-            // Initial state
+            // Set initial state
             toggleImportFields();
-    
-            // Listen for changes
+            
+            // Handle changes
             isImportCheckbox.addEventListener('change', toggleImportFields);
         }
     });

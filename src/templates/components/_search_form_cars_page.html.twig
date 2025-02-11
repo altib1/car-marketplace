@@ -153,6 +153,13 @@
                     <input type="checkbox" name="has_warranty" id="has_warranty" {% if criteria.has_warranty %}checked{% endif %} class="h-4 w-4 rounded border-gray-300">
                     <label for="has_warranty" class="ml-2 block text-sm font-medium text-gray-700">{{'search.filters.warranty'|trans}}</label>
                 </div>
+
+                <!-- Import -->
+                <div class="flex items-center">
+                    <input type="checkbox" name="is_import" id="is_import" {% if criteria.is_import %}checked{% endif %} class="h-4 w-4 rounded border-gray-300">
+                    <label for="is_import" class="ml-2 block text-sm font-medium text-gray-700">{{'search.filters.is_import'|trans}}</label>
+                </div>
+
                 <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-xl hover:bg-blue-700 transition">{{'search.search'|trans}}</button>
             </div>
         </form>
@@ -262,6 +269,14 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             {{'search.card.warranty'|trans}}
+                                        </span>
+                                    {% endif %}
+                                    {% if publication.isImport %}
+                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                            </svg>
+                                            {{'search.card.import'|trans}}
                                         </span>
                                     {% endif %}
                                 </div>

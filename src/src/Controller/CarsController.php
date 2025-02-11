@@ -45,6 +45,7 @@ class CarsController extends AbstractController
             'gearbox' => $request->query->get('gearbox'),
             'condition' => $request->query->get('condition'),
             'has_warranty' => $request->query->get('has_warranty'),
+            'is_import' => $request->query->get('is_import'),
             'sort' => $request->query->get('sort'),
             'page' => $request->query->getInt('page', 1),
             'per_page' => 10

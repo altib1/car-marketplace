@@ -27,6 +27,14 @@ car:
     key_features: 'Key Features'
     back_to_list: 'Back to List'
     tech_spec: 'Technical Specifications'
+    imported_from: "Imported from %country%"
+    import:
+        title: 'Import Information'
+        from_country: 'This vehicle is imported from %country%'
+        customs_paid: 'Customs duty has been paid'
+        customs_not_paid: 'Customs duty has not been paid'
+        details: 'Import Details'
+        disclaimer: 'Verify all import documentation and customs status before purchase'
     actions:
         edit: 'Edit'
         delete: 'Delete'
@@ -149,6 +157,11 @@ profile:
           date: 'Sale Date'
           cancel: 'Cancel'
           confirm: 'Confirm'
+        import:
+          title: 'Imported Vehicle'
+          from: 'Imported from %country%'
+          customs_paid: 'Customs duty has been paid'
+          customs_not_paid: 'Customs duty pending'
       index:
         title: 'Publications'
         new: 'New Publication'
@@ -303,6 +316,7 @@ search:
         location: 'Seller Location'
         location_select: 'Select sellers location'
         warranty: 'Has Warranty'
+        is_import: 'it''s Imported'
         year: 'Year'
         mileage: 'Mileage'
         search: 'Search'
@@ -328,6 +342,7 @@ search:
         engine: 'Engine Capacity'
         warranty: 'Warranty'
         view_details: 'View Details'
+        import: 'Imported'
     pagination:
         previous: 'Previous'
         next: 'Next'
