@@ -27,6 +27,14 @@ car:
     key_features: 'Karakteristikat Kyçe'
     back_to_list: 'Kthehu te Lista'
     tech_spec: 'Specifikimet Teknike'
+    imported_from: "Importuar nga %country%"
+    import:
+        title: 'Informacioni i Importit'
+        from_country: 'Ky automjet është importuar nga %country%'
+        customs_paid: 'Doganat janë paguar'
+        customs_not_paid: 'Doganat nuk janë paguar'
+        details: 'Detajet e Importit'
+        disclaimer: 'Verifikoni të gjithë dokumentacionin e importit dhe statusin doganor përpara blerjes'
     actions:
         edit: 'Ndrysho'
         delete: 'Fshij'
@@ -146,6 +154,11 @@ profile:
           date: 'Data e shitjes'
           cancel: 'Anulo'
           confirm: 'Fshij'
+        import:
+          title: 'Automjet i Importuar'
+          from: 'Importuar nga %country%'
+          customs_paid: 'Doganat janë paguar'
+          customs_not_paid: 'Doganat nuk janë paguar'
       index:
         title: 'Postimet'
         new: 'Krijo Postim të Ri'
@@ -198,6 +211,14 @@ profile:
           description: 'Përshkrimi'
           price: 'Çmimi'
           year: 'Viti i Prodhimit'
+          import:
+            title: 'Informacioni i Importit'
+            isImport: 'Kjo veturë është importuar ?'
+            country:
+              label: 'Prejardhja e Veturës'
+              placeholder: 'Zgjidh një shtet'
+            isCustomsDutyPaid: 'Detyra Doganore është paguar ?'
+            details: 'Detajet e Importit'
           brand:
             label: 'Marka'
             placeholder: 'Zgjidh një markë'
@@ -292,6 +313,7 @@ search:
         location: 'Vendndodhja'
         location_select: 'Selekto Vendndodhjen'
         warranty: 'Ka Garanci'
+        is_import: 'Automjet i Importuar'
         year: 'Viti'
         mileage: 'Kilometrazhi'
         search: 'Kërko'
@@ -314,6 +336,7 @@ search:
         engine: 'Kapaciteti i Motorit'
         warranty: 'Garanci'
         view_details: 'Shiko Postimin'
+        import: 'Automjet i Importuar'
     pagination:
         previous: 'Mbrapa'
         next: 'Para'

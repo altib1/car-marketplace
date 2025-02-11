@@ -60,6 +60,8 @@ fos_elastica:
                   type: keyword
               hasWarranty:
                   type: boolean
+              isImport:
+                  type: boolean
               saleStatus:
                   type: nested
                   properties:

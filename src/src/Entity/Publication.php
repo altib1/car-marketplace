@@ -93,6 +93,19 @@ class Publication
     #[ORM\OneToOne(mappedBy: 'publication', targetEntity: SaleStatus::class, cascade: ['persist', 'remove'])]
     private ?SaleStatus $saleStatus = null;
 
+    #[ORM\Column(type: Types::BOOLEAN)]
+    private bool $isImport = false;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?ImportCountry $importCountry = null;
+
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private ?bool $isCustomsDutyPaid = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $importDetails = null;
+
     public function __construct()
     {
         $this->media = new ArrayCollection();
@@ -428,6 +441,50 @@ class Publication
 
         $this->saleStatus = $saleStatus;
 
+        return $this;
+    }
+
+    public function isImport(): bool
+    {
+        return $this->isImport;
+    }
+
+    public function setIsImport(bool $isImport): self
+    {
+        $this->isImport = $isImport;
+        return $this;
+    }
+
+    public function getImportCountry(): ?ImportCountry
+    {
+        return $this->importCountry;
+    }
+
+    public function setImportCountry(?ImportCountry $importCountry): self
+    {
+        $this->importCountry = $importCountry;
+        return $this;
+    }
+
+    public function isCustomsDutyPaid(): ?bool
+    {
+        return $this->isCustomsDutyPaid;
+    }
+
+    public function setIsCustomsDutyPaid(?bool $isCustomsDutyPaid): self
+    {
+        $this->isCustomsDutyPaid = $isCustomsDutyPaid;
+        return $this;
+    }
+
+    public function getImportDetails(): ?string
+    {
+        return $this->importDetails;
+    }
+
+    public function setImportDetails(?string $importDetails): self
+    {
+        $this->importDetails = $importDetails;
         return $this;
     }
     

@@ -23,10 +23,41 @@ export function initializePublications() {
         });
 
         // Close modal when clicking outside
-        document.querySelector('.modal-overlay').addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.add('hidden');
-            }
-        });
+        const modalOverlay = document.querySelector('.modal-overlay');
+        if (modalOverlay) {
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.add('hidden');
+                }
+            });
+        }
+    });
+
+    // import forms handling
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const isImportCheckbox = document.querySelector('[data-toggle-import-fields]');
+        const importFieldsContainer = document.querySelector('.import-fields');
+        const importFields = document.querySelectorAll('.import-field');
+    
+        function toggleImportFields() {
+            const isEnabled = isImportCheckbox.checked;
+            importFieldsContainer.style.display = isEnabled ? 'grid' : 'none';
+            
+            importFields.forEach(field => {
+                field.disabled = !isEnabled;
+                if (field.id !== 'publication_isCustomsDutyPaid') {
+                    field.required = isEnabled;
+                }
+            });
+        }
+    
+        if (isImportCheckbox) {
+            // Set initial state
+            toggleImportFields();
+            
+            // Handle changes
+            isImportCheckbox.addEventListener('change', toggleImportFields);
+        }
     });
 }

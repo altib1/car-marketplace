@@ -51,24 +51,29 @@ export function initializeCars() {
         const closeFiltersBtn = document.getElementById('close-filters');
     
         // Toggle filters on mobile
-        toggleFiltersBtn.addEventListener('click', function() {
-            filterSection.classList.remove('-translate-x-full');
-            filterSection.classList.remove('opacity-0');
-            filterSection.classList.add('translate-x-0');
-            filterSection.classList.add('opacity-100');
-        });
+        if (toggleFiltersBtn) {
+            toggleFiltersBtn.addEventListener('click', function() {
+                filterSection.classList.remove('-translate-x-full');
+                filterSection.classList.remove('opacity-0');
+                filterSection.classList.add('translate-x-0');
+                filterSection.classList.add('opacity-100');
+            });
+        }
     
         // Close filters on mobile
-        closeFiltersBtn.addEventListener('click', function() {
-            filterSection.classList.add('-translate-x-full');
-            filterSection.classList.add('opacity-0');
-            filterSection.classList.remove('translate-x-0');
-            filterSection.classList.remove('opacity-100');
-        });
+        if (closeFiltersBtn) {
+            closeFiltersBtn.addEventListener('click', function() {
+                filterSection.classList.add('-translate-x-full');
+                filterSection.classList.add('opacity-0');
+                filterSection.classList.remove('translate-x-0');
+                filterSection.classList.remove('opacity-100');
+            });
+        }
     
         // Close filters when clicking outside on mobile
         document.addEventListener('click', function(event) {
-            if (!filterSection.contains(event.target) && 
+            if (filterSection && toggleFiltersBtn && 
+                !filterSection.contains(event.target) && 
                 !toggleFiltersBtn.contains(event.target) && 
                 window.innerWidth < 1024) {
                 filterSection.classList.add('-translate-x-full');
@@ -83,6 +88,8 @@ export function initializeCars() {
 
     document.addEventListener('DOMContentLoaded', function() {
         const vehiclePriceInput = document.getElementById('vehiclePrice');
+        if (!vehiclePriceInput) return;
+        
         const interestRateInput = document.getElementById('interestRate');
         const loanDurationSelect = document.getElementById('loanDuration');
         const monthlyPaymentDisplay = document.getElementById('monthlyPayment');

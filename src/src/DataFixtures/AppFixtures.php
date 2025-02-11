@@ -10,6 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\User;
 use App\Entity\Country;
 use App\Entity\Region;
+use App\Entity\ImportCountry;
 use App\Entity\Department;
 
 class AppFixtures extends Fixture
@@ -330,6 +331,7 @@ class AppFixtures extends Fixture
 
         $albania = new Country();
         $albania->setName('Albania');
+        $manager->persist($albania);
         
         $regions = [
             'Qarku i Beratit',
@@ -356,6 +358,7 @@ class AppFixtures extends Fixture
         
         $kosova = new Country();
         $kosova->setName('Kosova');
+        $manager->persist($kosova);
 
         $regions = [
             'Qarku i Ferizaj',
@@ -373,7 +376,48 @@ class AppFixtures extends Fixture
             $region->setCountry($kosova);
             $manager->persist($region);
         }
-        
+
+        $importCountries = [
+            // European Countries
+            'Germany',
+            'Italy',
+            'Switzerland',
+            'Austria',
+            'Belgium',
+            'Netherlands',
+            'France',
+            'Spain',
+            'Sweden',
+            'Norway',
+            'Denmark',
+            'Finland',
+            'Poland',
+            'Czech Republic',
+            'Slovakia',
+            'Hungary',
+            'Slovenia',
+            'Croatia',
+            'Greece',
+            'United Kingdom',
+            
+            // Asian Countries
+            'Japan',
+            'South Korea',
+            'China',
+            'Singapore',
+            'United Arab Emirates',
+            
+            // American Countries
+            'United States',
+            'Canada'
+        ];
+
+        foreach ($importCountries as $countryName) {
+            $importCountry = new ImportCountry();
+            $importCountry->setName($countryName);
+            $manager->persist($importCountry);
+        }
+      
         // Flush all changes to the database
         $manager->flush();
     }
