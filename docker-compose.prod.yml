@@ -1,6 +1,5 @@
 version: '3.8'
 
-
 services:
   php:
     build:
@@ -9,31 +8,44 @@ services:
         - APP_ENV=prod
     container_name: php-container
     volumes:
-      - ./src:/var/www/html
-      - ./node_modules:/var/www/html/node_modules
+      - ./src:/var/www/html:ro
+      - ./var:/var/www/html/var
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini
     environment:
       - APP_ENV=prod
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db/${MYSQL_DATABASE}
     networks:
       - app-network
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
     env_file:
       - .env.prod.local
+    healthcheck:
+      test: ["CMD-SHELL", "php -r 'exit(0);'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 
   nginx:
     build:
       context: ./docker/nginx
     container_name: nginx-container
     volumes:
-      - ./src:/var/www/html
-      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./src/public:/var/www/html/public:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./docker/nginx/nginx.log:/var/log/nginx/error.log
     ports:
       - "80:80"
       - "443:443"
     depends_on:
-      - php
+      php:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
 
   db:
     image: mysql:8.0
@@ -43,11 +55,18 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_INITDB_SKIP_TZ: 1
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/custom.cnf:ro
     networks:
       - app-network
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
   elasticsearch:
     image: elasticsearch:7.17.9
@@ -58,7 +77,6 @@ services:
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - bootstrap.memory_lock=true
       - cluster.name=docker-cluster
-      - cluster.routing.allocation.disk.threshold_enabled=false
     ulimits:
       memlock:
         soft: -1
@@ -78,28 +96,51 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-
+    deploy:
+      resources:
+        limits:
+          memory: 1g
 
   messenger-worker:
     build:
       context: ./docker/php
     container_name: messenger-worker
     volumes:
-      - ./:/var/www/html
-    command: ["/usr/local/bin/php", "/var/www/html/bin/console", "messenger:consume", "async", "--time-limit=3600", "-->    depends_on:
-      - php
-      - db
+      - ./src:/var/www/html:ro
+      - ./var:/var/www/html/var
+    command: ["/usr/local/bin/php", "/var/www/html/bin/console", "messenger:consume", "async", "--time-limit=3600"]
+    depends_on:
+      db:
+        condition: service_healthy
+      php:
+        condition: service_healthy
     networks:
       - app-network
     restart: unless-stopped
     env_file:
       - .env.prod.local
+    security_opt:
+      - no-new-privileges:true
+    deploy:
+      resources:
+        limits:
+          memory: 256M
 
 networks:
   app-network:
     driver: bridge
+    attachable: true
 
 volumes:
   db_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: ./docker/volumes/db_data
+      o: bind
   elasticsearch-data:
-
+    driver: local
+    driver_opts:
+      type: none
+      device: ./docker/volumes/elasticsearch-data
+      o: bind
