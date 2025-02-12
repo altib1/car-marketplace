@@ -1,12 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./assets/**/*.js",
-    "./templates/**/*.html.twig",
+    './templates/**/*.html.twig',
+    './assets/**/*.js',
+    './src/**/*.php'
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
-}
-
+  corePlugins: {
+    preflight: true,
+  },
+  plugins: []
+};

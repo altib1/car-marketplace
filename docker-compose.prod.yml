@@ -1,0 +1,105 @@
+version: '3.8'
+
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        - APP_ENV=prod
+    container_name: php-container
+    volumes:
+      - ./src:/var/www/html
+      - ./node_modules:/var/www/html/node_modules
+    environment:
+      - APP_ENV=prod
+    networks:
+      - app-network
+    restart: unless-stopped
+    env_file:
+      - .env.prod.local
+
+  nginx:
+    build:
+      context: ./docker/nginx
+    container_name: nginx-container
+    volumes:
+      - ./src:/var/www/html
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - php
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: db-container
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  elasticsearch:
+    image: elasticsearch:7.17.9
+    container_name: elasticsearch-container
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - bootstrap.memory_lock=true
+      - cluster.name=docker-cluster
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+
+  messenger-worker:
+    build:
+      context: ./docker/php
+    container_name: messenger-worker
+    volumes:
+      - ./:/var/www/html
+    command: ["/usr/local/bin/php", "/var/www/html/bin/console", "messenger:consume", "async", "--time-limit=3600", "-->    depends_on:
+      - php
+      - db
+    networks:
+      - app-network
+    restart: unless-stopped
+    env_file:
+      - .env.prod.local
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
+  elasticsearch-data:
+
