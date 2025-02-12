@@ -17,7 +17,9 @@ RUN apt-get update && apt-get install -y \
     libxslt-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
-    libxml2-dev
+    libxml2-dev \
+    nodejs \
+    npm
 
 # Configure GD with proper support for JPEG
 RUN docker-php-ext-configure gd \
