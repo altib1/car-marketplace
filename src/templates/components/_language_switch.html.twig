@@ -27,13 +27,13 @@
         x-transition:leave-end="opacity-0 scale-95"
         class="absolute right-0 mt-2 w-48 rounded-xl bg-white p-1 shadow-lg ring-1 ring-black ring-opacity-5 md:right-0 sm:left-0"
         style="display: none;">
-       <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'en'})) }}" 
+       <a href="{{ path(app.request.get('_route', 'app_home'), app.request.get('_route_params', [])|merge({'_locale': 'en'})) }}" 
          class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200"
          @click="open = false">
           <span class="fi fi-gb rounded-sm"></span>
           <span class="ml-3 font-medium">English</span>
        </a>
-       <a href="{{ path(app.request.get('_route', 'home'), app.request.get('_route_params', [])|merge({'_locale': 'sq'})) }}"
+       <a href="{{ path(app.request.get('_route', 'app_home'), app.request.get('_route_params', [])|merge({'_locale': 'sq'})) }}"
          class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-blue-50 rounded-lg transition-all duration-200"
          @click="open = false">
           <span class="fi fi-es rounded-sm"></span>
