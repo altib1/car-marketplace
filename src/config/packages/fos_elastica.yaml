@@ -1,7 +1,9 @@
 fos_elastica:
     clients:
         default:
-            url: 'http://elasticsearch:9200'
+            url: 'http://elasticsearch:9200'  # Already defined in your setup
+            username: '%env(ELASTIC_USERNAME)%'
+            password: '%env(ELASTIC_PASSWORD)%'
     indexes:
       publications:
           persistence:
