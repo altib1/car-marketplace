@@ -1,80 +1,75 @@
 FROM php:8.1-fpm
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    libonig-dev \
-    libxml2-dev \
+# Install system dependencies (including Node.js)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    unzip \
     libzip-dev \
     libicu-dev \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
-    libxslt-dev \
+    libonig-dev \
+    libxml2-dev \
     curl \
-    git \
-    zip \
-    unzip \
+    gnupg \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g npm@latest
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configure and install PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) \
+        pdo_mysql \
+        zip \
+        intl \
+        gd \
+        opcache
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Configure GD
-RUN docker-php-ext-configure gd --with-jpeg
+# PHP configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" \
+    && echo "opcache.memory_consumption=128\n\
+opcache.interned_strings_buffer=8\n\
+opcache.max_accelerated_files=4000\n\
+opcache.revalidate_freq=60\n\
+opcache.fast_shutdown=1\n\
+opcache.enable_cli=1\n\
+opcache.enable=1" > /usr/local/etc/php/conf.d/opcache.ini
 
-# Install PHP extensions
-RUN docker-php-ext-install -j$(nproc) \
-    pdo \
-    pdo_mysql \
-    zip \
-    opcache \
-    intl \
-    gd
+# Set working directory
+WORKDIR /var/www/html
 
-# Configure PHP for production
-RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+# Copy application files
+COPY --chown=www-data:www-data ./src .
 
-# Configure OpCache
-RUN echo "opcache.memory_consumption=128\n \
-    opcache.interned_strings_buffer=8\n \
-    opcache.max_accelerated_files=4000\n \
-    opcache.revalidate_freq=60\n \
-    opcache.fast_shutdown=1\n \
-    opcache.enable_cli=1\n \
-    opcache.enable=1" > /usr/local/etc/php/conf.d/opcache.ini
+# Create necessary directories and set permissions
+RUN mkdir -p var/cache var/log var/sessions public/build \
+    && chown -R www-data:www-data . \
+    && find var -type d -exec chmod 777 {} \; \
+    && chmod -R 755 public
 
-WORKDIR /var/www/html/src
+# Configure npm and create cache directory with correct permissions (as root)
+RUN mkdir -p /tmp/.npm /var/www/.npm \
+    && chown -R www-data:www-data /var/www/ /tmp/.npm \
+    && npm config set cache /tmp/.npm \
+    && npm config set prefix /tmp/.npm-global
 
-# Create necessary directories
-RUN mkdir -p \
-    var/cache \
-    var/log \
-    public/build \
-    public/build/.vite \
-    node_modules \
-    /var/www/.npm
-
-# Copy all necessary files
-COPY --chown=www-data:www-data ./src ./
-
-# Install npm dependencies
-RUN npm install
-
-# Build assets using the local vite executable
-RUN npm run build
-
-# Set correct permissions for the build directory
-RUN chown -R www-data:www-data /var/www/html/src/public/build && \
-    chmod -R 755 /var/www/html/src/public/build
-
+# Switch to non-root user
 USER www-data
 
-# Install composer dependencies
-RUN SYMFONY_ENV=prod composer install --no-dev --optimize-autoloader --no-scripts
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
 
+# Install Node.js dependencies and build frontend assets
+RUN npm ci --legacy-peer-deps \
+    && npm run build \
+    && rm -rf node_modules/.cache
+
+# Expose PHP-FPM port
 EXPOSE 9000
 
 CMD ["php-fpm"]
