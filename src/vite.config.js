@@ -1,25 +1,19 @@
-import { defineConfig } from 'vite';
-import symfonyPlugin from 'vite-plugin-symfony';
+import { defineConfig } from "vite";
+import symfonyPlugin from "vite-plugin-symfony";
+
+/* if you're using React */
+// import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  plugins: [
-    symfonyPlugin({
-      sass: false
-    })
-  ],
-  css: {
-    postcss: './postcss.config.cjs'
-  },
-  build: {
-    manifest: true,
-    rollupOptions: {
-      input: {
-        app: './assets/app.js'
-      }
-    }
-  },
-  server: {
-    port: 80,
-    host: '0.0.0.0',
-  },
+    plugins: [
+        /* react(), // if you're using React */
+        symfonyPlugin(),
+    ],
+    build: {
+        rollupOptions: {
+            input: {
+                app: "./assets/app.js"
+            },
+        }
+    },
 });
