@@ -55,9 +55,26 @@ class ShopController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $shopRepository->add($shop, true, $form, $fileUploader);
+            try {
+                // Check if logoImageFileName field exists
+                if (!$form->has('logoImageFileName')) {
+                    $this->addFlash('error', 'The logo image upload field is not configured properly. Please contact support.');
+                    return $this->redirectToRoute('app_shop');
+                }
 
-            return $this->redirectToRoute('app_shop');
+                // Check if logo image is uploaded
+                if (!$form->get('logoImageFileName')->getData()) {
+                    $this->addFlash('error', 'Please upload a logo image');
+                    return $this->redirectToRoute('app_shop_create');
+                }
+
+                $shopRepository->add($shop, true, $form, $fileUploader);
+                $this->addFlash('success', 'Shop created successfully!');
+                return $this->redirectToRoute('app_shop');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'An error occurred while creating the shop');
+                return $this->redirectToRoute('app_shop_create');
+            }
         }
 
         return $this->render('shop/create.html.twig', [
@@ -90,8 +107,21 @@ class ShopController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $shopRepository->edit($shop, true, $form, $fileUploader);
-            return $this->redirectToRoute('app_shop');
+            dd($fileUploader);
+            try{
+                            // Check for logo image
+            if (!$form->get('logoImageFileName')->getData()) {
+                throw new \InvalidArgumentException('Logo image is required');
+            }
+
+                $shopRepository->edit($shop, true, $form, $fileUploader);
+                $this->addFlash('success', 'Shop updated successfully!');
+                return $this->redirectToRoute('app_shop');
+            } catch (\Exception $e) {
+                $this->addFlash('error', $e->getMessage());
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'An error occurred while updating the shop.');
+            }
         }
 
         return $this->render('shop/edit.html.twig', [

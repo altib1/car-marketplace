@@ -13,15 +13,30 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\All;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 class ShopType extends AbstractType
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class, [
                 'label' => 'Shop Name',
                 'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                    new Callback([$this, 'validateUniqueName']),
+                ],
             ])
             ->add('backgroundImageFileName', FileType::class, [
                 'mapped' => false,
@@ -41,7 +56,7 @@ class ShopType extends AbstractType
             
             ->add('logoImageFileName', FileType::class, [
                 'mapped' => false, 
-                'required' => false,
+                'required' => true,
                 'attr' => [
                     'accept' => 'image/*',
                 ],
@@ -77,10 +92,29 @@ class ShopType extends AbstractType
             ]);
     }
 
+    public function validateUniqueName($value, ExecutionContextInterface $context)
+    {
+        $shop = $context->getRoot()->getData();
+        $shopId = $shop->getId();
+
+        $existingShop = $this->entityManager
+            ->getRepository(Shop::class)
+            ->findOneBy(['name' => $value]);
+
+        // If we found a shop with this name and it's not the current shop being edited
+        if ($existingShop && $existingShop->getId() !== $shopId) {
+            $context->buildViolation('A shop with this name already exists.')
+                ->atPath('name')
+                ->addViolation();
+        }
+    }
+
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Shop::class,
+            'validation_groups' => ['Default'],
         ]);
     }
 }
