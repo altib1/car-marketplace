@@ -571,7 +571,7 @@ shop:
     images:
       title: 'Shop Images'
       background: 'Background Image'
-      logo: 'Logo Image'
+      logo: 'Logo Image*'
       upload_text: 'Upload a file'
       drag_drop_text: 'or drag and drop'
       format_text: 'PNG, JPG, JPEG up to 10MB'
@@ -603,7 +603,7 @@ shop:
       title: 'Shop Images'
       background: 'Background Image'
       background_alt: 'Background image of %shop_name%'
-      logo: 'Logo Image'
+      logo: 'Logo Image*'
       logo_alt: 'Logo image of %shop_name%'
       upload_text: 'Upload a new file'
       drag_drop_text: 'or drag and drop'

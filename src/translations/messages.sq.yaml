@@ -508,7 +508,7 @@ shop:
     existing:
       images:
         background: 'Fotografia e Prapavijës'
-        logo: 'Logoja e Dyqanit'
+        logo: 'Logoja e Dyqanit*'
       badges:
         listed_cars: 'Veturat e Listuara'
         rating: 'Ne pritje te verifikimit'
@@ -598,7 +598,7 @@ shop:
       title: 'Fotot e Dyqanit'
       background: 'Fotografia e madhe(background)'
       background_alt: 'Fotografia e prapavijës e %shop_name%'
-      logo: 'Logoja'
+      logo: 'Logoja*'
       logo_alt: 'Logoja e %shop_name%'
       upload_text: 'Ngarko një foto të re'
       drag_drop_text: 'ose tërheq dhe lësho'

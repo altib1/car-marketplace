@@ -7,8 +7,10 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ShopRepository::class)]
+#[UniqueEntity("name", message: "A shop with this name already exists.")]
 class Shop
 {
     #[ORM\Id]
@@ -16,7 +18,7 @@ class Shop
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255 ,unique: true)]
     private ?string $name = null;
 
     #[ORM\Column(nullable: true)]
