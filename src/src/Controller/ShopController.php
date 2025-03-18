@@ -107,13 +107,12 @@ class ShopController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dd($fileUploader);
             try{
-                            // Check for logo image
-            if (!$form->get('logoImageFileName')->getData()) {
-                throw new \InvalidArgumentException('Logo image is required');
-            }
-
+                // Check for logo image
+                if (!$form->get('logoImageFileName')->getData()) {
+                    throw new \InvalidArgumentException('Logo image is required');
+                }
+            
                 $shopRepository->edit($shop, true, $form, $fileUploader);
                 $this->addFlash('success', 'Shop updated successfully!');
                 return $this->redirectToRoute('app_shop');

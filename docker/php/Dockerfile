@@ -53,12 +53,6 @@ RUN mkdir -p /var/www/html/node_modules && \
     chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-# # Switch to www-data user
-# USER www-data
-
-# Copy existing application directory contents
-COPY . /var/www/html
-
 # Expose port 9000
 EXPOSE 9000
 
