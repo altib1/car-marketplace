@@ -4,7 +4,8 @@ export function initializeShop() {
         // Initialize flatpickr for date inputs
         flatpickr('.datepicker', {
             dateFormat: 'Y-m-d',
-            allowInput: true
+            allowInput: true,
+            defaultDate: new Date()
         });
     
         // Services Collection Handler
@@ -53,6 +54,86 @@ export function initializeShop() {
                 button.addEventListener('click', function() {
                     this.closest('.service-entry').remove();
                 });
+            });
+        }
+
+                // Handle file uploads and previews
+        document.querySelectorAll('input[type="file"]').forEach(fileInput => {
+            fileInput.addEventListener('change', function() {
+                const previewArea = this.closest('.relative').querySelector('.preview-area');
+                if (previewArea && this.files && this.files[0]) {
+                    const file = this.files[0];
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        previewArea.innerHTML = `
+                            <div class="p-4">
+                                <img src="${e.target.result}" class="mx-auto h-48 object-contain" />
+                                <p class="text-center text-gray-500 mt-2">${file.name}</p>
+                            </div>
+                        `;
+                    };
+                    
+                    reader.readAsDataURL(file);
+                    
+                    // Remove any error messages when a file is selected
+                    const errorDiv = fileInput.parentNode.querySelector('.file-error');
+                    if (errorDiv) {
+                        errorDiv.remove();
+                    }
+                }
+            });
+        });
+
+        // Form validation
+        const form = document.querySelector('form');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                let hasErrors = false;
+                
+                // Validate required file inputs
+                document.querySelectorAll('input[type="file"][required]').forEach(fileInput => {
+                    if (!fileInput.files || !fileInput.files[0]) {
+                        e.preventDefault();
+                        hasErrors = true;
+                        
+                        // Create error message if it doesn't exist
+                        let errorDiv = fileInput.parentNode.querySelector('.file-error');
+                        if (!errorDiv) {
+                            errorDiv = document.createElement('div');
+                            errorDiv.className = 'file-error text-red-500 text-sm mt-1 font-medium';
+                            errorDiv.textContent = 'Please select a file';
+                            
+                            // Insert after the preview area
+                            const previewArea = fileInput.parentNode.querySelector('.preview-area');
+                            if (previewArea) {
+                                previewArea.parentNode.insertBefore(errorDiv, previewArea.nextSibling);
+                            } else {
+                                fileInput.parentNode.appendChild(errorDiv);
+                            }
+                        }
+                    }
+                });
+                
+                // Fix duplicate validation messages
+                const nameField = document.querySelector('#shop_name');
+                if (nameField) {
+                    const errorMessages = nameField.parentNode.querySelectorAll('.text-red-500');
+                    if (errorMessages.length > 1) {
+                        // Keep only the first error message
+                        for (let i = 1; i < errorMessages.length; i++) {
+                            errorMessages[i].remove();
+                        }
+                    }
+                }
+                
+                if (hasErrors) {
+                    // Focus the first field with an error
+                    const firstErrorField = document.querySelector('.file-error')?.parentNode.querySelector('input');
+                    if (firstErrorField) {
+                        firstErrorField.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }
+                }
             });
         }
     });
