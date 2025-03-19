@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
+    supervisor \
     curl \
     gnupg \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -46,6 +47,11 @@ WORKDIR /var/www/html
 # Copy application files
 COPY --chown=www-data:www-data ./src .
 
+# Copy supervisor configuration
+COPY docker/supervisor/conf.d/messenger-worker.conf /etc/supervisor/conf.d/
+
+RUN mkdir -p /var/log/supervisor
+
 # Create necessary directories and set permissions
 RUN mkdir -p var/cache var/log var/sessions public/build \
     && chown -R www-data:www-data . \
@@ -72,4 +78,4 @@ RUN npm ci --legacy-peer-deps \
 # Expose PHP-FPM port
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["/bin/bash", "-c", "supervisord -c /etc/supervisor/supervisord.conf & php-fpm"]

@@ -136,6 +136,10 @@ sudo -E docker compose -f docker-compose.prod.yml exec -T -u www-data php bash -
 '
 check_status "Cache operations"
 
+log "Restarting queue worker..."
+sudo -E docker compose -f docker-compose.prod.yml restart queue-worker
+check_status "Queue worker restart"
+
 # Add this line to your deploy.sh before the Tailwind build step
 docker exec -it php-container bash -c "chmod +x /var/www/html/var/tailwind/v4.0.9/tailwindcss-linux-x64 || true"
 
