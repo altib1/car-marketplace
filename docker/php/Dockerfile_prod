@@ -68,7 +68,8 @@ RUN mkdir -p /tmp/.npm /var/www/.npm \
 USER www-data
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --no-scripts --optimize-autoloader \
+    && composer dump-autoload --optimize
 
 # Install Node.js dependencies and build frontend assets
 RUN npm ci --legacy-peer-deps \
