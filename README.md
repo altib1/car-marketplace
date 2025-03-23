@@ -146,6 +146,12 @@ sudo docker compose -f docker-compose.prod.yml exec php php bin/console doctrine
 # Setup Elasticsearch
 sudo docker compose -f docker-compose.prod.yml exec php php bin/console fos:elastica:create --env=prod
 sudo docker compose -f docker-compose.prod.yml exec php php bin/console fos:elastica:populate --env=prod
+
+# Decompress the SQL dump file
+gunzip -c cars_data/car_marketplace.sql.gz > cars_data/car_marketplace.sql
+
+# Import the SQL file into MySQL
+sudo docker compose -f docker-compose.prod.yml exec -T db mysql -u altiballa -pkodi car_marketplace < cars_data/car_marketplace.sql
 ```
 
 ### 3. Supervisor Setup for Message Queue

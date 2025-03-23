@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfreetype6-dev \
     libonig-dev \
     libxml2-dev \
+    supervisor \
     curl \
     gnupg \
     && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
@@ -46,6 +47,15 @@ WORKDIR /var/www/html
 # Copy application files
 COPY --chown=www-data:www-data ./src .
 
+# Copy supervisor configuration
+COPY docker/supervisor/conf.d/messenger-worker.conf /etc/supervisor/conf.d/
+
+RUN mkdir -p /var/log/supervisor
+
+RUN mkdir -p /var/log/supervisor && \
+    chmod -R 777 /var/log/supervisor && \
+    chown -R www-data:www-data /var/log/supervisor
+
 # Create necessary directories and set permissions
 RUN mkdir -p var/cache var/log var/sessions public/build \
     && chown -R www-data:www-data . \
@@ -62,14 +72,17 @@ RUN mkdir -p /tmp/.npm /var/www/.npm \
 USER www-data
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install --no-dev --no-scripts --optimize-autoloader \
+    && composer dump-autoload --optimize
 
 # Install Node.js dependencies and build frontend assets
-RUN npm ci --legacy-peer-deps \
-    && npm run build \
-    && rm -rf node_modules/.cache
+RUN rm -f package-lock.json && \
+    npm install vite-plugin-symfony@^7.0.0 --save-dev && \
+    npm install && \
+    npm run build && \
+    rm -rf node_modules/.cache
 
 # Expose PHP-FPM port
 EXPOSE 9000
 
-CMD ["php-fpm"]
+CMD ["/bin/bash", "-c", "supervisord -c /etc/supervisor/supervisord.conf & php-fpm"]

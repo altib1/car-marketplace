@@ -71,6 +71,31 @@ services:
       timeout: 10s
       retries: 10
 
+  queue-worker:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile_prod
+    container_name: queue-worker-container
+    restart: unless-stopped
+    user: "www-data"
+    volumes:
+      - symfony_cache:/var/www/html/var/cache
+      - symfony_logs:/var/www/html/var/log
+      - symfony_sessions:/var/www/html/var/sessions
+    env_file:
+      - .env.prod
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - php
+    command: ["php", "/var/www/html/bin/console", "messenger:consume", "async", "--time-limit=3600", "--limit=10"]
+    healthcheck:
+      test: ["CMD", "php", "/var/www/html/bin/console", "messenger:stats", "--no-interaction"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
   elasticsearch:
     image: elasticsearch:7.17.9
     container_name: elasticsearch-container

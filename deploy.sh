@@ -131,13 +131,16 @@ log "Clearing and warming up cache..."
 sudo -E docker compose -f docker-compose.prod.yml exec -T -u www-data php bash -c '
     cd /var/www/html && \
     php bin/console cache:clear --env=prod && \
-    php bin/console cache:warmup --env=prod && \
-    php bin/console tailwind:build --minify
+    php bin/console cache:warmup --env=prod
 '
 check_status "Cache operations"
 
+log "Restarting queue worker..."
+sudo -E docker compose -f docker-compose.prod.yml restart queue-worker
+check_status "Queue worker restart"
+
 # Add this line to your deploy.sh before the Tailwind build step
-docker exec -it php-container bash -c "chmod +x /var/www/html/var/tailwind/v4.0.9/tailwindcss-linux-x64 || true"
+sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c "chmod +x /var/www/html/var/tailwind/v4.0.9/tailwindcss-linux-x64 || true"
 
 # Existing Tailwind build command
 log "Building Tailwind CSS..."
@@ -156,8 +159,12 @@ check_status "Importmap installation"
 sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console assets:install --env=prod'
 check_status "Assets installation"
 
-sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console tailwind:build --env=prod'
+log "Building Tailwind CSS with Symfony..."
+sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && NODE_ENV=production php bin/console tailwind:build --minify'
 check_status "Tailwind build"
+
+# sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console tailwind:build --env=prod'
+# check_status "Tailwind build"
 
 sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console asset-map:compile --env=prod'
 check_status "Asset map compilation"

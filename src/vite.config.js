@@ -7,13 +7,22 @@ import symfonyPlugin from "vite-plugin-symfony";
 export default defineConfig({
     plugins: [
         /* react(), // if you're using React */
-        symfonyPlugin(),
+        symfonyPlugin({
+            publicDirectory: './public',
+            buildDirectory: 'build',
+            servePublic: false,
+        }),
     ],
     build: {
+        minify: process.env.NODE_ENV === 'production',
+        outDir: './public/build',
         rollupOptions: {
             input: {
                 app: "./assets/app.js"
             },
         }
+    },
+    optimizeDeps: {
+        include: process.env.NODE_ENV === 'production' ? [] : ['tailwindcss'],
     },
 });
