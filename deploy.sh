@@ -159,8 +159,12 @@ check_status "Importmap installation"
 sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console assets:install --env=prod'
 check_status "Assets installation"
 
-sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console tailwind:build --env=prod'
+log "Building Tailwind CSS with Symfony..."
+sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && NODE_ENV=production php bin/console tailwind:build --minify'
 check_status "Tailwind build"
+
+# sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console tailwind:build --env=prod'
+# check_status "Tailwind build"
 
 sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console asset-map:compile --env=prod'
 check_status "Asset map compilation"
