@@ -214,6 +214,8 @@ profile:
           description: 'Description'
           price: 'Price'
           year: 'Year'
+          year_min: 'The year should be at least 1850'
+          year_max: 'The year should not exceed the current year'
           import:
             title: 'Import Information'
             isImport: 'Is this an imported vehicle?'

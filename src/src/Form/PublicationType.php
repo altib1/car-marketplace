@@ -27,6 +27,7 @@ use App\Entity\ImportCountry;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Constraints\Range;
 
 class PublicationType extends AbstractType
 {
@@ -52,6 +53,14 @@ class PublicationType extends AbstractType
             ->add('year', IntegerType::class, [
                 'label' => 'profile.publication.form.publication.year',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+                'constraints' => [
+                    new Range([
+                        'min' => 1850,
+                        'max' => (int) date('Y'),
+                        'minMessage' => 'profile.publication.form.publication.year_min',
+                        'maxMessage' => 'profile.publication.form.publication.year_max',
+                    ]),
+                ],
             ])
             ->add('brand', EntityType::class, [
                 'label' => 'profile.publication.form.publication.brand.label',
@@ -204,6 +213,13 @@ class PublicationType extends AbstractType
                 $form = $event->getForm();
     
                 $this->addImportFields($form, !empty($data['isImport']));
+            });
+
+            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $publication = $event->getData();
+                $form = $event->getForm();
+    
+                $this->addImportFields($form, $publication?->isImport());
             });
     }
 
