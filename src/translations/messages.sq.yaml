@@ -211,6 +211,8 @@ profile:
           description: 'Përshkrimi'
           price: 'Çmimi'
           year: 'Viti i Prodhimit'
+          year_min: 'Viti i Prodhimit duhet të jetë së paku 1850'
+          year_max: 'Viti i Prodhimit nuk mund të jetë më i madh se viti aktual'
           import:
             title: 'Informacioni i Importit'
             isImport: 'Kjo veturë është importuar ?'
@@ -241,7 +243,7 @@ profile:
             choices:
               manual: 'Manuale'
               automatic: 'Automatike'
-          engine_size: 'Kapaciteti i Motorit'
+          engine_size: 'Kapaciteti i Motorit ne Kuaj fuqi'
           warranty:
             title: 'Informacioni i Garancisë'
             has: 'Ka Garanci'

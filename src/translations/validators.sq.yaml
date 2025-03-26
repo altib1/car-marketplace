@@ -1,0 +1,3 @@
+profile.publication.form.publication.year_min: "Viti duhet të jetë midis {{ min }} dhe {{ max }}"
+profile.publication.form.publication.mileage_min: "Kilometrazhi duhet të jetë minimumi {{ min }}"
+profile.publication.form.publication.engine_size_min: "Madhësia e motorit duhet të jetë minimumi {{ min }}"
