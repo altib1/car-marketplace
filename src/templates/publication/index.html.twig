@@ -155,9 +155,9 @@
         {{ form_start(form, {'action': path('app_publication_remove', {'id': '__PUBLICATION_ID__'})}) }}
             <div class="mb-4">
                 {{ form_label(form.sold) }}
-                {{ form_widget(form.sold) }}
+                {{ form_widget(form.sold, {'attr': {'data-toggle-sale-date': true}}) }}
             </div>
-            <div class="mb-4">
+            <div class="mb-4" data-sale-date-container style="display: none;">
                 {{ form_label(form.saleDate) }}
                 {{ form_widget(form.saleDate) }}
             </div>

@@ -57,8 +57,7 @@ class PublicationType extends AbstractType
                     new Range([
                         'min' => 1850,
                         'max' => (int) date('Y'),
-                        'minMessage' => 'profile.publication.form.publication.year_min',
-                        'maxMessage' => 'profile.publication.form.publication.year_max',
+                        'notInRangeMessage' => 'profile.publication.form.publication.year_min',
                     ]),
                 ],
             ])
@@ -86,7 +85,17 @@ class PublicationType extends AbstractType
             ->add('mileage', IntegerType::class, [
                 'label' => 'profile.publication.form.publication.mileage',
                 'required' => false,
-                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+                'attr' => [
+                    'class' => 'w-full p-3 border rounded-lg',
+                    'placeholder' => ' 0',
+                    'min' => 0,
+                ],
+                'constraints' => [
+                    new Range([
+                        'min' => 0,
+                        'minMessage' => 'profile.publication.form.publication.mileage_min',
+                    ]),
+                ],
             ])
             ->add('fuelType', ChoiceType::class, [
                 'label' => 'profile.publication.form.publication.fuel_type.label',
@@ -111,16 +120,25 @@ class PublicationType extends AbstractType
                 'required' => false,
                 'scale' => 1,
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+                'attr' => [
+                    'class' => 'w-full p-3 border rounded-lg',
+                    'placeholder' => ' 0',
+                    'min' => 0,
+                ],
+                'constraints' => [
+                    new Range([
+                        'min' => 0,
+                        'minMessage' => 'profile.publication.form.publication.engine_size_min',
+                    ]),
+                ],
             ])
             ->add('hasWarranty', CheckboxType::class, [
                 'label' => 'profile.publication.form.publication.warranty.has',
                 'required' => false,
-                'attr' => ['class' => 'h-4 w-4 rounded border-gray-300'],
-            ])
-            ->add('warrantyMonths', IntegerType::class, [
-                'label' => 'profile.publication.form.publication.warranty.months',
-                'required' => false,
-                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
+                'attr' => ['class' => 
+                'h-4 w-4 rounded border-gray-300',
+                'data-toggle-warranty-fields' => true
+                ],  
             ])
             ->add('sellerLocation', EntityType::class, [
                 'label' => 'profile.publication.form.publication.location.region.label',
@@ -139,10 +157,11 @@ class PublicationType extends AbstractType
             ->add('condition', ChoiceType::class, [
                 'label' => 'profile.publication.form.publication.condition.label',
                 'choices' => [
-                    'profile.publication.form.publication.condition.choices.new' => 'new',
                     'profile.publication.form.publication.condition.choices.used' => 'used',
+                    'profile.publication.form.publication.condition.choices.new' => 'new',
                 ],
                 'empty_data' => 'used',
+                'data' => 'used',
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
             ->add('isImport', CheckboxType::class, [
@@ -205,6 +224,7 @@ class PublicationType extends AbstractType
                 $publication = $event->getData();
                 $form = $event->getForm();
     
+                $this->addWarrantyFields($form, $publication?->getHasWarranty() ?? false);
                 $this->addImportFields($form, $publication?->isImport());
             });
     
@@ -212,17 +232,23 @@ class PublicationType extends AbstractType
                 $data = $event->getData();
                 $form = $event->getForm();
     
+                $this->addWarrantyFields($form, !empty($data['hasWarranty']));
                 $this->addImportFields($form, !empty($data['isImport']));
-            });
-
-            $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                $publication = $event->getData();
-                $form = $event->getForm();
-    
-                $this->addImportFields($form, $publication?->isImport());
             });
     }
 
+    private function addWarrantyFields(FormInterface $form, bool $hasWarranty): void
+    {
+        $form->add('warrantyMonths', IntegerType::class, [
+            'label' => 'profile.publication.form.publication.warranty.months',
+            'required' => $hasWarranty,
+            'disabled' => !$hasWarranty,
+            'attr' => [
+                'class' => 'w-full p-3 border rounded-lg',
+                'id' => 'publication_warrantyMonths',
+            ],
+        ]);
+    }
     private function addImportFields(FormInterface $form, bool $isImport): void
     {
         $form->add('importCountry', EntityType::class, [

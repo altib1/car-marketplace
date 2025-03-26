@@ -233,7 +233,7 @@ profile:
           motorization:
             label: 'Motorization Type'
             placeholder: 'Choose a motorisation type'
-          mileage: 'Mileage'
+          mileage: 'Mileage in km'
           fuel_type:
             label: 'Fuel Type'
             choices:
@@ -246,7 +246,7 @@ profile:
             choices:
               manual: 'Manual'
               automatic: 'Automatic'
-          engine_size: 'Engine Size'
+          engine_size: 'Engine Size in Horsepower'
           warranty:
             title: 'Warranty Information'
             has: 'Has Warranty'

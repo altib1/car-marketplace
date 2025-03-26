@@ -243,7 +243,7 @@ profile:
             choices:
               manual: 'Manuale'
               automatic: 'Automatike'
-          engine_size: 'Kapaciteti i Motorit'
+          engine_size: 'Kapaciteti i Motorit ne Kuaj fuqi'
           warranty:
             title: 'Informacioni i Garancisë'
             has: 'Ka Garanci'
