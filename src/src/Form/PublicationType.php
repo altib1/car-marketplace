@@ -115,11 +115,9 @@ class PublicationType extends AbstractType
                 ],
                 'attr' => ['class' => 'w-full p-3 border rounded-lg'],
             ])
-            ->add('engineSize', NumberType::class, [
+            ->add('engineSize', IntegerType::class, [
                 'label' => 'profile.publication.form.publication.engine_size',
                 'required' => false,
-                'scale' => 1,
-                'attr' => ['class' => 'w-full p-3 border rounded-lg'],
                 'attr' => [
                     'class' => 'w-full p-3 border rounded-lg',
                     'placeholder' => ' 0',

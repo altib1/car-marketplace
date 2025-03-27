@@ -1,3 +1,3 @@
 profile.publication.form.publication.year_min: "Year must be between {{ min }} and {{ max }}"
-profile.publication.form.publication.mileage_min: "Mileage must be a minimum of {{ min }}"
-profile.publication.form.publication.engine_size_min: "Engine size must be a minimum of {{ min }}"
+profile.publication.form.publication.mileage_min: "Mileage must be a minimum of 0"
+profile.publication.form.publication.engine_size_min: "Engine size must be a minimum of 0"
