@@ -382,7 +382,7 @@ homepage:
         description: 'Nëse keni nevojë për një veturë të re, këtu do të gjeni atë që ju nevojitet.'
         button: 'Shikoni veturat tona'
 menu:
-  brand: 'AutoSmart'
+  brand: 'AutoMarket360'
   vehicles:
     title: 'Veturat'
     new: 'Veturat e reja'
@@ -499,7 +499,7 @@ login:
       button: 'Rivendos Fjalëkalimin'
       expiration_notice: 'Ky link do të skadojë pas 60 minutash.'
       security_notice: 'Nëse nuk e keni kërkuar këtë veprim, ju lutemi hyni në llogarinë tuaj dhe ndryshoni fjalëkalimin tuaj.'
-      footer: '@ AutoSmart 2025. Të gjitha të drejtat e rezervuara.'
+      footer: '@ AutoMarket360 2025. Të gjitha të drejtat e rezervuara.'
 
 shop:
   index:
@@ -648,8 +648,8 @@ terms:
     toc:
         title: 'Tabela e Përmbajtjes'
     intro:
-        title: 'Kushtet e Përdorimit të AutoSmart'
-        description: 'AutoSmart.com është një platformë online e dedikuar për tregtimin e automjeteve, që lehtëson lidhjet e sigurta midis shitësve dhe blerësve potencialë. Duke përdorur shërbimet tona, ju pranoni këto terma dhe kushte.'
+        title: 'Kushtet e Përdorimit të AutoMarket360'
+        description: 'AutoMarket360.com është një platformë online e dedikuar për tregtimin e automjeteve, që lehtëson lidhjet e sigurta midis shitësve dhe blerësve potencialë. Duke përdorur shërbimet tona, ju pranoni këto terma dhe kushte.'
         last_updated: 'Përditësuar së fundmi: 6 shkurt 2025'
     sections:
         general:
@@ -709,7 +709,7 @@ terms:
         liability:
             title: 'Kufizimi i Përgjegjësisë'
             content: >
-                AutoSmart nuk është përgjegjës për:
+                AutoMarket360 nuk është përgjegjës për:
                 - Gjendjen e automjeteve
                 - Mosmarrëveshjet e përdoruesve
                 - Humbjet financiare
@@ -719,7 +719,7 @@ terms:
         copyright:
             title: 'E Drejta e Autorit dhe Pronësia Intelektuale'
             content: >
-                Të gjitha të drejtat i rezervohen AutoSmart:
+                Të gjitha të drejtat i rezervohen AutoMarket360:
                 - Dizajni i platformës
                 - Kodi burimor
                 - Përmbajtja e bazës së të dhënave
@@ -752,7 +752,7 @@ terms:
         title: 'Ndryshimet në Kushte'
         content: 'Ne mund të përditësojmë këto kushte me njoftim 30 ditor'
     footer:
-        copyright: '© %year% AutoSmart. Të gjitha të drejtat e rezervuara. Në përputhje me EU-GDPR.'
+        copyright: '© %year% AutoMarket360. Të gjitha të drejtat e rezervuara. Në përputhje me EU-GDPR.'
 
 privacy_policy:
     title: 'Politika e Privatësisë'
@@ -830,8 +830,8 @@ privacy_policy:
         title: 'Na Kontaktoni për Privatësinë'
         description: 'Për çdo pyetje në lidhje me privatësinë tuaj:'
         methods:
-            email: 'Email: contact@autosmart.com'
-            dpo: 'Zyrtari i Mbrojtjes së të Dhënave: contact@autosmart.com'
+            email: 'Email: marketplacecar2@gmail.com'
+            dpo: 'Zyrtari i Mbrojtjes së të Dhënave: marketplacecar2@gmail.com'
             address: 'Adresa: [Adresa juaj fizike]'
             phone: 'Tel: [Numri i telefonit]'
 
@@ -846,9 +846,10 @@ footer:
     email: 'Email'
     phone: 'Telefon'
     address: 'Adresa'
-    copyright: '© year Car Marketplace. Të gjitha të drejtat të rezervuara.'
+    copyright: '© year AutoMarket360. Të gjitha të drejtat të rezervuara.'
     terms_of_use: 'Kushtet e Përdorimit'
     services: 'Shërbimet Tona'
+    developed_by: 'Krijuar nga'
 
 contact:
     title: 'Na Kontaktoni'
@@ -863,7 +864,7 @@ contact:
     info:
         title: 'Informacione Kontakti'
         address: 'Tiranë, Shqipëri'
-        email: 'contact@autosmart.com'
+        email: 'marketplacecar2@gmail.com'
         phone: '+355 69 XXX XXXX'
         hours: 'E Hënë-E Premte: 9:00 - 17:00'
     success: 'Mesazhi juaj u dërgua me sukses!'
@@ -871,10 +872,10 @@ contact:
         rate_limit: 'Ju lutemi prisni 5 minuta para se të dërgoni një mesazh tjetër.'
         send_failed: 'Dërgimi i mesazhit dështoi. Ju lutemi provoni përsëri.'
     email:
-        subject: 'Mesazh i Ri nga Formulari i Kontaktit - AutoSmart'
+        subject: 'Mesazh i Ri nga Formulari i Kontaktit - AutoMarket360'
 
 about:
-    title: 'Rreth AutoSmart'
+    title: 'Rreth AutoMarket360'
     hero:
         title: 'Gjeni Makinën Tuaj të Përsosur'
         description: 'Mënyra më e thjeshtë për të lidhur blerësit dhe shitësit e makinave në të gjithë Shqipërinë edhe Kosovën'
@@ -892,7 +893,7 @@ about:
             description: 'Listime të detajuara me foto dhe specifikime për të zgjedhur me mençuri'
     
     how_it_works:
-        title: 'Si Funksionon AutoSmart'
+        title: 'Si Funksionon AutoMarket360'
         steps:
             browse:
                 title: 'Shfleto Listat'
@@ -927,6 +928,6 @@ about:
     
     cta:
         title: 'Gati për të Gjetur Makinën Tuaj të Radhës?'
-        description: 'Bashkohuni me mijëra të tjerë që kanë gjetur makinën e tyre të përsosur në AutoSmart'
+        description: 'Bashkohuni me mijëra të tjerë që kanë gjetur makinën e tyre të përsosur në AutoMarket360'
         register: 'Krijo Llogari'
         contact: 'Na Kontaktoni'
