@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'privacy_policy.title'|trans }} - AutoSmart{% endblock %}
+{% block title %}{{ 'privacy_policy.title'|trans }} - AutoMarket360{% endblock %}
 
 {% block body %}
 <div class="min-h-screen">
@@ -19,7 +19,7 @@
             <h2 class="text-2xl font-semibold text-gray-800 mb-6">{{ 'privacy_policy.personal_data.title'|trans }}</h2>
             <p class="mb-4">{{ 'privacy_policy.personal_data.description'|trans }}</p>
             <ul class="space-y-3">
-                {% for item in ['name', 'email', 'phone', 'id', 'location', 'payment'] %}
+                {% for item in ['name', 'email', 'phone', 'id', 'location'] %}
                     <li class="flex items-center">
                         <span class="text-blue-500 mr-2">•</span>
                         {{ ('privacy_policy.personal_data.items.' ~ item)|trans }}

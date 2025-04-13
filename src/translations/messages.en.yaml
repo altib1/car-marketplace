@@ -388,7 +388,7 @@ homepage:
         description: 'An exclusive selection of vehicles that meet your expectations'
         button: 'Discover our vehicles'
 menu:
-  brand: 'AutoSmart'
+  brand: 'AutoMarket360'
   vehicles:
     title: 'Cars'
     new: 'New cars'
@@ -506,7 +506,7 @@ login:
       button: 'Reset Password'
       expiration_notice: 'This reset link will expire in'
       security_notice: 'If you did not request a password reset, please ignore this email or contact support if you have concerns.'
-      footer: '© AutoSmart 2025. All rights reserved.'
+      footer: '© AutoMarket360 2025. All rights reserved.'
 shop:
   index:
     title: 'Car Marketplace - Your Shop'
@@ -653,8 +653,8 @@ terms:
     toc:
         title: 'Table of Contents'
     intro:
-        title: 'AutoSmart Terms of Use'
-        description: 'AutoSmart.com is a dedicated online platform for vehicle trading, facilitating secure connections between sellers and potential buyers. By using our services, you agree to these terms and conditions.'
+        title: 'AutoMarket360 Terms of Use'
+        description: 'AutoMarket360.com is a dedicated online platform for vehicle trading, facilitating secure connections between sellers and potential buyers. By using our services, you agree to these terms and conditions.'
         last_updated: 'Last updated: 6th february 2025'
     sections:
         general:
@@ -714,7 +714,7 @@ terms:
         liability:
             title: 'Limitation of Liability'
             content: >
-                AutoSmart is not liable for:
+                AutoMarket360 is not liable for:
                 - Vehicle conditions
                 - User disputes
                 - Financial losses
@@ -724,7 +724,7 @@ terms:
         copyright:
             title: 'Copyright and Intellectual Property'
             content: >
-                All rights reserved to AutoSmart:
+                All rights reserved to AutoMarket360:
                 - Platform design
                 - Source code
                 - Database content
@@ -757,7 +757,7 @@ terms:
         title: 'Changes to Terms'
         content: 'We may update these terms with 30 days notice'
     footer:
-        copyright: '© %year% AutoSmart. All rights reserved. EU-GDPR Compliant.'
+        copyright: '© %year% AutoMarket360. All rights reserved. EU-GDPR Compliant.'
 
 privacy_policy:
     title: 'Privacy Policy'
@@ -835,8 +835,8 @@ privacy_policy:
         title: 'Privacy Contact'
         description: 'For any privacy-related queries:'
         methods:
-            email: 'Email: contact@autosmart.com'
-            dpo: 'Data Protection Officer: contact@autosmart.com'
+            email: 'Email: marketplacecar2@gmail.com'
+            dpo: 'Data Protection Officer: marketplacecar2@gmail.com'
             address: 'Address: [Your physical address]'
             phone: 'Tel: [Phone number]'
 
@@ -851,9 +851,10 @@ footer:
     email: 'Email'
     phone: 'Phone'
     address: 'Address'
-    copyright: '© year Car Marketplace. All rights reserved.'
+    copyright: '© year AutoMarket360. All rights reserved.'
     terms_of_use: 'Terms of Use'
     services: 'Our Services'
+    developed_by: 'Developed by'
 
 contact:
     title: 'Contact Us'
@@ -868,7 +869,7 @@ contact:
     info:
         title: 'Contact Information'
         address: 'Tirana, Albania'
-        email: 'contact@autosmart.com'
+        email: 'marketplacecar2@gmail.com'
         phone: '+355 69 XXX XXXX'
         hours: 'Mon-Fri: 9:00 AM - 5:00 PM'
     success: 'Your message has been sent successfully!'
@@ -876,9 +877,9 @@ contact:
         rate_limit: 'Please wait 5 minutes before sending another message.'
         send_failed: 'Failed to send message. Please try again.'
     email:
-        subject: 'New Contact Form Submission - AutoSmart'
+        subject: 'New Contact Form Submission - AutoMarket360'
 about:
-    title: 'About AutoSmart'
+    title: 'About AutoMarket360'
     hero:
         title: 'Find Your Perfect Car'
         description: 'The simplest way to connect car buyers and sellers across Albania and Kosova'
@@ -896,7 +897,7 @@ about:
             description: 'Detailed listings with photos and specifications help you choose wisely'
     
     how_it_works:
-        title: 'How AutoSmart Works'
+        title: 'How AutoMarket360 Works'
         steps:
             browse:
                 title: 'Browse Listings'
@@ -931,6 +932,6 @@ about:
     
     cta:
         title: 'Ready to Find Your Next Car?'
-        description: 'Join thousands of others who have found their perfect car on AutoSmart'
+        description: 'Join thousands of others who have found their perfect car on AutoMarket360'
         register: 'Create Account'
         contact: 'Contact Us'
