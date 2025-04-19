@@ -1,0 +1,9 @@
+presta_sitemap:
+    default_section: default
+    alternate:
+        enabled: true
+        default_locale: 'en'
+        locales: ['en', 'sq']
+        i18n: symfony
+    timetolive: 3600
+    

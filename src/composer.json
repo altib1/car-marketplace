@@ -17,6 +17,7 @@
         "knplabs/knp-paginator-bundle": "^6.6",
         "lcobucci/jwt": "^5.3",
         "pentatrion/vite-bundle": "^7.1",
+        "presta/sitemap-bundle": "^4.1",
         "symfony/asset-mapper": "6.4.*",
         "symfony/console": "6.4.*",
         "symfony/doctrine-messenger": "6.4.*",

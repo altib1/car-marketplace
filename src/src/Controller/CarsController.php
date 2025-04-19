@@ -17,7 +17,7 @@ use App\Repository\RegionRepository;
 
 class CarsController extends AbstractController
 {
-    #[Route('/cars', name: 'app_cars')]
+    #[Route('/cars', name: 'app_cars' , options: ['sitemap' => ['section' => 'cars', 'priority' => 1]])]
     public function index(
         Request $request,
         CarBrandRepository $carBrandRepository,

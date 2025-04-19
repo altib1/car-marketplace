@@ -12,7 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'app_contact')]
+    #[Route('/contact', name: 'app_contact', options: ['sitemap' => ['section' => 'contact', 'priority' => 0.5]])]
     public function index(
         Request $request, 
         \Symfony\Component\Mailer\MailerInterface $mailer,
