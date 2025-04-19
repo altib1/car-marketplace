@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AboutController extends AbstractController
 {
-    #[Route('/about', name: 'app_about')]
+    #[Route('/about', name: 'app_about', options: ['sitemap' => ['section' => 'about', 'priority' => 0.8]])]
     public function index(): Response
     {
         return $this->render('about/index.html.twig');

@@ -15,7 +15,7 @@ use App\Repository\RegionRepository;
 
 class HomePageController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
+    #[Route('/', name: 'app_home', options: ['sitemap' => ['section' => 'home', 'priority' => 1]] )]
     public function index(
         Request $request,
         CarBrandRepository $carBrandRepository,
