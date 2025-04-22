@@ -192,4 +192,9 @@ log "Populating Elasticsearch indices..."
 sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console fos:elastica:populate --env=prod'
 check_status "Elasticsearch population"
 
+# Populate sitemaps
+log "Populating Sitemaps..."
+sudo -E docker compose -f docker-compose.prod.yml exec -T php bash -c 'cd /var/www/html && php bin/console presta:sitemaps:dump --env=prod'
+check_status "Sitemaps population"
+
 log "🎉 Deployment completed successfully!"
